@@ -35,25 +35,36 @@ get_header();
 <section class="p-4 md:p-6 min-h-screen bg-[#7A9E7E] flex flex-col justify-center pt-24 lg:pt-6 relative">
   <div class="relative w-full max-w-[1400px] mx-auto min-h-[85vh] flex flex-col">
     
-    <!-- Top Header Area (Desktop) -->
-    <div class="hidden lg:flex justify-between items-center px-4 pt-4 pb-6 absolute top-0 left-0 w-full z-30 pointer-events-none">
-      <div class="w-1/3"></div> <!-- Placeholder for logo space inside card -->
-      
-      <!-- Sign In Pill -->
-      <div class="w-1/3 flex justify-center pointer-events-auto mt-4">
-         <div class="flex items-center shadow-lg rounded-full bg-[#FDB854] p-1 pr-1.5 transition-transform hover:scale-105 cursor-pointer">
-           <span class="text-white px-6 py-1.5 font-medium text-sm">Masuk</span>
-           <div class="bg-[#e89e3a] text-white p-1.5 rounded-full"><i data-lucide="arrow-right" class="h-4 w-4"></i></div>
-         </div>
-      </div>
+<!-- Floating Desktop Navbar (Figma Match) -->
+<nav class="hidden lg:flex fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl bg-[#1C2C1F] rounded-full px-8 py-3 justify-between items-center shadow-2xl border border-white/10">
+  <!-- Logo -->
+  <div class="flex items-center gap-2">
+    <?php if ( function_exists( 'has_custom_logo' ) && has_custom_logo() ) : ?>
+        <?php the_custom_logo(); ?>
+    <?php else : ?>
+        <div class="bg-white/10 p-1.5 rounded-lg">
+        <i data-lucide="headphones" class="h-5 w-5 text-white"></i>
+        </div>
+        <span class="font-bold text-xl tracking-tight text-white"><?php bloginfo( 'name' ); ?></span>
+    <?php endif; ?>
+  </div>
 
-      <!-- Navigation -->
-      <nav class="w-1/3 flex justify-end gap-8 text-white pr-8 pointer-events-auto mt-4">
-        <a href="#fitur" class="hover:text-[#FDB854] text-sm font-medium transition-colors">Fitur</a>
-        <a href="#usecase" class="hover:text-[#FDB854] text-sm font-medium transition-colors">Use Case</a>
-        <a href="#analitik" class="hover:text-[#FDB854] text-sm font-medium transition-colors">Analitik Data</a>
-      </nav>
+  <!-- Links -->
+  <div class="flex gap-8 text-white/80">
+    <a href="#fitur" class="hover:text-[#FDB854] text-sm font-medium transition-colors border-b-2 border-transparent hover:border-[#FDB854] pb-1">Fitur</a>
+    <a href="#usecase" class="hover:text-[#FDB854] text-sm font-medium transition-colors border-b-2 border-transparent hover:border-[#FDB854] pb-1">Use Case</a>
+    <a href="#analitik" class="hover:text-[#FDB854] text-sm font-medium transition-colors border-b-2 border-transparent hover:border-[#FDB854] pb-1">Analitik Data</a>
+    <a href="#harga" class="hover:text-[#FDB854] text-sm font-medium transition-colors border-b-2 border-transparent hover:border-[#FDB854] pb-1">Harga</a>
+  </div>
+
+  <!-- Sign In Pill -->
+  <div>
+    <div class="flex items-center shadow-lg rounded-full bg-[#FDB854] p-1 pr-1.5 transition-transform hover:scale-105 cursor-pointer">
+      <span class="text-white px-5 py-1.5 font-medium text-sm">Masuk</span>
+      <div class="bg-[#e89e3a] text-white p-1.5 rounded-full"><i data-lucide="arrow-right" class="h-4 w-4"></i></div>
     </div>
+  </div>
+</nav>
 
     <!-- =============================================
          DESKTOP HERO - Two independent SVG blocks
