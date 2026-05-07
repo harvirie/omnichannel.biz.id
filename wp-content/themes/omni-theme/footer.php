@@ -102,8 +102,8 @@
       new Swiper('.swiper-recommended', {
         slidesPerView: 1,
         loop: true,
-        effect: 'fade',
-        fadeEffect: { crossFade: true },
+        speed: 1000, // Smooth 1-second slide transition
+        grabCursor: true, // Allow users to swipe manually
         autoplay: {
           delay: recSpeed,
           disableOnInteraction: false,
