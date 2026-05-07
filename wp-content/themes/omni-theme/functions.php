@@ -26,10 +26,10 @@ function omni_theme_setup() {
 }
 add_action( 'after_setup_theme', 'omni_theme_setup' );
 
-// Auto-create default pages
+// Auto-create default pages & menu
 add_action('admin_init', 'omni_auto_create_pages');
 function omni_auto_create_pages() {
-    if (get_option('omni_pages_auto_created_v2')) return;
+    if (get_option('omni_pages_auto_created_v3')) return;
 
     $pages = [
         'Home' => 'Halaman Utama',
@@ -63,7 +63,36 @@ function omni_auto_create_pages() {
         update_option('page_on_front', $home_id);
     }
 
-    update_option('omni_pages_auto_created_v2', true);
+    // Auto-create menu
+    $menu_name = 'Menu Utama';
+    $menu_exists = wp_get_nav_menu_object($menu_name);
+
+    if (!$menu_exists) {
+        $menu_id = wp_create_nav_menu($menu_name);
+
+        // Add items to menu
+        $menu_items = ['Fitur', 'Use Case', 'Analitik Data', 'Harga', 'Artikel'];
+        foreach ($menu_items as $item_title) {
+            $page = get_page_by_title($item_title);
+            if ($page) {
+                wp_update_nav_menu_item($menu_id, 0, array(
+                    'menu-item-title' => $item_title,
+                    'menu-item-object-id' => $page->ID,
+                    'menu-item-object' => 'page',
+                    'menu-item-status' => 'publish',
+                    'menu-item-type' => 'post_type',
+                ));
+            }
+        }
+
+        // Assign to theme locations
+        $locations = get_theme_mod('nav_menu_locations');
+        $locations['primary'] = $menu_id;
+        $locations['mobile'] = $menu_id;
+        set_theme_mod('nav_menu_locations', $locations);
+    }
+
+    update_option('omni_pages_auto_created_v3', true);
 }
 
 
