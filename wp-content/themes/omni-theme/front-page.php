@@ -222,6 +222,33 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
 
           <div class="swiper integration-swiper w-[100vw] -mx-2 px-2 pt-2 pb-4" style="overflow: visible;">
             <div class="swiper-wrapper">
+              <!-- Slide Set 1 -->
+              <div class="swiper-slide">
+                <div class="border border-omni-light/30 rounded-xl p-3 flex flex-col items-center justify-center text-center bg-omni-secondary shadow-sm h-[80px]">
+                  <i data-lucide="phone" class="h-6 w-6 text-omni-accent mb-2 drop-shadow-sm"></i>
+                  <span class="text-xs text-white font-medium">Telepon</span>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="border border-omni-light/30 rounded-xl p-3 flex flex-col items-center justify-center text-center bg-omni-secondary shadow-sm h-[80px]">
+                  <i data-lucide="message-circle" class="h-6 w-6 text-omni-accent mb-2 drop-shadow-sm"></i>
+                  <span class="text-xs text-white font-medium">WhatsApp</span>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="border border-omni-light/30 rounded-xl p-3 flex flex-col items-center justify-center text-center bg-omni-secondary shadow-sm h-[80px]">
+                  <i class="fa-brands fa-instagram text-omni-accent text-2xl mb-2 drop-shadow-sm"></i>
+                  <span class="text-xs text-white font-medium">Instagram</span>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="border border-omni-light/30 rounded-xl p-3 flex flex-col items-center justify-center text-center bg-omni-secondary shadow-sm h-[80px]">
+                  <i data-lucide="mail" class="h-6 w-6 text-omni-accent mb-2 drop-shadow-sm"></i>
+                  <span class="text-xs text-white font-medium">Email</span>
+                </div>
+              </div>
+              
+              <!-- Slide Set 2 (Duplicate for loop warning) -->
               <div class="swiper-slide">
                 <div class="border border-omni-light/30 rounded-xl p-3 flex flex-col items-center justify-center text-center bg-omni-secondary shadow-sm h-[80px]">
                   <i data-lucide="phone" class="h-6 w-6 text-omni-accent mb-2 drop-shadow-sm"></i>
@@ -290,35 +317,41 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
       <!-- Swiper Carousel -->
       <div class="swiper customers-swiper !pb-16">
         <div class="swiper-wrapper">
-          <?php for ( $i = 1; $i <= 4; $i++ ) : 
-            $cust_name = get_theme_mod('omni_customer_'.$i.'_name', 'Pelanggan '.$i);
-            $cust_desc = get_theme_mod('omni_customer_'.$i.'_desc', 'Deskripsi pelanggan '.$i);
-            $default_imgs = array(
-                1 => 'https://images.unsplash.com/photo-1636217432188-3a81bccad020?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnb3Zlcm5tZW50JTIwb2ZmaWNlJTIwYnVpbGRpbmd8ZW58MXx8fHwxNzc4MTcyNDE5fDA&ixlib=rb-4.1.0&q=80&w=1080',
-                2 => 'https://images.unsplash.com/photo-1770775776141-6b3ac7ef9dd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBpbW1pZ3JhdGlvbiUyMG9mZmljZXxlbnwxfHx8fDE3NzgxNzI0MjB8MA&ixlib=rb-4.1.0&q=80&w=1080',
-                3 => 'https://images.unsplash.com/photo-1766898211749-00820c5dc505?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25jcmV0ZSUyMG1peGVyJTIwY29uc3RydWN0aW9ufGVufDF8fHx8MTc3ODE3MjQxOXww&ixlib=rb-4.1.0&q=80&w=1080',
-                4 => 'https://images.unsplash.com/photo-1721411480070-fcb558776d54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbWVyZ2VuY3klMjBtZWRpY2FsJTIwYW1idWxhbmNlfGVufDF8fHx8MTc3ODE3MjQyMHww&ixlib=rb-4.1.0&q=80&w=1080'
-            );
-            $cust_img = get_theme_mod('omni_customer_'.$i.'_img', $default_imgs[$i]);
-          ?>
-          <div class="swiper-slide">
-            <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-omni-border flex flex-col group transition-all duration-300 h-full">
-              <div class="relative h-48 overflow-hidden">
-                <img src="<?php echo esc_url($cust_img); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="<?php echo esc_attr($cust_name); ?>" />
-                <div class="absolute inset-0 bg-gradient-to-t from-omni-dark/90 via-omni-dark/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="absolute bottom-4 left-6 right-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 class="text-white font-bold text-2xl leading-tight drop-shadow-md mb-1"><?php echo esc_html($cust_name); ?></h3>
-                  <div class="w-12 h-1 bg-omni-accent rounded-full transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 delay-100"></div>
+          <?php 
+          // Print slides twice to ensure enough elements for Swiper loop mode on large screens
+          for ($duplicate = 1; $duplicate <= 2; $duplicate++) :
+            for ( $i = 1; $i <= 4; $i++ ) : 
+              $cust_name = get_theme_mod('omni_customer_'.$i.'_name', 'Pelanggan '.$i);
+              $cust_desc = get_theme_mod('omni_customer_'.$i.'_desc', 'Deskripsi pelanggan '.$i);
+              $default_imgs = array(
+                  1 => 'https://images.unsplash.com/photo-1636217432188-3a81bccad020?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnb3Zlcm5tZW50JTIwb2ZmaWNlJTIwYnVpbGRpbmd8ZW58MXx8fHwxNzc4MTcyNDE5fDA&ixlib=rb-4.1.0&q=80&w=1080',
+                  2 => 'https://images.unsplash.com/photo-1770775776141-6b3ac7ef9dd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBpbW1pZ3JhdGlvbiUyMG9mZmljZXxlbnwxfHx8fDE3NzgxNzI0MjB8MA&ixlib=rb-4.1.0&q=80&w=1080',
+                  3 => 'https://images.unsplash.com/photo-1766898211749-00820c5dc505?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25jcmV0ZSUyMG1peGVyJTIwY29uc3RydWN0aW9ufGVufDF8fHx8MTc3ODE3MjQxOXww&ixlib=rb-4.1.0&q=80&w=1080',
+                  4 => 'https://images.unsplash.com/photo-1721411480070-fcb558776d54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbWVyZ2VuY3klMjBtZWRpY2FsJTIwYW1idWxhbmNlfGVufDF8fHx8MTc3ODE3MjQyMHww&ixlib=rb-4.1.0&q=80&w=1080'
+              );
+              $cust_img = get_theme_mod('omni_customer_'.$i.'_img', $default_imgs[$i]);
+            ?>
+            <div class="swiper-slide h-auto">
+              <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-omni-border flex flex-col group transition-all duration-300 h-full">
+                <div class="relative h-48 overflow-hidden shrink-0">
+                  <img src="<?php echo esc_url($cust_img); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="<?php echo esc_attr($cust_name); ?>" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-omni-dark/90 via-omni-dark/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div class="absolute bottom-4 left-6 right-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 class="text-white font-bold text-2xl leading-tight drop-shadow-md mb-1"><?php echo esc_html($cust_name); ?></h3>
+                    <div class="w-12 h-1 bg-omni-accent rounded-full transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 delay-100"></div>
+                  </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                  <p class="text-omni-text-muted text-[15px] leading-relaxed flex-1">
+                    <?php echo esc_html($cust_desc); ?>
+                  </p>
                 </div>
               </div>
-              <div class="p-6 flex-1 flex flex-col">
-                <p class="text-omni-text-muted text-[15px] leading-relaxed flex-1">
-                  <?php echo esc_html($cust_desc); ?>
-                </p>
-              </div>
             </div>
-          </div>
-          <?php endfor; ?>
+            <?php 
+            endfor;
+          endfor; 
+          ?>
         </div>
         
         <!-- Custom Swiper Navigation -->
