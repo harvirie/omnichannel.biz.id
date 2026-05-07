@@ -212,3 +212,55 @@ add_action('template_redirect', function() {
         }
     }
 }, 1);
+
+// Register Custom Post Type for Demo Requests
+add_action('init', function() {
+    register_post_type('demo_request', array(
+        'labels'      => array(
+            'name'          => 'Inbox Demo',
+            'singular_name' => 'Permohonan Demo',
+            'menu_name'     => 'Inbox Demo',
+            'all_items'     => 'Semua Permohonan',
+        ),
+        'public'      => false,
+        'show_ui'     => true,
+        'menu_icon'   => 'dashicons-email-alt',
+        'supports'    => array('title', 'custom-fields'),
+        'capability_type' => 'post',
+        'capabilities' => array(
+            'create_posts' => 'do_not_allow', // Only via form
+        ),
+        'map_meta_cap' => true,
+    ));
+});
+
+// Handle Demo Form Submission via AJAX
+add_action('wp_ajax_submit_demo', 'omni_handle_demo_submission');
+add_action('wp_ajax_nopriv_submit_demo', 'omni_handle_demo_submission');
+
+function omni_handle_demo_submission() {
+    $name = isset($_POST['demo_name']) ? sanitize_text_field($_POST['demo_name']) : '';
+    $email = isset($_POST['demo_email']) ? sanitize_email($_POST['demo_email']) : '';
+    $phone = isset($_POST['demo_phone']) ? sanitize_text_field($_POST['demo_phone']) : '';
+
+    if (empty($name) || empty($email) || empty($phone)) {
+        wp_send_json_error('Mohon lengkapi semua data.');
+    }
+
+    $post_id = wp_insert_post(array(
+        'post_type'   => 'demo_request',
+        'post_title'  => $name . ' - ' . current_time('Y-m-d H:i'),
+        'post_status' => 'publish',
+        'meta_input'  => array(
+            'Nama Lengkap' => $name,
+            'Email'        => $email,
+            'No WhatsApp'  => $phone,
+        )
+    ));
+
+    if ($post_id && !is_wp_error($post_id)) {
+        wp_send_json_success('Permohonan berhasil dikirim. Tim kami akan segera menghubungi Anda!');
+    } else {
+        wp_send_json_error('Gagal mengirim permohonan. Silakan coba lagi nanti.');
+    }
+}

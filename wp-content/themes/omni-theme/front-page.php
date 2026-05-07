@@ -53,14 +53,14 @@
           </p>
 
           <!-- Search Bar -->
-          <div class="flex items-center bg-white p-[0.4vw] xl:p-1.5 rounded-full w-full shadow-sm mb-[2.2vw] xl:mb-8 border border-[#d2e3c9]">
+          <form method="get" action="<?php echo esc_url(home_url('/')); ?>" class="flex items-center bg-white p-[0.4vw] xl:p-1.5 rounded-full w-full shadow-sm mb-[2.2vw] xl:mb-8 border border-[#d2e3c9]">
             <a href="<?php echo home_url('/harga'); ?>" class="bg-[#567558] hover:bg-[#415B45] transition-colors text-white px-[1.2vw] py-[0.6vw] rounded-full text-[0.85vw] xl:text-sm font-semibold whitespace-nowrap">Coba Gratis</a>
-            <button class="px-[1vw] py-[0.6vw] text-[0.85vw] xl:text-sm font-semibold text-[#4F6854] hover:bg-slate-50 rounded-full transition-colors">Demo</button>
-            <div class="flex-1 px-3 text-[0.8vw] xl:text-sm text-slate-400 font-medium overflow-hidden text-ellipsis whitespace-nowrap">Pusat Layanan...</div>
-            <button class="bg-[#FDB854] hover:bg-[#e89e3a] transition-colors p-[0.6vw] xl:p-2.5 rounded-full text-white shadow-md flex-shrink-0">
+            <button type="button" onclick="document.getElementById('demo-modal').classList.remove('hidden')" class="px-[1vw] py-[0.6vw] text-[0.85vw] xl:text-sm font-semibold text-[#4F6854] hover:bg-slate-50 rounded-full transition-colors shrink-0">Demo</button>
+            <input type="text" name="s" placeholder="Pencarian" class="flex-1 px-3 text-[0.8vw] xl:text-sm text-slate-600 font-medium bg-transparent outline-none min-w-0" />
+            <button type="submit" class="bg-[#FDB854] hover:bg-[#e89e3a] transition-colors p-[0.6vw] xl:p-2.5 rounded-full text-white shadow-md flex-shrink-0">
               <i data-lucide="search" class="h-[1.1vw] w-[1.1vw] xl:h-5 xl:w-5"></i>
             </button>
-          </div>
+          </form>
 
           <!-- Trusted -->
           <div class="flex items-center gap-[0.8vw] xl:gap-3">
@@ -87,13 +87,14 @@
           </div>
 
           <!-- Search Bar -->
-          <div class="flex items-center bg-white p-1.5 rounded-full shadow-sm mb-5 border border-[#d2e3c9] w-full max-w-[340px]">
+          <form method="get" action="<?php echo esc_url(home_url('/')); ?>" class="flex items-center bg-white p-1.5 rounded-full shadow-sm mb-5 border border-[#d2e3c9] w-full max-w-[340px]">
             <a href="<?php echo home_url('/harga'); ?>" class="bg-[#567558] hover:bg-[#415B45] text-white px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap">Coba Gratis</a>
-            <div class="flex-1 px-3 text-xs text-slate-400 font-medium overflow-hidden text-ellipsis whitespace-nowrap">Pusat Layanan...</div>
-            <button class="bg-[#FDB854] p-2 rounded-full text-white shadow-md shrink-0">
+            <button type="button" onclick="document.getElementById('demo-modal').classList.remove('hidden')" class="px-2 py-2 text-xs font-semibold text-[#4F6854] hover:bg-slate-50 rounded-full transition-colors shrink-0">Demo</button>
+            <input type="text" name="s" placeholder="Pencarian" class="flex-1 px-2 text-xs text-slate-600 font-medium bg-transparent outline-none min-w-0" />
+            <button type="submit" class="bg-[#FDB854] p-2 rounded-full text-white shadow-md shrink-0">
               <i data-lucide="search" class="h-4 w-4"></i>
             </button>
-          </div>
+          </form>
 
           <!-- Mobile Image Container -->
           <div class="relative mt-auto w-full max-w-[340px] mx-auto shrink-0 h-[200px] rounded-3xl overflow-hidden shadow-xl border border-white/20 -translate-y-[80px] -translate-x-[10px]">
@@ -228,7 +229,7 @@
     </div>
 
     <!-- Swiper Container Wrapper -->
-    <div class="relative w-full px-2 md:px-8">
+    <div class="relative w-full px-6 md:px-14">
       <!-- Swiper Carousel -->
       <div class="swiper customers-swiper !pb-16">
         <div class="swiper-wrapper">
@@ -268,14 +269,84 @@
       </div>
       
       <!-- Outer Navigation Buttons -->
-      <div class="swiper-button-prev !text-[#1C2C1F] !w-12 !h-12 !bg-white/80 hover:!bg-white backdrop-blur-sm rounded-full shadow-lg border border-[#d2e3c9] transition-all !absolute !left-0 md:!-left-4 top-[40%] -translate-y-1/2 z-20 after:!hidden flex items-center justify-center">
+      <!-- Menggunakan padding 10px+ (translate) agar menjauh dari card -->
+      <div class="swiper-button-prev !text-[#1C2C1F] !w-12 !h-12 !bg-white/80 hover:!bg-white backdrop-blur-sm rounded-full shadow-lg border border-[#d2e3c9] transition-all !absolute !left-0 top-[40%] -translate-y-1/2 z-20 after:!hidden flex items-center justify-center -ml-2 md:-ml-[10px]">
         <i class="fa-solid fa-chevron-left text-xl"></i>
       </div>
-      <div class="swiper-button-next !text-[#1C2C1F] !w-12 !h-12 !bg-white/80 hover:!bg-white backdrop-blur-sm rounded-full shadow-lg border border-[#d2e3c9] transition-all !absolute !right-0 md:!-right-4 top-[40%] -translate-y-1/2 z-20 after:!hidden flex items-center justify-center">
+      <div class="swiper-button-next !text-[#1C2C1F] !w-12 !h-12 !bg-white/80 hover:!bg-white backdrop-blur-sm rounded-full shadow-lg border border-[#d2e3c9] transition-all !absolute !right-0 top-[40%] -translate-y-1/2 z-20 after:!hidden flex items-center justify-center -mr-2 md:-mr-[10px]">
         <i class="fa-solid fa-chevron-right text-xl"></i>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Demo Modal -->
+<div id="demo-modal" class="fixed inset-0 z-[100] hidden">
+  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onclick="document.getElementById('demo-modal').classList.add('hidden')"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl z-10 transition-transform">
+    <div class="flex justify-between items-center mb-6">
+      <h3 class="text-2xl font-bold text-[#1C2C1F]">Jadwalkan Demo</h3>
+      <button onclick="document.getElementById('demo-modal').classList.add('hidden')" class="text-slate-400 hover:text-slate-600">
+        <i data-lucide="x" class="h-6 w-6"></i>
+      </button>
+    </div>
+    <form id="demo-form" class="space-y-4" onsubmit="submitDemoForm(event)">
+      <div>
+        <label class="block text-sm font-medium text-[#4F6854] mb-1">Nama Lengkap</label>
+        <input type="text" name="demo_name" required class="w-full px-4 py-2 border border-[#d2e3c9] rounded-xl focus:outline-none focus:border-[#FDB854] focus:ring-1 focus:ring-[#FDB854]">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-[#4F6854] mb-1">Email Perusahaan</label>
+        <input type="email" name="demo_email" required class="w-full px-4 py-2 border border-[#d2e3c9] rounded-xl focus:outline-none focus:border-[#FDB854] focus:ring-1 focus:ring-[#FDB854]">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-[#4F6854] mb-1">Nomor WhatsApp</label>
+        <input type="tel" name="demo_phone" required class="w-full px-4 py-2 border border-[#d2e3c9] rounded-xl focus:outline-none focus:border-[#FDB854] focus:ring-1 focus:ring-[#FDB854]">
+      </div>
+      <button type="submit" id="demo-submit-btn" class="w-full bg-[#FDB854] hover:bg-[#e89e3a] text-white font-bold py-3 rounded-xl transition-colors mt-2">Kirim Permohonan</button>
+      <div id="demo-msg" class="hidden text-center text-sm font-medium mt-2"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+async function submitDemoForm(e) {
+  e.preventDefault();
+  const form = e.target;
+  const msg = document.getElementById('demo-msg');
+  const btn = document.getElementById('demo-submit-btn');
+  const formData = new FormData(form);
+  formData.append('action', 'submit_demo');
+  
+  btn.disabled = true;
+  btn.innerText = 'Mengirim...';
+  msg.classList.add('hidden');
+  
+  try {
+    const res = await fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
+      method: 'POST',
+      body: formData
+    });
+    const data = await res.json();
+    
+    msg.classList.remove('hidden');
+    if (data.success) {
+      msg.className = 'text-green-600 text-center text-sm font-medium mt-2';
+      msg.innerText = data.data;
+      form.reset();
+      setTimeout(() => document.getElementById('demo-modal').classList.add('hidden'), 2000);
+    } else {
+      msg.className = 'text-red-500 text-center text-sm font-medium mt-2';
+      msg.innerText = data.data || 'Terjadi kesalahan';
+    }
+  } catch (err) {
+    msg.classList.remove('hidden');
+    msg.className = 'text-red-500 text-center text-sm font-medium mt-2';
+    msg.innerText = 'Gagal menghubungi server';
+  }
+  
+  btn.disabled = false;
+  btn.innerText = 'Kirim Permohonan';
+}
+</script>
 <?php get_footer(); ?>
