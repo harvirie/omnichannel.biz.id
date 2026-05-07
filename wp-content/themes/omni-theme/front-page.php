@@ -63,30 +63,28 @@ get_header();
         <!-- SVG atas: light green shape + image clipped inside -->
         <svg viewBox="0 0 2000.62 1163.2" class="absolute inset-0 w-full h-full drop-shadow-xl" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <!-- ClipPath using the exact top-card shape, restricted to right half for the image -->
+            <!-- Rounded rect clipPath: photo appears as a contained card panel -->
             <clipPath id="imageClip">
-              <path d="M830 0 L1947.29 0 C1977.29 0 2000.62 20.5 2000.62 53.34 L2000.62 951.09 C2000.06 981.37 1976.91 1010.81 1936.18 1014.32 L839.36 1014.32 C814.08 1013.41 792.02 991.03 781.42 961.49 L764.83 919.48 C756.17 884.86 722.46 863.37 678.01 865.74 L58.46 865.74 L58.46 0 Z"/>
+              <rect x="880" y="55" width="1065" height="935" rx="45" ry="45"/>
             </clipPath>
+            <linearGradient id="imgGrad" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stop-color="#1C2C1F" stop-opacity="0.88"/>
+              <stop offset="45%" stop-color="#1C2C1F" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#1C2C1F" stop-opacity="0"/>
+            </linearGradient>
           </defs>
 
           <!-- Background fill for whole top card -->
           <path fill="#EBF4E3" d="M58.46 0c-31.35,2.09 -57.22,35.2 -58.46,63.75l0 868.18c0.2,40.69 31.43,80.18 57.88,82.69l620.13 0c44.45,-2.37 78.16,19.12 86.82,53.74l16.59 42.01c10.6,29.54 32.66,51.92 57.94,52.83l1096.82 0c40.73,-3.51 63.88,-32.95 64.44,-63.23l0 -897.75c-0.2,-32.84 -23,-53.97 -53.33,-53.34l-1115.52 0c-25.65,-2.32 -54.42,-18.17 -64.44,-44.44l-26.67 -71.11c-12.41,-25.68 -33.15,-31.59 -62.22,-33.33l-619.98 0z"/>
 
-          <!-- Photo clipped into the right portion of the top card -->
+          <!-- Photo clipped as a rounded card panel (right side) -->
           <image href="https://images.unsplash.com/photo-1766066014237-00645c74e9c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjYWxsJTIwY2VudGVyJTIwYWdlbnQlMjB0YWxraW5nJTIwb24lMjBoZWFkc2V0fGVufDF8fHx8MTc3ODE0Njc3NXww&ixlib=rb-4.1.0&q=80&w=1080"
-            x="800" y="0" width="1200" height="1020"
+            x="880" y="55" width="1065" height="935"
             preserveAspectRatio="xMidYMid slice"
             clip-path="url(#imageClip)"/>
 
-          <!-- Dark gradient overlay on image area -->
-          <defs>
-            <linearGradient id="imgGrad" x1="0" y1="1" x2="0" y2="0">
-              <stop offset="0%" stop-color="#1C2C1F" stop-opacity="0.85"/>
-              <stop offset="50%" stop-color="#1C2C1F" stop-opacity="0.15"/>
-              <stop offset="100%" stop-color="#1C2C1F" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-          <path fill="url(#imgGrad)" clip-path="url(#imageClip)" d="M830 0 L2000.62 0 L2000.62 1014.32 L839.36 1014.32 C814.08 1013.41 792.02 991.03 781.42 961.49 L764.83 919.48 C756.17 884.86 722.46 863.37 678.01 865.74 L58.46 865.74 L58.46 760 Q500 760 620 760 C660 760 680 780 690 800 L705 840 C720 880 755 900 800 900 Z"/>
+          <!-- Gradient overlay on the photo -->
+          <rect x="880" y="55" width="1065" height="935" rx="45" ry="45" fill="url(#imgGrad)" clip-path="url(#imageClip)"/>
         </svg>
 
         <!-- Left Text Content: positioned absolutely over SVG -->
@@ -143,8 +141,8 @@ get_header();
         </div>
       </div>
 
-      <!-- GAP between top and bottom SVG (visible green background shows through) -->
-      <div class="h-6"></div>
+      <!-- GAP between top and bottom SVG (small gap so green bg shows through) -->
+      <div class="h-2"></div>
 
       <!-- == BOTTOM CARD == -->
       <!-- Uses SVG bawah aspect ratio 1995.03 : 448.88 ≈ 4.44:1 -->
