@@ -26,6 +26,47 @@ function omni_theme_setup() {
 }
 add_action( 'after_setup_theme', 'omni_theme_setup' );
 
+// Auto-create default pages
+add_action('admin_init', 'omni_auto_create_pages');
+function omni_auto_create_pages() {
+    if (get_option('omni_pages_auto_created_v2')) return;
+
+    $pages = [
+        'Home' => 'Halaman Utama',
+        'Fitur' => 'Halaman Fitur',
+        'Use Case' => 'Halaman Use Case',
+        'Analitik Data' => 'Halaman Analitik Data',
+        'Harga' => 'Halaman Harga',
+        'Artikel' => 'Halaman Artikel'
+    ];
+
+    $home_id = 0;
+    foreach ($pages as $title => $content) {
+        $page_check = get_page_by_title($title);
+        if (!isset($page_check->ID)) {
+            $new_page = array(
+                'post_type' => 'page',
+                'post_title' => $title,
+                'post_content' => '',
+                'post_status' => 'publish',
+                'post_author' => 1,
+            );
+            $page_id = wp_insert_post($new_page);
+            if ($title === 'Home') $home_id = $page_id;
+        } else {
+            if ($title === 'Home') $home_id = $page_check->ID;
+        }
+    }
+
+    if ($home_id) {
+        update_option('show_on_front', 'page');
+        update_option('page_on_front', $home_id);
+    }
+
+    update_option('omni_pages_auto_created_v2', true);
+}
+
+
 // Custom Walker for Desktop Menu
 class Omni_Desktop_Nav_Walker extends Walker_Nav_Menu {
     function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
