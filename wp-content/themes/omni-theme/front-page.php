@@ -54,72 +54,79 @@ get_header();
     <!-- Main Content Grid -->
     <div class="relative w-full flex-1 flex flex-col pt-12 lg:pt-0 lg:mt-16">
       
-      <!-- Top Card (Light Green) -->
-      <div class="bg-[#EBF4E3] rounded-[2.5rem] p-8 md:p-12 lg:p-16 flex flex-col lg:flex-row gap-12 shadow-2xl relative z-10 pb-32">
-        
-        <!-- Left Content -->
-        <div class="flex-1">
-          <!-- Logo -->
-          <div class="flex items-center gap-2 mb-10">
-            <div class="bg-[#415B45] p-2 rounded-xl shadow-sm">
-              <i data-lucide="headphones" class="h-6 w-6 text-white"></i>
-            </div>
-            <span class="font-bold text-2xl tracking-tight text-[#1C2C1F] font-serif">OmniServe</span>
-          </div>
-          
-          <h1 class="text-5xl md:text-6xl lg:text-[64px] font-serif text-[#1C2C1F] mb-6 leading-[1.05]">
-            Satu Layar untuk<br>Semua Saluran.
-          </h1>
-          <p class="text-[#4F6854] text-lg max-w-md mb-12 font-medium leading-relaxed">
-            Tingkatkan kepuasan pelanggan dan produktivitas tim yang menghubungkan suara, chat, email, dan sosmed dalam satu tempat.
-          </p>
-
-          <!-- Search Bar Pill -->
-          <div class="flex items-center bg-white p-2 rounded-full max-w-md shadow-sm mb-12 border border-[#d2e3c9]">
-            <button class="bg-[#567558] hover:bg-[#415B45] transition-colors text-white px-6 py-3 rounded-full text-sm font-semibold">Coba Gratis</button>
-            <button class="px-6 py-3 text-sm font-semibold text-[#4F6854] hover:bg-slate-50 rounded-full transition-colors">Demo</button>
-            <div class="flex-1 px-4 text-sm text-slate-400 font-medium">Pusat Layanan...</div>
-            <button class="bg-[#FDB854] hover:bg-[#e89e3a] transition-colors p-3 rounded-full text-white shadow-md"><i data-lucide="search" class="h-5 w-5"></i></button>
-          </div>
-
-          <!-- Trusted Pilot -->
-          <div class="flex items-center gap-3">
-            <div class="bg-[#0f172a] p-2.5 rounded-full"><i data-lucide="star" class="h-5 w-5 text-[#34d399] fill-[#34d399]"></i></div>
-            <div>
-               <div class="font-serif italic text-lg text-[#1C2C1F] font-medium">Tanpa Kartu Kredit</div>
-               <div class="text-sm font-semibold text-[#4F6854]">Setup 5 Menit</div>
-            </div>
-          </div>
+      <!-- Top Card (Light Green with Top SVG) -->
+      <div class="relative w-full z-10">
+        <!-- TOP SVG -->
+        <div class="absolute inset-0 w-full h-full pointer-events-none drop-shadow-2xl">
+          <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" class="w-full h-full text-[#EBF4E3]" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 2000.62 1163.2" preserveAspectRatio="none">
+           <path fill="currentColor" d="M58.46 0c-31.35,2.09 -57.22,35.2 -58.46,63.75l0 868.18c0.2,40.69 31.43,80.18 57.88,82.69l620.13 0c44.45,-2.37 78.16,19.12 86.82,53.74l16.59 42.01c10.6,29.54 32.66,51.92 57.94,52.83l1096.82 0c40.73,-3.51 63.88,-32.95 64.44,-63.23l0 -897.75c-0.2,-32.84 -23,-53.97 -53.33,-53.34l-1115.52 0c-25.65,-2.32 -54.42,-18.17 -64.44,-44.44l-26.67 -71.11c-12.41,-25.68 -33.15,-31.59 -62.22,-33.33l-619.98 0z"/>
+          </svg>
         </div>
 
-        <!-- Right Content (Image) -->
-        <div class="flex-1 relative min-h-[400px] lg:min-h-[500px] rounded-[2rem] overflow-hidden shadow-2xl">
-          <img src="https://images.unsplash.com/photo-1766066014237-00645c74e9c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjYWxsJTIwY2VudGVyJTIwYWdlbnQlMjB0YWxraW5nJTIwb24lMjBoZWFkc2V0fGVufDF8fHx8MTc3ODE0Njc3NXww&ixlib=rb-4.1.0&q=80&w=1080" class="absolute inset-0 w-full h-full object-cover" />
-          
-          <div class="absolute inset-0 bg-gradient-to-t from-[#1C2C1F]/80 via-transparent to-transparent"></div>
-          
-          <!-- Glassmorphism overlay on Image -->
-          <div class="absolute bottom-6 left-6 right-6">
-            <h3 class="font-serif text-3xl mb-4 text-white drop-shadow-md">Recommended</h3>
-            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 text-white shadow-xl">
-               <div class="flex items-center gap-2 mb-2">
-                 <h4 class="font-medium text-xl text-white">Panggilan Masuk</h4>
-                 <div class="bg-[#ef4444] p-1 rounded-full"><i data-lucide="star" class="h-3 w-3 text-white fill-white"></i></div>
-                 <span class="text-sm font-semibold ml-1">(2.3k+)</span>
-               </div>
-               <p class="text-sm text-white/90">Budi Santoso - Keluhan Produk <br><span class="text-xs opacity-80">Menunggu antrean (0:45)</span></p>
+        <div class="relative z-10 flex flex-col lg:flex-row gap-12 p-8 md:p-12 lg:p-16 pb-32">
+          <!-- Left Content -->
+          <div class="flex-1">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 mb-10">
+              <div class="bg-[#415B45] p-2 rounded-xl shadow-sm">
+                <i data-lucide="headphones" class="h-6 w-6 text-white"></i>
+              </div>
+              <span class="font-bold text-2xl tracking-tight text-[#1C2C1F] font-serif">OmniServe</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-6xl lg:text-[64px] font-serif text-[#1C2C1F] mb-6 leading-[1.05]">
+              Satu Layar untuk<br>Semua Saluran.
+            </h1>
+            <p class="text-[#4F6854] text-lg max-w-md mb-12 font-medium leading-relaxed">
+              Tingkatkan kepuasan pelanggan dan produktivitas tim yang menghubungkan suara, chat, email, dan sosmed dalam satu tempat.
+            </p>
+
+            <!-- Search Bar Pill -->
+            <div class="flex items-center bg-white p-2 rounded-full max-w-md shadow-sm mb-12 border border-[#d2e3c9]">
+              <button class="bg-[#567558] hover:bg-[#415B45] transition-colors text-white px-6 py-3 rounded-full text-sm font-semibold">Coba Gratis</button>
+              <button class="px-6 py-3 text-sm font-semibold text-[#4F6854] hover:bg-slate-50 rounded-full transition-colors">Demo</button>
+              <div class="flex-1 px-4 text-sm text-slate-400 font-medium">Pusat Layanan...</div>
+              <button class="bg-[#FDB854] hover:bg-[#e89e3a] transition-colors p-3 rounded-full text-white shadow-md"><i data-lucide="search" class="h-5 w-5"></i></button>
+            </div>
+
+            <!-- Trusted Pilot -->
+            <div class="flex items-center gap-3">
+              <div class="bg-[#0f172a] p-2.5 rounded-full"><i data-lucide="star" class="h-5 w-5 text-[#34d399] fill-[#34d399]"></i></div>
+              <div>
+                 <div class="font-serif italic text-lg text-[#1C2C1F] font-medium">Tanpa Kartu Kredit</div>
+                 <div class="text-sm font-semibold text-[#4F6854]">Setup 5 Menit</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Content (Image) -->
+          <div class="flex-1 relative min-h-[400px] lg:min-h-[500px] rounded-[2rem] overflow-hidden shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1766066014237-00645c74e9c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjYWxsJTIwY2VudGVyJTIwYWdlbnQlMjB0YWxraW5nJTIwb24lMjBoZWFkc2V0fGVufDF8fHx8MTc3ODE0Njc3NXww&ixlib=rb-4.1.0&q=80&w=1080" class="absolute inset-0 w-full h-full object-cover" />
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1C2C1F]/80 via-transparent to-transparent"></div>
+            
+            <!-- Glassmorphism overlay on Image -->
+            <div class="absolute bottom-6 left-6 right-6">
+              <h3 class="font-serif text-3xl mb-4 text-white drop-shadow-md">Recommended</h3>
+              <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 text-white shadow-xl">
+                 <div class="flex items-center gap-2 mb-2">
+                   <h4 class="font-medium text-xl text-white">Panggilan Masuk</h4>
+                   <div class="bg-[#ef4444] p-1 rounded-full"><i data-lucide="star" class="h-3 w-3 text-white fill-white"></i></div>
+                   <span class="text-sm font-semibold ml-1">(2.3k+)</span>
+                 </div>
+                 <p class="text-sm text-white/90">Budi Santoso - Keluhan Produk <br><span class="text-xs opacity-80">Menunggu antrean (0:45)</span></p>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Bottom Dark Card (SVG background) -->
-      <div class="relative w-full mt-[-80px] lg:mt-[-120px] z-20 min-h-[300px] md:min-h-[350px] flex items-end drop-shadow-2xl">
+      <div class="relative w-full mt-[-100px] lg:mt-[-160px] z-20 min-h-[300px] md:min-h-[350px] flex items-end drop-shadow-2xl">
         <!-- SVG Shape -->
-        <div class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden rounded-b-[2.5rem]">
-           <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" class="w-full h-full drop-shadow-2xl" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-            viewBox="0 0 1998.02 451.34" preserveAspectRatio="none"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <div class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
+           <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" class="w-full h-full text-[#1C2C1F]" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+            viewBox="0 0 1995.03 448.88" preserveAspectRatio="none">
             <defs>
              <style type="text/css">
               <![CDATA[
@@ -129,7 +136,6 @@ get_header();
                   stroke-dasharray: 4000;
                   animation: drawOutline 6s ease-in-out infinite alternate;
                }
-               .fil0 {fill: #1C2C1F;}
                @keyframes drawOutline {
                  0% { stroke-dashoffset: 4000; }
                  100% { stroke-dashoffset: 0; }
@@ -137,14 +143,12 @@ get_header();
               ]]>
              </style>
             </defs>
-            <g id="Layer_x0020_1">
-             <path class="fil0 str0" d="M60.53 1.15l632.17 0c22.48,2.75 39.95,17.54 49.39,44.38l20.71 58.23c10.75,24.51 20.49,48.01 47.3,49.45l1128.88 0c36.35,2.9 56.65,24.87 57.88,53.87l0 200.69c-0.56,23.17 -18.18,41.32 -52.87,42.42l-1177.81 0 -361.13 0 -346.53 0c-25.14,-1.43 -56.31,-25.94 -57.37,-58.48l0 -327.12c2.74,-29.17 26.54,-60.35 59.38,-63.44z"/>
-            </g>
+            <path fill="currentColor" class="str0" d="M59.35 0l631.96 0c22.48,2.75 39.94,17.53 49.38,44.36l20.7 58.21c10.75,24.5 20.49,48 47.28,49.43l1128.5 0c36.34,2.91 56.63,24.87 57.86,53.86l0 200.62c-0.56,23.16 -18.18,41.31 -52.85,42.4l-1177.42 0 -361 0 -346.41 0c-25.14,-1.43 -56.29,-25.93 -57.35,-58.45l0 -327.01c2.73,-29.17 26.53,-60.34 59.35,-63.42z"/>
            </svg>
         </div>
 
         <!-- Bottom Content inside SVG -->
-        <div class="relative z-10 w-full flex flex-col lg:flex-row justify-between items-center p-8 md:p-12 pb-12 pt-24 md:pt-32 gap-8">
+        <div class="relative z-10 w-full flex flex-col lg:flex-row justify-between items-center p-8 md:p-12 pb-12 pt-28 md:pt-40 gap-8">
            <!-- Text -->
            <div class="text-white pl-4 lg:pl-12">
               <h2 class="font-serif text-4xl lg:text-5xl mb-6 text-[#EBF4E3]">Integrasi<br><em class="text-[#FDB854] font-sans italic">Tanpa Batas</em></h2>
