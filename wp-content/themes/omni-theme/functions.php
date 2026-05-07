@@ -103,5 +103,85 @@ function omni_theme_customize_register( $wp_customize ) {
             'section'  => 'omni_customers_section',
         ) ) );
     }
+
+    // Pricing Section
+    $wp_customize->add_section( 'omni_pricing_section', array(
+        'title'    => __( 'Daftar Harga (Pricing)', 'omni-theme' ),
+        'priority' => 55,
+    ) );
+
+    $default_plans = array(
+        1 => array('name' => 'Starter', 'price' => 'Rp 299.000', 'period' => '/agen/bulan', 'desc' => 'Sempurna untuk tim kecil yang baru memulai.', 'btn' => 'Mulai Uji Coba Gratis', 'features' => "Hingga 5 saluran komunikasi\nKotak masuk terpusat\nLaporan standar\nDukungan email 24/7"),
+        2 => array('name' => 'Pro', 'price' => 'Rp 799.000', 'period' => '/agen/bulan', 'desc' => 'Fitur lanjutan untuk tim yang berkembang.', 'btn' => 'Mulai Uji Coba Gratis', 'features' => "Semua saluran tidak terbatas\nOtomatisasi & Routing (ACD)\nAnalitik Real-time & Custom\nPrioritas dukungan live chat\nIntegrasi CRM"),
+        3 => array('name' => 'Enterprise', 'price' => 'Custom', 'period' => '', 'desc' => 'Skalabilitas dan keamanan maksimal.', 'btn' => 'Hubungi Sales', 'features' => "SLA 99.9% Uptime\nDedicated Account Manager\nKeamanan berbasis peran (RBAC)\nOn-premise deployment option\nPelatihan agen eksklusif")
+    );
+
+    for ($i = 1; $i <= 3; $i++) {
+        // Name
+        $wp_customize->add_setting( 'omni_pricing_'.$i.'_name', array(
+            'default'           => $default_plans[$i]['name'],
+            'sanitize_callback' => 'sanitize_text_field',
+        ) );
+        $wp_customize->add_control( 'omni_pricing_'.$i.'_name', array(
+            'label'    => __( 'Nama Paket '.$i, 'omni-theme' ),
+            'section'  => 'omni_pricing_section',
+            'type'     => 'text',
+        ) );
+        
+        // Price
+        $wp_customize->add_setting( 'omni_pricing_'.$i.'_price', array(
+            'default'           => $default_plans[$i]['price'],
+            'sanitize_callback' => 'sanitize_text_field',
+        ) );
+        $wp_customize->add_control( 'omni_pricing_'.$i.'_price', array(
+            'label'    => __( 'Harga Paket '.$i, 'omni-theme' ),
+            'section'  => 'omni_pricing_section',
+            'type'     => 'text',
+        ) );
+
+        // Period
+        $wp_customize->add_setting( 'omni_pricing_'.$i.'_period', array(
+            'default'           => $default_plans[$i]['period'],
+            'sanitize_callback' => 'sanitize_text_field',
+        ) );
+        $wp_customize->add_control( 'omni_pricing_'.$i.'_period', array(
+            'label'    => __( 'Periode Paket '.$i.' (cth: /bulan)', 'omni-theme' ),
+            'section'  => 'omni_pricing_section',
+            'type'     => 'text',
+        ) );
+
+        // Description
+        $wp_customize->add_setting( 'omni_pricing_'.$i.'_desc', array(
+            'default'           => $default_plans[$i]['desc'],
+            'sanitize_callback' => 'sanitize_textarea_field',
+        ) );
+        $wp_customize->add_control( 'omni_pricing_'.$i.'_desc', array(
+            'label'    => __( 'Deskripsi Paket '.$i, 'omni-theme' ),
+            'section'  => 'omni_pricing_section',
+            'type'     => 'textarea',
+        ) );
+
+        // Features
+        $wp_customize->add_setting( 'omni_pricing_'.$i.'_features', array(
+            'default'           => $default_plans[$i]['features'],
+            'sanitize_callback' => 'sanitize_textarea_field',
+        ) );
+        $wp_customize->add_control( 'omni_pricing_'.$i.'_features', array(
+            'label'    => __( 'Fitur Paket '.$i.' (Pisahkan dengan Enter/Baris Baru)', 'omni-theme' ),
+            'section'  => 'omni_pricing_section',
+            'type'     => 'textarea',
+        ) );
+
+        // Button Text
+        $wp_customize->add_setting( 'omni_pricing_'.$i.'_btn', array(
+            'default'           => $default_plans[$i]['btn'],
+            'sanitize_callback' => 'sanitize_text_field',
+        ) );
+        $wp_customize->add_control( 'omni_pricing_'.$i.'_btn', array(
+            'label'    => __( 'Teks Tombol Paket '.$i, 'omni-theme' ),
+            'section'  => 'omni_pricing_section',
+            'type'     => 'text',
+        ) );
+    }
 }
 add_action( 'customize_register', 'omni_theme_customize_register' );
