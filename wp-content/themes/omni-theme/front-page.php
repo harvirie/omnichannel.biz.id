@@ -283,110 +283,298 @@ get_header();
   </div>
 </section>
 
-<!-- Analitik Section -->
-<section id="analitik" class="py-24 bg-slate-900 text-white relative overflow-hidden">
-  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
-  <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-500/20 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2"></div>
-  
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<!-- Analitik Section (Redesain dari Figma) -->
+<section id="analitik" class="flex-1 bg-[#F4F9F0] w-full mt-12">
+  <!-- Header Area -->
+  <div class="bg-[#1C2C1F] py-20 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#415B45]/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#FDB854]/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2"></div>
+    
+    <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FDB854]/20 border border-[#FDB854]/30 text-[#FDB854] mb-6">
+        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+        <span class="text-sm font-semibold tracking-wide uppercase">Analitik Data</span>
+      </div>
+      <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+        Berhenti Sekadar Merespon.<br />
+        <span class="text-[#FDB854]">Ubah Interaksi Menjadi Data.</span>
+      </h1>
+      <p class="text-[#EBF4E3] text-lg md:text-xl max-w-2xl mx-auto">
+        Pelayanan pelanggan bukan lagi sekadar cost center. Melalui OmniServe, setiap keluhan, pertanyaan, dan saran direkam, dianalisis, dan divisualisasikan.
+      </p>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid lg:grid-cols-2 gap-16 items-center">
-      <div class="order-2 lg:order-1">
-        <img 
-          src="https://images.unsplash.com/photo-1759752394755-1241472b589d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXRhJTIwYW5hbHl0aWNzJTIwZGFzaGJvYXJkJTIwc2NyZWVufGVufDF8fHx8MTc3ODE0NTkwNnww&ixlib=rb-4.1.0&q=80&w=1080" 
-          alt="Data Analytics" 
-          class="rounded-2xl shadow-2xl border border-slate-700/50 object-cover h-[450px] w-full"
+      <div class="order-2 lg:order-1 relative">
+        <div class="absolute -inset-4 bg-[#7A9E7E]/20 rounded-[2.5rem] transform -rotate-2"></div>
+        <img
+          src="https://images.unsplash.com/photo-1759752394755-1241472b589d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXRhJTIwYW5hbHl0aWNzJTIwZGFzaGJvYXJkJTIwc2NyZWVufGVufDF8fHx8MTc3ODE0NTkwNnww&ixlib=rb-4.1.0&q=80&w=1080"
+          alt="Data Analytics"
+          class="relative rounded-2xl shadow-2xl border border-white/50 object-cover h-[450px] w-full"
         />
       </div>
+      
       <div class="order-1 lg:order-2 space-y-8">
-        <h2 class="text-3xl md:text-5xl font-bold leading-tight font-serif">
-          Berhenti Sekadar Merespon. <br />
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 font-sans">
-            Ubah Interaksi Menjadi Data.
-          </span>
+        <h2 class="text-3xl font-bold leading-tight text-[#1C2C1F]">
+          Wawasan Real-Time untuk Keputusan Bisnis Cerdas
         </h2>
-        <p class="text-slate-300 text-lg md:text-xl leading-relaxed">
-          Pelayanan pelanggan bukan lagi sekadar cost center. Melalui OmniServe, setiap keluhan, pertanyaan, dan saran direkam, dianalisis, dan divisualisasikan menjadi wawasan bisnis yang kuat secara real-time.
+        <p class="text-[#4F6854] text-lg leading-relaxed">
+          Platform analitik kami dirancang khusus untuk memantau sentimen pelanggan dan mengukur produktivitas agen secara komprehensif.
         </p>
+        
         <ul class="space-y-4 pt-4">
-          <li class="flex items-start gap-3">
-            <div class="bg-blue-500/20 p-1 rounded-full mt-1">
-              <i data-lucide="check-circle-2" class="h-5 w-5 text-blue-400"></i>
+          <li class="flex items-start gap-3 bg-white p-4 rounded-xl shadow-sm border border-[#d2e3c9]">
+            <div class="bg-[#EBF4E3] p-1.5 rounded-full mt-0.5 shrink-0">
+              <i data-lucide="check-circle-2" class="h-5 w-5 text-[#415B45]"></i>
             </div>
-            <span class="text-slate-200 text-lg">Identifikasi tren keluhan sebelum menjadi krisis</span>
+            <span class="text-[#1C2C1F] font-medium">Identifikasi tren keluhan sebelum menjadi krisis</span>
           </li>
-          <li class="flex items-start gap-3">
-            <div class="bg-blue-500/20 p-1 rounded-full mt-1">
-              <i data-lucide="check-circle-2" class="h-5 w-5 text-blue-400"></i>
+          <li class="flex items-start gap-3 bg-white p-4 rounded-xl shadow-sm border border-[#d2e3c9]">
+            <div class="bg-[#EBF4E3] p-1.5 rounded-full mt-0.5 shrink-0">
+              <i data-lucide="check-circle-2" class="h-5 w-5 text-[#415B45]"></i>
             </div>
-            <span class="text-slate-200 text-lg">Ukur kinerja agen secara objektif dengan metrik akurat</span>
+            <span class="text-[#1C2C1F] font-medium">Ukur kinerja agen secara objektif dengan metrik akurat</span>
           </li>
-          <li class="flex items-start gap-3">
-            <div class="bg-blue-500/20 p-1 rounded-full mt-1">
-              <i data-lucide="check-circle-2" class="h-5 w-5 text-blue-400"></i>
+          <li class="flex items-start gap-3 bg-white p-4 rounded-xl shadow-sm border border-[#d2e3c9]">
+            <div class="bg-[#EBF4E3] p-1.5 rounded-full mt-0.5 shrink-0">
+              <i data-lucide="check-circle-2" class="h-5 w-5 text-[#415B45]"></i>
             </div>
-            <span class="text-slate-200 text-lg">Pahami preferensi saluran komunikasi pelanggan Anda</span>
+            <span class="text-[#1C2C1F] font-medium">Pahami preferensi saluran komunikasi pelanggan Anda</span>
+          </li>
+          <li class="flex items-start gap-3 bg-white p-4 rounded-xl shadow-sm border border-[#d2e3c9]">
+            <div class="bg-[#EBF4E3] p-1.5 rounded-full mt-0.5 shrink-0">
+              <i data-lucide="check-circle-2" class="h-5 w-5 text-[#415B45]"></i>
+            </div>
+            <span class="text-[#1C2C1F] font-medium">Prediksi lonjakan panggilan berdasarkan riwayat data</span>
           </li>
         </ul>
       </div>
     </div>
   </div>
+
+  <!-- Metrics Section -->
+  <div class="bg-white py-24 border-t border-[#d2e3c9]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-[#1C2C1F] mb-4">Metrik Utama yang Dipantau</h2>
+        <p class="text-[#4F6854]">Segala indikator kinerja kunci (KPI) pusat layanan dalam satu layar.</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-[#F4F9F0] rounded-2xl p-8 border border-[#d2e3c9] text-center hover:-translate-y-1 transition-transform">
+          <div class="bg-[#FDB854] w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-md">
+            <i data-lucide="users" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-[#4F6854] font-medium mb-2">Customer Satisfaction (CSAT)</h3>
+          <div class="text-4xl font-bold text-[#1C2C1F] mb-3">98%</div>
+          <p class="text-sm text-[#4F6854]/80">Tingkat kepuasan rata-rata dari interaksi</p>
+        </div>
+        <div class="bg-[#F4F9F0] rounded-2xl p-8 border border-[#d2e3c9] text-center hover:-translate-y-1 transition-transform">
+          <div class="bg-[#FDB854] w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-md">
+            <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-[#4F6854] font-medium mb-2">First Contact Resolution</h3>
+          <div class="text-4xl font-bold text-[#1C2C1F] mb-3">85%</div>
+          <p class="text-sm text-[#4F6854]/80">Persentase masalah yang diselesaikan di kontak pertama</p>
+        </div>
+        <div class="bg-[#F4F9F0] rounded-2xl p-8 border border-[#d2e3c9] text-center hover:-translate-y-1 transition-transform">
+          <div class="bg-[#FDB854] w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-md">
+            <i data-lucide="trending-up" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-[#4F6854] font-medium mb-2">Average Handling Time</h3>
+          <div class="text-4xl font-bold text-[#1C2C1F] mb-3">3.2m</div>
+          <p class="text-sm text-[#4F6854]/80">Waktu rata-rata penyelesaian masalah pelanggan</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mini CTA -->
+  <div class="bg-[#7A9E7E] py-16 text-center">
+    <h2 class="text-2xl font-bold text-white mb-6">Mulai Gunakan Analisis Data Hari Ini</h2>
+    <a href="#harga" class="inline-block bg-[#FDB854] text-white px-8 py-3 rounded-full font-bold hover:bg-[#e89e3a] transition-colors shadow-lg">
+      Lihat Paket Harga
+    </a>
+  </div>
 </section>
 
-<!-- Fitur Section -->
-<section id="fitur" class="py-24 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center max-w-3xl mx-auto mb-16">
-      <h2 class="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-3">Kemudahan Maksimal</h2>
-      <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6 font-serif">Sistem Rumit yang Dibuat Sederhana</h3>
-      <p class="text-lg text-slate-600">
-        Desain antarmuka yang intuitif memastikan agen Anda bisa langsung bekerja tanpa perlu masa pelatihan berbulan-bulan. Fokus melayani, bukan belajar aplikasi.
+<!-- Fitur Section (Redesain dari Figma) -->
+<section id="fitur" class="bg-white w-full">
+  <!-- Header Area -->
+  <div class="bg-[#EBF4E3] py-20 border-b border-[#d2e3c9]">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-[#1C2C1F] mb-6">
+        Fitur <span class="text-[#415B45]">OmniServe</span>
+      </h1>
+      <p class="text-[#4F6854] text-lg md:text-xl max-w-2xl mx-auto">
+        Sistem canggih yang dibuat sederhana. Desain antarmuka intuitif memastikan tim Anda langsung bekerja tanpa pelatihan panjang.
+      </p>
+    </div>
+  </div>
+
+  <!-- Main Features Grid -->
+  <div class="py-24 max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Feature 1 -->
+      <div class="bg-[#F4F9F0] rounded-2xl p-8 border border-[#d2e3c9] hover:shadow-xl hover:border-[#7A9E7E] hover:-translate-y-1 transition-all duration-300 group">
+        <div class="bg-white w-14 h-14 rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <i data-lucide="globe" class="h-7 w-7 text-[#FDB854]"></i>
+        </div>
+        <h4 class="text-xl font-bold text-[#1C2C1F] mb-4">Integrasi Semua Channel</h4>
+        <p class="text-[#4F6854] leading-relaxed">Telepon, WhatsApp, Instagram, Email, dan Live Chat dalam satu kotak masuk (inbox). Agen tidak perlu berpindah tab.</p>
+      </div>
+      <!-- Feature 2 -->
+      <div class="bg-[#F4F9F0] rounded-2xl p-8 border border-[#d2e3c9] hover:shadow-xl hover:border-[#7A9E7E] hover:-translate-y-1 transition-all duration-300 group">
+        <div class="bg-white w-14 h-14 rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <i data-lucide="zap" class="h-7 w-7 text-[#FDB854]"></i>
+        </div>
+        <h4 class="text-xl font-bold text-[#1C2C1F] mb-4">Otomatisasi Cerdas (ACD)</h4>
+        <p class="text-[#4F6854] leading-relaxed">Distribusikan tiket secara otomatis ke agen yang paling tepat berdasarkan keahlian atau beban kerja saat ini.</p>
+      </div>
+      <!-- Feature 3 -->
+      <div class="bg-[#F4F9F0] rounded-2xl p-8 border border-[#d2e3c9] hover:shadow-xl hover:border-[#7A9E7E] hover:-translate-y-1 transition-all duration-300 group">
+        <div class="bg-white w-14 h-14 rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <i data-lucide="bar-chart-3" class="h-7 w-7 text-[#FDB854]"></i>
+        </div>
+        <h4 class="text-xl font-bold text-[#1C2C1F] mb-4">Laporan Siap Pakai</h4>
+        <p class="text-[#4F6854] leading-relaxed">Hasilkan laporan kinerja harian, mingguan, hingga bulanan hanya dengan satu klik. Ekspor dalam PDF atau Excel.</p>
+      </div>
+      <!-- Feature 4 -->
+      <div class="bg-[#F4F9F0] rounded-2xl p-8 border border-[#d2e3c9] hover:shadow-xl hover:border-[#7A9E7E] hover:-translate-y-1 transition-all duration-300 group">
+        <div class="bg-white w-14 h-14 rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <i data-lucide="shield-check" class="h-7 w-7 text-[#FDB854]"></i>
+        </div>
+        <h4 class="text-xl font-bold text-[#1C2C1F] mb-4">Keamanan Data Enterprise</h4>
+        <p class="text-[#4F6854] leading-relaxed">Enkripsi end-to-end, kepatuhan GDPR, dan manajemen akses berbasis peran (RBAC) untuk melindungi data pelanggan.</p>
+      </div>
+      <!-- Feature 5 -->
+      <div class="bg-[#F4F9F0] rounded-2xl p-8 border border-[#d2e3c9] hover:shadow-xl hover:border-[#7A9E7E] hover:-translate-y-1 transition-all duration-300 group">
+        <div class="bg-white w-14 h-14 rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <i data-lucide="message-square" class="h-7 w-7 text-[#FDB854]"></i>
+        </div>
+        <h4 class="text-xl font-bold text-[#1C2C1F] mb-4">Templat Balasan Cepat</h4>
+        <p class="text-[#4F6854] leading-relaxed">Simpan jawaban untuk pertanyaan yang sering diajukan (FAQ) agar agen merespons lebih cepat dan konsisten.</p>
+      </div>
+      <!-- Feature 6 -->
+      <div class="bg-[#F4F9F0] rounded-2xl p-8 border border-[#d2e3c9] hover:shadow-xl hover:border-[#7A9E7E] hover:-translate-y-1 transition-all duration-300 group">
+        <div class="bg-white w-14 h-14 rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <i data-lucide="headphones" class="h-7 w-7 text-[#FDB854]"></i>
+        </div>
+        <h4 class="text-xl font-bold text-[#1C2C1F] mb-4">Pemantauan Panggilan</h4>
+        <p class="text-[#4F6854] leading-relaxed">Supervisor dapat mendengarkan panggilan secara real-time (barge-in) atau memberi arahan tersembunyi (whisper).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Integration Banner -->
+  <div class="py-20 bg-[#1C2C1F] text-white text-center px-6">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-[#EBF4E3]">Mudah Diintegrasikan dengan Tools Anda</h2>
+    <p class="text-white/80 max-w-2xl mx-auto mb-10">
+      OmniServe menyediakan lebih dari 50+ integrasi langsung dengan CRM, ERP, dan aplikasi produktivitas populer seperti Salesforce, Zendesk, Slack, dan lainnya.
+    </p>
+    <a href="#use-case" class="inline-block bg-white text-[#1C2C1F] px-8 py-3 rounded-full font-bold hover:bg-[#FDB854] hover:text-white transition-colors shadow-lg">
+      Lihat Studi Kasus
+    </a>
+  </div>
+</section>
+
+<!-- Customers Section -->
+<section class="py-24 bg-[#EBF4E3] relative" id="customers">
+  <div class="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-bold text-[#1C2C1F] mb-4">Dipercaya Oleh Berbagai Instansi</h2>
+      <p class="text-[#4F6854] text-lg max-w-2xl mx-auto">
+        Kami bangga dapat mendukung pelayanan terbaik yang diberikan oleh mitra dan pelanggan kami.
       </p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8 mb-16">
-      <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-        <div class="bg-white w-14 h-14 rounded-xl shadow-sm flex items-center justify-center mb-6">
-          <i data-lucide="globe" class="h-7 w-7 text-blue-600"></i>
+    <!-- Grid Layout for Desktop, Scrollable Flex for Mobile -->
+    <div class="flex overflow-x-auto snap-x md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 pb-8 md:pb-0 hide-scrollbar -mx-6 px-6 md:mx-0 md:px-0">
+      <!-- Customer 1 -->
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-[#d2e3c9] flex flex-col group hover:-translate-y-2 transition-all duration-300 min-w-[300px] snap-center">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1636217432188-3a81bccad020?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnb3Zlcm5tZW50JTIwb2ZmaWNlJTIwYnVpbGRpbmd8ZW58MXx8fHwxNzc4MTcyNDE5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Kantor Imigrasi Tangerang" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#1C2C1F]/80 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <h3 class="text-white font-bold text-xl leading-tight drop-shadow-md">Kantor Imigrasi Tangerang</h3>
+          </div>
         </div>
-        <h4 class="text-xl font-bold text-slate-900 mb-4">Integrasi Semua Channel</h4>
-        <p class="text-slate-600 leading-relaxed">
-          Telepon, WhatsApp, Instagram, Email, dan Live Chat dalam satu kotak masuk (inbox). Agen tidak perlu lagi berpindah-pindah tab.
-        </p>
+        <div class="p-6 flex-1 flex flex-col">
+          <p class="text-[#4F6854] text-sm leading-relaxed flex-1">
+            Meningkatkan efisiensi layanan keimigrasian melalui integrasi saluran komunikasi terpusat untuk masyarakat.
+          </p>
+        </div>
       </div>
-      <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-        <div class="bg-white w-14 h-14 rounded-xl shadow-sm flex items-center justify-center mb-6">
-          <i data-lucide="zap" class="h-7 w-7 text-cyan-500"></i>
+
+      <!-- Customer 2 -->
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-[#d2e3c9] flex flex-col group hover:-translate-y-2 transition-all duration-300 min-w-[300px] snap-center">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1770775776141-6b3ac7ef9dd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBpbW1pZ3JhdGlvbiUyMG9mZmljZXxlbnwxfHx8fDE3NzgxNzI0MjB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Kantor Imigrasi Bogor" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#1C2C1F]/80 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <h3 class="text-white font-bold text-xl leading-tight drop-shadow-md">Kantor Imigrasi Bogor</h3>
+          </div>
         </div>
-        <h4 class="text-xl font-bold text-slate-900 mb-4">Otomatisasi Cerdas</h4>
-        <p class="text-slate-600 leading-relaxed">
-          Distribusikan tiket secara otomatis (ACD) ke agen yang paling tepat berdasarkan keahlian atau beban kerja.
-        </p>
+        <div class="p-6 flex-1 flex flex-col">
+          <p class="text-[#4F6854] text-sm leading-relaxed flex-1">
+            Mempercepat respons aduan dan permohonan paspor warga berkat fitur omnichannel dan analitik cerdas.
+          </p>
+        </div>
       </div>
-      <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-        <div class="bg-white w-14 h-14 rounded-xl shadow-sm flex items-center justify-center mb-6">
-          <i data-lucide="bar-chart-3" class="h-7 w-7 text-blue-500"></i>
+
+      <!-- Customer 3 -->
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-[#d2e3c9] flex flex-col group hover:-translate-y-2 transition-all duration-300 min-w-[300px] snap-center">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1766898211749-00820c5dc505?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25jcmV0ZSUyMG1peGVyJTIwY29uc3RydWN0aW9ufGVufDF8fHx8MTc3ODE3MjQxOXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="ADHIMIX" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#1C2C1F]/80 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <h3 class="text-white font-bold text-xl leading-tight drop-shadow-md">ADHIMIX</h3>
+          </div>
         </div>
-        <h4 class="text-xl font-bold text-slate-900 mb-4">Laporan Siap Pakai</h4>
-        <p class="text-slate-600 leading-relaxed">
-          Hasilkan laporan kinerja harian, mingguan, hingga bulanan hanya dengan satu klik. Ekspor dalam format PDF atau Excel.
-        </p>
+        <div class="p-6 flex-1 flex flex-col">
+          <p class="text-[#4F6854] text-sm leading-relaxed flex-1">
+            Mendigitalisasi koordinasi tim lapangan dan dukungan klien dengan performa stabil 24/7 di semua proyek.
+          </p>
+        </div>
+      </div>
+
+      <!-- Customer 4 -->
+      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-[#d2e3c9] flex flex-col group hover:-translate-y-2 transition-all duration-300 min-w-[300px] snap-center">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1721411480070-fcb558776d54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbWVyZ2VuY3klMjBtZWRpY2FsJTIwYW1idWxhbmNlfGVufDF8fHx8MTc3ODE3MjQyMHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="PSC 119" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#1C2C1F]/80 to-transparent"></div>
+          <div class="absolute bottom-4 left-4 right-4">
+            <h3 class="text-white font-bold text-xl leading-tight drop-shadow-md">PSC 119 Dinkes Kab. Bandung</h3>
+          </div>
+        </div>
+        <div class="p-6 flex-1 flex flex-col">
+          <p class="text-[#4F6854] text-sm leading-relaxed flex-1">
+            Mengamankan jalur komunikasi gawat darurat medis dengan stabilitas tanpa batas dan navigasi responsif yang andal.
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA Section -->
-<section class="py-20 bg-blue-600 relative overflow-hidden">
+<!-- CTA Section Harmonized with OmniServe Colors -->
+<section class="py-20 bg-[#1C2C1F] relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#415B45]/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+  <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#FDB854]/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2"></div>
+
   <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 font-serif">Siap Mengubah Cara Anda Melayani?</h2>
-    <p class="text-blue-100 text-xl mb-10 max-w-2xl mx-auto">
+    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Siap Mengubah Cara Anda Melayani?</h2>
+    <p class="text-[#EBF4E3] text-xl mb-10 max-w-2xl mx-auto opacity-90">
       Bergabunglah dengan ratusan perusahaan lain yang telah mendigitalisasi pusat layanan pelanggan mereka dengan OmniServe.
     </p>
     <div class="flex flex-col sm:flex-row justify-center gap-4">
-      <button class="bg-white text-blue-600 hover:bg-slate-50 px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg">
+      <a href="#harga" class="bg-[#FDB854] text-white hover:bg-[#e89e3a] px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 inline-block">
         Mulai Uji Coba Gratis
-      </button>
-      <button class="bg-blue-700 text-white hover:bg-blue-800 border border-blue-500 px-8 py-4 rounded-full font-bold text-lg transition-all">
+      </a>
+      <button class="bg-transparent text-white hover:bg-white/10 border border-white/30 px-8 py-4 rounded-full font-bold text-lg transition-all">
         Hubungi Sales Kami
       </button>
     </div>
