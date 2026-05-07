@@ -75,68 +75,64 @@
       if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMobileMenu);
       if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
     }
-    // Initialize Swiper Carousel for Customers
-    if (document.querySelector('.customers-swiper')) {
-      const swiper = new Swiper('.customers-swiper', {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        loop: true,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-        breakpoints: {
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-          1280: {
-            slidesPerView: 4,
-            spaceBetween: 30,
-          },
-        }
-      });
+
+    // === OPTIMASI TBT: Inisialisasi Swiper via Intersection Observer ===
+    // Swiper hanya di-init saat carousel masuk ke viewport, bukan saat halaman load.
+    function lazyInitSwiper(selector, config) {
+      const el = document.querySelector(selector);
+      if (!el) return;
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (typeof Swiper !== 'undefined') {
+              new Swiper(selector, config);
+            } else {
+              // Swiper belum loaded, coba lagi setelah 100ms
+              setTimeout(() => new Swiper(selector, config), 100);
+            }
+            obs.unobserve(el);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      observer.observe(el);
     }
 
-    // Initialize Integration Swiper (Mobile only)
-    if (document.querySelector('.integration-swiper')) {
-      new Swiper('.integration-swiper', {
-        slidesPerView: 2,
-        spaceBetween: 12,
-        loop: true,
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: false,
-        },
-      });
-    }
+    <?php $recSpeed = (int)get_theme_mod('omni_rec_speed', 10) * 1000; ?>
 
-    // Initialize Swiper Carousel for Recommended
-    if (document.querySelector('.swiper-recommended')) {
-      const recSpeed = <?php echo (int)get_theme_mod('omni_rec_speed', 10) * 1000; ?>;
-      new Swiper('.swiper-recommended', {
-        slidesPerView: 1,
-        loop: true,
-        speed: 1000, // Smooth 1-second slide transition
-        grabCursor: true, // Allow users to swipe manually
-        autoplay: {
-          delay: recSpeed,
-          disableOnInteraction: false,
-        },
-      });
-    }
+    // Customers Carousel — lazy init
+    lazyInitSwiper('.customers-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: { delay: 3000, disableOnInteraction: false },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      breakpoints: {
+        640:  { slidesPerView: 2, spaceBetween: 20 },
+        1024: { slidesPerView: 3, spaceBetween: 30 },
+        1280: { slidesPerView: 4, spaceBetween: 30 },
+      }
+    });
+
+    // Integration Carousel (Mobile) — lazy init
+    lazyInitSwiper('.integration-swiper', {
+      slidesPerView: 2,
+      spaceBetween: 12,
+      loop: true,
+      autoplay: { delay: 5000, disableOnInteraction: false },
+    });
+
+    // Recommended Carousel — lazy init
+    lazyInitSwiper('.swiper-recommended', {
+      slidesPerView: 1,
+      loop: true,
+      speed: 1000,
+      grabCursor: true,
+      autoplay: { delay: <?php echo $recSpeed; ?>, disableOnInteraction: false },
+    });
+
   });
 </script>
 <?php wp_footer(); ?>
