@@ -59,7 +59,7 @@ get_header();
       <!-- == TOP CARD == -->
       <!-- Uses SVG atas aspect ratio 2000.62 : 1163.2 ≈ 1.72:1 -->
       <!-- The image is clipped INSIDE the SVG shape via clipPath -->
-      <div class="relative w-full" style="aspect-ratio: 2000.62 / 1163.2;">
+      <div class="relative w-full min-h-[580px]" style="aspect-ratio: 2000.62 / 1163.2;">
         <!-- SVG atas: light green shape + image clipped inside -->
         <svg viewBox="0 0 2000.62 1163.2" class="absolute inset-0 w-full h-full drop-shadow-xl" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -89,7 +89,7 @@ get_header();
         </svg>
 
         <!-- Left Text Content: positioned absolutely over SVG -->
-        <div class="absolute top-[7%] left-[5%] w-[38%] z-20 flex flex-col">
+        <div class="absolute top-[5%] left-[4%] w-[40%] z-20 flex flex-col">
           <div class="flex items-center gap-2 mb-8">
             <div class="bg-[#415B45] p-2 rounded-xl shadow-sm">
               <i data-lucide="headphones" class="h-6 w-6 text-white"></i>
@@ -142,12 +142,12 @@ get_header();
         </div>
       </div>
 
-      <!-- GAP between top and bottom SVG (small gap so green bg shows through) -->
-      <div class="h-2"></div>
+      <!-- GAP: small so green bg shows through -->
+      <div class="h-1"></div>
 
       <!-- == BOTTOM CARD == -->
       <!-- Uses SVG bawah aspect ratio 1995.03 : 448.88 ≈ 4.44:1 -->
-      <div class="relative w-full" style="aspect-ratio: 1995.03 / 448.88;">
+      <div class="relative w-full min-h-[200px]" style="aspect-ratio: 1995.03 / 448.88;">
         <!-- SVG bawah background shape with orange drop-shadow -->
         <svg viewBox="0 0 1995.03 448.88" class="absolute inset-0 w-full h-full text-[#1C2C1F]"
           preserveAspectRatio="xMidYMid meet"
