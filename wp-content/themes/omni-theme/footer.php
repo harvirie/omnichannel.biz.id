@@ -95,6 +95,21 @@
         }
       });
     }
+
+    // Initialize Swiper Carousel for Recommended
+    if (document.querySelector('.swiper-recommended')) {
+      const recSpeed = <?php echo (int)get_theme_mod('omni_rec_speed', 10) * 1000; ?>;
+      new Swiper('.swiper-recommended', {
+        slidesPerView: 1,
+        loop: true,
+        effect: 'fade',
+        fadeEffect: { crossFade: true },
+        autoplay: {
+          delay: recSpeed,
+          disableOnInteraction: false,
+        },
+      });
+    }
   });
 </script>
 <?php wp_footer(); ?>

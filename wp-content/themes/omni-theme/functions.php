@@ -301,20 +301,36 @@ add_action('customize_register', function($wp_customize) {
         'priority' => 31,
     ));
 
-    $fields = array(
-        'omni_rec_title'  => array('label' => 'Judul (Recommended)', 'default' => 'Panggilan Masuk'),
-        'omni_rec_rating' => array('label' => 'Rating/Angka', 'default' => '(2.3k+)'),
-        'omni_rec_desc'   => array('label' => 'Deskripsi Singkat', 'default' => 'Budi Santoso - Keluhan Produk'),
-        'omni_rec_sub'    => array('label' => 'Sub Status', 'default' => 'Menunggu antrean (0:45)'),
-    );
+    $wp_customize->add_setting('omni_rec_speed', array('default' => 10, 'sanitize_callback' => 'absint'));
+    $wp_customize->add_control('omni_rec_speed', array(
+        'label'       => 'Durasi Slide (Detik)',
+        'section'     => 'omni_hero_recommended',
+        'type'        => 'number',
+        'input_attrs' => array('min' => 1, 'max' => 60),
+    ));
 
-    foreach ($fields as $id => $data) {
-        $wp_customize->add_setting($id, array('default' => $data['default'], 'sanitize_callback' => 'sanitize_text_field'));
-        $wp_customize->add_control($id, array(
-            'label'   => $data['label'],
-            'section' => 'omni_hero_recommended',
-            'type'    => 'text',
-        ));
+    $default_items = [
+        1 => ['title' => 'Panggilan Masuk', 'rating' => '(2.3k+)', 'desc' => 'Budi Santoso - Keluhan Produk', 'sub' => 'Menunggu antrean (0:45)'],
+        2 => ['title' => 'Pesan Masuk', 'rating' => '(1.5k+)', 'desc' => 'Siti Aminah - Info Layanan', 'sub' => 'Dialihkan ke Tim B (0:12)'],
+        3 => ['title' => 'Email Baru', 'rating' => '(900+)', 'desc' => 'Agus Pratama - Kerjasama', 'sub' => 'Belum dibaca (5m yang lalu)'],
+    ];
+
+    for ($i = 1; $i <= 3; $i++) {
+        $fields = array(
+            "omni_rec_{$i}_title"  => array('label' => "Judul Item {$i}", 'default' => $default_items[$i]['title']),
+            "omni_rec_{$i}_rating" => array('label' => "Rating/Angka Item {$i}", 'default' => $default_items[$i]['rating']),
+            "omni_rec_{$i}_desc"   => array('label' => "Deskripsi Item {$i}", 'default' => $default_items[$i]['desc']),
+            "omni_rec_{$i}_sub"    => array('label' => "Sub Status Item {$i}", 'default' => $default_items[$i]['sub']),
+        );
+
+        foreach ($fields as $id => $data) {
+            $wp_customize->add_setting($id, array('default' => $data['default'], 'sanitize_callback' => 'sanitize_text_field'));
+            $wp_customize->add_control($id, array(
+                'label'   => $data['label'],
+                'section' => 'omni_hero_recommended',
+                'type'    => 'text',
+            ));
+        }
     }
 });
 
