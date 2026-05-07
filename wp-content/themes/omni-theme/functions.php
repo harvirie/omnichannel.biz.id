@@ -185,3 +185,20 @@ function omni_theme_customize_register( $wp_customize ) {
     }
 }
 add_action( 'customize_register', 'omni_theme_customize_register' );
+
+// Custom routing for our multi-page React-like architecture
+add_action('template_redirect', function() {
+    if (is_admin()) return;
+    
+    $path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+    $pages = ['fitur', 'use-case', 'analitik', 'harga'];
+    
+    if (in_array($path, $pages)) {
+        $template = locate_template("page-{$path}.php");
+        if ($template) {
+            status_header(200);
+            include $template;
+            exit;
+        }
+    }
+});
