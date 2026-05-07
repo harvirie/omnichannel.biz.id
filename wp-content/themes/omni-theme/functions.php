@@ -15,10 +15,50 @@ function omni_theme_setup() {
     add_theme_support( 'title-tag' );
     add_theme_support( 'post-thumbnails' );
 
+    // Register Nav Menus
+    register_nav_menus(array(
+        'primary' => 'Menu Utama (Desktop)',
+        'mobile'  => 'Menu Mobile',
+    ));
+
     // Disable Gutenberg / Block Editor (Use Classic Editor)
     add_filter('use_block_editor_for_post', '__return_false', 10);
 }
 add_action( 'after_setup_theme', 'omni_theme_setup' );
+
+// Custom Walker for Desktop Menu
+class Omni_Desktop_Nav_Walker extends Walker_Nav_Menu {
+    function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+        $classes = empty($item->classes) ? array() : (array) $item->classes;
+        $active_class = in_array('current-menu-item', $classes) || in_array('current_page_item', $classes) ? 'text-omni-accent' : 'text-white';
+        $line_class = in_array('current-menu-item', $classes) || in_array('current_page_item', $classes) ? 'w-full opacity-100' : 'w-1 opacity-0 group-hover:opacity-100 group-hover:w-full';
+        
+        $output .= '<li class="flex items-center">';
+        $output .= '<a href="' . esc_url($item->url) . '" class="group relative text-sm font-medium transition-all duration-300 hover:text-omni-accent hover:-translate-y-0.5 ' . $active_class . '">';
+        $output .= apply_filters('the_title', $item->title, $item->ID);
+        $output .= '<span class="absolute -bottom-2 left-1/2 -translate-x-1/2 h-0.5 bg-omni-accent rounded-full transition-all duration-300 ' . $line_class . '"></span>';
+        $output .= '</a>';
+    }
+    function end_el(&$output, $item, $depth = 0, $args = null) {
+        $output .= '</li>';
+    }
+}
+
+// Custom Walker for Mobile Menu
+class Omni_Mobile_Nav_Walker extends Walker_Nav_Menu {
+    function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
+        $classes = empty($item->classes) ? array() : (array) $item->classes;
+        $active_class = in_array('current-menu-item', $classes) || in_array('current_page_item', $classes) ? 'text-omni-accent bg-omni-dark/5' : 'text-omni-text-muted hover:text-omni-button hover:bg-omni-dark/5';
+        
+        $output .= '<a href="' . esc_url($item->url) . '" class="block px-4 py-3 rounded-xl font-medium transition-colors ' . $active_class . '">';
+        $output .= apply_filters('the_title', $item->title, $item->ID);
+        $output .= '</a>';
+    }
+    function end_el(&$output, $item, $depth = 0, $args = null) {
+        // block level anchors don't need wrapping li closures if we strip the ul wrapper, but wp_nav_menu uses them.
+        // We will configure wp_nav_menu to NOT use ul/li for mobile, so end_el does nothing.
+    }
+}
 
 // Customizer settings
 function omni_theme_customize_register( $wp_customize ) {

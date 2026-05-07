@@ -49,18 +49,27 @@
   // Mobile menu toggle
   document.addEventListener('DOMContentLoaded', function() {
     const mobileBtn = document.getElementById('mobile-menu-btn');
-    const mobilePanel = document.getElementById('mobile-menu-panel');
-    const menuIcon = document.querySelector('.menu-icon');
-    const closeIcon = document.querySelector('.close-icon');
+    const mobileCloseBtn = document.getElementById('mobile-menu-close');
+    const mobileDrawer = document.getElementById('mobile-menu-drawer');
+    const mobileOverlay = document.getElementById('mobile-menu-overlay');
 
-    if(mobileBtn && mobilePanel) {
-      mobileBtn.addEventListener('click', () => {
-        mobilePanel.classList.toggle('hidden');
-        menuIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
-      });
+    function openMobileMenu() {
+      mobileDrawer.classList.remove('-translate-x-full');
+      mobileOverlay.classList.remove('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
     }
 
+    function closeMobileMenu() {
+      mobileDrawer.classList.add('-translate-x-full');
+      mobileOverlay.classList.add('opacity-0', 'pointer-events-none');
+      document.body.style.overflow = '';
+    }
+
+    if (mobileBtn && mobileDrawer) {
+      mobileBtn.addEventListener('click', openMobileMenu);
+      if (mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMobileMenu);
+      if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
+    }
     // Initialize Swiper Carousel for Customers
     if (document.querySelector('.customers-swiper')) {
       const swiper = new Swiper('.customers-swiper', {

@@ -80,7 +80,7 @@
 <?php wp_body_open(); ?>
 
 <!-- Mobile Navbar -->
-<nav class="md:hidden fixed w-full bg-omni-light/90 backdrop-blur-md z-50 border-b border-omni-border">
+<nav class="md:hidden fixed top-0 w-full bg-omni-light/90 backdrop-blur-md z-40 border-b border-omni-border">
   <div class="px-4">
     <div class="flex justify-between items-center h-20">
       <a href="<?php echo home_url('/'); ?>" class="flex items-center gap-2">
@@ -94,24 +94,66 @@
         <?php endif; ?>
       </a>
       <div class="flex items-center">
-        <button id="mobile-menu-btn" class="text-omni-text-muted">
+        <button id="mobile-menu-btn" class="text-omni-text-muted hover:text-omni-accent transition-colors">
           <i data-lucide="menu" class="h-6 w-6 menu-icon"></i>
-          <i data-lucide="x" class="h-6 w-6 close-icon hidden"></i>
         </button>
       </div>
     </div>
   </div>
-  <div id="mobile-menu-panel" class="hidden bg-omni-light border-b border-omni-border px-4 pt-2 pb-4 space-y-1 shadow-lg absolute w-full">
-    <?php
-      $current_path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-    ?>
-    <a href="<?php echo home_url('/fitur'); ?>" class="block px-3 py-2 rounded-md font-medium <?php echo $current_path == 'fitur' ? 'text-omni-accent bg-omni-dark/5' : 'text-omni-text-muted hover:text-omni-button'; ?>">Fitur</a>
-    <a href="<?php echo home_url('/use-case'); ?>" class="block px-3 py-2 rounded-md font-medium <?php echo $current_path == 'use-case' ? 'text-omni-accent bg-omni-dark/5' : 'text-omni-text-muted hover:text-omni-button'; ?>">Use Case</a>
-    <a href="<?php echo home_url('/analitik'); ?>" class="block px-3 py-2 rounded-md font-medium <?php echo $current_path == 'analitik' ? 'text-omni-accent bg-omni-dark/5' : 'text-omni-text-muted hover:text-omni-button'; ?>">Analitik Data</a>
-    <a href="<?php echo home_url('/harga'); ?>" class="block px-3 py-2 rounded-md font-medium <?php echo $current_path == 'harga' ? 'text-omni-accent bg-omni-dark/5' : 'text-omni-text-muted hover:text-omni-button'; ?>">Harga</a>
-    <a href="<?php echo home_url('/artikel'); ?>" class="block px-3 py-2 rounded-md font-medium <?php echo $current_path == 'artikel' ? 'text-omni-accent bg-omni-dark/5' : 'text-omni-text-muted hover:text-omni-button'; ?>">Artikel</a>
-  </div>
 </nav>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu-overlay" class="fixed inset-0 bg-omni-dark/60 backdrop-blur-sm z-[60] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+<!-- Mobile Menu Drawer (Side Panel) -->
+<div id="mobile-menu-drawer" class="fixed top-0 left-0 h-full w-[80%] max-w-sm bg-omni-light z-[70] shadow-2xl transform -translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col">
+  <div class="px-6 h-20 flex items-center justify-between border-b border-omni-border/50 shrink-0">
+    <div class="flex items-center gap-2">
+      <div class="bg-omni-button-hover p-2 rounded-lg shadow-sm">
+        <i data-lucide="headphones" class="h-5 w-5 text-white"></i>
+      </div>
+      <span class="font-bold text-lg tracking-tight text-omni-dark">Menu Navigasi</span>
+    </div>
+    <button id="mobile-menu-close" class="text-omni-text-muted hover:text-omni-accent transition-colors bg-white p-2 rounded-full shadow-sm border border-omni-border/50">
+      <i data-lucide="x" class="h-4 w-4"></i>
+    </button>
+  </div>
+  
+  <div class="p-6 flex-1 overflow-y-auto space-y-2">
+    <?php
+    if (has_nav_menu('mobile')) {
+        wp_nav_menu([
+            'theme_location' => 'mobile',
+            'container'      => false,
+            'items_wrap'     => '%3$s', // Remove ul wrapper
+            'walker'         => new Omni_Mobile_Nav_Walker(),
+            'fallback_cb'    => false,
+        ]);
+    } else {
+        // Fallback if no menu assigned
+        $current_path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+        $links = [
+            ['path' => 'fitur', 'name' => 'Fitur'],
+            ['path' => 'use-case', 'name' => 'Use Case'],
+            ['path' => 'analitik', 'name' => 'Analitik Data'],
+            ['path' => 'harga', 'name' => 'Harga'],
+            ['path' => 'artikel', 'name' => 'Artikel'],
+        ];
+        foreach ($links as $link) {
+            $is_active = ($current_path === $link['path']);
+            $class = $is_active ? 'text-omni-accent bg-omni-dark/5' : 'text-omni-text-muted hover:text-omni-button hover:bg-omni-dark/5';
+            echo '<a href="' . home_url('/' . $link['path']) . '" class="block px-4 py-3 rounded-xl font-medium transition-colors ' . $class . '">' . $link['name'] . '</a>';
+        }
+    }
+    ?>
+  </div>
+  
+  <div class="p-6 border-t border-omni-border/50 shrink-0 bg-white/50">
+    <a href="<?php echo home_url('/harga'); ?>" class="flex justify-center items-center w-full shadow-md rounded-xl bg-omni-accent hover:bg-omni-accent-hover transition-all p-3 text-white font-bold">
+      Masuk / Coba Gratis
+    </a>
+  </div>
+</div>
 
 <!-- Desktop & Tablet Header Wrapper (Floating Rounded Square) -->
 <div class="hidden md:flex fixed top-6 left-0 w-full z-50 justify-center pointer-events-none px-4">
@@ -132,21 +174,35 @@
       </div>
 
       <!-- Desktop Navigation -->
-      <nav class="flex-1 flex justify-center gap-8">
+      <nav class="flex-1 flex justify-center items-center">
         <?php
-          $links = [
-              ['path' => 'fitur', 'name' => 'Fitur'],
-              ['path' => 'use-case', 'name' => 'Use Case'],
-              ['path' => 'analitik', 'name' => 'Analitik Data'],
-              ['path' => 'harga', 'name' => 'Harga'],
-              ['path' => 'artikel', 'name' => 'Artikel'],
-          ];
-          foreach ($links as $link) {
-              $is_active = ($current_path === $link['path']);
-              $text_color = $is_active ? 'text-omni-accent' : 'text-white';
-              $line_classes = $is_active ? 'w-full opacity-100' : 'w-1 opacity-0 group-hover:opacity-100 group-hover:w-full';
-              echo '<a href="' . home_url('/' . $link['path']) . '" class="group relative text-sm font-medium transition-all duration-300 hover:text-omni-accent hover:-translate-y-0.5 ' . $text_color . '">' . $link['name'] . '<span class="absolute -bottom-2 left-1/2 -translate-x-1/2 h-0.5 bg-omni-accent rounded-full transition-all duration-300 ' . $line_classes . '"></span></a>';
-          }
+        if (has_nav_menu('primary')) {
+            wp_nav_menu([
+                'theme_location' => 'primary',
+                'container'      => false,
+                'menu_class'     => 'flex gap-8 m-0 p-0 list-none',
+                'walker'         => new Omni_Desktop_Nav_Walker(),
+                'fallback_cb'    => false,
+            ]);
+        } else {
+            // Fallback
+            $current_path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+            echo '<ul class="flex gap-8 m-0 p-0 list-none">';
+            $links = [
+                ['path' => 'fitur', 'name' => 'Fitur'],
+                ['path' => 'use-case', 'name' => 'Use Case'],
+                ['path' => 'analitik', 'name' => 'Analitik Data'],
+                ['path' => 'harga', 'name' => 'Harga'],
+                ['path' => 'artikel', 'name' => 'Artikel'],
+            ];
+            foreach ($links as $link) {
+                $is_active = ($current_path === $link['path']);
+                $text_color = $is_active ? 'text-omni-accent' : 'text-white';
+                $line_classes = $is_active ? 'w-full opacity-100' : 'w-1 opacity-0 group-hover:opacity-100 group-hover:w-full';
+                echo '<li class="flex items-center"><a href="' . home_url('/' . $link['path']) . '" class="group relative text-sm font-medium transition-all duration-300 hover:text-omni-accent hover:-translate-y-0.5 ' . $text_color . '">' . $link['name'] . '<span class="absolute -bottom-2 left-1/2 -translate-x-1/2 h-0.5 bg-omni-accent rounded-full transition-all duration-300 ' . $line_classes . '"></span></a></li>';
+            }
+            echo '</ul>';
+        }
         ?>
       </nav>
 
