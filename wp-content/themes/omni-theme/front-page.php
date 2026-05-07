@@ -28,9 +28,43 @@ get_header();
 </nav>
 
 <!-- Custom Hero (Cmouse Layout + OmniServe Content + Blue Theme) -->
-<section class="p-4 md:p-6 min-h-screen bg-slate-50 flex items-center justify-center pt-24 lg:pt-6">
+<section class="p-4 md:p-6 min-h-screen bg-slate-50 flex items-center justify-center pt-24 lg:pt-6 relative">
   <div class="relative w-full max-w-[1400px] mx-auto rounded-[2.5rem] bg-slate-900 p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-[85vh] shadow-2xl">
     
+    <!-- Dynamic Animated SVG Background -->
+    <div class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden rounded-[2.5rem]">
+      <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" class="w-full h-full opacity-70" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd; transform-origin: center; animation: pulseSvg 6s ease-in-out infinite alternate;"
+      viewBox="0 0 2003.61 1165.9" preserveAspectRatio="none"
+       xmlns:xlink="http://www.w3.org/1999/xlink">
+       <defs>
+        <style type="text/css">
+         <![CDATA[
+          @keyframes pulseSvg {
+            0% { transform: scale(1); opacity: 0.4; }
+            100% { transform: scale(1.02); opacity: 0.8; }
+          }
+          @keyframes drawStroke {
+            0% { stroke-dashoffset: 7000; }
+            100% { stroke-dashoffset: 0; }
+          }
+          .str0 {
+            stroke:#332D2B;
+            stroke-width:4;
+            stroke-miterlimit:22.9256;
+            stroke-dasharray: 7000;
+            animation: drawStroke 15s linear infinite;
+          }
+          .fil0 {fill:none}
+         ]]>
+        </style>
+       </defs>
+       <g id="Layer_x0020_1">
+        <metadata id="CorelCorpID_0Corel-Layer"/>
+        <path class="fil0 str0" d="M59.63 1.15c-31.36,2.09 -57.24,35.21 -58.48,63.77l0 868.48c0.21,40.7 31.44,80.21 57.9,82.71l620.34 0c44.47,-2.37 78.19,19.13 86.85,53.76l16.6 42.02c10.6,29.56 32.67,51.95 57.96,52.85l1097.19 0c40.74,-3.5 63.9,-32.96 64.46,-63.25l0 -898.05c-0.2,-32.85 -23.01,-53.99 -53.35,-53.35l-1115.9 0c-25.65,-2.32 -54.43,-18.18 -64.46,-44.46l-26.68 -71.13c-12.41,-25.7 -33.16,-31.61 -62.24,-33.35l-620.19 0z"/>
+       </g>
+      </svg>
+    </div>
+
     <!-- Top Nav (Desktop) -->
     <nav class="absolute top-10 right-12 z-20 hidden lg:flex items-center gap-8">
       <a href="#fitur" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Fitur</a>
@@ -120,7 +154,7 @@ get_header();
     </div>
 
     <!-- Right Column (Image) -->
-    <div class="lg:col-span-5 relative rounded-[2rem] overflow-hidden min-h-[400px] lg:mt-24">
+    <div class="lg:col-span-5 relative z-10 rounded-[2rem] overflow-hidden min-h-[400px] lg:mt-24">
       <img src="https://images.unsplash.com/photo-1766066014237-00645c74e9c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjYWxsJTIwY2VudGVyJTIwYWdlbnQlMjB0YWxraW5nJTIwb24lMjBoZWFkc2V0fGVufDF8fHx8MTc3ODE0Njc3NXww&ixlib=rb-4.1.0&q=80&w=1080" class="absolute inset-0 w-full h-full object-cover" />
       <div class="absolute inset-0 bg-blue-900/10"></div>
       
