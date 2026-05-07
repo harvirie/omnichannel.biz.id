@@ -7,10 +7,14 @@ get_header();
   <div class="px-4">
     <div class="flex justify-between items-center h-20">
       <div class="flex items-center gap-2">
-        <div class="bg-[#415B45] p-2 rounded-lg">
-          <i data-lucide="headphones" class="h-6 w-6 text-white"></i>
-        </div>
-        <span class="font-bold text-xl tracking-tight text-[#1C2C1F]">OmniServe</span>
+        <?php if ( function_exists( 'has_custom_logo' ) && has_custom_logo() ) : ?>
+            <?php the_custom_logo(); ?>
+        <?php else : ?>
+            <div class="bg-[#415B45] p-2 rounded-lg">
+            <i data-lucide="headphones" class="h-6 w-6 text-white"></i>
+            </div>
+            <span class="font-bold text-xl tracking-tight text-[#1C2C1F]"><?php bloginfo( 'name' ); ?></span>
+        <?php endif; ?>
       </div>
       <div class="flex items-center">
         <button id="mobile-menu-btn" class="text-[#4F6854]">
@@ -80,7 +84,7 @@ get_header();
           <path fill="#EBF4E3" d="M58.46 0c-31.35,2.09 -57.22,35.2 -58.46,63.75l0 868.18c0.2,40.69 31.43,80.18 57.88,82.69l620.13 0c44.45,-2.37 78.16,19.12 86.82,53.74l16.59 42.01c10.6,29.54 32.66,51.92 57.94,52.83l1096.82 0c40.73,-3.51 63.88,-32.95 64.44,-63.23l0 -897.75c-0.2,-32.84 -23,-53.97 -53.33,-53.34l-1115.52 0c-25.65,-2.32 -54.42,-18.17 -64.44,-44.44l-26.67 -71.11c-12.41,-25.68 -33.15,-31.59 -62.22,-33.33l-619.98 0z"/>
 
           <!-- Photo as portrait card floating inside the SVG -->
-          <image href="https://images.unsplash.com/photo-1766066014237-00645c74e9c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjYWxsJTIwY2VudGVyJTIwYWdlbnQlMjB0YWxraW5nJTIwb24lMjBoZWFkc2V0fGVufDF8fHx8MTc3ODE0Njc3NXww&ixlib=rb-4.1.0&q=80&w=1080"
+          <image href="<?php echo esc_url(get_theme_mod('omni_hero_image', 'https://images.unsplash.com/photo-1766066014237-00645c74e9c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjYWxsJTIwY2VudGVyJTIwYWdlbnQlMjB0YWxraW5nJTIwb24lMjBoZWFkc2V0fGVufDF8fHx8MTc3ODE0Njc3NXww&ixlib=rb-4.1.0&q=80&w=1080')); ?>"
             x="950" y="215" width="990" height="740"
             preserveAspectRatio="xMidYMid slice"
             clip-path="url(#imageClip)"/>
@@ -92,10 +96,14 @@ get_header();
         <!-- Left Text Content: positioned absolutely over SVG -->
         <div class="absolute top-[5%] left-[4%] w-[40%] z-20 flex flex-col">
           <div class="flex items-center gap-2 mb-8">
-            <div class="bg-[#415B45] p-2 rounded-xl shadow-sm">
-              <i data-lucide="headphones" class="h-6 w-6 text-white"></i>
-            </div>
-            <span class="font-bold text-[1.4vw] xl:text-2xl tracking-tight text-[#1C2C1F] font-serif">OmniServe</span>
+            <?php if ( function_exists( 'has_custom_logo' ) && has_custom_logo() ) : ?>
+                <?php the_custom_logo(); ?>
+            <?php else : ?>
+                <div class="bg-[#415B45] p-2 rounded-xl shadow-sm">
+                <i data-lucide="headphones" class="h-6 w-6 text-white"></i>
+                </div>
+                <span class="font-bold text-[1.4vw] xl:text-2xl tracking-tight text-[#1C2C1F] font-serif"><?php bloginfo( 'name' ); ?></span>
+            <?php endif; ?>
           </div>
 
           <h1 class="text-[3.2vw] xl:text-[58px] font-serif text-[#1C2C1F] mb-5 leading-[1.05]">
@@ -233,7 +241,7 @@ get_header();
 
         <!-- Image -->
         <div class="relative w-full h-[300px] md:h-[400px] rounded-[1.5rem] overflow-hidden shadow-xl">
-          <img src="https://images.unsplash.com/photo-1766066014237-00645c74e9c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjYWxsJTIwY2VudGVyJTIwYWdlbnQlMjB0YWxraW5nJTIwb24lMjBoZWFkc2V0fGVufDF8fHx8MTc3ODE0Njc3NXww&ixlib=rb-4.1.0&q=80&w=1080" class="absolute inset-0 w-full h-full object-cover" />
+          <img src="<?php echo esc_url(get_theme_mod('omni_hero_image', 'https://images.unsplash.com/photo-1766066014237-00645c74e9c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjYWxsJTIwY2VudGVyJTIwYWdlbnQlMjB0YWxraW5nJTIwb24lMjBoZWFkc2V0fGVufDF8fHx8MTc3ODE0Njc3NXww&ixlib=rb-4.1.0&q=80&w=1080')); ?>" class="absolute inset-0 w-full h-full object-cover" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#1C2C1F]/90 via-[#1C2C1F]/20 to-transparent"></div>
           
           <div class="absolute bottom-4 left-4 right-4">
@@ -493,69 +501,32 @@ get_header();
 
     <!-- Grid Layout for Desktop, Scrollable Flex for Mobile -->
     <div class="flex overflow-x-auto snap-x md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 pb-8 md:pb-0 hide-scrollbar -mx-6 px-6 md:mx-0 md:px-0">
-      <!-- Customer 1 -->
+      <?php for ( $i = 1; $i <= 4; $i++ ) : 
+        $cust_name = get_theme_mod('omni_customer_'.$i.'_name', 'Pelanggan '.$i);
+        $cust_desc = get_theme_mod('omni_customer_'.$i.'_desc', 'Deskripsi pelanggan '.$i);
+        $default_imgs = array(
+            1 => 'https://images.unsplash.com/photo-1636217432188-3a81bccad020?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnb3Zlcm5tZW50JTIwb2ZmaWNlJTIwYnVpbGRpbmd8ZW58MXx8fHwxNzc4MTcyNDE5fDA&ixlib=rb-4.1.0&q=80&w=1080',
+            2 => 'https://images.unsplash.com/photo-1770775776141-6b3ac7ef9dd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBpbW1pZ3JhdGlvbiUyMG9mZmljZXxlbnwxfHx8fDE3NzgxNzI0MjB8MA&ixlib=rb-4.1.0&q=80&w=1080',
+            3 => 'https://images.unsplash.com/photo-1766898211749-00820c5dc505?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25jcmV0ZSUyMG1peGVyJTIwY29uc3RydWN0aW9ufGVufDF8fHx8MTc3ODE3MjQxOXww&ixlib=rb-4.1.0&q=80&w=1080',
+            4 => 'https://images.unsplash.com/photo-1721411480070-fcb558776d54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbWVyZ2VuY3klMjBtZWRpY2FsJTIwYW1idWxhbmNlfGVufDF8fHx8MTc3ODE3MjQyMHww&ixlib=rb-4.1.0&q=80&w=1080'
+        );
+        $cust_img = get_theme_mod('omni_customer_'.$i.'_img', $default_imgs[$i]);
+      ?>
       <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-[#d2e3c9] flex flex-col group hover:-translate-y-2 transition-all duration-300 min-w-[300px] snap-center">
         <div class="relative h-48 overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1636217432188-3a81bccad020?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnb3Zlcm5tZW50JTIwb2ZmaWNlJTIwYnVpbGRpbmd8ZW58MXx8fHwxNzc4MTcyNDE5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Kantor Imigrasi Tangerang" />
+          <img src="<?php echo esc_url($cust_img); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="<?php echo esc_attr($cust_name); ?>" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#1C2C1F]/80 to-transparent"></div>
           <div class="absolute bottom-4 left-4 right-4">
-            <h3 class="text-white font-bold text-xl leading-tight drop-shadow-md">Kantor Imigrasi Tangerang</h3>
+            <h3 class="text-white font-bold text-xl leading-tight drop-shadow-md"><?php echo esc_html($cust_name); ?></h3>
           </div>
         </div>
         <div class="p-6 flex-1 flex flex-col">
           <p class="text-[#4F6854] text-sm leading-relaxed flex-1">
-            Meningkatkan efisiensi layanan keimigrasian melalui integrasi saluran komunikasi terpusat untuk masyarakat.
+            <?php echo esc_html($cust_desc); ?>
           </p>
         </div>
       </div>
-
-      <!-- Customer 2 -->
-      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-[#d2e3c9] flex flex-col group hover:-translate-y-2 transition-all duration-300 min-w-[300px] snap-center">
-        <div class="relative h-48 overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1770775776141-6b3ac7ef9dd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBpbW1pZ3JhdGlvbiUyMG9mZmljZXxlbnwxfHx8fDE3NzgxNzI0MjB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Kantor Imigrasi Bogor" />
-          <div class="absolute inset-0 bg-gradient-to-t from-[#1C2C1F]/80 to-transparent"></div>
-          <div class="absolute bottom-4 left-4 right-4">
-            <h3 class="text-white font-bold text-xl leading-tight drop-shadow-md">Kantor Imigrasi Bogor</h3>
-          </div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col">
-          <p class="text-[#4F6854] text-sm leading-relaxed flex-1">
-            Mempercepat respons aduan dan permohonan paspor warga berkat fitur omnichannel dan analitik cerdas.
-          </p>
-        </div>
-      </div>
-
-      <!-- Customer 3 -->
-      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-[#d2e3c9] flex flex-col group hover:-translate-y-2 transition-all duration-300 min-w-[300px] snap-center">
-        <div class="relative h-48 overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1766898211749-00820c5dc505?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25jcmV0ZSUyMG1peGVyJTIwY29uc3RydWN0aW9ufGVufDF8fHx8MTc3ODE3MjQxOXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="ADHIMIX" />
-          <div class="absolute inset-0 bg-gradient-to-t from-[#1C2C1F]/80 to-transparent"></div>
-          <div class="absolute bottom-4 left-4 right-4">
-            <h3 class="text-white font-bold text-xl leading-tight drop-shadow-md">ADHIMIX</h3>
-          </div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col">
-          <p class="text-[#4F6854] text-sm leading-relaxed flex-1">
-            Mendigitalisasi koordinasi tim lapangan dan dukungan klien dengan performa stabil 24/7 di semua proyek.
-          </p>
-        </div>
-      </div>
-
-      <!-- Customer 4 -->
-      <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-[#d2e3c9] flex flex-col group hover:-translate-y-2 transition-all duration-300 min-w-[300px] snap-center">
-        <div class="relative h-48 overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1721411480070-fcb558776d54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbWVyZ2VuY3klMjBtZWRpY2FsJTIwYW1idWxhbmNlfGVufDF8fHx8MTc3ODE3MjQyMHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="PSC 119" />
-          <div class="absolute inset-0 bg-gradient-to-t from-[#1C2C1F]/80 to-transparent"></div>
-          <div class="absolute bottom-4 left-4 right-4">
-            <h3 class="text-white font-bold text-xl leading-tight drop-shadow-md">PSC 119 Dinkes Kab. Bandung</h3>
-          </div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col">
-          <p class="text-[#4F6854] text-sm leading-relaxed flex-1">
-            Mengamankan jalur komunikasi gawat darurat medis dengan stabilitas tanpa batas dan navigasi responsif yang andal.
-          </p>
-        </div>
-      </div>
+      <?php endfor; ?>
     </div>
   </div>
 </section>
