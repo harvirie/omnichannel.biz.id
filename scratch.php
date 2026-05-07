@@ -1,7 +1,68 @@
 <?php get_header(); ?>
 
+<!-- Floating Desktop Navbar (Figma Match) -->
+<nav class="hidden lg:flex fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl bg-[#1C2C1F] rounded-full px-8 py-3 justify-between items-center shadow-2xl border border-white/10">
+  <!-- Logo -->
+  <div class="flex items-center gap-2">
+    <?php if ( function_exists( 'has_custom_logo' ) && has_custom_logo() ) : ?>
+        <?php the_custom_logo(); ?>
+    <?php else : ?>
+        <div class="bg-white/10 p-1.5 rounded-lg">
+        <i data-lucide="headphones" class="h-5 w-5 text-white"></i>
+        </div>
+        <span class="font-bold text-xl tracking-tight text-white"><?php bloginfo( 'name' ); ?></span>
+    <?php endif; ?>
+  </div>
+
+  <!-- Links -->
+  <div class="flex gap-8 text-white/80">
+    <a href="#fitur" class="hover:text-[#FDB854] text-sm font-medium transition-colors border-b-2 border-transparent hover:border-[#FDB854] pb-1">Fitur</a>
+    <a href="#usecase" class="hover:text-[#FDB854] text-sm font-medium transition-colors border-b-2 border-transparent hover:border-[#FDB854] pb-1">Use Case</a>
+    <a href="#analitik" class="hover:text-[#FDB854] text-sm font-medium transition-colors border-b-2 border-transparent hover:border-[#FDB854] pb-1">Analitik Data</a>
+    <a href="#harga" class="hover:text-[#FDB854] text-sm font-medium transition-colors border-b-2 border-transparent hover:border-[#FDB854] pb-1">Harga</a>
+  </div>
+
+  <!-- Sign In Pill -->
+  <div>
+    <div class="flex items-center shadow-lg rounded-full bg-[#FDB854] p-1 pr-1.5 transition-transform hover:scale-105 cursor-pointer">
+      <span class="text-white px-5 py-1.5 font-medium text-sm">Masuk</span>
+      <div class="bg-[#e89e3a] text-white p-1.5 rounded-full"><i data-lucide="arrow-right" class="h-4 w-4"></i></div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Navbar -->
+<nav class="lg:hidden fixed w-full bg-[#EBF4E3]/90 backdrop-blur-md z-50 border-b border-[#d2e3c9]">
+  <div class="px-4">
+    <div class="flex justify-between items-center h-20">
+      <div class="flex items-center gap-2">
+        <?php if ( function_exists( 'has_custom_logo' ) && has_custom_logo() ) : ?>
+            <?php the_custom_logo(); ?>
+        <?php else : ?>
+            <div class="bg-[#415B45] p-2 rounded-lg">
+            <i data-lucide="headphones" class="h-6 w-6 text-white"></i>
+            </div>
+            <span class="font-bold text-xl tracking-tight text-[#1C2C1F]"><?php bloginfo( 'name' ); ?></span>
+        <?php endif; ?>
+      </div>
+      <div class="flex items-center">
+        <button id="mobile-menu-btn" class="text-[#4F6854]">
+          <i data-lucide="menu" class="h-6 w-6 menu-icon"></i>
+          <i data-lucide="x" class="h-6 w-6 close-icon hidden"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="mobile-menu-panel" class="hidden bg-[#EBF4E3] border-b border-[#d2e3c9] px-4 pt-2 pb-4 space-y-1 shadow-lg">
+    <a href="#fitur" class="block px-3 py-2 rounded-md font-medium text-[#4F6854] hover:text-[#567558]">Fitur</a>
+    <a href="#usecase" class="block px-3 py-2 rounded-md font-medium text-[#4F6854] hover:text-[#567558]">Use Case</a>
+    <a href="#analitik" class="block px-3 py-2 rounded-md font-medium text-[#4F6854] hover:text-[#567558]">Analitik Data</a>
+    <a href="#harga" class="block px-3 py-2 rounded-md font-medium text-[#4F6854] hover:text-[#567558]">Harga</a>
+  </div>
+</nav>
+
 <!-- Hero Section -->
-<section class="p-4 md:p-6 bg-[#7A9E7E] flex flex-col justify-center relative flex-1 min-h-[calc(100vh-6rem)] overflow-x-hidden">
+<section class="p-4 md:p-6 bg-[#7A9E7E] flex flex-col justify-center relative flex-1 min-h-[calc(100vh-6rem)] overflow-x-hidden pt-24 lg:pt-6">
   <div class="relative w-full max-w-[1400px] mx-auto flex flex-col items-center justify-center pt-8 lg:pt-0">
     
     <!-- Responsive Hero (Desktop & Mobile) -->
@@ -39,13 +100,17 @@
         <!-- Left Content (Desktop) -->
         <div class="hidden md:flex absolute top-[7%] left-[5%] w-[38%] z-20 flex-col">
           <div class="flex items-center gap-[0.55vw] xl:gap-2 mb-[2.2vw] xl:mb-8">
-            <div class="bg-[#415B45] p-[0.55vw] xl:p-2 rounded-[0.8vw] xl:rounded-xl shadow-sm">
-              <i data-lucide="headphones" class="h-[1.66vw] w-[1.66vw] xl:h-6 xl:w-6 text-white"></i>
-            </div>
-            <span class="font-bold text-[1.4vw] xl:text-2xl tracking-tight text-[#1C2C1F]"><?php bloginfo( 'name' ); ?></span>
+            <?php if ( function_exists( 'has_custom_logo' ) && has_custom_logo() ) : ?>
+                <?php the_custom_logo(); ?>
+            <?php else : ?>
+                <div class="bg-[#415B45] p-[0.55vw] xl:p-2 rounded-[0.8vw] xl:rounded-xl shadow-sm">
+                <i data-lucide="headphones" class="h-[1.66vw] w-[1.66vw] xl:h-6 xl:w-6 text-white"></i>
+                </div>
+                <span class="font-bold text-[1.4vw] xl:text-2xl tracking-tight text-[#1C2C1F]"><?php bloginfo( 'name' ); ?></span>
+            <?php endif; ?>
           </div>
 
-          <h1 class="text-[3.2vw] xl:text-[58px] text-[#1C2C1F] mb-[1.38vw] xl:mb-5 leading-[1.05]">
+          <h1 class="text-[3.2vw] xl:text-[58px] text-[#1C2C1F] mb-[1.38vw] xl:mb-5 leading-[1.05] font-serif">
             Satu Layar untuk<br/>Semua Saluran.
           </h1>
           <p class="text-[#4F6854] text-[1vw] xl:text-base max-w-[92%] mb-[2.2vw] xl:mb-8 font-medium leading-relaxed">
@@ -54,7 +119,7 @@
 
           <!-- Search Bar -->
           <div class="flex items-center bg-white p-[0.4vw] xl:p-1.5 rounded-full w-full shadow-sm mb-[2.2vw] xl:mb-8 border border-[#d2e3c9]">
-            <a href="<?php echo home_url('/harga'); ?>" class="bg-[#567558] hover:bg-[#415B45] transition-colors text-white px-[1.2vw] py-[0.6vw] rounded-full text-[0.85vw] xl:text-sm font-semibold whitespace-nowrap">Coba Gratis</a>
+            <a href="#harga" class="bg-[#567558] hover:bg-[#415B45] transition-colors text-white px-[1.2vw] py-[0.6vw] rounded-full text-[0.85vw] xl:text-sm font-semibold whitespace-nowrap">Coba Gratis</a>
             <button class="px-[1vw] py-[0.6vw] text-[0.85vw] xl:text-sm font-semibold text-[#4F6854] hover:bg-slate-50 rounded-full transition-colors">Demo</button>
             <div class="flex-1 px-3 text-[0.8vw] xl:text-sm text-slate-400 font-medium overflow-hidden text-ellipsis whitespace-nowrap">Pusat Layanan...</div>
             <button class="bg-[#FDB854] hover:bg-[#e89e3a] transition-colors p-[0.6vw] xl:p-2.5 rounded-full text-white shadow-md flex-shrink-0">
@@ -68,7 +133,7 @@
               <i data-lucide="star" class="h-[1.1vw] w-[1.1vw] xl:h-5 xl:w-5 text-[#FDB854] fill-[#FDB854]"></i>
             </div>
             <div>
-              <div class="italic text-[1vw] xl:text-base text-[#1C2C1F] font-medium">Tanpa Kartu Kredit</div>
+              <div class="italic text-[1vw] xl:text-base text-[#1C2C1F] font-medium font-serif">Tanpa Kartu Kredit</div>
               <div class="text-[0.8vw] xl:text-sm font-semibold text-[#4F6854]">Setup 5 Menit</div>
             </div>
           </div>
@@ -78,7 +143,7 @@
         <div class="flex md:hidden absolute top-0 z-20 flex-col px-6 pt-8 pb-6" style="width: 100vw; left: 55vw; height: 100%;">
 
           <div class="translate-y-[70px] -translate-x-[10px] mb-[70px]">
-            <h1 class="text-4xl text-[#1C2C1F] font-bold leading-[1.05] mb-3 drop-shadow-sm mt-[5px]">
+            <h1 class="text-4xl text-[#1C2C1F] font-bold leading-[1.05] mb-3 drop-shadow-sm mt-[5px] font-serif">
               Satu Layar untuk<br/>Semua Saluran.
             </h1>
             <p class="text-[#4F6854] text-[15px] font-medium leading-relaxed mb-5 w-[90%]">
@@ -88,7 +153,7 @@
 
           <!-- Search Bar -->
           <div class="flex items-center bg-white p-1.5 rounded-full shadow-sm mb-5 border border-[#d2e3c9] w-full max-w-[340px]">
-            <a href="<?php echo home_url('/harga'); ?>" class="bg-[#567558] hover:bg-[#415B45] text-white px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap">Coba Gratis</a>
+            <a href="#harga" class="bg-[#567558] hover:bg-[#415B45] text-white px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap">Coba Gratis</a>
             <div class="flex-1 px-3 text-xs text-slate-400 font-medium overflow-hidden text-ellipsis whitespace-nowrap">Pusat Layanan...</div>
             <button class="bg-[#FDB854] p-2 rounded-full text-white shadow-md shrink-0">
               <i data-lucide="search" class="h-4 w-4"></i>
@@ -127,10 +192,10 @@
         <!-- Desktop Bottom Card Content -->
         <div class="hidden md:flex absolute inset-0 z-10 items-center justify-between px-[6%]">
           <div class="text-white">
-            <h2 class="text-[2.5vw] xl:text-5xl mb-[1.38vw] xl:mb-5 text-[#EBF4E3] leading-tight">
+            <h2 class="text-[2.5vw] xl:text-5xl mb-[1.38vw] xl:mb-5 text-[#EBF4E3] leading-tight font-serif">
               Integrasi<br/><em class="text-[#FDB854] italic">Tanpa Batas</em>
             </h2>
-            <a href="<?php echo home_url('/fitur'); ?>" class="flex items-center w-fit shadow-lg rounded-full bg-[#FDB854] hover:bg-[#e89e3a] transition-all p-[0.27vw] xl:p-1 pr-[0.41vw] xl:pr-1.5 cursor-pointer hover:scale-105">
+            <a href="#fitur" class="flex items-center w-fit shadow-lg rounded-full bg-[#FDB854] hover:bg-[#e89e3a] transition-all p-[0.27vw] xl:p-1 pr-[0.41vw] xl:pr-1.5 cursor-pointer hover:scale-105">
               <span class="text-white px-[1.38vw] xl:px-5 py-[0.41vw] xl:py-1.5 font-semibold text-[0.85vw] xl:text-sm">Pelajari</span>
               <div class="bg-[#e89e3a] text-white p-[0.41vw] xl:p-1.5 rounded-full">
                 <i data-lucide="arrow-right" class="h-[1vw] w-[1vw] xl:h-4 xl:w-4"></i>
@@ -161,10 +226,10 @@
         <!-- Mobile Bottom Card Content -->
         <div class="flex md:hidden absolute top-[15%] z-10 flex-col justify-center px-6 -translate-y-[10px] -translate-x-[20px]" style="width: 100vw; left: 55vw; height: 85%;">
           <div class="text-white mb-5">
-            <h2 class="text-3xl mb-3 text-[#EBF4E3] leading-tight">
+            <h2 class="text-3xl mb-3 text-[#EBF4E3] leading-tight font-serif">
               Integrasi<br/><em class="text-[#FDB854] italic">Tanpa Batas</em>
             </h2>
-            <a href="<?php echo home_url('/fitur'); ?>" class="flex items-center w-fit shadow-lg rounded-full bg-[#FDB854] transition-all p-1 pr-1.5">
+            <a href="#fitur" class="flex items-center w-fit shadow-lg rounded-full bg-[#FDB854] transition-all p-1 pr-1.5">
               <span class="text-white px-4 py-1 font-semibold text-xs">Pelajari Lebih Lanjut</span>
               <div class="bg-[#e89e3a] text-white p-1 rounded-full">
                 <i data-lucide="arrow-right" class="h-3 w-3"></i>
@@ -195,78 +260,3 @@
     </div>
   </div>
 </section>
-
-<!-- CTA Section Harmonized with OmniServe Colors -->
-<section class="py-20 bg-[#1C2C1F] relative overflow-hidden">
-  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#415B45]/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
-  <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#FDB854]/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2"></div>
-
-  <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Siap Mengubah Cara Anda Melayani?</h2>
-    <p class="text-[#EBF4E3] text-xl mb-10 max-w-2xl mx-auto opacity-90">
-      Bergabunglah dengan ratusan perusahaan lain yang telah mendigitalisasi pusat layanan pelanggan mereka dengan OmniServe.
-    </p>
-    <div class="flex flex-col sm:flex-row justify-center gap-4">
-      <a href="<?php echo home_url('/harga'); ?>" class="bg-[#FDB854] text-white hover:bg-[#e89e3a] px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
-        Mulai Uji Coba Gratis
-      </a>
-      <button class="bg-transparent text-white hover:bg-white/10 border border-white/30 px-8 py-4 rounded-full font-bold text-lg transition-all">
-        Hubungi Sales Kami
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- Customers Section -->
-<section class="py-24 bg-[#EBF4E3] relative">
-  <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-5xl font-bold text-[#1C2C1F] mb-4">Dipercaya Oleh Berbagai Instansi</h2>
-      <p class="text-[#4F6854] text-lg max-w-2xl mx-auto">
-        Kami bangga dapat mendukung pelayanan terbaik yang diberikan oleh mitra dan pelanggan kami.
-      </p>
-    </div>
-
-    <!-- Swiper Carousel -->
-    <div class="swiper customers-swiper !pb-16">
-      <div class="swiper-wrapper">
-        <?php for ( $i = 1; $i <= 4; $i++ ) : 
-          $cust_name = get_theme_mod('omni_customer_'.$i.'_name', 'Pelanggan '.$i);
-          $cust_desc = get_theme_mod('omni_customer_'.$i.'_desc', 'Deskripsi pelanggan '.$i);
-          $default_imgs = array(
-              1 => 'https://images.unsplash.com/photo-1636217432188-3a81bccad020?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnb3Zlcm5tZW50JTIwb2ZmaWNlJTIwYnVpbGRpbmd8ZW58MXx8fHwxNzc4MTcyNDE5fDA&ixlib=rb-4.1.0&q=80&w=1080',
-              2 => 'https://images.unsplash.com/photo-1770775776141-6b3ac7ef9dd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBpbW1pZ3JhdGlvbiUyMG9mZmljZXxlbnwxfHx8fDE3NzgxNzI0MjB8MA&ixlib=rb-4.1.0&q=80&w=1080',
-              3 => 'https://images.unsplash.com/photo-1766898211749-00820c5dc505?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25jcmV0ZSUyMG1peGVyJTIwY29uc3RydWN0aW9ufGVufDF8fHx8MTc3ODE3MjQxOXww&ixlib=rb-4.1.0&q=80&w=1080',
-              4 => 'https://images.unsplash.com/photo-1721411480070-fcb558776d54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbWVyZ2VuY3klMjBtZWRpY2FsJTIwYW1idWxhbmNlfGVufDF8fHx8MTc3ODE3MjQyMHww&ixlib=rb-4.1.0&q=80&w=1080'
-          );
-          $cust_img = get_theme_mod('omni_customer_'.$i.'_img', $default_imgs[$i]);
-        ?>
-        <div class="swiper-slide">
-          <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-[#d2e3c9] flex flex-col group transition-all duration-300 h-full">
-            <div class="relative h-48 overflow-hidden">
-              <img src="<?php echo esc_url($cust_img); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="<?php echo esc_attr($cust_name); ?>" />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#1C2C1F]/90 via-[#1C2C1F]/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="absolute bottom-4 left-6 right-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 class="text-white font-bold text-2xl leading-tight drop-shadow-md mb-1"><?php echo esc_html($cust_name); ?></h3>
-                <div class="w-12 h-1 bg-[#FDB854] rounded-full transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 delay-100"></div>
-              </div>
-            </div>
-            <div class="p-6 flex-1 flex flex-col">
-              <p class="text-[#4F6854] text-[15px] leading-relaxed flex-1">
-                <?php echo esc_html($cust_desc); ?>
-              </p>
-            </div>
-          </div>
-        </div>
-        <?php endfor; ?>
-      </div>
-      
-      <!-- Custom Swiper Navigation -->
-      <div class="swiper-pagination !bottom-0 pb-2"></div>
-      <div class="swiper-button-prev !text-[#1C2C1F] !w-12 !h-12 !bg-white/80 hover:!bg-white backdrop-blur-sm rounded-full shadow-lg border border-[#d2e3c9] transition-all after:!text-xl -translate-x-2 lg:-translate-x-6"></div>
-      <div class="swiper-button-next !text-[#1C2C1F] !w-12 !h-12 !bg-white/80 hover:!bg-white backdrop-blur-sm rounded-full shadow-lg border border-[#d2e3c9] transition-all after:!text-xl translate-x-2 lg:translate-x-6"></div>
-    </div>
-  </div>
-</section>
-
-<?php get_footer(); ?>

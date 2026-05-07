@@ -3,12 +3,20 @@
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
+            fontFamily: {
+              sans: ['Outfit', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
             colors: {
               omni: {
                 dark: '<?php echo esc_js(get_theme_mod("omni_primary_color", "#1C2C1F")); ?>',
@@ -36,10 +44,14 @@
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+        }
     </style>
     <?php wp_head(); ?>
 </head>
-<body <?php body_class('min-h-screen bg-[#7A9E7E] flex flex-col font-sans text-slate-900'); ?>>
+<body <?php body_class('min-h-screen bg-[#7A9E7E] flex flex-col font-sans text-slate-900 overflow-x-hidden'); ?>>
 <?php wp_body_open(); ?>
 
 <!-- Mobile Navbar -->

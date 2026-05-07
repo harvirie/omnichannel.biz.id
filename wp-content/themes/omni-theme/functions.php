@@ -188,17 +188,27 @@ add_action( 'customize_register', 'omni_theme_customize_register' );
 
 // Custom routing for our multi-page React-like architecture
 add_action('template_redirect', function() {
+    global $wp_query;
     if (is_admin()) return;
     
     $path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
     $pages = ['fitur', 'use-case', 'analitik', 'harga'];
     
     if (in_array($path, $pages)) {
+        // Prevent WP from thinking it's a 404
+        $wp_query->is_404 = false;
+        $wp_query->is_page = true;
+        status_header(200);
+        
+        // Set dynamic document title
+        add_filter('pre_get_document_title', function() use ($path) {
+            return ucwords(str_replace('-', ' ', $path)) . ' - ' . get_bloginfo('name');
+        });
+
         $template = locate_template("page-{$path}.php");
         if ($template) {
-            status_header(200);
             include $template;
             exit;
         }
     }
-});
+}, 1);

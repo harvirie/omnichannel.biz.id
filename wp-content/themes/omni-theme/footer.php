@@ -39,6 +39,64 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  // Initialize Lucide icons
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+  }
+
+  // Mobile menu toggle
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobilePanel = document.getElementById('mobile-menu-panel');
+    const menuIcon = document.querySelector('.menu-icon');
+    const closeIcon = document.querySelector('.close-icon');
+
+    if(mobileBtn && mobilePanel) {
+      mobileBtn.addEventListener('click', () => {
+        mobilePanel.classList.toggle('hidden');
+        menuIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+      });
+    }
+
+    // Initialize Swiper Carousel for Customers
+    if (document.querySelector('.customers-swiper')) {
+      const swiper = new Swiper('.customers-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          1280: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+          },
+        }
+      });
+    }
+  });
+</script>
 <?php wp_footer(); ?>
 </body>
 </html>
