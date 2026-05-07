@@ -148,7 +148,7 @@
               <span class="text-[0.75vw] xl:text-xs text-slate-200 font-medium">WhatsApp</span>
             </div>
             <div class="border border-[#2C4131] rounded-[1.11vw] xl:rounded-2xl p-[1.2vw] xl:p-5 w-[8vw] xl:w-[120px] flex flex-col items-center text-center hover:bg-[#2A3E2F] transition-all cursor-pointer group hover:-translate-y-1 bg-[#1C2C1F]/80">
-              <i data-lucide="instagram" class="h-[1.8vw] w-[1.8vw] xl:h-7 xl:w-7 text-[#FDB854] mb-[0.55vw] xl:mb-2 group-hover:scale-110 transition-transform"></i>
+              <i class="fa-brands fa-instagram text-[#FDB854] text-[1.8vw] xl:text-2xl mb-[0.55vw] xl:mb-2 group-hover:scale-110 transition-transform"></i>
               <span class="text-[0.75vw] xl:text-xs text-slate-200 font-medium">Instagram</span>
             </div>
             <div class="border border-[#2C4131] rounded-[1.11vw] xl:rounded-2xl p-[1.2vw] xl:p-5 w-[8vw] xl:w-[120px] flex flex-col items-center text-center hover:bg-[#2A3E2F] transition-all cursor-pointer group hover:-translate-y-1 bg-[#1C2C1F]/80">
@@ -182,7 +182,7 @@
               <span class="text-xs text-white font-medium">WhatsApp</span>
             </div>
             <div class="border border-[#EBF4E3]/30 rounded-xl p-3 min-w-[28vw] snap-center flex flex-col items-center justify-center text-center bg-[#7A9E7E] shrink-0 shadow-sm">
-              <i data-lucide="instagram" class="h-6 w-6 text-[#FDB854] mb-2 drop-shadow-sm"></i>
+              <i class="fa-brands fa-instagram text-[#FDB854] text-2xl mb-2 drop-shadow-sm"></i>
               <span class="text-xs text-white font-medium">Instagram</span>
             </div>
             <div class="border border-[#EBF4E3]/30 rounded-xl p-3 min-w-[28vw] snap-center flex flex-col items-center justify-center text-center bg-[#7A9E7E] shrink-0 shadow-sm">
@@ -227,44 +227,53 @@
       </p>
     </div>
 
-    <!-- Swiper Carousel -->
-    <div class="swiper customers-swiper !pb-16">
-      <div class="swiper-wrapper">
-        <?php for ( $i = 1; $i <= 4; $i++ ) : 
-          $cust_name = get_theme_mod('omni_customer_'.$i.'_name', 'Pelanggan '.$i);
-          $cust_desc = get_theme_mod('omni_customer_'.$i.'_desc', 'Deskripsi pelanggan '.$i);
-          $default_imgs = array(
-              1 => 'https://images.unsplash.com/photo-1636217432188-3a81bccad020?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnb3Zlcm5tZW50JTIwb2ZmaWNlJTIwYnVpbGRpbmd8ZW58MXx8fHwxNzc4MTcyNDE5fDA&ixlib=rb-4.1.0&q=80&w=1080',
-              2 => 'https://images.unsplash.com/photo-1770775776141-6b3ac7ef9dd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBpbW1pZ3JhdGlvbiUyMG9mZmljZXxlbnwxfHx8fDE3NzgxNzI0MjB8MA&ixlib=rb-4.1.0&q=80&w=1080',
-              3 => 'https://images.unsplash.com/photo-1766898211749-00820c5dc505?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25jcmV0ZSUyMG1peGVyJTIwY29uc3RydWN0aW9ufGVufDF8fHx8MTc3ODE3MjQxOXww&ixlib=rb-4.1.0&q=80&w=1080',
-              4 => 'https://images.unsplash.com/photo-1721411480070-fcb558776d54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbWVyZ2VuY3klMjBtZWRpY2FsJTIwYW1idWxhbmNlfGVufDF8fHx8MTc3ODE3MjQyMHww&ixlib=rb-4.1.0&q=80&w=1080'
-          );
-          $cust_img = get_theme_mod('omni_customer_'.$i.'_img', $default_imgs[$i]);
-        ?>
-        <div class="swiper-slide">
-          <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-[#d2e3c9] flex flex-col group transition-all duration-300 h-full">
-            <div class="relative h-48 overflow-hidden">
-              <img src="<?php echo esc_url($cust_img); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="<?php echo esc_attr($cust_name); ?>" />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#1C2C1F]/90 via-[#1C2C1F]/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div class="absolute bottom-4 left-6 right-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 class="text-white font-bold text-2xl leading-tight drop-shadow-md mb-1"><?php echo esc_html($cust_name); ?></h3>
-                <div class="w-12 h-1 bg-[#FDB854] rounded-full transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 delay-100"></div>
+    <!-- Swiper Container Wrapper -->
+    <div class="relative w-full px-2 md:px-8">
+      <!-- Swiper Carousel -->
+      <div class="swiper customers-swiper !pb-16">
+        <div class="swiper-wrapper">
+          <?php for ( $i = 1; $i <= 4; $i++ ) : 
+            $cust_name = get_theme_mod('omni_customer_'.$i.'_name', 'Pelanggan '.$i);
+            $cust_desc = get_theme_mod('omni_customer_'.$i.'_desc', 'Deskripsi pelanggan '.$i);
+            $default_imgs = array(
+                1 => 'https://images.unsplash.com/photo-1636217432188-3a81bccad020?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnb3Zlcm5tZW50JTIwb2ZmaWNlJTIwYnVpbGRpbmd8ZW58MXx8fHwxNzc4MTcyNDE5fDA&ixlib=rb-4.1.0&q=80&w=1080',
+                2 => 'https://images.unsplash.com/photo-1770775776141-6b3ac7ef9dd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBpbW1pZ3JhdGlvbiUyMG9mZmljZXxlbnwxfHx8fDE3NzgxNzI0MjB8MA&ixlib=rb-4.1.0&q=80&w=1080',
+                3 => 'https://images.unsplash.com/photo-1766898211749-00820c5dc505?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25jcmV0ZSUyMG1peGVyJTIwY29uc3RydWN0aW9ufGVufDF8fHx8MTc3ODE3MjQxOXww&ixlib=rb-4.1.0&q=80&w=1080',
+                4 => 'https://images.unsplash.com/photo-1721411480070-fcb558776d54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbWVyZ2VuY3klMjBtZWRpY2FsJTIwYW1idWxhbmNlfGVufDF8fHx8MTc3ODE3MjQyMHww&ixlib=rb-4.1.0&q=80&w=1080'
+            );
+            $cust_img = get_theme_mod('omni_customer_'.$i.'_img', $default_imgs[$i]);
+          ?>
+          <div class="swiper-slide">
+            <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-[#d2e3c9] flex flex-col group transition-all duration-300 h-full">
+              <div class="relative h-48 overflow-hidden">
+                <img src="<?php echo esc_url($cust_img); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="<?php echo esc_attr($cust_name); ?>" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#1C2C1F]/90 via-[#1C2C1F]/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="absolute bottom-4 left-6 right-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 class="text-white font-bold text-2xl leading-tight drop-shadow-md mb-1"><?php echo esc_html($cust_name); ?></h3>
+                  <div class="w-12 h-1 bg-[#FDB854] rounded-full transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 delay-100"></div>
+                </div>
+              </div>
+              <div class="p-6 flex-1 flex flex-col">
+                <p class="text-[#4F6854] text-[15px] leading-relaxed flex-1">
+                  <?php echo esc_html($cust_desc); ?>
+                </p>
               </div>
             </div>
-            <div class="p-6 flex-1 flex flex-col">
-              <p class="text-[#4F6854] text-[15px] leading-relaxed flex-1">
-                <?php echo esc_html($cust_desc); ?>
-              </p>
-            </div>
           </div>
+          <?php endfor; ?>
         </div>
-        <?php endfor; ?>
+        
+        <!-- Custom Swiper Navigation -->
+        <div class="swiper-pagination !bottom-0 pb-2"></div>
       </div>
       
-      <!-- Custom Swiper Navigation -->
-      <div class="swiper-pagination !bottom-0 pb-2"></div>
-      <div class="swiper-button-prev !text-[#1C2C1F] !w-12 !h-12 !bg-white/80 hover:!bg-white backdrop-blur-sm rounded-full shadow-lg border border-[#d2e3c9] transition-all after:!text-xl -translate-x-2 lg:-translate-x-6"></div>
-      <div class="swiper-button-next !text-[#1C2C1F] !w-12 !h-12 !bg-white/80 hover:!bg-white backdrop-blur-sm rounded-full shadow-lg border border-[#d2e3c9] transition-all after:!text-xl translate-x-2 lg:translate-x-6"></div>
+      <!-- Outer Navigation Buttons -->
+      <div class="swiper-button-prev !text-[#1C2C1F] !w-12 !h-12 !bg-white/80 hover:!bg-white backdrop-blur-sm rounded-full shadow-lg border border-[#d2e3c9] transition-all !absolute !left-0 md:!-left-4 top-[40%] -translate-y-1/2 z-20 after:!hidden flex items-center justify-center">
+        <i class="fa-solid fa-chevron-left text-xl"></i>
+      </div>
+      <div class="swiper-button-next !text-[#1C2C1F] !w-12 !h-12 !bg-white/80 hover:!bg-white backdrop-blur-sm rounded-full shadow-lg border border-[#d2e3c9] transition-all !absolute !right-0 md:!-right-4 top-[40%] -translate-y-1/2 z-20 after:!hidden flex items-center justify-center">
+        <i class="fa-solid fa-chevron-right text-xl"></i>
+      </div>
     </div>
   </div>
 </section>
