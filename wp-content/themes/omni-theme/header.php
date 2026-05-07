@@ -133,16 +133,19 @@
         // Fallback if no menu assigned
         $current_path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
         $links = [
-            ['path' => 'fitur', 'name' => 'Fitur'],
-            ['path' => 'use-case', 'name' => 'Use Case'],
-            ['path' => 'analitik', 'name' => 'Analitik Data'],
-            ['path' => 'harga', 'name' => 'Harga'],
-            ['path' => 'artikel', 'name' => 'Artikel'],
+            ['path' => 'fitur', 'name' => 'Fitur', 'icon' => 'layers'],
+            ['path' => 'use-case', 'name' => 'Use Case', 'icon' => 'briefcase'],
+            ['path' => 'analitik', 'name' => 'Analitik Data', 'icon' => 'bar-chart-2'],
+            ['path' => 'harga', 'name' => 'Harga', 'icon' => 'credit-card'],
+            ['path' => 'artikel', 'name' => 'Artikel', 'icon' => 'file-text'],
         ];
         foreach ($links as $link) {
             $is_active = ($current_path === $link['path']);
-            $class = $is_active ? 'text-omni-accent bg-omni-dark/5' : 'text-omni-text-muted hover:text-omni-button hover:bg-omni-dark/5';
-            echo '<a href="' . home_url('/' . $link['path']) . '" class="block px-4 py-3 rounded-xl font-medium transition-colors ' . $class . '">' . $link['name'] . '</a>';
+            $class = $is_active ? 'text-omni-accent bg-omni-dark/5 shadow-inner' : 'text-omni-text-muted hover:text-omni-button hover:bg-omni-dark/5 hover:translate-x-1';
+            echo '<a href="' . home_url('/' . $link['path']) . '" class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all duration-300 ' . $class . '">';
+            echo '<i data-lucide="' . $link['icon'] . '" class="h-5 w-5 opacity-70"></i>';
+            echo '<span>' . $link['name'] . '</span>';
+            echo '</a>';
         }
     }
     ?>

@@ -29,7 +29,7 @@ add_action( 'after_setup_theme', 'omni_theme_setup' );
 // Auto-create default pages & menu
 add_action('admin_init', 'omni_auto_create_pages');
 function omni_auto_create_pages() {
-    if (get_option('omni_pages_auto_created_v4')) return;
+    if (get_option('omni_pages_auto_created_v5')) return;
 
     $pages = [
         'Home' => [
@@ -60,13 +60,22 @@ function omni_auto_create_pages() {
 
     $home_id = 0;
     foreach ($pages as $title => $meta) {
-        $page_check = get_page_by_title($title);
+        $slug = sanitize_title($title);
+        if ($title === 'Analitik Data') $slug = 'analitik';
+        if ($title === 'Home') $slug = 'home';
+
+        $page_check = get_page_by_path($slug);
+        if (!$page_check) {
+            $page_check = get_page_by_title($title);
+        }
+        
         $page_id = 0;
         
-        if (!isset($page_check->ID)) {
+        if (!$page_check || !isset($page_check->ID)) {
             $new_page = array(
                 'post_type' => 'page',
                 'post_title' => $title,
+                'post_name' => $slug,
                 'post_content' => '',
                 'post_status' => 'publish',
                 'post_author' => 1,
@@ -74,6 +83,13 @@ function omni_auto_create_pages() {
             $page_id = wp_insert_post($new_page);
         } else {
             $page_id = $page_check->ID;
+            // Force update slug if it's wrong (e.g. analitik-data -> analitik)
+            if ($page_check->post_name !== $slug) {
+                wp_update_post(array(
+                    'ID' => $page_id,
+                    'post_name' => $slug
+                ));
+            }
         }
 
         if ($title === 'Home') $home_id = $page_id;
@@ -119,7 +135,7 @@ function omni_auto_create_pages() {
         set_theme_mod('nav_menu_locations', $locations);
     }
 
-    update_option('omni_pages_auto_created_v4', true);
+    update_option('omni_pages_auto_created_v5', true);
 }
 
 
@@ -145,15 +161,26 @@ class Omni_Desktop_Nav_Walker extends Walker_Nav_Menu {
 class Omni_Mobile_Nav_Walker extends Walker_Nav_Menu {
     function start_el(&$output, $item, $depth = 0, $args = null, $id = 0) {
         $classes = empty($item->classes) ? array() : (array) $item->classes;
-        $active_class = in_array('current-menu-item', $classes) || in_array('current_page_item', $classes) ? 'text-omni-accent bg-omni-dark/5' : 'text-omni-text-muted hover:text-omni-button hover:bg-omni-dark/5';
+        $active_class = in_array('current-menu-item', $classes) || in_array('current_page_item', $classes) ? 'text-omni-accent bg-omni-dark/5 shadow-inner' : 'text-omni-text-muted hover:text-omni-button hover:bg-omni-dark/5 hover:translate-x-1';
         
-        $output .= '<a href="' . esc_url($item->url) . '" class="block px-4 py-3 rounded-xl font-medium transition-colors ' . $active_class . '">';
-        $output .= apply_filters('the_title', $item->title, $item->ID);
+        $title = apply_filters('the_title', $item->title, $item->ID);
+        
+        // Auto-assign icons based on title for that "canggih" look
+        $icon = 'chevron-right'; // default
+        $title_lower = strtolower($title);
+        if (strpos($title_lower, 'fitur') !== false) $icon = 'layers';
+        if (strpos($title_lower, 'use case') !== false) $icon = 'briefcase';
+        if (strpos($title_lower, 'analitik') !== false) $icon = 'bar-chart-2';
+        if (strpos($title_lower, 'harga') !== false) $icon = 'credit-card';
+        if (strpos($title_lower, 'artikel') !== false) $icon = 'file-text';
+        if (strpos($title_lower, 'home') !== false || strpos($title_lower, 'beranda') !== false) $icon = 'home';
+        
+        $output .= '<a href="' . esc_url($item->url) . '" class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all duration-300 ' . $active_class . '">';
+        $output .= '<i data-lucide="' . $icon . '" class="h-5 w-5 opacity-70"></i>';
+        $output .= '<span>' . $title . '</span>';
         $output .= '</a>';
     }
     function end_el(&$output, $item, $depth = 0, $args = null) {
-        // block level anchors don't need wrapping li closures if we strip the ul wrapper, but wp_nav_menu uses them.
-        // We will configure wp_nav_menu to NOT use ul/li for mobile, so end_el does nothing.
     }
 }
 

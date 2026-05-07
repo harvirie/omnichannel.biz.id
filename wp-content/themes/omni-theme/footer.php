@@ -105,6 +105,19 @@
       });
     }
 
+    // Initialize Integration Swiper (Mobile only)
+    if (document.querySelector('.integration-swiper')) {
+      new Swiper('.integration-swiper', {
+        slidesPerView: 2,
+        spaceBetween: 12,
+        loop: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+      });
+    }
+
     // Initialize Swiper Carousel for Recommended
     if (document.querySelector('.swiper-recommended')) {
       const recSpeed = <?php echo (int)get_theme_mod('omni_rec_speed', 10) * 1000; ?>;
