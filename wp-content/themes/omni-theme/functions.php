@@ -51,6 +51,29 @@ function omni_theme_customize_register( $wp_customize ) {
         'section'  => 'omni_colors_section',
     ) ) );
 
+    // Extended Colors
+    $extra_colors = [
+        'omni_secondary_color' => ['label' => 'Warna Sekunder / Hero', 'default' => '#7A9E7E'],
+        'omni_button_color'    => ['label' => 'Warna Tombol Utama', 'default' => '#567558'],
+        'omni_button_hover'    => ['label' => 'Warna Hover Tombol', 'default' => '#415B45'],
+        'omni_accent_hover'    => ['label' => 'Warna Hover Aksen', 'default' => '#e89e3a'],
+        'omni_text_muted'      => ['label' => 'Warna Teks Redup', 'default' => '#4F6854'],
+        'omni_border_color'    => ['label' => 'Warna Garis Tepi', 'default' => '#d2e3c9'],
+        'omni_dark_border'     => ['label' => 'Warna Garis Gelap', 'default' => '#2C4131'],
+        'omni_dark_hover'      => ['label' => 'Warna Hover Garis Gelap', 'default' => '#2A3E2F'],
+    ];
+
+    foreach ($extra_colors as $id => $data) {
+        $wp_customize->add_setting( $id, array(
+            'default'           => $data['default'],
+            'sanitize_callback' => 'sanitize_hex_color',
+        ) );
+        $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $id, array(
+            'label'    => $data['label'],
+            'section'  => 'omni_colors_section',
+        ) ) );
+    }
+
     // Hero Section
     $wp_customize->add_section( 'omni_hero_section', array(
         'title'    => __( 'Hero Media', 'omni-theme' ),

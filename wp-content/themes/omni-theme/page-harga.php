@@ -2,10 +2,10 @@
 
 <div class="flex-1 bg-white w-full">
   <div class="py-20 text-center max-w-3xl mx-auto px-6">
-    <h1 class="text-4xl md:text-5xl font-bold text-[#1C2C1F] mb-6">
-      Harga Transparan, <span class="text-[#7A9E7E]">Tanpa Biaya Tersembunyi</span>
+    <h1 class="text-4xl md:text-5xl font-bold text-omni-dark mb-6">
+      Harga Transparan, <span class="text-omni-secondary">Tanpa Biaya Tersembunyi</span>
     </h1>
-    <p class="text-[#4F6854] text-lg">
+    <p class="text-omni-text-muted text-lg">
       Pilih paket yang paling sesuai dengan kebutuhan pusat layanan pelanggan Anda. Semua paket dilengkapi dengan uji coba gratis 14 hari.
     </p>
   </div>
@@ -29,33 +29,33 @@
           
           $is_popular = ($i == 2);
           
-          $color_class = $is_popular ? 'bg-[#1C2C1F]' : ($i == 1 ? 'bg-white' : 'bg-[#F4F9F0]');
-          $text_color = $is_popular ? 'text-white' : 'text-[#1C2C1F]';
-          $border_shadow = $is_popular ? 'border-[#FDB854] shadow-2xl relative transform md:-translate-y-4' : 'border-[#d2e3c9] shadow-md';
+          $color_class = $is_popular ? 'bg-omni-dark' : ($i == 1 ? 'bg-white' : 'bg-[#F4F9F0]');
+          $text_color = $is_popular ? 'text-white' : 'text-omni-dark';
+          $border_shadow = $is_popular ? 'border-omni-accent shadow-2xl relative transform md:-translate-y-4' : 'border-omni-border shadow-md';
           
-          $btn_color = $is_popular ? 'bg-[#FDB854] text-white hover:bg-[#e89e3a]' : ($i == 1 ? 'bg-[#EBF4E3] text-[#415B45] hover:bg-[#d2e3c9]' : 'bg-[#415B45] text-white hover:bg-[#2C4131]');
+          $btn_color = $is_popular ? 'bg-omni-accent text-white hover:bg-omni-accent-hover' : ($i == 1 ? 'bg-omni-light text-omni-button-hover hover:bg-omni-border' : 'bg-omni-button-hover text-white hover:bg-omni-dark-border');
       ?>
       <div class="<?php echo esc_attr($color_class . ' ' . $text_color . ' rounded-3xl p-8 border ' . $border_shadow); ?> flex flex-col">
         <?php if ($is_popular) : ?>
-          <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#FDB854] text-white px-4 py-1 rounded-full text-sm font-bold shadow-md whitespace-nowrap">
+          <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-omni-accent text-white px-4 py-1 rounded-full text-sm font-bold shadow-md whitespace-nowrap">
             Paling Populer
           </div>
         <?php endif; ?>
         
         <h3 class="text-2xl font-bold mb-2"><?php echo esc_html($name); ?></h3>
-        <p class="mb-6 text-sm <?php echo $is_popular ? 'text-white/80' : 'text-[#4F6854]'; ?>">
+        <p class="mb-6 text-sm <?php echo $is_popular ? 'text-white/80' : 'text-omni-text-muted'; ?>">
             <?php echo esc_html($desc); ?>
         </p>
         
         <div class="mb-8">
           <span class="text-4xl font-extrabold"><?php echo esc_html($price); ?></span>
-          <span class="text-sm font-medium <?php echo $is_popular ? 'text-white/80' : 'text-[#415B45]'; ?>"><?php echo esc_html($period); ?></span>
+          <span class="text-sm font-medium <?php echo $is_popular ? 'text-white/80' : 'text-omni-button-hover'; ?>"><?php echo esc_html($period); ?></span>
         </div>
         
         <ul class="space-y-4 mb-8 flex-1">
           <?php foreach ($features as $feat) : ?>
             <li class="flex items-start gap-3">
-              <i data-lucide="check" class="w-5 h-5 shrink-0 <?php echo $is_popular ? 'text-[#FDB854]' : 'text-[#7A9E7E]'; ?>"></i>
+              <i data-lucide="check" class="w-5 h-5 shrink-0 <?php echo $is_popular ? 'text-omni-accent' : 'text-omni-secondary'; ?>"></i>
               <span class="font-medium text-sm md:text-base"><?php echo esc_html($feat); ?></span>
             </li>
           <?php endforeach; ?>

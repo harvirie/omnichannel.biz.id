@@ -2,12 +2,12 @@
 
 <div class="flex-1 bg-white w-full">
   <!-- Header Area -->
-  <div class="bg-[#EBF4E3] py-20 border-b border-[#d2e3c9]">
+  <div class="bg-omni-light py-20 border-b border-omni-border">
     <div class="max-w-7xl mx-auto px-6 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold text-[#1C2C1F] mb-6">
-        Fitur <span class="text-[#415B45]">OmniServe</span>
+      <h1 class="text-4xl md:text-5xl font-bold text-omni-dark mb-6">
+        Fitur <span class="text-omni-button-hover">OmniServe</span>
       </h1>
-      <p class="text-[#4F6854] text-lg md:text-xl max-w-2xl mx-auto">
+      <p class="text-omni-text-muted text-lg md:text-xl max-w-2xl mx-auto">
         Sistem canggih yang dibuat sederhana. Desain antarmuka intuitif memastikan tim Anda langsung bekerja tanpa pelatihan panjang.
       </p>
     </div>
@@ -52,12 +52,12 @@
           ];
           foreach ($features as $f) :
         ?>
-          <div class="bg-[#F4F9F0] rounded-2xl p-8 border border-[#d2e3c9] hover:shadow-xl hover:border-[#7A9E7E] hover:-translate-y-1 transition-all duration-300 group">
+          <div class="bg-[#F4F9F0] rounded-2xl p-8 border border-omni-border hover:shadow-xl hover:border-omni-secondary hover:-translate-y-1 transition-all duration-300 group">
             <div class="bg-white w-14 h-14 rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              <i data-lucide="<?php echo esc_attr($f['icon']); ?>" class="h-7 w-7 text-[#FDB854]"></i>
+              <i data-lucide="<?php echo esc_attr($f['icon']); ?>" class="h-7 w-7 text-omni-accent"></i>
             </div>
-            <h4 class="text-xl font-bold text-[#1C2C1F] mb-4"><?php echo esc_html($f['title']); ?></h4>
-            <p class="text-[#4F6854] leading-relaxed"><?php echo esc_html($f['description']); ?></p>
+            <h4 class="text-xl font-bold text-omni-dark mb-4"><?php echo esc_html($f['title']); ?></h4>
+            <p class="text-omni-text-muted leading-relaxed"><?php echo esc_html($f['description']); ?></p>
           </div>
         <?php endforeach; ?>
       </div>
@@ -65,12 +65,12 @@
   </section>
 
   <!-- Integration Banner -->
-  <section class="py-20 bg-[#1C2C1F] text-white text-center px-6">
-    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-[#EBF4E3]">Mudah Diintegrasikan dengan Tools Anda</h2>
+  <section class="py-20 bg-omni-dark text-white text-center px-6">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-omni-light">Mudah Diintegrasikan dengan Tools Anda</h2>
     <p class="text-white/80 max-w-2xl mx-auto mb-10">
       OmniServe menyediakan lebih dari 50+ integrasi langsung dengan CRM, ERP, dan aplikasi produktivitas populer seperti Salesforce, Zendesk, Slack, dan lainnya.
     </p>
-    <a href="<?php echo home_url('/use-case'); ?>" class="inline-block bg-white text-[#1C2C1F] px-8 py-3 rounded-full font-bold hover:bg-[#FDB854] hover:text-white transition-colors shadow-lg">
+    <a href="<?php echo home_url('/use-case'); ?>" class="inline-block bg-white text-omni-dark px-8 py-3 rounded-full font-bold hover:bg-omni-accent hover:text-white transition-colors shadow-lg">
       Lihat Studi Kasus
     </a>
   </section>
