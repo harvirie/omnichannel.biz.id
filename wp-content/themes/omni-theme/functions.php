@@ -29,20 +29,40 @@ add_action( 'after_setup_theme', 'omni_theme_setup' );
 // Auto-create default pages & menu
 add_action('admin_init', 'omni_auto_create_pages');
 function omni_auto_create_pages() {
-    if (get_option('omni_pages_auto_created_v3')) return;
+    if (get_option('omni_pages_auto_created_v4')) return;
 
     $pages = [
-        'Home' => 'Halaman Utama',
-        'Fitur' => 'Halaman Fitur',
-        'Use Case' => 'Halaman Use Case',
-        'Analitik Data' => 'Halaman Analitik Data',
-        'Harga' => 'Halaman Harga',
-        'Artikel' => 'Halaman Artikel'
+        'Home' => [
+            'seo_title' => 'Aplikasi Call Center Resmi & Omnichannel Call Center Terbaik',
+            'seo_desc' => 'Tingkatkan layanan dengan aplikasi omnichannel call center resmi. Solusi tepat untuk layanan call center perusahaan & call center pemerintah. Coba gratis sekarang!'
+        ],
+        'Fitur' => [
+            'seo_title' => 'Fitur Lengkap Layanan Call Center & Omnichannel | Sewa Aplikasi Call Center',
+            'seo_desc' => 'Pelajari fitur unggulan sewa aplikasi call center kami. Kelola layanan call center dan omnichannel call center dari satu platform terpadu yang canggih.'
+        ],
+        'Use Case' => [
+            'seo_title' => 'Studi Kasus Omnichannel Call Center & Call Center Pemerintah',
+            'seo_desc' => 'Lihat bagaimana aplikasi call center resmi kami membantu berbagai industri, termasuk sektor swasta dan layanan call center pemerintah dalam melayani masyarakat.'
+        ],
+        'Analitik Data' => [
+            'seo_title' => 'Analitik Data & Laporan Layanan Call Center Omnichannel',
+            'seo_desc' => 'Pantau performa layanan call center Anda dengan dashboard analitik canggih. Laporan komprehensif untuk aplikasi omnichannel call center resmi.'
+        ],
+        'Harga' => [
+            'seo_title' => 'Harga Sewa Aplikasi Call Center & Omnichannel Resmi',
+            'seo_desc' => 'Pilihan harga sewa aplikasi call center yang fleksibel untuk bisnis skala kecil hingga enterprise dan call center pemerintah. Mulai uji coba gratis!'
+        ],
+        'Artikel' => [
+            'seo_title' => 'Artikel & Panduan Omnichannel Call Center Resmi',
+            'seo_desc' => 'Kumpulan artikel, tips, dan panduan seputar layanan call center, aplikasi omnichannel call center, dan implementasi pada call center pemerintah.'
+        ]
     ];
 
     $home_id = 0;
-    foreach ($pages as $title => $content) {
+    foreach ($pages as $title => $meta) {
         $page_check = get_page_by_title($title);
+        $page_id = 0;
+        
         if (!isset($page_check->ID)) {
             $new_page = array(
                 'post_type' => 'page',
@@ -52,9 +72,16 @@ function omni_auto_create_pages() {
                 'post_author' => 1,
             );
             $page_id = wp_insert_post($new_page);
-            if ($title === 'Home') $home_id = $page_id;
         } else {
-            if ($title === 'Home') $home_id = $page_check->ID;
+            $page_id = $page_check->ID;
+        }
+
+        if ($title === 'Home') $home_id = $page_id;
+
+        // Auto-inject SEO Metadata
+        if ($page_id) {
+            update_post_meta($page_id, '_omni_seo_title', $meta['seo_title']);
+            update_post_meta($page_id, '_omni_seo_desc', $meta['seo_desc']);
         }
     }
 
@@ -92,7 +119,7 @@ function omni_auto_create_pages() {
         set_theme_mod('nav_menu_locations', $locations);
     }
 
-    update_option('omni_pages_auto_created_v3', true);
+    update_option('omni_pages_auto_created_v4', true);
 }
 
 
