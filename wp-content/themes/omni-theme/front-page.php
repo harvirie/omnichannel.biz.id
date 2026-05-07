@@ -22,15 +22,15 @@
             <h3 class="text-[1.6vw] xl:text-2xl mb-[1vw] xl:mb-3 text-white drop-shadow-md">Recommended</h3>
             <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-[1vw] xl:p-5 text-white shadow-xl">
               <div class="flex items-center gap-2 mb-1">
-                <h4 class="font-medium text-[1.1vw] xl:text-lg text-white">Panggilan Masuk</h4>
+                <h4 class="font-medium text-[1.1vw] xl:text-lg text-white"><?php echo esc_html(get_theme_mod('omni_rec_title', 'Panggilan Masuk')); ?></h4>
                 <div class="bg-[#FDB854] p-1 rounded-full">
                   <i data-lucide="star" class="h-3 w-3 text-white fill-white"></i>
                 </div>
-                <span class="text-[0.8vw] xl:text-sm font-semibold ml-1">(2.3k+)</span>
+                <span class="text-[0.8vw] xl:text-sm font-semibold ml-1"><?php echo esc_html(get_theme_mod('omni_rec_rating', '(2.3k+)')); ?></span>
               </div>
               <p class="text-[0.85vw] xl:text-sm text-white/90">
-                Budi Santoso - Keluhan Produk<br/>
-                <span class="text-[0.75vw] xl:text-xs opacity-80">Menunggu antrean (0:45)</span>
+                <?php echo esc_html(get_theme_mod('omni_rec_desc', 'Budi Santoso - Keluhan Produk')); ?><br/>
+                <span class="text-[0.75vw] xl:text-xs opacity-80"><?php echo esc_html(get_theme_mod('omni_rec_sub', 'Menunggu antrean (0:45)')); ?></span>
               </p>
             </div>
           </div>
@@ -104,12 +104,12 @@
             <div class="absolute bottom-3 left-3 right-3">
               <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-3 text-white shadow-lg">
                 <div class="flex items-center gap-2 mb-1">
-                  <h4 class="font-medium text-sm text-white">Panggilan Masuk</h4>
+                  <h4 class="font-medium text-sm text-white"><?php echo esc_html(get_theme_mod('omni_rec_title', 'Panggilan Masuk')); ?></h4>
                   <div class="bg-[#FDB854] p-1 rounded-full">
                     <i data-lucide="star" class="h-3 w-3 text-white fill-white"></i>
                   </div>
                 </div>
-                <p class="text-xs text-white/90">Budi Santoso - Keluhan Produk</p>
+                <p class="text-xs text-white/90"><?php echo esc_html(get_theme_mod('omni_rec_desc', 'Budi Santoso - Keluhan Produk')); ?></p>
               </div>
             </div>
           </div>

@@ -50,6 +50,21 @@
             font-family: 'Outfit', sans-serif;
         }
     </style>
+    <?php
+    if (is_singular()) {
+        $seo_desc = get_post_meta(get_the_ID(), '_omni_seo_desc', true);
+        if ($seo_desc) {
+            echo '<meta name="description" content="' . esc_attr($seo_desc) . '">' . "\n";
+        }
+        $seo_title = get_post_meta(get_the_ID(), '_omni_seo_title', true);
+        if ($seo_title) {
+            // We use a filter to override the document title if custom SEO title is set
+            add_filter('pre_get_document_title', function($title) use ($seo_title) {
+                return $seo_title;
+            }, 99);
+        }
+    }
+    ?>
     <?php wp_head(); ?>
 </head>
 <body <?php body_class('min-h-screen bg-[#7A9E7E] flex flex-col font-sans text-slate-900 overflow-x-hidden'); ?>>
@@ -85,6 +100,7 @@
     <a href="<?php echo home_url('/use-case'); ?>" class="block px-3 py-2 rounded-md font-medium <?php echo $current_path == 'use-case' ? 'text-[#FDB854] bg-[#1C2C1F]/5' : 'text-[#4F6854] hover:text-[#567558]'; ?>">Use Case</a>
     <a href="<?php echo home_url('/analitik'); ?>" class="block px-3 py-2 rounded-md font-medium <?php echo $current_path == 'analitik' ? 'text-[#FDB854] bg-[#1C2C1F]/5' : 'text-[#4F6854] hover:text-[#567558]'; ?>">Analitik Data</a>
     <a href="<?php echo home_url('/harga'); ?>" class="block px-3 py-2 rounded-md font-medium <?php echo $current_path == 'harga' ? 'text-[#FDB854] bg-[#1C2C1F]/5' : 'text-[#4F6854] hover:text-[#567558]'; ?>">Harga</a>
+    <a href="<?php echo home_url('/artikel'); ?>" class="block px-3 py-2 rounded-md font-medium <?php echo $current_path == 'artikel' ? 'text-[#FDB854] bg-[#1C2C1F]/5' : 'text-[#4F6854] hover:text-[#567558]'; ?>">Artikel</a>
   </div>
 </nav>
 
@@ -114,6 +130,7 @@
               ['path' => 'use-case', 'name' => 'Use Case'],
               ['path' => 'analitik', 'name' => 'Analitik Data'],
               ['path' => 'harga', 'name' => 'Harga'],
+              ['path' => 'artikel', 'name' => 'Artikel'],
           ];
           foreach ($links as $link) {
               $is_active = ($current_path === $link['path']);

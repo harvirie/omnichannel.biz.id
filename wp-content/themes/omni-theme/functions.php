@@ -192,7 +192,7 @@ add_action('template_redirect', function() {
     if (is_admin()) return;
     
     $path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-    $pages = ['fitur', 'use-case', 'analitik', 'harga'];
+    $pages = ['fitur', 'use-case', 'analitik', 'harga', 'artikel'];
     
     if (in_array($path, $pages)) {
         // Prevent WP from thinking it's a 404
@@ -264,3 +264,109 @@ function omni_handle_demo_submission() {
         wp_send_json_error('Gagal mengirim permohonan. Silakan coba lagi nanti.');
     }
 }
+
+// ---------------------------------------------------------
+// 1. Customizer untuk Recommended Testimonial di Hero
+// ---------------------------------------------------------
+add_action('customize_register', function($wp_customize) {
+    $wp_customize->add_section('omni_hero_recommended', array(
+        'title'    => 'Hero Recommended',
+        'priority' => 31,
+    ));
+
+    $fields = array(
+        'omni_rec_title'  => array('label' => 'Judul (Recommended)', 'default' => 'Panggilan Masuk'),
+        'omni_rec_rating' => array('label' => 'Rating/Angka', 'default' => '(2.3k+)'),
+        'omni_rec_desc'   => array('label' => 'Deskripsi Singkat', 'default' => 'Budi Santoso - Keluhan Produk'),
+        'omni_rec_sub'    => array('label' => 'Sub Status', 'default' => 'Menunggu antrean (0:45)'),
+    );
+
+    foreach ($fields as $id => $data) {
+        $wp_customize->add_setting($id, array('default' => $data['default'], 'sanitize_callback' => 'sanitize_text_field'));
+        $wp_customize->add_control($id, array(
+            'label'   => $data['label'],
+            'section' => 'omni_hero_recommended',
+            'type'    => 'text',
+        ));
+    }
+});
+
+// ---------------------------------------------------------
+// 2. Fitur SEO (Meta Box, Sitemap, Robots.txt)
+// ---------------------------------------------------------
+
+// Add Meta Box for SEO Title & Description
+add_action('add_meta_boxes', function() {
+    add_meta_box('omni_seo_meta', 'Pengaturan SEO Google', 'omni_seo_meta_html', array('post', 'page'), 'normal', 'high');
+});
+
+function omni_seo_meta_html($post) {
+    $seo_title = get_post_meta($post->ID, '_omni_seo_title', true);
+    $seo_desc = get_post_meta($post->ID, '_omni_seo_desc', true);
+    wp_nonce_field('omni_seo_save', 'omni_seo_nonce');
+    ?>
+    <p>
+        <label for="omni_seo_title" style="display:block;font-weight:bold;margin-bottom:5px;">SEO Title</label>
+        <input type="text" name="omni_seo_title" id="omni_seo_title" class="widefat" value="<?php echo esc_attr($seo_title); ?>" placeholder="Kosongkan untuk menggunakan judul bawaan">
+    </p>
+    <p>
+        <label for="omni_seo_desc" style="display:block;font-weight:bold;margin-bottom:5px;">Meta Description</label>
+        <textarea name="omni_seo_desc" id="omni_seo_desc" class="widefat" rows="3"><?php echo esc_textarea($seo_desc); ?></textarea>
+    </p>
+    <?php
+}
+
+add_action('save_post', function($post_id) {
+    if (!isset($_POST['omni_seo_nonce']) || !wp_verify_nonce($_POST['omni_seo_nonce'], 'omni_seo_save')) return;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_post', $post_id)) return;
+
+    if (isset($_POST['omni_seo_title'])) update_post_meta($post_id, '_omni_seo_title', sanitize_text_field($_POST['omni_seo_title']));
+    if (isset($_POST['omni_seo_desc'])) update_post_meta($post_id, '_omni_seo_desc', sanitize_textarea_field($_POST['omni_seo_desc']));
+});
+
+// Generate dynamic robots.txt
+add_filter('robots_txt', function($output, $public) {
+    $sitemap_url = home_url('/sitemap.xml');
+    $output .= "\nUser-agent: *\nDisallow: /wp-admin/\nAllow: /wp-admin/admin-ajax.php\n";
+    $output .= "\nSitemap: " . $sitemap_url . "\n";
+    return $output;
+}, 10, 2);
+
+// Generate dynamic sitemap.xml
+add_action('init', function() {
+    add_rewrite_rule('^sitemap\.xml$', 'index.php?omni_sitemap=1', 'top');
+});
+
+add_filter('query_vars', function($vars) {
+    $vars[] = 'omni_sitemap';
+    return $vars;
+});
+
+add_action('template_redirect', function() {
+    if (get_query_var('omni_sitemap')) {
+        header('Content-Type: text/xml; charset=utf-8');
+        echo '<?xml version="1.0" encoding="UTF-8"?>';
+        echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        
+        $posts = get_posts(array('post_type' => array('post', 'page'), 'posts_per_page' => -1, 'post_status' => 'publish'));
+        
+        // Add virtual pages
+        $virtual_pages = ['/fitur', '/use-case', '/analitik', '/harga'];
+        foreach ($virtual_pages as $vp) {
+            echo '<url><loc>' . esc_url(home_url($vp)) . '</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>';
+        }
+
+        foreach ($posts as $p) {
+            echo '<url>';
+            echo '<loc>' . esc_url(get_permalink($p->ID)) . '</loc>';
+            echo '<lastmod>' . get_the_modified_date('Y-m-d\TH:i:s+00:00', $p->ID) . '</lastmod>';
+            echo '<changefreq>monthly</changefreq>';
+            echo '<priority>' . ($p->post_type == 'page' ? '0.8' : '0.6') . '</priority>';
+            echo '</url>';
+        }
+        
+        echo '</urlset>';
+        exit;
+    }
+}, 0);
