@@ -3,6 +3,8 @@ get_header();
 $front_id = get_option('page_on_front');
 $hero_title = get_post_meta($front_id, 'omni_hero_title', true) ?: 'Satu Layar untuk<br/>Semua Saluran.';
 $hero_sub = get_post_meta($front_id, 'omni_hero_sub', true) ?: 'Tingkatkan kepuasan pelanggan dan produktivitas tim yang menghubungkan suara, chat, email, dan sosmed dalam satu tempat.';
+$hero_badge1 = get_post_meta($front_id, 'omni_hero_badge1', true) ?: 'Tanpa Kartu Kredit';
+$hero_badge2 = get_post_meta($front_id, 'omni_hero_badge2', true) ?: 'Setup 5 Menit';
 $integration_title = get_post_meta($front_id, 'omni_integration_title', true) ?: 'Integrasi<br/><em class="text-omni-accent italic">Tanpa Batas</em>';
 $cta_title = get_post_meta($front_id, 'omni_cta_title', true) ?: 'Siap Mengubah Cara Anda Melayani?';
 $cta_sub = get_post_meta($front_id, 'omni_cta_sub', true) ?: 'Bergabunglah dengan ratusan perusahaan lain yang telah mendigitalisasi pusat layanan pelanggan mereka dengan OmniServe.';
@@ -95,8 +97,8 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
               <i data-lucide="star" class="h-[1.1vw] w-[1.1vw] xl:h-5 xl:w-5 text-omni-accent fill-omni-accent"></i>
             </div>
             <div>
-              <div class="italic text-[1vw] xl:text-base text-omni-dark font-medium">Tanpa Kartu Kredit</div>
-              <div class="text-[0.8vw] xl:text-sm font-semibold text-omni-text-muted">Setup 5 Menit</div>
+              <div class="italic text-[1vw] xl:text-base text-omni-dark font-medium"><?php echo esc_html($hero_badge1); ?></div>
+              <div class="text-[0.8vw] xl:text-sm font-semibold text-omni-text-muted"><?php echo esc_html($hero_badge2); ?></div>
             </div>
           </div>
         </div>

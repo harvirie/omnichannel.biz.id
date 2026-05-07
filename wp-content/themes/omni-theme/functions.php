@@ -392,6 +392,8 @@ function omni_home_copy_html($post) {
     $fields = [
         'omni_hero_title' => ['label' => 'Judul Hero Utama (Gunakan <br/> untuk baris baru)', 'type' => 'text', 'default' => 'Satu Layar untuk<br/>Semua Saluran.'],
         'omni_hero_sub' => ['label' => 'Subjudul Hero', 'type' => 'editor', 'default' => 'Tingkatkan kepuasan pelanggan dan produktivitas tim yang menghubungkan suara, chat, email, dan sosmed dalam satu tempat.'],
+        'omni_hero_badge1' => ['label' => 'Teks Badge 1 (Bawah Kolom Pencarian)', 'type' => 'text', 'default' => 'Tanpa Kartu Kredit'],
+        'omni_hero_badge2' => ['label' => 'Teks Badge 2 (Bawah Kolom Pencarian)', 'type' => 'text', 'default' => 'Setup 5 Menit'],
         'omni_integration_title' => ['label' => 'Judul Integrasi (Section Bawah Hero)', 'type' => 'text', 'default' => 'Integrasi<br/><em class="text-omni-accent italic">Tanpa Batas</em>'],
         'omni_cta_title' => ['label' => 'Judul CTA (Call to Action)', 'type' => 'text', 'default' => 'Siap Mengubah Cara Anda Melayani?'],
         'omni_cta_sub' => ['label' => 'Subjudul CTA', 'type' => 'editor', 'default' => 'Bergabunglah dengan ratusan perusahaan lain yang telah mendigitalisasi pusat layanan pelanggan mereka dengan OmniServe.'],
@@ -450,7 +452,7 @@ add_action('save_post', function($post_id) {
 
     // Save Homepage Copywriting Meta
     if (isset($_POST['omni_home_nonce']) && wp_verify_nonce($_POST['omni_home_nonce'], 'omni_home_save')) {
-        $fields = ['omni_hero_title', 'omni_hero_sub', 'omni_integration_title', 'omni_cta_title', 'omni_cta_sub', 'omni_trusted_title', 'omni_trusted_sub'];
+        $fields = ['omni_hero_title', 'omni_hero_sub', 'omni_hero_badge1', 'omni_hero_badge2', 'omni_integration_title', 'omni_cta_title', 'omni_cta_sub', 'omni_trusted_title', 'omni_trusted_sub'];
         foreach ($fields as $field) {
             if (isset($_POST[$field])) {
                 // If it's a textarea/editor, use wp_kses_post to allow HTML
