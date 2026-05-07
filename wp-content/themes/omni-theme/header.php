@@ -22,37 +22,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous"></noscript>
 
-    <!-- Tailwind CSS: harus synchronous karena config ditetapkan di bawah -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS: File statis yang dikompilasi lokal (tidak pakai CDN) -->
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/omni-theme.css">
     <!-- Lucide Icons: defer agar tidak memblokir render -->
     <script src="https://unpkg.com/lucide@latest" defer></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Outfit', 'sans-serif'],
-              serif: ['Playfair Display', 'serif'],
-            },
-            colors: {
-              omni: {
-                dark: '<?php echo esc_js(get_theme_mod("omni_primary_color", "#1C2C1F")); ?>',
-                light: '<?php echo esc_js(get_theme_mod("omni_light_color", "#EBF4E3")); ?>',
-                accent: '<?php echo esc_js(get_theme_mod("omni_accent_color", "#FDB854")); ?>',
-                secondary: '<?php echo esc_js(get_theme_mod("omni_secondary_color", "#7A9E7E")); ?>',
-                button: '<?php echo esc_js(get_theme_mod("omni_button_color", "#567558")); ?>',
-                'button-hover': '<?php echo esc_js(get_theme_mod("omni_button_hover", "#415B45")); ?>',
-                'accent-hover': '<?php echo esc_js(get_theme_mod("omni_accent_hover", "#e89e3a")); ?>',
-                'text-muted': '<?php echo esc_js(get_theme_mod("omni_text_muted", "#4F6854")); ?>',
-                border: '<?php echo esc_js(get_theme_mod("omni_border_color", "#d2e3c9")); ?>',
-                'dark-border': '<?php echo esc_js(get_theme_mod("omni_dark_border", "#2C4131")); ?>',
-                'dark-hover': '<?php echo esc_js(get_theme_mod("omni_dark_hover", "#2A3E2F")); ?>',
-              }
-            }
-          }
-        }
-      }
-    </script>
     <style>
         /* Base color variables for standard CSS if needed */
         :root {
