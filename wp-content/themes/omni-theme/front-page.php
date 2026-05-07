@@ -65,9 +65,9 @@ get_header();
           <defs>
             <!-- Portrait card clipPath: clear padding on all 4 sides -->
             <!-- right-edge: 950+990=1940, right-pad=(2001-1940)=61 -->
-            <!-- bottom: 55+900=955, shape-bottom≈1014, bottom-pad=59 -->
+            <!-- bottom: 135+820=955, shape-bottom≈1014, bottom-pad=59 -->
             <clipPath id="imageClip">
-              <rect x="950" y="55" width="990" height="900" rx="44" ry="44"/>
+              <rect x="950" y="135" width="990" height="820" rx="44" ry="44"/>
             </clipPath>
             <linearGradient id="imgGrad" x1="0" y1="1" x2="0" y2="0">
               <stop offset="0%" stop-color="#1C2C1F" stop-opacity="0.9"/>
@@ -81,12 +81,12 @@ get_header();
 
           <!-- Photo as portrait card floating inside the SVG -->
           <image href="https://images.unsplash.com/photo-1766066014237-00645c74e9c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjYWxsJTIwY2VudGVyJTIwYWdlbnQlMjB0YWxraW5nJTIwb24lMjBoZWFkc2V0fGVufDF8fHx8MTc3ODE0Njc3NXww&ixlib=rb-4.1.0&q=80&w=1080"
-            x="950" y="55" width="990" height="900"
+            x="950" y="135" width="990" height="820"
             preserveAspectRatio="xMidYMid slice"
             clip-path="url(#imageClip)"/>
 
           <!-- Gradient overlay on photo -->
-          <rect x="950" y="55" width="990" height="900" rx="44" ry="44" fill="url(#imgGrad)"/>
+          <rect x="950" y="135" width="990" height="820" rx="44" ry="44" fill="url(#imgGrad)"/>
         </svg>
 
         <!-- Left Text Content: positioned absolutely over SVG -->
