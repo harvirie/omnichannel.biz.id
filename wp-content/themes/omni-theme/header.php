@@ -48,20 +48,33 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* SVG Glow Animation */
+        /* SVG Glow Animation — pakai stroke-dashoffset agar cahaya berjalan mengitari outline */
         @keyframes svgGlowLine {
-            0% { stroke-dashoffset: 100; }
-            100% { stroke-dashoffset: 0; }
+            0%   { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -100; }
         }
+        /* Path utama: cahaya emas tipis berjalan */
         .svg-glow-path {
             fill: none;
             stroke: var(--omni-accent);
-            stroke-width: 6;
+            stroke-width: 5;
             stroke-linecap: round;
-            filter: drop-shadow(0 0 12px var(--omni-accent)) drop-shadow(0 0 4px var(--omni-accent));
-            stroke-dasharray: 15 85;
-            animation: svgGlowLine 12s linear infinite;
-            opacity: 0.8;
+            stroke-dasharray: 8 92;
+            animation: svgGlowLine 14s linear infinite;
+            opacity: 0.9;
+            /* Pakai filter SVG native via id, bukan CSS filter (menghindari kotak) */
+            filter: url(#glow-filter);
+        }
+        /* Path kedua: cahaya lebih tebal & lebih lambat untuk efek depth */
+        .svg-glow-path-wide {
+            fill: none;
+            stroke: var(--omni-accent);
+            stroke-width: 12;
+            stroke-linecap: round;
+            stroke-dasharray: 5 95;
+            animation: svgGlowLine 18s linear infinite reverse;
+            opacity: 0.25;
+            filter: url(#glow-filter);
         }
     </style>
     <?php
