@@ -13,6 +13,10 @@ function omni_theme_setup() {
         'flex-width'  => true,
     ) );
     add_theme_support( 'title-tag' );
+    add_theme_support( 'post-thumbnails' );
+
+    // Disable Gutenberg / Block Editor (Use Classic Editor)
+    add_filter('use_block_editor_for_post', '__return_false', 10);
 }
 add_action( 'after_setup_theme', 'omni_theme_setup' );
 
