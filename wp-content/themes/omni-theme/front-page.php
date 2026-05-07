@@ -1,4 +1,14 @@
-<?php get_header(); ?>
+<?php 
+get_header(); 
+$front_id = get_option('page_on_front');
+$hero_title = get_post_meta($front_id, 'omni_hero_title', true) ?: 'Satu Layar untuk<br/>Semua Saluran.';
+$hero_sub = get_post_meta($front_id, 'omni_hero_sub', true) ?: 'Tingkatkan kepuasan pelanggan dan produktivitas tim yang menghubungkan suara, chat, email, dan sosmed dalam satu tempat.';
+$integration_title = get_post_meta($front_id, 'omni_integration_title', true) ?: 'Integrasi<br/><em class="text-omni-accent italic">Tanpa Batas</em>';
+$cta_title = get_post_meta($front_id, 'omni_cta_title', true) ?: 'Siap Mengubah Cara Anda Melayani?';
+$cta_sub = get_post_meta($front_id, 'omni_cta_sub', true) ?: 'Bergabunglah dengan ratusan perusahaan lain yang telah mendigitalisasi pusat layanan pelanggan mereka dengan OmniServe.';
+$trusted_title = get_post_meta($front_id, 'omni_trusted_title', true) ?: 'Dipercaya Oleh Berbagai Instansi';
+$trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabunglah dengan perusahaan terkemuka yang telah bertransformasi bersama kami.';
+?>
 
 <!-- Hero Section -->
 <section class="p-4 md:p-6 bg-omni-secondary flex flex-col justify-center relative flex-1 min-h-[calc(100vh-6rem)] overflow-x-hidden">
@@ -23,22 +33,27 @@
             <div class="swiper swiper-recommended w-full pointer-events-auto overflow-hidden rounded-2xl">
               <div class="swiper-wrapper">
                 <?php 
+                $defaults = [
+                    1 => ['title' => 'Panggilan Masuk', 'rating' => '(2.3k+)', 'desc' => 'Budi Santoso - Keluhan Produk', 'sub' => 'Menunggu antrean (0:45)'],
+                    2 => ['title' => 'Pesan Masuk', 'rating' => '(1.5k+)', 'desc' => 'Siti Aminah - Info Layanan', 'sub' => 'Dialihkan ke Tim B (0:12)'],
+                    3 => ['title' => 'Email Baru', 'rating' => '(900+)', 'desc' => 'Agus Pratama - Kerjasama', 'sub' => 'Belum dibaca (5m yang lalu)'],
+                ];
                 for ($i = 1; $i <= 3; $i++): 
-                    $title = get_theme_mod("omni_rec_{$i}_title", $i == 1 ? 'Panggilan Masuk' : '');
+                    $title = get_theme_mod("omni_rec_{$i}_title", $defaults[$i]['title']);
                     if (!$title) continue;
                 ?>
                 <div class="swiper-slide">
-                  <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-[1vw] xl:p-5 text-white shadow-xl">
+                  <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-[1vw] xl:p-5 text-white shadow-xl cursor-grab active:cursor-grabbing">
                     <div class="flex items-center gap-2 mb-1">
                       <h4 class="font-medium text-[1.1vw] xl:text-lg text-white"><?php echo esc_html($title); ?></h4>
                       <div class="bg-omni-accent p-1 rounded-full">
                         <i data-lucide="star" class="h-3 w-3 text-white fill-white"></i>
                       </div>
-                      <span class="text-[0.8vw] xl:text-sm font-semibold ml-1"><?php echo esc_html(get_theme_mod("omni_rec_{$i}_rating", '(2.3k+)')); ?></span>
+                      <span class="text-[0.8vw] xl:text-sm font-semibold ml-1"><?php echo esc_html(get_theme_mod("omni_rec_{$i}_rating", $defaults[$i]['rating'])); ?></span>
                     </div>
                     <p class="text-[0.85vw] xl:text-sm text-white/90">
-                      <?php echo esc_html(get_theme_mod("omni_rec_{$i}_desc", 'Budi Santoso - Keluhan Produk')); ?><br/>
-                      <span class="text-[0.75vw] xl:text-xs opacity-80"><?php echo esc_html(get_theme_mod("omni_rec_{$i}_sub", 'Menunggu antrean (0:45)')); ?></span>
+                      <?php echo esc_html(get_theme_mod("omni_rec_{$i}_desc", $defaults[$i]['desc'])); ?><br/>
+                      <span class="text-[0.75vw] xl:text-xs opacity-80"><?php echo esc_html(get_theme_mod("omni_rec_{$i}_sub", $defaults[$i]['sub'])); ?></span>
                     </p>
                   </div>
                 </div>
@@ -58,11 +73,11 @@
           </div>
 
           <h1 class="text-[3.2vw] xl:text-[58px] text-omni-dark mb-[1.38vw] xl:mb-5 leading-[1.05]">
-            Satu Layar untuk<br/>Semua Saluran.
+            <?php echo $hero_title; ?>
           </h1>
-          <p class="text-omni-text-muted text-[1vw] xl:text-base max-w-[92%] mb-[2.2vw] xl:mb-8 font-medium leading-relaxed">
-            Tingkatkan kepuasan pelanggan dan produktivitas tim yang menghubungkan suara, chat, email, dan sosmed dalam satu tempat.
-          </p>
+          <div class="text-omni-text-muted text-[1vw] xl:text-base max-w-[92%] mb-[2.2vw] xl:mb-8 font-medium leading-relaxed omni-rich-text">
+            <?php echo wpautop($hero_sub); ?>
+          </div>
 
           <!-- Search Bar -->
           <form method="get" action="<?php echo esc_url(home_url('/')); ?>" class="flex items-center bg-white p-[0.4vw] xl:p-1.5 rounded-full w-full shadow-sm mb-[2.2vw] xl:mb-8 border border-omni-border">
@@ -91,11 +106,11 @@
 
           <div class="translate-y-[70px] -translate-x-[10px] mb-[70px]">
             <h1 class="text-4xl text-omni-dark font-bold leading-[1.05] mb-3 drop-shadow-sm mt-[5px]">
-              Satu Layar untuk<br/>Semua Saluran.
+              <?php echo $hero_title; ?>
             </h1>
-            <p class="text-omni-text-muted text-[15px] font-medium leading-relaxed mb-5 w-[90%]">
-              Tingkatkan kepuasan pelanggan dan produktivitas tim yang menghubungkan suara, chat, email, dan sosmed.
-            </p>
+            <div class="text-omni-text-muted text-[15px] font-medium leading-relaxed mb-5 w-[90%] omni-rich-text">
+              <?php echo wpautop($hero_sub); ?>
+            </div>
           </div>
 
           <!-- Search Bar -->
@@ -117,19 +132,25 @@
               <div class="swiper swiper-recommended w-full overflow-hidden rounded-xl">
                 <div class="swiper-wrapper">
                   <?php 
+                  $defaults = [
+                      1 => ['title' => 'Panggilan Masuk', 'rating' => '(2.3k+)', 'desc' => 'Budi Santoso - Keluhan Produk', 'sub' => 'Menunggu antrean (0:45)'],
+                      2 => ['title' => 'Pesan Masuk', 'rating' => '(1.5k+)', 'desc' => 'Siti Aminah - Info Layanan', 'sub' => 'Dialihkan ke Tim B (0:12)'],
+                      3 => ['title' => 'Email Baru', 'rating' => '(900+)', 'desc' => 'Agus Pratama - Kerjasama', 'sub' => 'Belum dibaca (5m yang lalu)'],
+                  ];
                   for ($i = 1; $i <= 3; $i++): 
-                      $title = get_theme_mod("omni_rec_{$i}_title", $i == 1 ? 'Panggilan Masuk' : '');
+                      $title = get_theme_mod("omni_rec_{$i}_title", $defaults[$i]['title']);
                       if (!$title) continue;
                   ?>
                   <div class="swiper-slide">
-                    <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-3 text-white shadow-lg">
+                    <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-3 text-white shadow-lg cursor-grab active:cursor-grabbing">
                       <div class="flex items-center gap-2 mb-1">
                         <h4 class="font-medium text-sm text-white"><?php echo esc_html($title); ?></h4>
                         <div class="bg-omni-accent p-1 rounded-full">
                           <i data-lucide="star" class="h-3 w-3 text-white fill-white"></i>
                         </div>
+                        <span class="text-[0.8vw] xl:text-sm font-semibold ml-1"><?php echo esc_html(get_theme_mod("omni_rec_{$i}_rating", $defaults[$i]['rating'])); ?></span>
                       </div>
-                      <p class="text-xs text-white/90"><?php echo esc_html(get_theme_mod("omni_rec_{$i}_desc", 'Budi Santoso - Keluhan Produk')); ?></p>
+                      <p class="text-xs text-white/90"><?php echo esc_html(get_theme_mod("omni_rec_{$i}_desc", $defaults[$i]['desc'])); ?></p>
                     </div>
                   </div>
                   <?php endfor; ?>
@@ -153,7 +174,7 @@
         <div class="hidden md:flex absolute inset-0 z-10 items-center justify-between px-[6%]">
           <div class="text-white">
             <h2 class="text-[2.5vw] xl:text-5xl mb-[1.38vw] xl:mb-5 text-omni-light leading-tight">
-              Integrasi<br/><em class="text-omni-accent italic">Tanpa Batas</em>
+              <?php echo $integration_title; ?>
             </h2>
             <a href="<?php echo home_url('/fitur'); ?>" class="flex items-center w-fit shadow-lg rounded-full bg-omni-accent hover:bg-omni-accent-hover transition-all p-[0.27vw] xl:p-1 pr-[0.41vw] xl:pr-1.5 cursor-pointer hover:scale-105">
               <span class="text-white px-[1.38vw] xl:px-5 py-[0.41vw] xl:py-1.5 font-semibold text-[0.85vw] xl:text-sm">Pelajari</span>
@@ -187,7 +208,7 @@
         <div class="flex md:hidden absolute top-[15%] z-10 flex-col justify-center px-6 -translate-y-[10px] -translate-x-[20px]" style="width: 100vw; left: 55vw; height: 85%;">
           <div class="text-white mb-5">
             <h2 class="text-3xl mb-3 text-omni-light leading-tight">
-              Integrasi<br/><em class="text-omni-accent italic">Tanpa Batas</em>
+              <?php echo $integration_title; ?>
             </h2>
             <a href="<?php echo home_url('/fitur'); ?>" class="flex items-center w-fit shadow-lg rounded-full bg-omni-accent transition-all p-1 pr-1.5">
               <span class="text-white px-4 py-1 font-semibold text-xs">Pelajari Lebih Lanjut</span>
@@ -227,10 +248,10 @@
   <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-omni-accent/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2"></div>
 
   <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Siap Mengubah Cara Anda Melayani?</h2>
-    <p class="text-omni-light text-xl mb-10 max-w-2xl mx-auto opacity-90">
-      Bergabunglah dengan ratusan perusahaan lain yang telah mendigitalisasi pusat layanan pelanggan mereka dengan OmniServe.
-    </p>
+    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6"><?php echo esc_html($cta_title); ?></h2>
+    <div class="text-omni-light text-xl mb-10 max-w-2xl mx-auto opacity-90 omni-rich-text">
+      <?php echo wpautop($cta_sub); ?>
+    </div>
     <div class="flex flex-col sm:flex-row justify-center gap-4">
       <a href="<?php echo home_url('/harga'); ?>" class="bg-omni-accent text-white hover:bg-omni-accent-hover px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
         Mulai Uji Coba Gratis
@@ -246,10 +267,10 @@
 <section class="py-24 bg-omni-light relative">
   <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-5xl font-bold text-omni-dark mb-4">Dipercaya Oleh Berbagai Instansi</h2>
-      <p class="text-omni-text-muted text-lg max-w-2xl mx-auto">
-        Kami bangga dapat mendukung pelayanan terbaik yang diberikan oleh mitra dan pelanggan kami.
-      </p>
+      <h2 class="text-3xl md:text-5xl font-bold text-omni-dark mb-4"><?php echo esc_html($trusted_title); ?></h2>
+      <div class="text-omni-text-muted text-lg max-w-2xl mx-auto omni-rich-text">
+        <?php echo wpautop($trusted_sub); ?>
+      </div>
     </div>
 
     <!-- Swiper Container Wrapper -->

@@ -341,7 +341,46 @@ add_action('customize_register', function($wp_customize) {
 // Add Meta Box for SEO Title & Description
 add_action('add_meta_boxes', function() {
     add_meta_box('omni_seo_meta', 'Pengaturan SEO Google', 'omni_seo_meta_html', array('post', 'page'), 'normal', 'high');
+    
+    // Add Copywriting meta box specifically for pages (so they can edit Home text)
+    add_meta_box('omni_home_copy_meta', 'Pengaturan Teks Copywriting (Khusus Halaman Beranda)', 'omni_home_copy_html', 'page', 'normal', 'high');
 });
+
+function omni_home_copy_html($post) {
+    wp_nonce_field('omni_home_save', 'omni_home_nonce');
+
+    $fields = [
+        'omni_hero_title' => ['label' => 'Judul Hero Utama (Gunakan <br/> untuk baris baru)', 'type' => 'text', 'default' => 'Satu Layar untuk<br/>Semua Saluran.'],
+        'omni_hero_sub' => ['label' => 'Subjudul Hero', 'type' => 'editor', 'default' => 'Tingkatkan kepuasan pelanggan dan produktivitas tim yang menghubungkan suara, chat, email, dan sosmed dalam satu tempat.'],
+        'omni_integration_title' => ['label' => 'Judul Integrasi (Section Bawah Hero)', 'type' => 'text', 'default' => 'Integrasi<br/><em class="text-omni-accent italic">Tanpa Batas</em>'],
+        'omni_cta_title' => ['label' => 'Judul CTA (Call to Action)', 'type' => 'text', 'default' => 'Siap Mengubah Cara Anda Melayani?'],
+        'omni_cta_sub' => ['label' => 'Subjudul CTA', 'type' => 'editor', 'default' => 'Bergabunglah dengan ratusan perusahaan lain yang telah mendigitalisasi pusat layanan pelanggan mereka dengan OmniServe.'],
+        'omni_trusted_title' => ['label' => 'Judul Logo Klien', 'type' => 'text', 'default' => 'Dipercaya Oleh Berbagai Instansi'],
+        'omni_trusted_sub' => ['label' => 'Subjudul Klien', 'type' => 'editor', 'default' => 'Bergabunglah dengan perusahaan terkemuka yang telah bertransformasi bersama kami.'],
+    ];
+
+    echo '<p style="color:#666;">Silakan isi teks di bawah ini jika halaman ini Anda jadikan sebagai Halaman Depan (Beranda/Home). Pengaturan ini menggunakan editor WYSIWYG untuk bagian subjudul.</p>';
+
+    foreach ($fields as $id => $data) {
+        $val = get_post_meta($post->ID, $id, true);
+        if ($val === '') $val = $data['default'];
+
+        echo '<div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee;">';
+        echo '<label style="font-weight:bold; display:block; margin-bottom:10px; font-size:14px;">' . $data['label'] . '</label>';
+        
+        if ($data['type'] == 'editor') {
+            wp_editor($val, $id, array(
+                'textarea_name' => $id, 
+                'media_buttons' => false, 
+                'textarea_rows' => 4, 
+                'teeny' => true
+            ));
+        } else {
+            echo '<input type="text" name="'.$id.'" class="widefat" style="padding:10px; font-size:14px;" value="'.esc_attr($val).'">';
+        }
+        echo '</div>';
+    }
+}
 
 function omni_seo_meta_html($post) {
     $seo_title = get_post_meta($post->ID, '_omni_seo_title', true);
@@ -360,12 +399,26 @@ function omni_seo_meta_html($post) {
 }
 
 add_action('save_post', function($post_id) {
-    if (!isset($_POST['omni_seo_nonce']) || !wp_verify_nonce($_POST['omni_seo_nonce'], 'omni_seo_save')) return;
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
     if (!current_user_can('edit_post', $post_id)) return;
 
-    if (isset($_POST['omni_seo_title'])) update_post_meta($post_id, '_omni_seo_title', sanitize_text_field($_POST['omni_seo_title']));
-    if (isset($_POST['omni_seo_desc'])) update_post_meta($post_id, '_omni_seo_desc', sanitize_textarea_field($_POST['omni_seo_desc']));
+    // Save SEO Meta
+    if (isset($_POST['omni_seo_nonce']) && wp_verify_nonce($_POST['omni_seo_nonce'], 'omni_seo_save')) {
+        if (isset($_POST['omni_seo_title'])) update_post_meta($post_id, '_omni_seo_title', sanitize_text_field($_POST['omni_seo_title']));
+        if (isset($_POST['omni_seo_desc'])) update_post_meta($post_id, '_omni_seo_desc', sanitize_textarea_field($_POST['omni_seo_desc']));
+    }
+
+    // Save Homepage Copywriting Meta
+    if (isset($_POST['omni_home_nonce']) && wp_verify_nonce($_POST['omni_home_nonce'], 'omni_home_save')) {
+        $fields = ['omni_hero_title', 'omni_hero_sub', 'omni_integration_title', 'omni_cta_title', 'omni_cta_sub', 'omni_trusted_title', 'omni_trusted_sub'];
+        foreach ($fields as $field) {
+            if (isset($_POST[$field])) {
+                // If it's a textarea/editor, use wp_kses_post to allow HTML
+                $val = (strpos($field, '_sub') !== false) ? wp_kses_post($_POST[$field]) : wp_kses_post($_POST[$field]);
+                update_post_meta($post_id, $field, $val);
+            }
+        }
+    }
 });
 
 // Generate dynamic robots.txt
