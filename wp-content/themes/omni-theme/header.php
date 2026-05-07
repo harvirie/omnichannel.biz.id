@@ -58,6 +58,22 @@
         body {
             font-family: 'Outfit', sans-serif;
         }
+
+        /* SVG Glow Animation */
+        @keyframes svgGlowLine {
+            0% { stroke-dashoffset: 100; }
+            100% { stroke-dashoffset: 0; }
+        }
+        .svg-glow-path {
+            fill: none;
+            stroke: var(--omni-accent);
+            stroke-width: 6;
+            stroke-linecap: round;
+            filter: drop-shadow(0 0 12px var(--omni-accent)) drop-shadow(0 0 4px var(--omni-accent));
+            stroke-dasharray: 15 85;
+            animation: svgGlowLine 12s linear infinite;
+            opacity: 0.8;
+        }
     </style>
     <?php
     if (is_singular()) {
