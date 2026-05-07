@@ -20,7 +20,7 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./wp-content/
-        server-dir: /htdocs/wp-content/
+        server-dir: /omnichannel.biz.id/htdocs/wp-content/
         exclude: |
           **/.git*
           **/.git*/**
