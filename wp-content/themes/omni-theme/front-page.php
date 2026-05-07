@@ -126,46 +126,36 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
           </form>
 
           <!-- Mobile Image Container -->
-          <div class="relative mt-auto w-full max-w-[340px] mx-auto shrink-0 h-[200px] rounded-3xl overflow-hidden shadow-xl border border-white/20 -translate-y-[80px] -translate-x-[10px]">
+          <div class="relative mt-4 mb-4 w-full max-w-[340px] mx-auto shrink-0 h-[200px] rounded-3xl overflow-hidden shadow-xl border border-white/20 -translate-x-[10px]">
             <img src="<?php echo esc_url(get_theme_mod('omni_hero_image', 'https://images.unsplash.com/photo-1766066014237-00645c74e9c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjYWxsJTIwY2VudGVyJTIwYWdlbnQlMjB0YWxraW5nJTIwb24lMjBoZWFkc2V0fGVufDF8fHx8MTc3ODE0Njc3NXww&ixlib=rb-4.1.0&q=80&w=1080')); ?>" class="absolute inset-0 w-full h-full object-cover" alt="Call center agent" />
             <div class="absolute inset-0 bg-gradient-to-t from-omni-dark/90 via-omni-dark/20 to-transparent"></div>
             
-          <!-- Mobile Hero Right (Swiper) -->
-          <div class="md:hidden w-full relative mt-4 z-10 px-4">
-            <div class="bg-omni-dark/40 backdrop-blur-xl border border-white/20 p-4 rounded-3xl shadow-2xl">
-              <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-inner">
-                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop" alt="Dashboard" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80" />
-                <div class="absolute inset-0 bg-gradient-to-tr from-omni-dark/80 via-transparent to-white/10"></div>
-                
-                <!-- Floating Card Mobile -->
-                <div class="absolute bottom-4 left-4 right-4 z-20">
-                  <div class="swiper swiper-recommended w-full overflow-hidden rounded-xl">
-                    <div class="swiper-wrapper">
-                      <?php 
-                      $defaults = [
-                          1 => ['title' => 'Panggilan Masuk', 'rating' => '(2.3k+)', 'desc' => 'Budi Santoso - Keluhan Produk', 'sub' => 'Menunggu antrean (0:45)'],
-                          2 => ['title' => 'Pesan Masuk', 'rating' => '(1.5k+)', 'desc' => 'Siti Aminah - Info Layanan', 'sub' => 'Dialihkan ke Tim B (0:12)'],
-                          3 => ['title' => 'Email Baru', 'rating' => '(900+)', 'desc' => 'Agus Pratama - Kerjasama', 'sub' => 'Belum dibaca (5m yang lalu)'],
-                      ];
-                      for ($i = 1; $i <= 3; $i++): 
-                          $title = get_theme_mod("omni_rec_{$i}_title", $defaults[$i]['title']);
-                          if (!$title) continue;
-                      ?>
-                      <div class="swiper-slide">
-                        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-3 text-white shadow-lg cursor-grab active:cursor-grabbing">
-                          <div class="flex items-center gap-2 mb-1">
-                            <h4 class="font-medium text-sm text-white"><?php echo esc_html($title); ?></h4>
-                            <div class="bg-omni-accent p-1 rounded-full">
-                              <i data-lucide="star" class="h-3 w-3 text-white fill-white"></i>
-                            </div>
-                            <span class="text-[0.8vw] xl:text-sm font-semibold ml-1"><?php echo esc_html(get_theme_mod("omni_rec_{$i}_rating", $defaults[$i]['rating'])); ?></span>
-                          </div>
-                          <p class="text-xs text-white/90"><?php echo esc_html(get_theme_mod("omni_rec_{$i}_desc", $defaults[$i]['desc'])); ?></p>
+            <div class="absolute bottom-3 left-3 right-3">
+              <div class="swiper swiper-recommended w-full overflow-hidden rounded-xl">
+                <div class="swiper-wrapper">
+                  <?php 
+                  $defaults = [
+                      1 => ['title' => 'Panggilan Masuk', 'rating' => '(2.3k+)', 'desc' => 'Budi Santoso - Keluhan Produk', 'sub' => 'Menunggu antrean (0:45)'],
+                      2 => ['title' => 'Pesan Masuk', 'rating' => '(1.5k+)', 'desc' => 'Siti Aminah - Info Layanan', 'sub' => 'Dialihkan ke Tim B (0:12)'],
+                      3 => ['title' => 'Email Baru', 'rating' => '(900+)', 'desc' => 'Agus Pratama - Kerjasama', 'sub' => 'Belum dibaca (5m yang lalu)'],
+                  ];
+                  for ($i = 1; $i <= 3; $i++): 
+                      $title = get_theme_mod("omni_rec_{$i}_title", $defaults[$i]['title']);
+                      if (!$title) continue;
+                  ?>
+                  <div class="swiper-slide">
+                    <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-3 text-white shadow-lg cursor-grab active:cursor-grabbing">
+                      <div class="flex items-center gap-2 mb-1">
+                        <h4 class="font-medium text-sm text-white"><?php echo esc_html($title); ?></h4>
+                        <div class="bg-omni-accent p-1 rounded-full">
+                          <i data-lucide="star" class="h-3 w-3 text-white fill-white"></i>
                         </div>
+                        <span class="text-[0.8vw] xl:text-sm font-semibold ml-1"><?php echo esc_html(get_theme_mod("omni_rec_{$i}_rating", $defaults[$i]['rating'])); ?></span>
                       </div>
-                      <?php endfor; ?>
+                      <p class="text-xs text-white/90"><?php echo esc_html(get_theme_mod("omni_rec_{$i}_desc", $defaults[$i]['desc'])); ?></p>
                     </div>
                   </div>
+                  <?php endfor; ?>
                 </div>
               </div>
             </div>
@@ -175,7 +165,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
       </div>
 
       <!-- Bottom Card -->
-      <div class="relative z-20 w-[300vw] -left-[55vw] md:w-full md:left-0 transition-all max-md:!-mt-[1vw]" style="aspect-ratio: 2000.62 / 448.88; margin-top: -2.99%;">
+      <div class="relative z-20 w-[300vw] -left-[55vw] md:w-full md:left-0 transition-all max-md:!-mt-[9.6vw]" style="aspect-ratio: 2000.62 / 448.88; margin-top: -2.99%;">
         <svg viewBox="0 0 2000.62 448.88" class="absolute inset-0 w-full h-full text-omni-dark"
           preserveAspectRatio="xMidYMid meet"
           style="filter: drop-shadow(-8px 8px 0px #FDB854);">
@@ -233,25 +223,25 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
           <div class="swiper integration-swiper w-[100vw] -mx-2 px-2 pt-2 pb-4" style="overflow: visible;">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
-                <div class="border border-omni-light/30 rounded-xl p-3 flex flex-col items-center justify-center text-center bg-omni-secondary shadow-sm">
+                <div class="border border-omni-light/30 rounded-xl p-3 flex flex-col items-center justify-center text-center bg-omni-secondary shadow-sm h-[80px]">
                   <i data-lucide="phone" class="h-6 w-6 text-omni-accent mb-2 drop-shadow-sm"></i>
                   <span class="text-xs text-white font-medium">Telepon</span>
                 </div>
               </div>
               <div class="swiper-slide">
-                <div class="border border-omni-light/30 rounded-xl p-3 flex flex-col items-center justify-center text-center bg-omni-secondary shadow-sm">
+                <div class="border border-omni-light/30 rounded-xl p-3 flex flex-col items-center justify-center text-center bg-omni-secondary shadow-sm h-[80px]">
                   <i data-lucide="message-circle" class="h-6 w-6 text-omni-accent mb-2 drop-shadow-sm"></i>
                   <span class="text-xs text-white font-medium">WhatsApp</span>
                 </div>
               </div>
               <div class="swiper-slide">
-                <div class="border border-omni-light/30 rounded-xl p-3 flex flex-col items-center justify-center text-center bg-omni-secondary shadow-sm">
+                <div class="border border-omni-light/30 rounded-xl p-3 flex flex-col items-center justify-center text-center bg-omni-secondary shadow-sm h-[80px]">
                   <i class="fa-brands fa-instagram text-omni-accent text-2xl mb-2 drop-shadow-sm"></i>
                   <span class="text-xs text-white font-medium">Instagram</span>
                 </div>
               </div>
               <div class="swiper-slide">
-                <div class="border border-omni-light/30 rounded-xl p-3 flex flex-col items-center justify-center text-center bg-omni-secondary shadow-sm">
+                <div class="border border-omni-light/30 rounded-xl p-3 flex flex-col items-center justify-center text-center bg-omni-secondary shadow-sm h-[80px]">
                   <i data-lucide="mail" class="h-6 w-6 text-omni-accent mb-2 drop-shadow-sm"></i>
                   <span class="text-xs text-white font-medium">Email</span>
                 </div>
@@ -331,10 +321,17 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
           <?php endfor; ?>
         </div>
         
-        <!-- Navigation -->
-        <div class="swiper-button-prev !left-0 xl:!-left-6 !text-omni-dark after:!text-[1.5vw] xl:after:!text-xl bg-white shadow-lg w-[3.5vw] h-[3.5vw] xl:w-12 xl:h-12 rounded-full !hidden md:!flex items-center justify-center transition-transform hover:scale-110"></div>
-        <div class="swiper-button-next !right-0 xl:!-right-6 !text-omni-dark after:!text-[1.5vw] xl:after:!text-xl bg-white shadow-lg w-[3.5vw] h-[3.5vw] xl:w-12 xl:h-12 rounded-full !hidden md:!flex items-center justify-center transition-transform hover:scale-110"></div>
-        <div class="swiper-pagination !-bottom-2 md:!bottom-0"></div>
+        <!-- Custom Swiper Navigation -->
+        <div class="swiper-pagination !bottom-0 pb-2"></div>
+      </div>
+      
+      <!-- Outer Navigation Buttons -->
+      <!-- Menggunakan padding 10px+ (translate) agar menjauh dari card -->
+      <div class="swiper-button-prev !text-omni-dark !w-12 !h-12 !bg-white/80 hover:!bg-white backdrop-blur-sm rounded-full shadow-lg border border-omni-border transition-all !absolute !left-0 top-[40%] -translate-y-1/2 z-20 after:!hidden !hidden md:!flex items-center justify-center -ml-2 md:-ml-[10px]">
+        <i class="fa-solid fa-chevron-left text-xl"></i>
+      </div>
+      <div class="swiper-button-next !text-omni-dark !w-12 !h-12 !bg-white/80 hover:!bg-white backdrop-blur-sm rounded-full shadow-lg border border-omni-border transition-all !absolute !right-0 top-[40%] -translate-y-1/2 z-20 after:!hidden !hidden md:!flex items-center justify-center -mr-2 md:-mr-[10px]">
+        <i class="fa-solid fa-chevron-right text-xl"></i>
       </div>
     </div>
   </div>
