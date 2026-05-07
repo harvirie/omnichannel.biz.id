@@ -39,12 +39,17 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
 <script>
-  // Initialize Lucide icons
-  if (typeof lucide !== 'undefined') {
-    lucide.createIcons();
+  // Initialize Lucide icons - dengan delay karena script defer
+  function initLucide() {
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    } else {
+      setTimeout(initLucide, 100);
+    }
   }
+  document.addEventListener('DOMContentLoaded', initLucide);
 
   // Mobile menu toggle
   document.addEventListener('DOMContentLoaded', function() {
