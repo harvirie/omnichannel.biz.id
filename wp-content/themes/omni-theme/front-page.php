@@ -63,14 +63,15 @@ get_header();
         <!-- SVG atas: light green shape + image clipped inside -->
         <svg viewBox="0 0 2000.62 1163.2" class="absolute inset-0 w-full h-full drop-shadow-xl" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <!-- Rounded rect clipPath: photo as contained card with padding from all edges -->
-            <!-- x=870 right-pad=(2000-870-1075)=55, y=60 bottom=(60+925)=985 bottom-pad=(1014-985)=29 -->
+            <!-- Portrait card clipPath: clear padding on all 4 sides -->
+            <!-- right-edge: 950+990=1940, right-pad=(2001-1940)=61 -->
+            <!-- bottom: 55+900=955, shape-bottom≈1014, bottom-pad=59 -->
             <clipPath id="imageClip">
-              <rect x="870" y="60" width="1075" height="900" rx="42" ry="42"/>
+              <rect x="950" y="55" width="990" height="900" rx="44" ry="44"/>
             </clipPath>
             <linearGradient id="imgGrad" x1="0" y1="1" x2="0" y2="0">
               <stop offset="0%" stop-color="#1C2C1F" stop-opacity="0.9"/>
-              <stop offset="40%" stop-color="#1C2C1F" stop-opacity="0.25"/>
+              <stop offset="38%" stop-color="#1C2C1F" stop-opacity="0.2"/>
               <stop offset="100%" stop-color="#1C2C1F" stop-opacity="0"/>
             </linearGradient>
           </defs>
@@ -78,14 +79,14 @@ get_header();
           <!-- Background fill for whole top card -->
           <path fill="#EBF4E3" d="M58.46 0c-31.35,2.09 -57.22,35.2 -58.46,63.75l0 868.18c0.2,40.69 31.43,80.18 57.88,82.69l620.13 0c44.45,-2.37 78.16,19.12 86.82,53.74l16.59 42.01c10.6,29.54 32.66,51.92 57.94,52.83l1096.82 0c40.73,-3.51 63.88,-32.95 64.44,-63.23l0 -897.75c-0.2,-32.84 -23,-53.97 -53.33,-53.34l-1115.52 0c-25.65,-2.32 -54.42,-18.17 -64.44,-44.44l-26.67 -71.11c-12.41,-25.68 -33.15,-31.59 -62.22,-33.33l-619.98 0z"/>
 
-          <!-- Photo clipped as a rounded card panel with proper padding from all sides -->
+          <!-- Photo as portrait card floating inside the SVG -->
           <image href="https://images.unsplash.com/photo-1766066014237-00645c74e9c6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjYWxsJTIwY2VudGVyJTIwYWdlbnQlMjB0YWxraW5nJTIwb24lMjBoZWFkc2V0fGVufDF8fHx8MTc3ODE0Njc3NXww&ixlib=rb-4.1.0&q=80&w=1080"
-            x="870" y="60" width="1075" height="900"
+            x="950" y="55" width="990" height="900"
             preserveAspectRatio="xMidYMid slice"
             clip-path="url(#imageClip)"/>
 
-          <!-- Gradient overlay on the photo -->
-          <rect x="870" y="60" width="1075" height="900" rx="42" ry="42" fill="url(#imgGrad)"/>
+          <!-- Gradient overlay on photo -->
+          <rect x="950" y="55" width="990" height="900" rx="44" ry="44" fill="url(#imgGrad)"/>
         </svg>
 
         <!-- Left Text Content: positioned absolutely over SVG -->
@@ -126,8 +127,8 @@ get_header();
           </div>
         </div>
 
-        <!-- Recommended overlay on bottom of image (right side) -->
-        <div class="absolute z-20 pointer-events-none" style="bottom: 10%; right: 5%; width: 40%;">
+        <!-- Recommended overlay — positioned inside the photo card bounds -->
+        <div class="absolute z-20 pointer-events-none" style="bottom: 9%; right: 6%; width: 37%;">
           <h3 class="font-serif text-[1.6vw] xl:text-2xl mb-3 text-white drop-shadow-md">Recommended</h3>
           <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-[1vw] xl:p-5 text-white shadow-xl">
             <div class="flex items-center gap-2 mb-1">
