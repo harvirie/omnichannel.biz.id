@@ -383,11 +383,11 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
       </div>
       
       <!-- Outer Navigation Buttons - Gold contrast on light background -->
-      <div class="swiper-button-prev !w-12 !h-12 rounded-full shadow-lg transition-all !absolute !left-0 top-[40%] -translate-y-1/2 z-20 after:!hidden !hidden md:!flex items-center justify-center -ml-2 md:-ml-[10px]" style="background:#D4AF37;border:2px solid #B8962E;">
-        <i class="fa-solid fa-chevron-left text-lg" style="color:#0F172A;"></i>
+      <div class="swiper-button-prev !w-12 !h-12 rounded-full shadow-lg transition-all !absolute !left-0 top-[40%] -translate-y-1/2 z-20 after:!hidden !hidden md:!flex items-center justify-center -ml-2 md:-ml-[10px]" style="background:#D4AF37;border:2px solid #B8962E;cursor:pointer;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F172A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
       </div>
-      <div class="swiper-button-next !w-12 !h-12 rounded-full shadow-lg transition-all !absolute !right-0 top-[40%] -translate-y-1/2 z-20 after:!hidden !hidden md:!flex items-center justify-center -mr-2 md:-mr-[10px]" style="background:#D4AF37;border:2px solid #B8962E;">
-        <i class="fa-solid fa-chevron-right text-lg" style="color:#0F172A;"></i>
+      <div class="swiper-button-next !w-12 !h-12 rounded-full shadow-lg transition-all !absolute !right-0 top-[40%] -translate-y-1/2 z-20 after:!hidden !hidden md:!flex items-center justify-center -mr-2 md:-mr-[10px]" style="background:#D4AF37;border:2px solid #B8962E;cursor:pointer;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F172A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
       </div>
     </div>
   </div>
