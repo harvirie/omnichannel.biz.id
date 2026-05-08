@@ -1,0 +1,15 @@
+# OmniServe Security: Block direct access to wp-includes
+Options -Indexes
+DirectoryIndex disabled
+
+# Block all PHP execution kecuali yang diizinkan WordPress core
+<FilesMatch "\.php$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Allow only specific wp-includes PHP files needed externally
+<FilesMatch "^(wp-tinymce\.php|ms-files\.php)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>

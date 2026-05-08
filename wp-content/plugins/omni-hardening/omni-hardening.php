@@ -516,6 +516,14 @@ function omni_sec_admin_page() {
 /* ═══════════════════════════════════════════════
    15. ANIMATED 403 FORBIDDEN PAGE
    ═══════════════════════════════════════════════ */
+
+// Handle ?omni_error=403 from .htaccess ErrorDocument
+add_action( 'init', function() {
+    if ( isset( $_GET['omni_error'] ) && (int) $_GET['omni_error'] === 403 ) {
+        omni_sec_render_403();
+    }
+} );
+
 add_action( 'init', function() {
     // Trigger 403 page for blocked bot user agents
     $ua = $_SERVER['HTTP_USER_AGENT'] ?? '';

@@ -9,6 +9,30 @@ RewriteRule . /index.php [L]
 </IfModule>
 # END WordPress
 
+# BEGIN OmniServe-Directory-Protection
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Block direct browser access to wp-content/ (folder only, not files inside)
+RewriteCond %{REQUEST_URI} ^/wp-content/?$ [NC]
+RewriteRule ^ - [F,L]
+
+# Block direct browser access to wp-includes/ (folder only)
+RewriteCond %{REQUEST_URI} ^/wp-includes/?$ [NC]
+RewriteRule ^ - [F,L]
+
+# Block wp-admin direct access from non-logged requests (except admin-ajax)
+RewriteCond %{REQUEST_URI} ^/wp-admin/ [NC]
+RewriteCond %{REQUEST_URI} !^/wp-admin/admin-ajax\.php$ [NC]
+RewriteCond %{HTTP_COOKIE} !wordpress_logged_in [NC]
+RewriteRule ^wp-admin/(.+)$ - [F,L]
+</IfModule>
+
+# Custom 403 Error document
+ErrorDocument 403 /index.php?omni_error=403
+# END OmniServe-Directory-Protection
+
+
 # ===== PERFORMANCE OPTIMIZATIONS =====
 
 # Enable Gzip Compression

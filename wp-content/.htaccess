@@ -1,0 +1,26 @@
+# OmniServe Security: Block direct browser access to wp-content directory
+# Akses langsung ke folder ini HARUS diblokir (403 Forbidden)
+
+# Block directory listing
+Options -Indexes
+
+# Block PHP execution (kecuali yang dibutuhkan WordPress)
+<FilesMatch "\.(php|php\d|phtml|phar)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Allow specific WordPress-required PHP files
+<FilesMatch "^(index\.php)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Block access to sensitive files
+<FilesMatch "\.(log|bak|sql|tar|gz|zip|env|ini|conf)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Return 403 for direct directory access attempts
+DirectoryIndex disabled
