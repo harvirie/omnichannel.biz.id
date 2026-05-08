@@ -29,10 +29,10 @@
     <style>
         /* Base color variables for standard CSS if needed */
         :root {
-            --omni-dark: <?php echo esc_attr(get_theme_mod('omni_primary_color', '#0F172A')); ?>;
-            --omni-light: <?php echo esc_attr(get_theme_mod('omni_light_color', '#F8FAFC')); ?>;
-            --omni-accent: <?php echo esc_attr(get_theme_mod('omni_accent_color', '#D4AF37')); ?>;
-            --omni-secondary: <?php echo esc_attr(get_theme_mod('omni_secondary_color', '#CBD5E1')); ?>;
+            --omni-dark: <?php echo esc_attr(get_theme_mod('omni_primary_color_v2', '#0F172A')); ?>;
+            --omni-light: <?php echo esc_attr(get_theme_mod('omni_light_color_v2', '#F8FAFC')); ?>;
+            --omni-accent: <?php echo esc_attr(get_theme_mod('omni_accent_color_v2', '#D4AF37')); ?>;
+            --omni-secondary: <?php echo esc_attr(get_theme_mod('omni_secondary_color_v2', '#CBD5E1')); ?>;
         }
         
         /* Hide scrollbar utility */
