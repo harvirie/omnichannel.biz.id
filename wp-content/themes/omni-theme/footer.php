@@ -157,6 +157,13 @@ async function submitDemoForm(e) {
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
 <script>
+  // Supress Swiper Loop Warning
+  const originalWarn = console.warn;
+  console.warn = function(msg) {
+    if (typeof msg === 'string' && msg.includes('Swiper Loop Warning')) return;
+    originalWarn.apply(console, arguments);
+  };
+
   // Initialize Lucide icons - dengan delay karena script defer
   function initLucide() {
     if (typeof lucide !== 'undefined') {
