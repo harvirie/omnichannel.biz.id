@@ -47,6 +47,7 @@ function omni_lc_render_widget() {
 @media(max-width:767px){
   #omni-lc-bubble-text{display:none;}
   #omni-lc-toggle{bottom:92px;right:20px;}
+  #omni-lc-window{width:calc(100vw - 16px);right:8px;bottom:160px;max-height:65vh;}
 }
 
 /* ── Chat window ── */
@@ -221,10 +222,20 @@ function showErr(msg){ errEl.textContent=msg; errEl.style.display='block'; }
 function sendMessage() {
     const text = input.value.trim();
     if(!text||!sessionKey) return;
-    appendMsg('user', text, 'sekarang');
+    // Optimistically render; we'll update lastMsgId from server to prevent poll duplicate
+    const tempId = 'temp_' + Date.now();
+    appendMsg('user', text, 'sekarang', null, tempId);
     input.value='';
     post({action:'omni_lc_send', nonce:NONCE, session_key:sessionKey, message:text})
-    .then(res=>{ if(res.success&&res.data.bot_reply) renderMessage(res.data.bot_reply.id,'bot',res.data.bot_reply.message,res.data.bot_reply.meta,'sekarang'); });
+    .then(res=>{
+        if(res.success) {
+            // Update the temp element with real ID so poll skips it
+            const el = document.querySelector('[data-msg-id="'+tempId+'"]');
+            if(el && res.data.user_msg_id) el.dataset.msgId = res.data.user_msg_id;
+            if(res.data.user_msg_id > lastMsgId) lastMsgId = res.data.user_msg_id;
+            if(res.data.bot_reply) renderMessage(res.data.bot_reply.id,'bot',res.data.bot_reply.message,res.data.bot_reply.meta,'sekarang');
+        }
+    });
 }
 sendBtn.addEventListener('click', sendMessage);
 input.addEventListener('keydown', e=>{ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();} });

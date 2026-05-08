@@ -86,10 +86,12 @@ function omni_lc_ajax_send() {
         'created_at' => current_time( 'mysql', true ),
     ], ['%d','%s','%s','%s','%s'] );
 
+    $user_msg_id = $wpdb->insert_id;
+
     // Bot auto-reply for menu actions
     $bot_reply = omni_lc_bot_reply( $session->id, $message );
 
-    wp_send_json_success( ['bot_reply' => $bot_reply] );
+    wp_send_json_success( ['user_msg_id' => $user_msg_id, 'bot_reply' => $bot_reply] );
 }
 
 /* ── Poll for new messages ── */

@@ -120,7 +120,7 @@ function omni_sec_send_headers() {
         "default-src 'self'",
         "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://res.cloudinary.com https://fonts.googleapis.com https://www.googletagmanager.com https://static.cloudflareinsights.com https://googleads.g.doubleclick.net https://www.google.com https://www.googleadservices.com https://www.google.co.id blob:",
         "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com",
-        "img-src 'self' data: https://res.cloudinary.com https://secure.gravatar.com https://www.google-analytics.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://www.google.com https://www.googleadservices.com https://www.google.co.id",
+        "img-src 'self' data: https://res.cloudinary.com https://secure.gravatar.com https://www.google-analytics.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://www.google.com https://www.googleadservices.com https://www.google.co.id https://s.w.org",
         "font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net",
         "media-src 'self' https://res.cloudinary.com",
         "connect-src 'self' https://cdn.jsdelivr.net https://cloudflareinsights.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.google.com https://www.googleadservices.com https://www.google.co.id",
