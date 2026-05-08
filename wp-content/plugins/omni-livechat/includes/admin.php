@@ -23,16 +23,31 @@ function omni_lc_save_settings() {
     $data['greeting_close']= sanitize_textarea_field( $_POST['greeting_close'] ?? '' );
     $data['logo_url']      = esc_url_raw( $_POST['logo_url'] ?? '' );
 
-    // Bot menus
-    $labels   = array_map( 'sanitize_text_field',   (array)( $_POST['menu_label']   ?? [] ) );
-    $roles    = array_map( 'sanitize_text_field',   (array)( $_POST['menu_role']    ?? [] ) );
+    // Bot menus — 2-level
+    $labels    = array_map( 'sanitize_text_field', (array)( $_POST['menu_label'] ?? [] ) );
+    $roles     = array_map( 'sanitize_text_field', (array)( $_POST['menu_role']  ?? [] ) );
+    $sub_data  = $_POST['menu_children'] ?? []; // keyed by parent index
     $menus = [];
     foreach ( $labels as $i => $label ) {
         if ( ! trim($label) ) continue;
+        $children = [];
+        $raw_children = $sub_data[$i] ?? [];
+        $child_labels    = array_map( 'sanitize_text_field',   (array)( $raw_children['label']    ?? [] ) );
+        $child_messages  = array_map( 'sanitize_textarea_field', (array)( $raw_children['message']  ?? [] ) );
+        $child_is_human  = (array)( $raw_children['is_human'] ?? [] );
+        foreach ( $child_labels as $j => $clabel ) {
+            if ( ! trim($clabel) ) continue;
+            $children[] = [
+                'label'    => $clabel,
+                'message'  => $child_messages[$j] ?? '',
+                'is_human' => isset( $child_is_human[$j] ) ? true : false,
+                'children' => [],
+            ];
+        }
         $menus[] = [
             'label'    => $label,
             'role'     => $roles[$i] ?? '',
-            'children' => [],
+            'children' => $children,
         ];
     }
     if ( ! empty( $menus ) ) $data['bot_menus'] = $menus;
@@ -256,19 +271,75 @@ function omni_lc_page_settings() {
         </div>
 
         <div style="background:#fff;border:1px solid #E2E8F0;border-radius:.875rem;padding:1.5rem;margin-bottom:1.25rem;">
-          <h2 style="margin:0 0 1rem;font-size:1rem;color:#0F172A;">🤖 Menu Bot (Level 1)</h2>
-          <p style="font-size:.8rem;color:#64748B;margin:0 0 1rem;">Tambah/hapus menu utama. Sub-menu & respons dapat dikonfigurasi via kode.</p>
+          <h2 style="margin:0 0 .25rem;font-size:1rem;color:#0F172A;">🤖 Menu Bot (2 Level)</h2>
+          <p style="font-size:.8rem;color:#64748B;margin:0 0 1.25rem;">Konfigurasi menu Level 1 (utama) dan Level 2 (sub-menu) beserta respons bot-nya.</p>
+
           <div id="lc-menu-rows">
             <?php foreach($menus as $i=>$menu): ?>
-            <div class="lc-menu-row" style="display:flex;gap:8px;margin-bottom:8px;align-items:center;">
-              <input type="text" name="menu_label[]" value="<?php echo esc_attr($menu['label']); ?>" placeholder="Label menu" style="flex:2;border:1.5px solid #CBD5E1;border-radius:.5rem;padding:.4rem .6rem;font-size:.85rem;">
-              <input type="text" name="menu_role[]"  value="<?php echo esc_attr($menu['role']); ?>"  placeholder="Role (sales/teknis)" style="flex:1;border:1.5px solid #CBD5E1;border-radius:.5rem;padding:.4rem .6rem;font-size:.85rem;">
-              <button type="button" onclick="this.closest('.lc-menu-row').remove()" style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;border-radius:.375rem;padding:.3rem .6rem;cursor:pointer;">✕</button>
+            <div class="lc-menu-row" data-idx="<?php echo $i; ?>" style="border:1.5px solid #E2E8F0;border-radius:.75rem;margin-bottom:1rem;overflow:hidden;">
+              <div style="background:#F8FAFC;padding:.6rem 1rem;display:flex;gap:8px;align-items:center;border-bottom:1px solid #E2E8F0;">
+                <span style="font-size:.7rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;">Level 1</span>
+                <input type="text" name="menu_label[]" value="<?php echo esc_attr($menu['label']); ?>" placeholder="Label menu" style="flex:2;border:1.5px solid #CBD5E1;border-radius:.5rem;padding:.35rem .6rem;font-size:.85rem;">
+                <input type="text" name="menu_role[]"  value="<?php echo esc_attr($menu['role']); ?>"  placeholder="Role" style="flex:1;border:1.5px solid #CBD5E1;border-radius:.5rem;padding:.35rem .6rem;font-size:.85rem;">
+                <button type="button" onclick="this.closest('.lc-menu-row').remove()" style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;border-radius:.375rem;padding:.3rem .6rem;cursor:pointer;flex-shrink:0;">✕</button>
+              </div>
+              <div style="padding:.75rem 1rem;">
+                <div style="font-size:.72rem;font-weight:700;color:#1E40AF;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.05em;">↳ Sub-menu Level 2</div>
+                <div class="lc-children-rows">
+                  <?php foreach($menu['children'] ?? [] as $j=>$child): ?>
+                  <div class="lc-child-row" style="background:#F0F9FF;border:1px solid #BFDBFE;border-radius:.5rem;padding:.6rem .75rem;margin-bottom:.5rem;">
+                    <div style="display:flex;gap:8px;align-items:center;margin-bottom:.4rem;">
+                      <span style="font-size:.65rem;color:#1E40AF;font-weight:700;white-space:nowrap;">Level 2</span>
+                      <input type="text" name="menu_children[<?php echo $i; ?>][label][]" value="<?php echo esc_attr($child['label']); ?>" placeholder="Label sub-menu" style="flex:1;border:1.5px solid #BFDBFE;border-radius:.5rem;padding:.3rem .6rem;font-size:.82rem;">
+                      <label style="display:flex;align-items:center;gap:4px;font-size:.75rem;color:#374151;white-space:nowrap;cursor:pointer;">
+                        <input type="checkbox" name="menu_children[<?php echo $i; ?>][is_human][<?php echo $j; ?>]" value="1" <?php checked(!empty($child['is_human'])); ?>> 👤 Agent
+                      </label>
+                      <button type="button" onclick="this.closest('.lc-child-row').remove()" style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;border-radius:.375rem;padding:.2rem .5rem;cursor:pointer;font-size:.75rem;flex-shrink:0;">✕</button>
+                    </div>
+                    <textarea name="menu_children[<?php echo $i; ?>][message][]" rows="3" placeholder="Pesan respons bot..." style="width:100%;border:1.5px solid #BFDBFE;border-radius:.5rem;padding:.35rem .6rem;font-size:.82rem;box-sizing:border-box;resize:vertical;font-family:inherit;"><?php echo esc_textarea($child['message'] ?? ''); ?></textarea>
+                  </div>
+                  <?php endforeach; ?>
+                </div>
+                <button type="button" onclick="lcAddChild(this, <?php echo $i; ?>)" style="background:#EFF6FF;color:#1E40AF;border:1px solid #BFDBFE;border-radius:.5rem;padding:.3rem .8rem;cursor:pointer;font-size:.78rem;">+ Tambah Sub-menu</button>
+              </div>
             </div>
             <?php endforeach; ?>
           </div>
-          <button type="button" onclick="document.getElementById('lc-menu-rows').insertAdjacentHTML('beforeend','<div class=\'lc-menu-row\' style=\'display:flex;gap:8px;margin-bottom:8px;align-items:center;\'><input type=\'text\' name=\'menu_label[]\' placeholder=\'Label menu\' style=\'flex:2;border:1.5px solid #CBD5E1;border-radius:.5rem;padding:.4rem .6rem;font-size:.85rem;\'><input type=\'text\' name=\'menu_role[]\' placeholder=\'Role\' style=\'flex:1;border:1.5px solid #CBD5E1;border-radius:.5rem;padding:.4rem .6rem;font-size:.85rem;\'><button type=\'button\' onclick=\'this.closest(&quot;.lc-menu-row&quot;).remove()\' style=\'background:#fef2f2;color:#dc2626;border:1px solid #fecaca;border-radius:.375rem;padding:.3rem .6rem;cursor:pointer;\'>✕</button></div>')" style="background:#F0FDF4;color:#166534;border:1px solid #BBF7D0;border-radius:.5rem;padding:.4rem 1rem;cursor:pointer;font-size:.8rem;">+ Tambah Menu</button>
+          <button type="button" onclick="lcAddMenu()" style="background:#F0FDF4;color:#166534;border:1px solid #BBF7D0;border-radius:.5rem;padding:.4rem 1rem;cursor:pointer;font-size:.8rem;">+ Tambah Menu Level 1</button>
         </div>
+
+        <script>
+        var lcMenuCount = <?php echo count($menus); ?>;
+        function lcAddMenu() {
+            var idx = lcMenuCount++;
+            var html = '<div class="lc-menu-row" data-idx="'+idx+'" style="border:1.5px solid #E2E8F0;border-radius:.75rem;margin-bottom:1rem;overflow:hidden;">'
+                + '<div style="background:#F8FAFC;padding:.6rem 1rem;display:flex;gap:8px;align-items:center;border-bottom:1px solid #E2E8F0;">'
+                + '<span style="font-size:.7rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;">Level 1</span>'
+                + '<input type="text" name="menu_label[]" placeholder="Label menu" style="flex:2;border:1.5px solid #CBD5E1;border-radius:.5rem;padding:.35rem .6rem;font-size:.85rem;">'
+                + '<input type="text" name="menu_role[]" placeholder="Role" style="flex:1;border:1.5px solid #CBD5E1;border-radius:.5rem;padding:.35rem .6rem;font-size:.85rem;">'
+                + '<button type="button" onclick="this.closest(\'.lc-menu-row\').remove()" style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;border-radius:.375rem;padding:.3rem .6rem;cursor:pointer;flex-shrink:0;">✕</button>'
+                + '</div>'
+                + '<div style="padding:.75rem 1rem;">'
+                + '<div style="font-size:.72rem;font-weight:700;color:#1E40AF;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.05em;">↳ Sub-menu Level 2</div>'
+                + '<div class="lc-children-rows"></div>'
+                + '<button type="button" onclick="lcAddChild(this,'+idx+')" style="background:#EFF6FF;color:#1E40AF;border:1px solid #BFDBFE;border-radius:.5rem;padding:.3rem .8rem;cursor:pointer;font-size:.78rem;">+ Tambah Sub-menu</button>'
+                + '</div></div>';
+            document.getElementById('lc-menu-rows').insertAdjacentHTML('beforeend', html);
+        }
+        function lcAddChild(btn, idx) {
+            var childCount = btn.closest('div[style]').querySelectorAll('.lc-child-row').length;
+            var html = '<div class="lc-child-row" style="background:#F0F9FF;border:1px solid #BFDBFE;border-radius:.5rem;padding:.6rem .75rem;margin-bottom:.5rem;">'
+                + '<div style="display:flex;gap:8px;align-items:center;margin-bottom:.4rem;">'
+                + '<span style="font-size:.65rem;color:#1E40AF;font-weight:700;white-space:nowrap;">Level 2</span>'
+                + '<input type="text" name="menu_children['+idx+'][label][]" placeholder="Label sub-menu" style="flex:1;border:1.5px solid #BFDBFE;border-radius:.5rem;padding:.3rem .6rem;font-size:.82rem;">'
+                + '<label style="display:flex;align-items:center;gap:4px;font-size:.75rem;color:#374151;white-space:nowrap;cursor:pointer;"><input type="checkbox" name="menu_children['+idx+'][is_human]['+childCount+']" value="1"> 👤 Agent</label>'
+                + '<button type="button" onclick="this.closest(\'.lc-child-row\').remove()" style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;border-radius:.375rem;padding:.2rem .5rem;cursor:pointer;font-size:.75rem;flex-shrink:0;">✕</button>'
+                + '</div>'
+                + '<textarea name="menu_children['+idx+'][message][]" rows="3" placeholder="Pesan respons bot..." style="width:100%;border:1.5px solid #BFDBFE;border-radius:.5rem;padding:.35rem .6rem;font-size:.82rem;box-sizing:border-box;resize:vertical;font-family:inherit;"></textarea>'
+                + '</div>';
+            btn.previousElementSibling.insertAdjacentHTML('beforeend', html);
+        }
+        </script>
 
         <div style="background:#fff;border:1px solid #E2E8F0;border-radius:.875rem;padding:1.5rem;margin-bottom:1.25rem;">
           <h2 style="margin:0 0 1rem;font-size:1rem;color:#0F172A;">🖼️ Logo URL</h2>

@@ -19,11 +19,16 @@ function omni_lc_defaults() {
                 'role'     => 'sales',
                 'children' => [
                     [
-                        'label'   => 'Pilihan Harga',
-                        'message' => "Berikut pilihan paket kami:\n\n📦 *Paket Standar* — Cocok untuk UKM yang baru memulai.\n🚀 *Paket Pro* — Fitur lengkap untuk bisnis berkembang.\n\nMau info lebih detail paket mana?",
-                        'children' => [
-                            ['label' => 'Pilihan Chat', 'message' => 'Baik! Tim kami akan segera melayani Anda melalui chat ini. Silakan sampaikan pertanyaan Anda.', 'is_human' => true],
-                        ],
+                        'label'    => 'Harga Pro',
+                        'message'  => "💎 *Paket Professional Plus*\n\n📞 Kanal: WhatsApp (Blue Tick), Instagram & Telepon (PSTN)\n📨 Kapasitas: 6.000 Pesan/Bulan (Rollover)\n🤖 Fitur: FAQ Database & Multilevel Menu Bot\n👤 Agen: Custom Setup (5 dedicated agent lines)\n🎙️ Khusus: Voice Call Recording & Nomor Lokal (021)\n📊 Laporan: Dashboard Monitoring & Analytics\n☁️ Support: Helpdesk via WA Group & Cloud Server\n\n💰 *Harga: Rp 13.875.000/Bulan*\n📌 Total: Rp 166.500.000 (min. 12 bulan)\n\nIngin konsultasi lebih lanjut?",
+                        'is_human' => true,
+                        'children' => [],
+                    ],
+                    [
+                        'label'    => 'Harga Standar',
+                        'message'  => "📦 *Paket Standard*\n\n📱 Kanal: WhatsApp (Blue Tick) & Instagram\n♾️ Kapasitas: Unlimited Interaction\n🤖 Fitur: FAQ Database & Multilevel Menu Bot\n👥 Agen: Unlimited Agent\n🔗 Khusus: API Integrasi Custom\n📄 Laporan: Dokumen Laporan Bulanan (Cetak/Buku)\n☁️ Support: Helpdesk via WA Group & Cloud Server\n\n💰 *Harga: Rp 6.882.000/Bulan*\n📌 Total: Rp 48.174.500 (min. 6 bulan)\n\nIngin konsultasi lebih lanjut?",
+                        'is_human' => true,
+                        'children' => [],
                     ],
                 ],
             ],
@@ -31,8 +36,18 @@ function omni_lc_defaults() {
                 'label'    => 'Teknis',
                 'role'     => 'teknis',
                 'children' => [
-                    ['label' => 'Konsultasi', 'message' => 'Baik! Tim teknis kami siap membantu konsultasi. Silakan ceritakan kendala yang Anda alami.', 'is_human' => true],
-                    ['label' => 'Demo',        'message' => 'Kami akan menjadwalkan sesi demo untuk Anda. Kapan waktu yang paling nyaman bagi Anda?', 'is_human' => true],
+                    [
+                        'label'    => 'Konsultasi',
+                        'message'  => "Baik! Tim teknis kami siap membantu konsultasi. 🛠️\n\nSilakan ceritakan kendala atau pertanyaan teknis yang Anda alami, dan agen kami akan segera merespons.",
+                        'is_human' => true,
+                        'children' => [],
+                    ],
+                    [
+                        'label'    => 'Demo',
+                        'message'  => "Kami akan menjadwalkan sesi demo untuk Anda! 🎯\n\nLihat dulu fitur-fitur unggulan kami di:\n👉 https://omnichannel.biz.id/fitur\n\nTim kami akan segera menghubungi Anda untuk menjadwalkan sesi demo.",
+                        'is_human' => true,
+                        'children' => [],
+                    ],
                 ],
             ],
         ],
