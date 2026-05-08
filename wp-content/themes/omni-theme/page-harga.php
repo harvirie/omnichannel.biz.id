@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div class="flex-1 w-full" style="background: linear-gradient(135deg, #EBF4E3 0%, #f8fdf5 50%, #EBF4E3 100%);">
+<div class="flex-1 w-full" style="background: linear-gradient(135deg, #F8FAFC 0%, #ffffff 50%, #F8FAFC 100%);">
 
   <!-- Hero Header -->
   <div class="py-20 text-center max-w-3xl mx-auto px-6">
@@ -77,7 +77,7 @@
       </div>
 
       <!-- ===== PAKET PROFESSIONAL PLUS ===== -->
-      <div class="bg-omni-dark rounded-3xl p-8 border-2 border-omni-accent shadow-2xl flex flex-col relative group hover:shadow-[0_30px_80px_rgba(253,184,84,0.3)] hover:-translate-y-1 transition-all duration-300" style="filter: drop-shadow(-6px 6px 0px #FDB854);">
+      <div class="bg-omni-dark rounded-3xl p-8 border-2 border-omni-accent shadow-2xl flex flex-col relative group hover:shadow-[0_30px_80px_rgba(212,175,55,0.3)] hover:-translate-y-1 transition-all duration-300" style="filter: drop-shadow(-6px 6px 0px #D4AF37);">
         <!-- Badge -->
         <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-omni-accent text-white px-5 py-1.5 rounded-full text-sm font-bold shadow-lg whitespace-nowrap flex items-center gap-2">
           <i data-lucide="star" class="h-3.5 w-3.5 fill-white"></i>

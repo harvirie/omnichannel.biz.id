@@ -193,7 +193,7 @@ function omni_theme_customize_register( $wp_customize ) {
     ) );
 
     $wp_customize->add_setting( 'omni_primary_color', array(
-        'default'           => '#1C2C1F',
+        'default'           => '#0F172A',
         'sanitize_callback' => 'sanitize_hex_color',
     ) );
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'omni_primary_color', array(
@@ -202,7 +202,7 @@ function omni_theme_customize_register( $wp_customize ) {
     ) ) );
 
     $wp_customize->add_setting( 'omni_accent_color', array(
-        'default'           => '#FDB854',
+        'default'           => '#D4AF37',
         'sanitize_callback' => 'sanitize_hex_color',
     ) );
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'omni_accent_color', array(
@@ -211,7 +211,7 @@ function omni_theme_customize_register( $wp_customize ) {
     ) ) );
 
     $wp_customize->add_setting( 'omni_light_color', array(
-        'default'           => '#EBF4E3',
+        'default'           => '#F8FAFC',
         'sanitize_callback' => 'sanitize_hex_color',
     ) );
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'omni_light_color', array(
@@ -221,14 +221,14 @@ function omni_theme_customize_register( $wp_customize ) {
 
     // Extended Colors
     $extra_colors = [
-        'omni_secondary_color' => ['label' => 'Warna Sekunder / Hero', 'default' => '#7A9E7E'],
-        'omni_button_color'    => ['label' => 'Warna Tombol Utama', 'default' => '#567558'],
-        'omni_button_hover'    => ['label' => 'Warna Hover Tombol', 'default' => '#415B45'],
-        'omni_accent_hover'    => ['label' => 'Warna Hover Aksen', 'default' => '#e89e3a'],
-        'omni_text_muted'      => ['label' => 'Warna Teks Redup', 'default' => '#4F6854'],
-        'omni_border_color'    => ['label' => 'Warna Garis Tepi', 'default' => '#d2e3c9'],
-        'omni_dark_border'     => ['label' => 'Warna Garis Gelap', 'default' => '#2C4131'],
-        'omni_dark_hover'      => ['label' => 'Warna Hover Garis Gelap', 'default' => '#2A3E2F'],
+        'omni_secondary_color' => ['label' => 'Warna Sekunder / Hero', 'default' => '#CBD5E1'],
+        'omni_button_color'    => ['label' => 'Warna Tombol Utama', 'default' => '#1E3A8A'],
+        'omni_button_hover'    => ['label' => 'Warna Hover Tombol', 'default' => '#1E40AF'],
+        'omni_accent_hover'    => ['label' => 'Warna Hover Aksen', 'default' => '#B8972D'],
+        'omni_text_muted'      => ['label' => 'Warna Teks Redup', 'default' => '#64748B'],
+        'omni_border_color'    => ['label' => 'Warna Garis Tepi', 'default' => '#E2E8F0'],
+        'omni_dark_border'     => ['label' => 'Warna Garis Gelap', 'default' => '#1E293B'],
+        'omni_dark_hover'      => ['label' => 'Warna Hover Garis Gelap', 'default' => '#1E293B'],
     ];
 
     foreach ($extra_colors as $id => $data) {

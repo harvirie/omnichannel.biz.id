@@ -28,17 +28,17 @@ module.exports = {
       },
       colors: {
         omni: {
-          dark: '#1C2C1F',
-          light: '#EBF4E3',
-          accent: '#FDB854',
-          secondary: '#7A9E7E',
-          button: '#567558',
-          'button-hover': '#415B45',
-          'accent-hover': '#e89e3a',
-          'text-muted': '#4F6854',
-          border: '#d2e3c9',
-          'dark-border': '#2C4131',
-          'dark-hover': '#2A3E2F',
+          dark: '#0F172A',
+          light: '#F8FAFC',
+          accent: '#D4AF37',
+          secondary: '#CBD5E1',
+          button: '#1E3A8A',
+          'button-hover': '#1E40AF',
+          'accent-hover': '#B8972D',
+          'text-muted': '#64748B',
+          border: '#E2E8F0',
+          'dark-border': '#1E293B',
+          'dark-hover': '#1E293B',
         }
       }
     }
