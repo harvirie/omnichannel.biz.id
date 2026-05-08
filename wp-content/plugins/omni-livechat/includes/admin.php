@@ -130,6 +130,8 @@ function omni_lc_page_inbox() {
         lcPollTimer = setInterval(omniLcPoll, 2000);
     }
 
+    function escHtmlAdmin(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
     function omniLcAppendMsg(sender, message, created_at, id) {
         const wrap = document.getElementById('lc-messages-wrap');
         if (id && document.querySelector('[data-msg-id="'+id+'"]')) return;
@@ -139,8 +141,8 @@ function omni_lc_page_inbox() {
         if (id) div.dataset.msgId = id;
         div.style.cssText = `display:flex;justify-content:${isAgent?'flex-end':'flex-start'};`;
         div.innerHTML = `<div style="max-width:70%;background:${isAgent?'#1E40AF':isUser?'#fff':'#F0FDF4'};color:${isAgent?'#fff':'#1e293b'};border:1px solid ${isAgent?'transparent':isUser?'#E2E8F0':'#bbf7d0'};border-radius:.75rem;padding:.5rem .75rem;font-size:.82rem;line-height:1.5;">
-            <div style="font-size:.65rem;color:${isAgent?'rgba(255,255,255,.7)':'#94A3B8'};margin-bottom:2px;font-weight:600;">${sender.toUpperCase()} · ${created_at}</div>
-            ${message.replace(/\n/g,'<br>')}
+            <div style="font-size:.65rem;color:${isAgent?'rgba(255,255,255,.7)':'#94A3B8'};margin-bottom:2px;font-weight:600;">${escHtmlAdmin(sender).toUpperCase()} · ${escHtmlAdmin(created_at)}</div>
+            ${escHtmlAdmin(message).replace(/\n/g,'<br>')}
         </div>`;
         wrap.appendChild(div);
         wrap.scrollTop = wrap.scrollHeight;
