@@ -130,26 +130,32 @@ function omni_lc_page_inbox() {
         lcPollTimer = setInterval(omniLcPoll, 2000);
     }
 
+    function omniLcAppendMsg(sender, message, created_at, id) {
+        const wrap = document.getElementById('lc-messages-wrap');
+        if (id && document.querySelector('[data-msg-id="'+id+'"]')) return;
+        const isAgent = sender === 'agent';
+        const isUser  = sender === 'user';
+        const div = document.createElement('div');
+        if (id) div.dataset.msgId = id;
+        div.style.cssText = `display:flex;justify-content:${isAgent?'flex-end':'flex-start'};`;
+        div.innerHTML = `<div style="max-width:70%;background:${isAgent?'#1E40AF':isUser?'#fff':'#F0FDF4'};color:${isAgent?'#fff':'#1e293b'};border:1px solid ${isAgent?'transparent':isUser?'#E2E8F0':'#bbf7d0'};border-radius:.75rem;padding:.5rem .75rem;font-size:.82rem;line-height:1.5;">
+            <div style="font-size:.65rem;color:${isAgent?'rgba(255,255,255,.7)':'#94A3B8'};margin-bottom:2px;font-weight:600;">${sender.toUpperCase()} · ${created_at}</div>
+            ${message.replace(/\n/g,'<br>')}
+        </div>`;
+        wrap.appendChild(div);
+        wrap.scrollTop = wrap.scrollHeight;
+    }
+
     function omniLcPoll() {
         if (!lcActiveSession) return;
         fetch(lcAjax, { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'},
             body: new URLSearchParams({action:'omni_lc_admin_poll', nonce:lcNonce, session_id:lcActiveSession, last_id:lcLastMsgId})
         }).then(r=>r.json()).then(res=>{
             if (!res.success) return;
-            const wrap = document.getElementById('lc-messages-wrap');
             res.data.messages.forEach(m=>{
                 if (m.id > lcLastMsgId) lcLastMsgId = m.id;
-                const isAgent = m.sender === 'agent';
-                const isUser  = m.sender === 'user';
-                const div = document.createElement('div');
-                div.style.cssText = `display:flex;justify-content:${isAgent?'flex-end':'flex-start'};`;
-                div.innerHTML = `<div style="max-width:70%;background:${isAgent?'#1E40AF':isUser?'#fff':'#F0FDF4'};color:${isAgent?'#fff':'#1e293b'};border:1px solid ${isAgent?'transparent':isUser?'#E2E8F0':'#bbf7d0'};border-radius:.75rem;padding:.5rem .75rem;font-size:.82rem;line-height:1.5;">
-                    <div style="font-size:.65rem;color:${isAgent?'rgba(255,255,255,.7)':'#94A3B8'};margin-bottom:2px;font-weight:600;">${m.sender.toUpperCase()} · ${m.created_at}</div>
-                    ${m.message.replace(/\n/g,'<br>')}
-                </div>`;
-                wrap.appendChild(div);
+                omniLcAppendMsg(m.sender, m.message, m.created_at, m.id);
             });
-            if (res.data.messages.length) wrap.scrollTop = wrap.scrollHeight;
         });
     }
 
@@ -157,9 +163,18 @@ function omni_lc_page_inbox() {
         const input = document.getElementById('lc-reply-input');
         const msg = input.value.trim();
         if (!msg || !lcActiveSession) return;
+        this.disabled = true;
         fetch(lcAjax, { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'},
             body: new URLSearchParams({action:'omni_lc_agent_send', nonce:lcNonce, session_id:lcActiveSession, message:msg})
-        }).then(r=>r.json()).then(()=>{ input.value=''; omniLcPoll(); });
+        }).then(r=>r.json()).then(res=>{
+            input.value='';
+            // Update lastMsgId BEFORE polling so the sent message is skipped by poll
+            if (res.success && res.data && res.data.id) {
+                lcLastMsgId = Math.max(lcLastMsgId, res.data.id);
+                // Render the agent message locally immediately
+                omniLcAppendMsg('agent', msg, 'sekarang', res.data.id);
+            }
+        }).finally(()=>{ this.disabled = false; });
     });
     document.getElementById('lc-reply-input').addEventListener('keydown', function(e){
         if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); document.getElementById('lc-reply-btn').click(); }
