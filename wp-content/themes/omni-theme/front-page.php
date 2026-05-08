@@ -75,11 +75,13 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
 
         <!-- Left Content (Desktop) -->
         <div class="hidden md:flex absolute top-[7%] left-[5%] w-[38%] z-20 flex-col">
-          <div class="flex items-center gap-[0.55vw] xl:gap-2 mb-[2.2vw] xl:mb-8">
-            <div class="bg-omni-button-hover p-[0.55vw] xl:p-2 rounded-[0.8vw] xl:rounded-xl shadow-sm">
-              <i data-lucide="headphones" class="h-[1.66vw] w-[1.66vw] xl:h-6 xl:w-6 text-white"></i>
-            </div>
-            <span class="font-bold text-[1.4vw] xl:text-2xl tracking-tight text-omni-dark"><?php bloginfo( 'name' ); ?></span>
+          <div class="flex items-center mb-[2.2vw] xl:mb-8">
+            <a href="<?php echo home_url('/'); ?>">
+              <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_dark_ymby0d.svg"
+                   alt="<?php bloginfo('name'); ?>"
+                   class="h-[2.2vw] xl:h-8 w-auto object-contain"
+                   loading="eager">
+            </a>
           </div>
 
           <h1 class="text-[3.2vw] xl:text-[58px] text-omni-dark mb-[1.38vw] xl:mb-5 leading-[1.05]">
