@@ -15,6 +15,8 @@ add_action('wp_head', function() {
     echo '<meta property="og:description" content="Sewa layanan omnichannel call center lengkap: WhatsApp Blue Tick, PSTN, Bot FAQ, Unlimited Agent. Terpercaya untuk pemerintah & korporasi.">' . "\n";
     echo '<meta property="og:type" content="website">' . "\n";
     echo '<link rel="canonical" href="' . esc_url(home_url('/fitur')) . '">' . "\n";
+    // Preload LCP hero image (WebP) agar LCP turun signifikan
+    echo '<link rel="preload" as="image" href="' . get_template_directory_uri() . '/assets/img/fitur-hero.webp" type="image/webp">' . "\n";
 }, 5);
 ?>
 <?php get_header(); ?>
@@ -37,15 +39,23 @@ add_action('wp_head', function() {
     </div>
   </div>
 
-  <!-- Hero Illustration -->
+  <!-- Hero Illustration — WebP dengan fallback PNG untuk LCP optimal -->
   <div class="max-w-5xl mx-auto px-6 -mt-6 mb-4">
-    <img
-      src="<?php echo get_template_directory_uri(); ?>/assets/img/fitur-hero.png"
-      alt="Dashboard omnichannel call center Kabayan — WhatsApp, Instagram, PSTN dalam satu inbox terpadu"
-      width="1024" height="1024"
-      class="w-full rounded-3xl shadow-2xl border border-omni-border object-cover"
-      loading="lazy"
-    >
+    <picture>
+      <source
+        srcset="<?php echo get_template_directory_uri(); ?>/assets/img/fitur-hero.webp"
+        type="image/webp"
+      >
+      <img
+        src="<?php echo get_template_directory_uri(); ?>/assets/img/fitur-hero.png"
+        alt="Dashboard omnichannel call center Kabayan — WhatsApp, Instagram, PSTN dalam satu inbox terpadu"
+        width="1024" height="1024"
+        class="w-full rounded-3xl shadow-2xl border border-omni-border object-cover"
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
+      >
+    </picture>
   </div>
 
   <!-- Feature Group 1: Kanal Komunikasi -->

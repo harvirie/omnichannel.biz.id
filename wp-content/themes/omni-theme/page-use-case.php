@@ -15,6 +15,8 @@ add_action('wp_head', function() {
     echo '<meta property="og:description" content="Solusi sewa omnichannel call center untuk pemerintah, perbankan, e-commerce, klinik, dan B2B. Terbukti meningkatkan kualitas layanan publik.">' . "\n";
     echo '<meta property="og:type" content="website">' . "\n";
     echo '<link rel="canonical" href="' . esc_url(home_url('/use-case')) . '">' . "\n";
+    // Preload LCP hero image (WebP) agar LCP turun signifikan
+    echo '<link rel="preload" as="image" href="' . get_template_directory_uri() . '/assets/img/usecase-hero.webp" type="image/webp">' . "\n";
 }, 5);
 ?>
 <?php get_header(); ?>
@@ -40,15 +42,23 @@ add_action('wp_head', function() {
     <div class="absolute bottom-10 right-10 w-80 h-80 bg-omni-dark/20 rounded-full blur-3xl"></div>
   </div>
 
-  <!-- Use Case Hero Illustration -->
+  <!-- Use Case Hero Illustration — WebP dengan fallback PNG untuk LCP optimal -->
   <div class="max-w-5xl mx-auto px-6 -mt-8 mb-4 relative z-10">
-    <img
-      src="<?php echo get_template_directory_uri(); ?>/assets/img/usecase-hero.png"
-      alt="Solusi omnichannel call center untuk berbagai industri: e-commerce, perbankan, klinik, pemerintah, dan B2B"
-      width="1024" height="1024"
-      class="w-full rounded-3xl shadow-2xl border border-omni-border object-cover"
-      loading="lazy"
-    >
+    <picture>
+      <source
+        srcset="<?php echo get_template_directory_uri(); ?>/assets/img/usecase-hero.webp"
+        type="image/webp"
+      >
+      <img
+        src="<?php echo get_template_directory_uri(); ?>/assets/img/usecase-hero.png"
+        alt="Solusi omnichannel call center untuk berbagai industri: e-commerce, perbankan, klinik, pemerintah, dan B2B"
+        width="1024" height="1024"
+        class="w-full rounded-3xl shadow-2xl border border-omni-border object-cover"
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
+      >
+    </picture>
   </div>
 
   <!-- Package Context Banner -->
