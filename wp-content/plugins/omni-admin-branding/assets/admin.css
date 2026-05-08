@@ -1,0 +1,221 @@
+/* ===================================================
+   OmniServe Admin Area Branding
+   Menyesuaikan warna WP Dashboard dengan brand:
+   Dark Blue #0F172A | Gold #D4AF37 | Light Gray #F8FAFC
+   =================================================== */
+
+/* ── ROOT VARIABLES ── */
+:root {
+    --omni-dark:    #0F172A;
+    --omni-dark2:   #1E293B;
+    --omni-accent:  #D4AF37;
+    --omni-light:   #F8FAFC;
+    --omni-border:  #E2E8F0;
+    --omni-muted:   #64748B;
+    --omni-btn:     #1E3A8A;
+    --omni-btn-h:   #1E40AF;
+}
+
+/* ── ADMIN MENU SIDEBAR ── */
+#adminmenuback,
+#adminmenuwrap,
+#adminmenu {
+    background: var(--omni-dark) !important;
+}
+#adminmenu a,
+#adminmenu .wp-menu-name {
+    color: rgba(255,255,255,0.75) !important;
+    font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+    font-size: 0.875rem !important;
+}
+#adminmenu .wp-menu-arrow,
+#adminmenu .wp-menu-arrow div {
+    background: var(--omni-dark2) !important;
+}
+#adminmenu li.menu-top:hover,
+#adminmenu li.opensub > a.menu-top,
+#adminmenu li > a.menu-top:focus {
+    color: var(--omni-accent) !important;
+    background: rgba(212,175,55,0.08) !important;
+}
+#adminmenu li.current > a.menu-top,
+#adminmenu .current a,
+#adminmenu .wp-has-current-submenu .wp-submenu .wp-submenu-head {
+    color: var(--omni-accent) !important;
+    background: rgba(212,175,55,0.12) !important;
+    border-left: 3px solid var(--omni-accent) !important;
+}
+#adminmenu .wp-submenu {
+    background: var(--omni-dark2) !important;
+}
+#adminmenu .wp-submenu a {
+    color: rgba(255,255,255,0.65) !important;
+}
+#adminmenu .wp-submenu a:hover,
+#adminmenu .wp-submenu a:focus {
+    color: var(--omni-accent) !important;
+}
+#adminmenu .wp-submenu li.current a {
+    color: var(--omni-accent) !important;
+}
+
+/* ── ADMIN MENU ICONS ── */
+#adminmenu .menu-icon-dashboard div.wp-menu-image:before,
+#adminmenu div.wp-menu-image:before {
+    color: rgba(255,255,255,0.5) !important;
+}
+#adminmenu li.current > a.menu-top div.wp-menu-image:before,
+#adminmenu li:hover > a.menu-top div.wp-menu-image:before {
+    color: var(--omni-accent) !important;
+}
+
+/* ── ADMIN BAR (TOP) ── */
+#wpadminbar {
+    background: var(--omni-dark) !important;
+    border-bottom: 1px solid rgba(212,175,55,0.2) !important;
+}
+#wpadminbar .ab-item,
+#wpadminbar .ab-label,
+#wpadminbar .ab-icon:before,
+#wpadminbar #wp-admin-bar-root-default .ab-item {
+    color: rgba(255,255,255,0.8) !important;
+}
+#wpadminbar .menupop:hover > .ab-item,
+#wpadminbar .ab-item:hover,
+#wpadminbar a:hover .ab-item {
+    color: var(--omni-accent) !important;
+    background: transparent !important;
+}
+#wpadminbar .menupop .ab-sub-wrapper {
+    background: var(--omni-dark2) !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4) !important;
+}
+#wpadminbar .ab-submenu .ab-item {
+    color: rgba(255,255,255,0.75) !important;
+}
+#wpadminbar .ab-submenu .ab-item:hover {
+    color: var(--omni-accent) !important;
+    background: rgba(212,175,55,0.08) !important;
+}
+
+/* ── MAIN CONTENT AREA ── */
+#wpcontent,
+#wpbody-content {
+    background: var(--omni-light) !important;
+}
+#wpfooter {
+    background: #fff !important;
+    border-top: 1px solid var(--omni-border) !important;
+    color: var(--omni-muted) !important;
+}
+#wpfooter a {
+    color: var(--omni-accent) !important;
+}
+
+/* ── PAGE TITLE & H-TAGS ── */
+.wrap h1,
+.wrap h2 {
+    font-family: 'Outfit', 'Segoe UI', sans-serif !important;
+    color: var(--omni-dark) !important;
+    font-weight: 700 !important;
+}
+
+/* ── POSTBOX / META BOX ── */
+.postbox {
+    border: 1px solid var(--omni-border) !important;
+    border-radius: 0.75rem !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+    overflow: hidden !important;
+}
+.postbox .postbox-header {
+    background: #fff !important;
+    border-bottom: 1px solid var(--omni-border) !important;
+}
+.postbox .postbox-header h2,
+.postbox .hndle {
+    color: var(--omni-dark) !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+}
+
+/* ── BUTTONS ── */
+.button-primary,
+input[type="submit"].button-primary,
+button.button-primary {
+    background: var(--omni-dark) !important;
+    border-color: var(--omni-dark) !important;
+    border-radius: 0.5rem !important;
+    color: #fff !important;
+    font-family: 'Outfit', inherit !important;
+    font-weight: 600 !important;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s !important;
+    box-shadow: 0 2px 8px rgba(15,23,42,0.2) !important;
+}
+.button-primary:hover {
+    background: var(--omni-btn-h) !important;
+    border-color: var(--omni-btn-h) !important;
+    transform: translateY(-1px) !important;
+}
+.button {
+    border-radius: 0.5rem !important;
+    font-family: 'Outfit', inherit !important;
+}
+
+/* ── FORM TABLE INPUTS ── */
+.form-table input[type="text"],
+.form-table input[type="email"],
+.form-table input[type="url"],
+.form-table input[type="password"],
+.form-table textarea,
+.form-table select {
+    border: 1.5px solid var(--omni-border) !important;
+    border-radius: 0.5rem !important;
+    padding: 0.5rem 0.75rem !important;
+    font-family: 'Outfit', inherit !important;
+    color: var(--omni-dark) !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+}
+.form-table input:focus,
+.form-table textarea:focus,
+.form-table select:focus {
+    border-color: var(--omni-accent) !important;
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.15) !important;
+    outline: none !important;
+}
+
+/* ── NOTICE / ALERTS ── */
+.notice {
+    border-radius: 0.5rem !important;
+    border-left-width: 4px !important;
+}
+.notice-success { border-left-color: #22c55e !important; }
+.notice-error   { border-left-color: #ef4444 !important; }
+.notice-warning { border-left-color: var(--omni-accent) !important; }
+.notice-info    { border-left-color: var(--omni-btn) !important; }
+
+/* ── WP LIST TABLE ── */
+.wp-list-table th {
+    color: var(--omni-dark) !important;
+    font-weight: 600 !important;
+    font-family: 'Outfit', inherit !important;
+}
+.wp-list-table .row-actions span a {
+    color: var(--omni-btn) !important;
+}
+.wp-list-table .row-actions span.trash a {
+    color: #ef4444 !important;
+}
+
+/* ── FOCUS RING (ACCESSIBILITY) ── */
+*:focus-visible {
+    outline: 2px solid var(--omni-accent) !important;
+    outline-offset: 2px !important;
+}
+
+/* ── GOOGLE FONTS ── */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+* {
+    font-family: 'Outfit', 'Segoe UI', sans-serif;
+}
