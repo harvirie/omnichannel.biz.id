@@ -100,7 +100,7 @@
 <?php wp_body_open(); ?>
 
 <!-- Mobile Navbar -->
-<nav class="md:hidden fixed top-0 w-full bg-omni-dark/98 z-40 border-b border-white/10 shadow-md" style="will-change: transform;">
+<nav class="md:hidden fixed top-0 w-full z-40 border-b border-white/10 shadow-md" style="background-color: #0F172A; will-change: transform;">
   <div class="px-4">
     <div class="flex justify-between items-center h-20">
       <a href="<?php echo home_url('/'); ?>" class="flex items-center">
@@ -180,7 +180,7 @@
 
 <!-- Desktop & Tablet Header Wrapper (Floating Rounded Square) -->
 <div class="hidden md:flex fixed top-6 left-0 w-full z-50 justify-center pointer-events-none px-4">
-  <header class="w-full max-w-[1100px] pointer-events-auto transition-shadow duration-300 bg-omni-dark/98 border border-white/10 shadow-2xl rounded-[2rem]" style="will-change: transform;">
+  <header class="w-full max-w-[1100px] pointer-events-auto transition-shadow duration-300 border border-white/10 shadow-2xl rounded-[2rem]" style="background-color: #0F172A; will-change: transform;">
     <div class="px-6 h-20 flex justify-between items-center">
       <!-- Logo -->
       <div class="w-1/4">

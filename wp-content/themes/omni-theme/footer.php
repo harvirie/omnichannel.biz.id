@@ -7,7 +7,7 @@
         <a href="<?php echo home_url('/'); ?>">
           <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_wh_ysccoa.svg"
                alt="<?php bloginfo('name'); ?>"
-               class="h-9 w-auto object-contain"
+               class="h-6 w-auto object-contain"
                loading="lazy">
         </a>
       </div>
