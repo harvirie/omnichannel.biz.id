@@ -35,7 +35,8 @@ add_action( 'login_enqueue_scripts', function() {
 // 2. LOGIN PAGE — Replace Logo Image
 // ─────────────────────────────────────────────
 add_action( 'login_enqueue_scripts', function() {
-    $logo_url = 'https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg';
+    // Login page has DARK background → use WHITE icon (logo for dark bg)
+    $logo_url    = 'https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_pagpmz.svg';
     $brand_color = '#0F172A';
     $accent      = '#D4AF37';
     ?>
@@ -231,12 +232,10 @@ add_action( 'admin_enqueue_scripts', function() {
 // 4. ADMIN BAR — Replace WP logo
 // ─────────────────────────────────────────────
 add_action( 'admin_bar_menu', function( \WP_Admin_Bar $wp_admin_bar ) {
-    $logo_url = 'https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg';
+    // Admin bar has DARK background → use WHITE icon (logo for dark bg)
+    $logo_url = 'https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_pagpmz.svg';
 
-    // Remove default WP logo node
     $wp_admin_bar->remove_node('wp-logo');
-
-    // Add custom brand logo node
     $wp_admin_bar->add_node([
         'id'    => 'omni-brand-logo',
         'title' => '<img src="' . esc_url($logo_url) . '" alt="OmniServe" style="height:26px;width:auto;vertical-align:middle;margin-top:-2px;display:inline-block;">',

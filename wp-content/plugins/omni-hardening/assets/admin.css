@@ -1,0 +1,141 @@
+/* ─── OmniServe Security Dashboard Admin CSS ─── */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+
+:root {
+    --omni-dark:   #0F172A;
+    --omni-accent: #D4AF37;
+    --omni-light:  #F8FAFC;
+    --omni-border: #E2E8F0;
+    --omni-muted:  #64748B;
+    --omni-ok:     #22c55e;
+    --omni-warn:   #f59e0b;
+    --omni-danger: #ef4444;
+}
+
+.omni-sec-wrap * { font-family: 'Outfit', 'Segoe UI', sans-serif !important; box-sizing: border-box; }
+
+.omni-sec-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--omni-dark);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    border-radius: 1rem;
+    margin: 1rem 0 1.5rem;
+    box-shadow: 0 4px 20px rgba(15,23,42,0.2);
+}
+.omni-sec-header .omni-sec-logo {
+    height: 36px;
+    width: auto;
+    filter: brightness(0) invert(1); /* make it white on dark bg */
+}
+.omni-sec-header h1 {
+    color: #fff !important;
+    font-size: 1.25rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.omni-sec-header p { color: rgba(255,255,255,0.6) !important; margin: 4px 0 0 !important; font-size: 0.85rem; }
+
+.omni-sec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1rem;
+}
+
+.omni-sec-card {
+    background: #fff;
+    border: 1px solid var(--omni-border);
+    border-radius: 0.875rem;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.omni-sec-card h2 {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    color: var(--omni-dark) !important;
+    margin: 0 0 1rem !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+/* Checklist */
+.omni-sec-checklist { list-style: none; margin: 0; padding: 0; }
+.omni-sec-checklist li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--omni-border);
+    font-size: 0.875rem;
+    color: var(--omni-dark);
+}
+.omni-sec-checklist li:last-child { border-bottom: none; }
+.omni-sec-checklist li.ok  { }
+.omni-sec-checklist li.warn { color: var(--omni-warn); }
+.omni-sec-checklist .icon { font-size: 1rem; }
+
+/* Stat number */
+.omni-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+.omni-stat-num {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--omni-dark);
+    line-height: 1;
+}
+
+/* Table */
+.omni-sec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8125rem;
+    color: var(--omni-dark);
+}
+.omni-sec-table th {
+    text-align: left;
+    padding: 0.4rem 0.6rem;
+    background: var(--omni-light);
+    border-bottom: 1px solid var(--omni-border);
+    font-weight: 600;
+    color: var(--omni-muted);
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+}
+.omni-sec-table td {
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid var(--omni-border);
+}
+.omni-sec-table tr:last-child td { border-bottom: none; }
+.omni-sec-table tr:hover td { background: #f8fafc; }
+
+/* CVE badges */
+.omni-cve-list { list-style: none; margin: 0; padding: 0; }
+.omni-cve-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--omni-border);
+    font-size: 0.8125rem;
+    color: var(--omni-dark);
+}
+.omni-cve-list li:last-child { border-bottom: none; }
+.cve-badge {
+    display: inline-block;
+    background: var(--omni-dark);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 999px;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+}
