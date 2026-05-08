@@ -9,20 +9,6 @@ RewriteRule . /index.php [L]
 </IfModule>
 # END WordPress
 
-# BEGIN OmniServe-Directory-Protection
-<IfModule mod_rewrite.c>
-RewriteEngine On
-
-# Redirect direct access to wp-content/ folder to custom error page
-RewriteCond %{REQUEST_URI} ^/wp-content/?$ [NC]
-RewriteRule ^ /akses-ditolak/?reason=wp-content [R=302,L]
-
-# Redirect direct access to wp-includes/ folder to custom error page
-RewriteCond %{REQUEST_URI} ^/wp-includes/?$ [NC]
-RewriteRule ^ /akses-ditolak/?reason=wp-includes [R=302,L]
-
-</IfModule>
-# END OmniServe-Directory-Protection
 
 
 # ===== PERFORMANCE OPTIMIZATIONS =====
