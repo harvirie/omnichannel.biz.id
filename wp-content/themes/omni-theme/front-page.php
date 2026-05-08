@@ -125,7 +125,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
                  loading="eager">
           </a>
 
-          <div class="translate-y-[70px] -translate-x-[10px] mb-[70px]">
+          <div class="-translate-x-[10px] mb-6" style="margin-top: -30px;">
             <h1 class="text-4xl text-omni-dark font-bold leading-[1.05] mb-3 drop-shadow-sm mt-[5px]">
               <?php echo $hero_title; ?>
             </h1>
