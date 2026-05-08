@@ -34,7 +34,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
 
         <!-- Inner Image Container (Desktop) -->
         <div class="hidden md:block absolute z-10 rounded-[2.5vw] overflow-hidden shadow-2xl" style="top: 17.55%; right: 4.5%; bottom: 11.45%; width: 43%;">
-          <video src="https://res.cloudinary.com/dtxwwevxl/video/upload/v1778211855/video_hero_wkvc4s.mp4" class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline fetchpriority="high"></video>
+          <video src="https://res.cloudinary.com/dtxwwevxl/video/upload/q_auto:low,f_auto/v1778211855/video_hero_wkvc4s.mp4" class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline preload="none" style="will-change: transform;"></video>
           <div class="absolute inset-0 bg-gradient-to-t from-omni-dark/90 via-omni-dark/20 to-transparent"></div>
           
           <!-- Recommended Card -->

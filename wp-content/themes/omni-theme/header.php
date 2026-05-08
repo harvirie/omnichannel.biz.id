@@ -3,29 +3,25 @@
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Resource Hints: Preconnect ke semua CDN eksternal -->
+    <!-- Resource Hints: Preconnect ke CDN aktif saja -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://unpkg.com" crossorigin>
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
 
-    <!-- Google Fonts: display=swap agar teks langsung tampil -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!-- Google Fonts: hanya weight yang benar-benar dipakai -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Swiper CSS: dimuat lebih awal karena dipakai di hero -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></noscript>
+    <!-- Swiper CSS: hanya dimuat jika dipakai, via jsDelivr cepat -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
-    <!-- Font Awesome: async load via media trick (non-blocking) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous"></noscript>
+    <!-- Font Awesome: hanya brand icons yang dipakai (fa-brands saja, jauh lebih kecil) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css"></noscript>
 
     <!-- Tailwind CSS: File statis yang dikompilasi lokal (tidak pakai CDN) -->
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/omni-theme.css?v=<?php echo filemtime(get_template_directory() . '/assets/omni-theme.css'); ?>">
-    <!-- Lucide Icons: defer agar tidak memblokir render -->
-    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <!-- Lucide Icons: jsDelivr lebih cepat & reliable vs unpkg -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <style>
         /* Base color variables for standard CSS if needed */
         :root {
@@ -98,7 +94,7 @@
 <?php wp_body_open(); ?>
 
 <!-- Mobile Navbar -->
-<nav class="md:hidden fixed top-0 w-full bg-omni-light/90 backdrop-blur-md z-40 border-b border-omni-border">
+<nav class="md:hidden fixed top-0 w-full bg-omni-dark/98 z-40 border-b border-white/10 shadow-md" style="will-change: transform;">
   <div class="px-4">
     <div class="flex justify-between items-center h-20">
       <a href="<?php echo home_url('/'); ?>" class="flex items-center gap-2">
@@ -178,7 +174,7 @@
 
 <!-- Desktop & Tablet Header Wrapper (Floating Rounded Square) -->
 <div class="hidden md:flex fixed top-6 left-0 w-full z-50 justify-center pointer-events-none px-4">
-  <header class="w-full max-w-[1100px] pointer-events-auto transition-all duration-300 bg-omni-dark/95 backdrop-blur-md border border-white/10 shadow-2xl rounded-[2rem]">
+  <header class="w-full max-w-[1100px] pointer-events-auto transition-shadow duration-300 bg-omni-dark/98 border border-white/10 shadow-2xl rounded-[2rem]" style="will-change: transform;">
     <div class="px-6 h-20 flex justify-between items-center">
       <!-- Logo -->
       <div class="w-1/4">
