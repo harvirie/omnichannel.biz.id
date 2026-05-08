@@ -118,7 +118,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
         <div class="flex md:hidden absolute top-0 z-20 flex-col px-6 pt-8 pb-6" style="width: 100vw; left: 55vw; height: 100%;">
 
           <div class="translate-y-[70px] -translate-x-[10px] mb-[70px]">
-            <a href="<?php echo home_url('/'); ?>" class="block -mt-12 mb-8">
+            <a href="<?php echo home_url('/'); ?>" class="block -mt-[110px] mb-[30px]">
               <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg"
                    alt="<?php bloginfo('name'); ?>"
                    class="w-auto object-contain"
