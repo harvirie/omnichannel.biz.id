@@ -3,7 +3,7 @@
 Plugin Name: Omni Core Plugin
 Description: Custom core functionality for omnichannel.biz.id
 Version: 1.0.0
-Author: Harvirie
+Author: Harizal
 */
 
 if ( ! defined( 'ABSPATH' ) ) {

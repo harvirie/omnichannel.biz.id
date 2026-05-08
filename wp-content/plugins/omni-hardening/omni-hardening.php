@@ -4,7 +4,7 @@
  * Plugin URI:   https://omnichannel.biz.id
  * Description:  Hardening otomatis WordPress: anti-bruteforce, CSP, REST API lockdown, XSS mitigation, XML/XXE disable, PHP-in-uploads block, login protection, dan file integrity. Berdasarkan CVE-2026-3906/3907/3908.
  * Version:      1.0.0
- * Author:       OmniServe Team
+ * Author:       Harizal
  * License:      GPL-2.0+
  * Text Domain:  omni-hardening
  */
