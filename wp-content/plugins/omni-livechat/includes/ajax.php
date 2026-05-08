@@ -187,7 +187,7 @@ function omni_lc_ajax_admin_poll() {
     wp_send_json_success( ['messages' => $out] );
 }
 
-/* ── Close session ── */
+/* ── Close session (admin) ── */
 add_action( 'wp_ajax_omni_lc_close_session', 'omni_lc_ajax_close_session' );
 function omni_lc_ajax_close_session() {
     check_ajax_referer( 'omni_lc_admin_nonce', 'nonce' );
@@ -198,6 +198,26 @@ function omni_lc_ajax_close_session() {
     $wpdb->update( "{$wpdb->prefix}lc_sessions", ['status' => 'closed'], ['id' => $session_id], ['%s'], ['%d'] );
     wp_send_json_success();
 }
+
+/* ── End session by user (frontend) — auth via session_key ── */
+add_action( 'wp_ajax_omni_lc_end_session',        'omni_lc_ajax_end_session' );
+add_action( 'wp_ajax_nopriv_omni_lc_end_session', 'omni_lc_ajax_end_session' );
+function omni_lc_ajax_end_session() {
+    check_ajax_referer( 'omni_lc_nonce', 'nonce' );
+
+    $key = sanitize_text_field( $_POST['session_key'] ?? '' );
+    if ( ! $key ) wp_send_json_error( 'Invalid.' );
+
+    global $wpdb;
+    $session = $wpdb->get_row( $wpdb->prepare(
+        "SELECT id FROM {$wpdb->prefix}lc_sessions WHERE session_key = %s AND status = 'open' LIMIT 1", $key
+    ) );
+    if ( ! $session ) wp_send_json_error( 'Session not found.' );
+
+    $wpdb->update( "{$wpdb->prefix}lc_sessions", ['status' => 'closed'], ['id' => $session->id], ['%s'], ['%d'] );
+    wp_send_json_success();
+}
+
 
 /* ── Assign role ── */
 add_action( 'wp_ajax_omni_lc_assign', 'omni_lc_ajax_assign' );
