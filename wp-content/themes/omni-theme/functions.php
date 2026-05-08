@@ -264,23 +264,38 @@ function omni_theme_customize_register( $wp_customize ) {
     ) );
 
     $default_customer_names = array(
-        1 => 'Pemerintah Daerah',   2 => 'Imigrasi',
-        3 => 'Konstruksi',          4 => 'Layanan Medis',
-        5 => 'Perbankan & Keuangan',6 => 'E-Commerce',
+        1 => 'Kantor Imigrasi Kelas I Non TPI Tangerang',
+        2 => 'Kantor Imigrasi Kelas I Non TPI Bogor',
+        3 => 'ADHIMIX',
+        4 => 'PSC 119 DINKES Kab. Bandung',
+        5 => 'ADHIMIX RMC',
+        6 => 'DPMPTSP Provinsi Jawa Barat',
         7 => 'Logistik',            8 => 'Pendidikan',
         9 => 'Asuransi',           10 => 'Retail',
     );
     $default_customer_descs = array(
-        1 => 'Meningkatkan responsivitas layanan publik dengan call center omnichannel terpadu.',
-        2 => 'Mengoptimalkan antrian layanan keimigrasian dengan sistem manajemen tiket cerdas.',
-        3 => 'Mengelola komunikasi proyek multi-lokasi dalam satu platform terintegrasi.',
-        4 => 'Meningkatkan koordinasi antar departemen medis dan kepuasan pasien.',
-        5 => 'Memastikan keamanan dan kecepatan layanan nasabah 24/7 di semua kanal.',
-        6 => 'Menangani ribuan permintaan pelanggan harian dengan efisiensi tinggi.',
+        1 => 'Meningkatkan pelayanan publik melalui antrian dan responsivitas layanan keimigrasian.',
+        2 => 'Optimalisasi layanan informasi paspor dan izin tinggal warga negara asing terpadu.',
+        3 => 'Sinergi komunikasi korporat yang lebih efisien dan terarah di seluruh cabang operasi.',
+        4 => 'Layanan cepat tanggap darurat medis (Public Safety Center) untuk masyarakat secara real-time.',
+        5 => 'Call Center Omnichannel terintegrasi penuh dengan sistem untuk pelayanan pelanggan prima.',
+        6 => 'Mempermudah layanan perizinan dan penanaman modal dengan responsivitas tinggi.',
         7 => 'Memantau pengiriman dan mengelola keluhan pelanggan secara real-time.',
         8 => 'Mempermudah komunikasi antara institusi, pengajar, dan orang tua siswa.',
         9 => 'Mempercepat proses klaim dan layanan nasabah asuransi di semua saluran.',
         10 => 'Mengintegrasikan layanan pelanggan online dan offline dalam satu dashboard.',
+    );
+    $default_customer_imgs = array(
+        1 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/imigrasi_tangerang_fbbk8l.png',
+        2 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/imigrasi_bogor_ju9wpd.png',
+        3 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/adhimix_jwbryb.png',
+        4 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230600/PSC119_t6v8kk.png',
+        5 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/adhimix_rmc_lrpswy.png',
+        6 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/dpmptsp_jabar_r5wtai.png',
+        7 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/dpmptsp_jabar_r5wtai.png',
+        8 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/dpmptsp_jabar_r5wtai.png',
+        9 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/dpmptsp_jabar_r5wtai.png',
+       10 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/dpmptsp_jabar_r5wtai.png',
     );
 
     for ($i = 1; $i <= 10; $i++) {
@@ -304,15 +319,17 @@ function omni_theme_customize_register( $wp_customize ) {
             'section'  => 'omni_customers_section',
             'type'     => 'textarea',
         ) );
-        // Image
+        // Image URL
         $wp_customize->add_setting( 'omni_customer_'.$i.'_img', array(
-            'default'           => '',
+            'default'           => $default_customer_imgs[$i] ?? '',
             'sanitize_callback' => 'esc_url_raw',
         ) );
-        $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'omni_customer_'.$i.'_img', array(
-            'label'    => __( 'Foto Pelanggan '.$i, 'omni-theme' ),
-            'section'  => 'omni_customers_section',
-        ) ) );
+        $wp_customize->add_control( 'omni_customer_'.$i.'_img', array(
+            'label'       => __( 'URL Foto Pelanggan '.$i.' (Cloudinary)', 'omni-theme' ),
+            'description' => 'Masukkan URL Cloudinary (opsional tambahkan parameter f_auto,q_auto)',
+            'section'     => 'omni_customers_section',
+            'type'        => 'url',
+        ) );
     }
 
     // Pricing Section

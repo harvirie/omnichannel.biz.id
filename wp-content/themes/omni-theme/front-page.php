@@ -342,16 +342,16 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
               $cust_name = get_theme_mod('omni_customer_'.$i.'_name', 'Pelanggan '.$i);
               $cust_desc = get_theme_mod('omni_customer_'.$i.'_desc', 'Deskripsi pelanggan '.$i);
               $default_imgs = array(
-                  1 => get_template_directory_uri() . '/assets/images/customer-1-pemerintah.webp',
-                  2 => get_template_directory_uri() . '/assets/images/customer-2-imigrasi.webp',
-                  3 => get_template_directory_uri() . '/assets/images/customer-3-konstruksi.webp',
-                  4 => get_template_directory_uri() . '/assets/images/customer-4-medis.webp',
-                  5 => get_template_directory_uri() . '/assets/images/customer-1-pemerintah.webp',
-                  6 => get_template_directory_uri() . '/assets/images/customer-2-imigrasi.webp',
-                  7 => get_template_directory_uri() . '/assets/images/customer-3-konstruksi.webp',
-                  8 => get_template_directory_uri() . '/assets/images/customer-4-medis.webp',
-                  9 => get_template_directory_uri() . '/assets/images/customer-1-pemerintah.webp',
-                 10 => get_template_directory_uri() . '/assets/images/customer-2-imigrasi.webp',
+                  1 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/imigrasi_tangerang_fbbk8l.png',
+                  2 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/imigrasi_bogor_ju9wpd.png',
+                  3 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/adhimix_jwbryb.png',
+                  4 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230600/PSC119_t6v8kk.png',
+                  5 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/adhimix_rmc_lrpswy.png',
+                  6 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/dpmptsp_jabar_r5wtai.png',
+                  7 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/dpmptsp_jabar_r5wtai.png',
+                  8 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/dpmptsp_jabar_r5wtai.png',
+                  9 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/dpmptsp_jabar_r5wtai.png',
+                 10 => 'https://res.cloudinary.com/dtxwwevxl/image/upload/f_auto,q_auto,e_improve/v1778230601/dpmptsp_jabar_r5wtai.png',
               );
               $cust_img = get_theme_mod('omni_customer_'.$i.'_img', $default_imgs[$i] ?? $default_imgs[1]);
             ?>
