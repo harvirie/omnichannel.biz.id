@@ -461,16 +461,126 @@ add_action('init', function() {
             'all_items'     => 'Semua Permohonan',
         ),
         'public'      => false,
-        'show_ui'     => true,
-        'menu_icon'   => 'dashicons-email-alt',
+        'show_ui'     => false, // We will use a custom admin page instead
         'supports'    => array('title', 'custom-fields'),
         'capability_type' => 'post',
-        'capabilities' => array(
-            'create_posts' => 'do_not_allow', // Only via form
-        ),
-        'map_meta_cap' => true,
     ));
 });
+
+// Custom Admin Page for Inbox Demo
+add_action('admin_menu', function() {
+    add_menu_page(
+        'Inbox Demo',
+        'Inbox Demo',
+        'manage_options',
+        'inbox-demo',
+        'omni_render_inbox_demo_page',
+        'dashicons-email-alt',
+        26
+    );
+});
+
+function omni_render_inbox_demo_page() {
+    // Handle Delete Action
+    if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
+        $id = (int)$_GET['id'];
+        if (check_admin_referer('demo_delete_' . $id)) {
+            wp_delete_post($id, true);
+            echo '<div class="notice notice-success is-dismissible"><p>Permohonan demo berhasil dihapus.</p></div>';
+        }
+    }
+
+    // Fetch Demo Requests
+    $args = array(
+        'post_type'      => 'demo_request',
+        'post_status'    => 'publish',
+        'posts_per_page' => -1,
+        'orderby'        => 'date',
+        'order'          => 'DESC'
+    );
+    $requests = get_posts($args);
+    $total = count($requests);
+
+    // Filter today
+    $today_count = 0;
+    foreach ($requests as $r) {
+        if (strpos($r->post_date, current_time('Y-m-d')) === 0) {
+            $today_count++;
+        }
+    }
+
+    ?>
+    <div class="wrap" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;margin-top:20px;max-width:1200px;">
+      
+      <!-- Header -->
+      <div style="background:#0F172A;border-radius:1rem;padding:2rem;color:white;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;box-shadow:0 10px 15px -3px rgba(0,0,0,0.1);">
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <div style="background:rgba(255,255,255,0.1);padding:1rem;border-radius:.75rem;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div>
+            <h1 style="color:white;margin:0 0 .25rem;font-size:1.5rem;font-weight:800;letter-spacing:-.025em;">Inbox Demo</h1>
+            <p style="color:#94A3B8;margin:0;font-size:.875rem;">Data permohonan demo dari form website</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-bottom:1.5rem;">
+        <div style="background:white;padding:1.5rem;border-radius:1rem;border:1px solid #E2E8F0;border-top:4px solid #0F172A;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
+          <div style="font-size:2rem;font-weight:800;color:#0F172A;line-height:1;"><?php echo $total; ?></div>
+          <div style="color:#64748B;font-size:.875rem;margin-top:.5rem;font-weight:600;">Total Permohonan</div>
+        </div>
+        <div style="background:white;padding:1.5rem;border-radius:1rem;border:1px solid #E2E8F0;border-top:4px solid #D4AF37;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
+          <div style="font-size:2rem;font-weight:800;color:#D4AF37;line-height:1;"><?php echo $today_count; ?></div>
+          <div style="color:#64748B;font-size:.875rem;margin-top:.5rem;font-weight:600;">Masuk Hari Ini</div>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div style="background:#fff;border:1px solid #E2E8F0;border-radius:.875rem;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+        <div style="padding:1rem 1.5rem;border-bottom:1px solid #E2E8F0;font-weight:700;color:#0F172A;">
+          Daftar Permohonan (<?php echo $total; ?> total)
+        </div>
+        <?php if ($requests): ?>
+        <table style="width:100%;border-collapse:collapse;font-size:.8125rem;">
+          <thead>
+            <tr style="background:#F8FAFC;">
+              <?php foreach (['#','Nama','Email','No WhatsApp','Waktu','Aksi'] as $h): ?>
+              <th style="padding:.6rem 1rem;text-align:left;font-weight:600;color:#64748B;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #E2E8F0;"><?php echo $h; ?></th>
+              <?php endforeach; ?>
+            </tr>
+          </thead>
+          <tbody>
+          <?php foreach ($requests as $i => $r):
+            $meta_name  = get_post_meta($r->ID, 'Nama Lengkap', true);
+            $meta_email = get_post_meta($r->ID, 'Email', true);
+            $meta_phone = get_post_meta($r->ID, 'No WhatsApp', true);
+            $del_url = wp_nonce_url(admin_url("admin.php?page=inbox-demo&action=delete&id={$r->ID}"), 'demo_delete_' . $r->ID);
+          ?>
+            <tr style="<?php echo $i % 2 ? 'background:#F8FAFC;' : ''; ?>border-bottom:1px solid #F1F5F9;">
+              <td style="padding:.55rem 1rem;color:#94A3B8;"><?php echo $r->ID; ?></td>
+              <td style="padding:.55rem 1rem;font-weight:600;color:#0F172A;"><?php echo esc_html($meta_name); ?></td>
+              <td style="padding:.55rem 1rem;"><a href="mailto:<?php echo esc_attr($meta_email); ?>" style="color:#1E3A8A;"><?php echo esc_html($meta_email); ?></a></td>
+              <td style="padding:.55rem 1rem;"><a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $meta_phone); ?>" target="_blank" style="color:#25D366;font-weight:600;"><?php echo esc_html($meta_phone); ?></a></td>
+              <td style="padding:.55rem 1rem;color:#64748B;white-space:nowrap;"><?php echo esc_html(get_date_from_gmt($r->post_date, 'd/m/Y H:i')); ?></td>
+              <td style="padding:.55rem 1rem;">
+                <a href="<?php echo esc_url($del_url); ?>" style="color:#ef4444;font-size:.75rem;text-decoration:none;" onclick="return confirm('Hapus permohonan ini?')">🗑 Hapus</a>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+          </tbody>
+        </table>
+        <?php else: ?>
+          <div style="padding:3rem;text-align:center;color:#94A3B8;">
+            <div style="font-size:2.5rem;margin-bottom:.5rem;">📭</div>
+            <div>Belum ada permohonan masuk.</div>
+          </div>
+        <?php endif; ?>
+      </div>
+    </div>
+    <?php
+}
 
 // Handle Demo Form Submission via AJAX
 add_action('wp_ajax_submit_demo', 'omni_handle_demo_submission');
