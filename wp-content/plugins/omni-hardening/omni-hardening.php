@@ -111,6 +111,9 @@ function omni_sec_check_lockout( $user, $username, $password ) {
 add_action( 'send_headers', 'omni_sec_send_headers' );
 function omni_sec_send_headers() {
     if ( headers_sent() ) return;
+    // Skip CSP on WP admin & customizer to avoid breaking iframe preview
+    if ( is_admin() ) return;
+    if ( isset( $_GET['customize_changeset_uuid'] ) || isset( $_GET['customize_theme'] ) ) return;
 
     // Content Security Policy — blocks XSS (CVE-2026-3906/3907 mitigation)
     $csp = implode( '; ', [
@@ -121,7 +124,7 @@ function omni_sec_send_headers() {
         "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net",
         "media-src 'self' https://res.cloudinary.com",
         "connect-src 'self'",
-        "frame-ancestors 'none'",
+        "frame-ancestors 'self'",
         "object-src 'none'",
         "base-uri 'self'",
         "form-action 'self'",
