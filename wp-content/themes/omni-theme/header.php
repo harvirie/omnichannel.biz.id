@@ -91,18 +91,67 @@
         }
     </style>
     <?php
-    if (is_singular()) {
+    if (is_singular() || is_front_page()) {
         $seo_desc = get_post_meta(get_the_ID(), '_omni_seo_desc', true);
+        if (!$seo_desc && is_front_page()) {
+            $front_id = get_option('page_on_front');
+            $seo_desc = get_post_meta($front_id, '_omni_seo_desc', true);
+        }
         if ($seo_desc) {
             echo '<meta name="description" content="' . esc_attr($seo_desc) . '">' . "\n";
+            echo '<meta property="og:description" content="' . esc_attr($seo_desc) . '">' . "\n";
+            echo '<meta name="twitter:description" content="' . esc_attr($seo_desc) . '">' . "\n";
         }
+        
         $seo_title = get_post_meta(get_the_ID(), '_omni_seo_title', true);
+        if (!$seo_title && is_front_page()) {
+            $front_id = get_option('page_on_front');
+            $seo_title = get_post_meta($front_id, '_omni_seo_title', true);
+        }
         if ($seo_title) {
-            // We use a filter to override the document title if custom SEO title is set
             add_filter('pre_get_document_title', function($title) use ($seo_title) {
                 return $seo_title;
             }, 99);
+            echo '<meta property="og:title" content="' . esc_attr($seo_title) . '">' . "\n";
+            echo '<meta name="twitter:title" content="' . esc_attr($seo_title) . '">' . "\n";
         }
+
+        // Canonical URL
+        $current_url = home_url(add_query_arg(array(), $wp->request));
+        echo '<link rel="canonical" href="' . esc_url($current_url) . '">' . "\n";
+        echo '<meta property="og:url" content="' . esc_url($current_url) . '">' . "\n";
+        echo '<meta property="og:type" content="website">' . "\n";
+        
+        // Twitter Card
+        echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+        
+        // Default OG Image
+        $og_image = 'https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_wh_ysccoa.svg';
+        echo '<meta property="og:image" content="' . esc_url($og_image) . '">' . "\n";
+        echo '<meta name="twitter:image" content="' . esc_url($og_image) . '">' . "\n";
+
+        // JSON-LD Schema
+        ?>
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "<?php echo esc_js($seo_title ? $seo_title : get_bloginfo('name')); ?>",
+          "operatingSystem": "Web",
+          "applicationCategory": "BusinessApplication",
+          "url": "<?php echo esc_url($current_url); ?>",
+          "description": "<?php echo esc_js($seo_desc); ?>",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Kabayan Group",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "<?php echo esc_url($og_image); ?>"
+            }
+          }
+        }
+        </script>
+        <?php
     }
     ?>
     <?php wp_head(); ?>
