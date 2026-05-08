@@ -118,6 +118,13 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
         <div class="flex md:hidden absolute top-0 z-20 flex-col px-6 pt-8 pb-6" style="width: 100vw; left: 55vw; height: 100%;">
 
           <div class="translate-y-[70px] -translate-x-[10px] mb-[70px]">
+            <a href="<?php echo home_url('/'); ?>" class="block mb-5">
+              <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_dark_ymby0d.svg"
+                   alt="<?php bloginfo('name'); ?>"
+                   class="w-auto object-contain"
+                   style="height: 32px;"
+                   loading="eager">
+            </a>
             <h1 class="text-4xl text-omni-dark font-bold leading-[1.05] mb-3 drop-shadow-sm mt-[5px]">
               <?php echo $hero_title; ?>
             </h1>
