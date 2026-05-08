@@ -30,7 +30,7 @@
       <ul class="space-y-2 text-sm">
         <li><a href="#" class="hover:text-omni-accent transition-colors">Tentang Kami</a></li>
         <li><a href="#" class="hover:text-omni-accent transition-colors">Karir</a></li>
-        <li><a href="#" class="hover:text-omni-accent transition-colors">Hubungi Kami</a></li>
+        <li><a href="https://wa.me/6281283835553" target="_blank" rel="noopener noreferrer" class="hover:text-omni-accent transition-colors">Hubungi Kami</a></li>
       </ul>
     </div>
   </div>
@@ -38,6 +38,7 @@
     <p>&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>. Hak Cipta Dilindungi. Theme Design by Harizal.</p>
   </div>
 </footer>
+
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
 <script>
@@ -132,6 +133,7 @@
       grabCursor: true,
       autoplay: { delay: <?php echo $recSpeed; ?>, disableOnInteraction: false },
     });
+
 
   });
 </script>

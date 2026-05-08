@@ -149,7 +149,7 @@
   <div class="bg-omni-dark py-16 text-center px-6">
     <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">Butuh Paket <span class="text-omni-accent">Khusus untuk Instansi?</span></h3>
     <p class="text-white/60 mb-8 max-w-xl mx-auto">Kami melayani pengadaan resmi, integrasi sistem pemerintah, dan kebutuhan enterprise skala besar.</p>
-    <a href="<?php echo home_url('/'); ?>?demo=1" onclick="document.getElementById('demo-modal')?.classList.remove('hidden'); return false;"
+    <a href="https://wa.me/6281283835553" target="_blank" rel="noopener noreferrer"
        class="inline-flex items-center gap-2 bg-omni-accent hover:bg-omni-accent-hover text-white font-bold py-4 px-8 rounded-full transition-all shadow-lg hover:-translate-y-1">
       <i data-lucide="phone" class="h-5 w-5"></i>
       Hubungi Tim Sales Kami

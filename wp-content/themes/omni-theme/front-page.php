@@ -311,9 +311,9 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
       <a href="<?php echo home_url('/harga'); ?>" class="bg-omni-accent text-white hover:bg-omni-accent-hover px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
         Mulai Uji Coba Gratis
       </a>
-      <button class="bg-transparent text-white hover:bg-white/10 border border-white/30 px-8 py-4 rounded-full font-bold text-lg transition-all">
+      <a href="https://wa.me/6281283835553" target="_blank" rel="noopener noreferrer" class="bg-transparent text-white hover:bg-white/10 border border-white/30 px-8 py-4 rounded-full font-bold text-lg transition-all flex items-center justify-center">
         Hubungi Sales Kami
-      </button>
+      </a>
     </div>
   </div>
 </section>
