@@ -299,6 +299,16 @@ function omni_theme_customize_register( $wp_customize ) {
     );
 
     for ($i = 1; $i <= 10; $i++) {
+        // Toggle Visibility
+        $wp_customize->add_setting( 'omni_customer_'.$i.'_show', array(
+            'default'           => $i <= 6 ? true : false,
+            'sanitize_callback' => 'rest_sanitize_boolean',
+        ) );
+        $wp_customize->add_control( 'omni_customer_'.$i.'_show', array(
+            'label'    => __( 'Tampilkan Pelanggan '.$i, 'omni-theme' ),
+            'section'  => 'omni_customers_section',
+            'type'     => 'checkbox',
+        ) );
         // Name
         $wp_customize->add_setting( 'omni_customer_'.$i.'_name', array(
             'default'           => $default_customer_names[$i] ?? 'Pelanggan '.$i,

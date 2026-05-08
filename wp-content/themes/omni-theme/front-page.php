@@ -339,6 +339,10 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
           // Print slides twice for Swiper loop mode
           for ($duplicate = 1; $duplicate <= 2; $duplicate++) :
             for ( $i = 1; $i <= 10; $i++ ) : 
+              // Check if customer is set to be shown
+              $is_shown = get_theme_mod('omni_customer_'.$i.'_show', $i <= 6 ? true : false);
+              if (!$is_shown) continue;
+
               $cust_name = get_theme_mod('omni_customer_'.$i.'_name', 'Pelanggan '.$i);
               $cust_desc = get_theme_mod('omni_customer_'.$i.'_desc', 'Deskripsi pelanggan '.$i);
               $default_imgs = array(
