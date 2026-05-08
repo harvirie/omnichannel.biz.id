@@ -47,15 +47,15 @@ function omni_lc_render_widget() {
 
 /* ── Chat window ── */
 #omni-lc-window{
-  position:fixed;bottom:172px;right:24px;z-index:99998;
-  width:360px;max-height:570px;
+  position:fixed;bottom:160px;right:24px;z-index:99998;
+  width:360px;max-height:460px;
   background:#fff;border-radius:16px;
   box-shadow:0 20px 60px rgba(0,0,0,.18);
   display:none;flex-direction:column;overflow:hidden;
   animation:omniLcSlide .25s ease;
 }
 @media(max-width:767px){
-  #omni-lc-window{width:calc(100vw - 16px);right:8px;bottom:80px;}
+  #omni-lc-window{width:calc(100vw - 16px);right:8px;bottom:80px;max-height:calc(100vh - 180px);}
 }
 #omni-lc-header{background:#1E40AF;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;}
 #omni-lc-header img{width:40px;height:40px;border-radius:50%;background:#fff;padding:4px;object-fit:contain;flex-shrink:0;}
@@ -71,7 +71,7 @@ function omni_lc_render_widget() {
 #omni-lc-submit{background:#1E40AF;color:#fff;font-weight:700;font-size:15px;padding:11px 28px;border-radius:10px;border:none;cursor:pointer;transition:background .2s;}
 #omni-lc-submit:hover{background:#1d4ed8;}
 #omni-lc-chat-wrap{display:none;flex-direction:column;height:100%;}
-#omni-lc-messages{flex:1;overflow-y:auto;padding:12px;background:#F1F5F9;display:flex;flex-direction:column;gap:8px;min-height:270px;max-height:370px;}
+#omni-lc-messages{flex:1;overflow-y:auto;padding:12px;background:#F1F5F9;display:flex;flex-direction:column;gap:8px;min-height:180px;max-height:260px;}
 .lc-msg-bot{display:flex;gap:8px;align-items:flex-end;}
 .lc-msg-avatar{width:30px;height:30px;border-radius:50%;background:#fff;border:1.5px solid #E2E8F0;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .lc-msg-avatar img{width:20px;height:20px;object-fit:contain;}
