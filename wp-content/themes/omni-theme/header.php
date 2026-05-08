@@ -14,6 +14,17 @@
     <link rel="shortcut icon" type="image/svg+xml" href="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg">
     <link rel="apple-touch-icon" href="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg">
 
+    <?php if ( is_front_page() || is_page('fitur') ) : ?>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18148308364"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-18148308364');
+    </script>
+    <?php endif; ?>
     <!-- Google Fonts: hanya weight yang benar-benar dipakai -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
 
