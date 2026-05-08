@@ -83,7 +83,7 @@ add_action('wp_head', function() {
     <div class="max-w-7xl mx-auto px-6 space-y-10">
 
       <!-- E-Commerce -->
-      <div class="bg-[#F4F9F0] rounded-3xl p-8 md:p-10 border border-omni-border hover:shadow-xl transition-shadow duration-300">
+      <div class="bg-omni-light rounded-3xl p-8 md:p-10 border border-omni-border hover:shadow-xl transition-shadow duration-300">
         <div class="flex flex-col md:flex-row gap-8">
           <div class="shrink-0 bg-white p-4 rounded-2xl shadow-sm h-fit">
             <i data-lucide="shopping-bag" class="w-10 h-10 text-omni-accent"></i>
@@ -121,7 +121,7 @@ add_action('wp_head', function() {
       </div>
 
       <!-- Financial Services -->
-      <div class="bg-[#F4F9F0] rounded-3xl p-8 md:p-10 border border-omni-border hover:shadow-xl transition-shadow duration-300">
+      <div class="bg-omni-light rounded-3xl p-8 md:p-10 border border-omni-border hover:shadow-xl transition-shadow duration-300">
         <div class="flex flex-col md:flex-row gap-8">
           <div class="shrink-0 bg-white p-4 rounded-2xl shadow-sm h-fit">
             <i data-lucide="building-2" class="w-10 h-10 text-omni-button-hover"></i>
@@ -159,7 +159,7 @@ add_action('wp_head', function() {
       </div>
 
       <!-- Healthcare -->
-      <div class="bg-[#F4F9F0] rounded-3xl p-8 md:p-10 border border-omni-border hover:shadow-xl transition-shadow duration-300">
+      <div class="bg-omni-light rounded-3xl p-8 md:p-10 border border-omni-border hover:shadow-xl transition-shadow duration-300">
         <div class="flex flex-col md:flex-row gap-8">
           <div class="shrink-0 bg-white p-4 rounded-2xl shadow-sm h-fit">
             <i data-lucide="stethoscope" class="w-10 h-10 text-omni-secondary"></i>
@@ -235,7 +235,7 @@ add_action('wp_head', function() {
       </div>
 
       <!-- B2B / Agency -->
-      <div class="bg-[#F4F9F0] rounded-3xl p-8 md:p-10 border border-omni-border hover:shadow-xl transition-shadow duration-300">
+      <div class="bg-omni-light rounded-3xl p-8 md:p-10 border border-omni-border hover:shadow-xl transition-shadow duration-300">
         <div class="flex flex-col md:flex-row gap-8">
           <div class="shrink-0 bg-white p-4 rounded-2xl shadow-sm h-fit">
             <i data-lucide="briefcase" class="w-10 h-10 text-omni-dark"></i>

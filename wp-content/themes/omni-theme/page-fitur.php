@@ -87,12 +87,12 @@ add_action('wp_head', function() {
           </ul>
         </div>
         <div class="md:w-1/2 grid grid-cols-2 gap-4">
-          <div class="bg-[#F4F9F0] rounded-2xl p-6 border border-omni-border text-center">
+          <div class="bg-omni-light rounded-2xl p-6 border border-omni-border text-center">
             <i data-lucide="message-circle" class="h-10 w-10 text-[#25D366] mx-auto mb-3"></i>
             <p class="font-bold text-omni-dark text-sm">WhatsApp</p>
             <p class="text-xs text-omni-text-muted mt-1">Blue Tick Verified</p>
           </div>
-          <div class="bg-[#F4F9F0] rounded-2xl p-6 border border-omni-border text-center">
+          <div class="bg-omni-light rounded-2xl p-6 border border-omni-border text-center">
             <i data-lucide="instagram" class="h-10 w-10 text-[#E1306C] mx-auto mb-3"></i>
             <p class="font-bold text-omni-dark text-sm">Instagram</p>
             <p class="text-xs text-omni-text-muted mt-1">Direct Message</p>
@@ -108,7 +108,7 @@ add_action('wp_head', function() {
   </section>
 
   <!-- Feature Group 2: Otomatisasi & Bot -->
-  <section class="py-20 bg-[#F4F9F0] border-b border-omni-border">
+  <section class="py-20 bg-omni-light border-b border-omni-border">
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex flex-col md:flex-row-reverse gap-12 items-center">
         <div class="md:w-1/2">
@@ -145,9 +145,9 @@ add_action('wp_head', function() {
               </div>
             </div>
             <div class="space-y-3">
-              <div class="bg-[#F4F9F0] rounded-xl p-3 text-sm text-omni-dark">📦 Pilih menu: <strong>1</strong> - Status Order | <strong>2</strong> - Pengembalian | <strong>3</strong> - Promo</div>
+              <div class="bg-omni-light rounded-xl p-3 text-sm text-omni-dark">📦 Pilih menu: <strong>1</strong> - Status Order | <strong>2</strong> - Pengembalian | <strong>3</strong> - Promo</div>
               <div class="bg-omni-light rounded-xl p-3 text-sm text-omni-text-muted ml-4">Pelanggan ketik: <strong>1</strong></div>
-              <div class="bg-[#F4F9F0] rounded-xl p-3 text-sm text-omni-dark">✅ Order #1234 sedang dalam pengiriman. Estimasi tiba: <strong>Besok, 08:00</strong></div>
+              <div class="bg-omni-light rounded-xl p-3 text-sm text-omni-dark">✅ Order #1234 sedang dalam pengiriman. Estimasi tiba: <strong>Besok, 08:00</strong></div>
             </div>
           </div>
         </div>
@@ -175,7 +175,7 @@ add_action('wp_head', function() {
         ];
         foreach ($agent_features as $f) :
         ?>
-        <div class="<?php echo $f['highlight'] ? 'bg-omni-dark' : 'bg-[#F4F9F0]'; ?> rounded-2xl p-8 border <?php echo $f['highlight'] ? 'border-omni-accent' : 'border-omni-border'; ?> hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+        <div class="<?php echo $f['highlight'] ? 'bg-omni-dark' : 'bg-omni-light'; ?> rounded-2xl p-8 border <?php echo $f['highlight'] ? 'border-omni-accent' : 'border-omni-border'; ?> hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
           <div class="<?php echo $f['highlight'] ? 'bg-omni-accent' : 'bg-white'; ?> w-14 h-14 rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
             <i data-lucide="<?php echo esc_attr($f['icon']); ?>" class="h-7 w-7 <?php echo $f['highlight'] ? 'text-white' : 'text-omni-accent'; ?>"></i>
           </div>
@@ -191,7 +191,7 @@ add_action('wp_head', function() {
   </section>
 
   <!-- Feature Group 4: API, Voice Recording, Laporan -->
-  <section class="py-20 bg-[#F4F9F0] border-b border-omni-border">
+  <section class="py-20 bg-omni-light border-b border-omni-border">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-14">
         <div class="inline-flex items-center gap-2 bg-omni-light text-omni-button-hover px-3 py-1.5 rounded-full text-xs font-bold mb-4">
@@ -212,7 +212,7 @@ add_action('wp_head', function() {
         foreach ($tech_features as $f) :
         ?>
         <div class="bg-white rounded-2xl p-8 border border-omni-border hover:shadow-xl hover:border-omni-secondary hover:-translate-y-1 transition-all duration-300 group flex gap-6">
-          <div class="bg-[#F4F9F0] w-14 h-14 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+          <div class="bg-omni-light w-14 h-14 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
             <i data-lucide="<?php echo esc_attr($f['icon']); ?>" class="h-7 w-7 text-omni-secondary"></i>
           </div>
           <div>

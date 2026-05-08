@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div class="flex-1 bg-[#F4F9F0] w-full">
+<div class="flex-1 bg-omni-light w-full">
   <!-- Header Area -->
   <div class="bg-omni-dark py-20 relative overflow-hidden">
     <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-omni-button-hover/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
@@ -82,7 +82,7 @@
           ];
           foreach ($metrics as $metric) :
         ?>
-          <div class="bg-[#F4F9F0] rounded-2xl p-8 border border-omni-border text-center hover:-translate-y-1 transition-transform">
+          <div class="bg-omni-light rounded-2xl p-8 border border-omni-border text-center hover:-translate-y-1 transition-transform">
             <div class="bg-omni-accent w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-md">
               <i data-lucide="<?php echo esc_attr($metric['icon']); ?>" class="w-6 h-6"></i>
             </div>
