@@ -40,7 +40,7 @@ add_action('wp_head', function() {
   </div>
 
   <!-- Hero Illustration — WebP dengan fallback PNG untuk LCP optimal -->
-  <div class="max-w-4xl lg:max-w-3xl mx-auto px-6 mt-[10px] mb-4">
+  <div class="max-w-4xl lg:max-w-3xl mx-auto px-6 mt-5 mb-4">
     <picture>
       <source
         srcset="<?php echo get_template_directory_uri(); ?>/assets/img/fitur-hero.webp"
