@@ -546,26 +546,45 @@ function omni_render_inbox_demo_page() {
         <table style="width:100%;border-collapse:collapse;font-size:.8125rem;">
           <thead>
             <tr style="background:#F8FAFC;">
-              <?php foreach (['#','Nama','Email','No WhatsApp','Waktu','Aksi'] as $h): ?>
+              <?php foreach (['#','Klien','Kontak','Jadwal & Tipe','Waktu Input','Aksi'] as $h): ?>
               <th style="padding:.6rem 1rem;text-align:left;font-weight:600;color:#64748B;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #E2E8F0;"><?php echo $h; ?></th>
               <?php endforeach; ?>
             </tr>
           </thead>
           <tbody>
           <?php foreach ($requests as $i => $r):
-            $meta_name  = get_post_meta($r->ID, 'Nama Lengkap', true);
-            $meta_email = get_post_meta($r->ID, 'Email', true);
-            $meta_phone = get_post_meta($r->ID, 'No WhatsApp', true);
+            $meta_name    = get_post_meta($r->ID, 'Nama Lengkap', true);
+            $meta_company = get_post_meta($r->ID, 'Perusahaan', true);
+            $meta_email   = get_post_meta($r->ID, 'Email', true);
+            $meta_phone   = get_post_meta($r->ID, 'No WhatsApp', true);
+            $meta_date    = get_post_meta($r->ID, 'Tanggal', true);
+            $meta_time    = get_post_meta($r->ID, 'Jam', true);
+            $meta_type    = get_post_meta($r->ID, 'Tipe', true);
+            $meta_address = get_post_meta($r->ID, 'Alamat Kantor', true);
             $del_url = wp_nonce_url(admin_url("admin.php?page=inbox-demo&action=delete&id={$r->ID}"), 'demo_delete_' . $r->ID);
           ?>
             <tr style="<?php echo $i % 2 ? 'background:#F8FAFC;' : ''; ?>border-bottom:1px solid #F1F5F9;">
               <td style="padding:.55rem 1rem;color:#94A3B8;"><?php echo $r->ID; ?></td>
-              <td style="padding:.55rem 1rem;font-weight:600;color:#0F172A;"><?php echo esc_html($meta_name); ?></td>
-              <td style="padding:.55rem 1rem;"><a href="mailto:<?php echo esc_attr($meta_email); ?>" style="color:#1E3A8A;"><?php echo esc_html($meta_email); ?></a></td>
-              <td style="padding:.55rem 1rem;"><a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $meta_phone); ?>" target="_blank" style="color:#25D366;font-weight:600;"><?php echo esc_html($meta_phone); ?></a></td>
-              <td style="padding:.55rem 1rem;color:#64748B;white-space:nowrap;"><?php echo esc_html(get_date_from_gmt($r->post_date, 'd/m/Y H:i')); ?></td>
               <td style="padding:.55rem 1rem;">
-                <a href="<?php echo esc_url($del_url); ?>" style="color:#ef4444;font-size:.75rem;text-decoration:none;" onclick="return confirm('Hapus permohonan ini?')">🗑 Hapus</a>
+                <div style="font-weight:700;color:#0F172A;font-size:13px;"><?php echo esc_html($meta_name); ?></div>
+                <div style="color:#64748B;font-size:12px;"><?php echo esc_html($meta_company); ?></div>
+              </td>
+              <td style="padding:.55rem 1rem;">
+                <div><a href="mailto:<?php echo esc_attr($meta_email); ?>" style="color:#1E3A8A;text-decoration:none;font-weight:500;"><?php echo esc_html($meta_email); ?></a></div>
+                <div><a href="https://wa.me/<?php echo preg_replace('/[^0-9]/', '', $meta_phone); ?>" target="_blank" style="color:#25D366;text-decoration:none;font-weight:600;font-size:12px;">📞 <?php echo esc_html($meta_phone); ?></a></div>
+              </td>
+              <td style="padding:.55rem 1rem;">
+                <div style="font-weight:600;color:#0F172A;"><?php echo esc_html($meta_date . ' - ' . $meta_time); ?></div>
+                <div style="color:<?php echo $meta_type === 'Online' ? '#3B82F6' : '#EAB308'; ?>;font-size:11px;font-weight:700;text-transform:uppercase;">
+                  <?php echo esc_html($meta_type); ?>
+                </div>
+                <?php if ($meta_type === 'Offline' && !empty($meta_address)): ?>
+                  <div style="color:#64748B;font-size:11px;margin-top:2px;max-width:150px;white-space:normal;line-height:1.2;"><?php echo esc_html($meta_address); ?></div>
+                <?php endif; ?>
+              </td>
+              <td style="padding:.55rem 1rem;color:#64748B;white-space:nowrap;font-size:12px;"><?php echo esc_html(get_date_from_gmt($r->post_date, 'd/m/Y H:i')); ?></td>
+              <td style="padding:.55rem 1rem;">
+                <a href="<?php echo esc_url($del_url); ?>" style="color:#ef4444;font-size:.75rem;text-decoration:none;font-weight:600;" onclick="return confirm('Hapus permohonan ini?')">🗑 Hapus</a>
               </td>
             </tr>
           <?php endforeach; ?>
@@ -587,22 +606,32 @@ add_action('wp_ajax_submit_demo', 'omni_handle_demo_submission');
 add_action('wp_ajax_nopriv_submit_demo', 'omni_handle_demo_submission');
 
 function omni_handle_demo_submission() {
-    $name = isset($_POST['demo_name']) ? sanitize_text_field($_POST['demo_name']) : '';
-    $email = isset($_POST['demo_email']) ? sanitize_email($_POST['demo_email']) : '';
-    $phone = isset($_POST['demo_phone']) ? sanitize_text_field($_POST['demo_phone']) : '';
+    $name    = isset($_POST['demo_name']) ? sanitize_text_field($_POST['demo_name']) : '';
+    $company = isset($_POST['demo_company']) ? sanitize_text_field($_POST['demo_company']) : '';
+    $email   = isset($_POST['demo_email']) ? sanitize_email($_POST['demo_email']) : '';
+    $phone   = isset($_POST['demo_phone']) ? sanitize_text_field($_POST['demo_phone']) : '';
+    $date    = isset($_POST['demo_date']) ? sanitize_text_field($_POST['demo_date']) : '';
+    $time    = isset($_POST['demo_time']) ? sanitize_text_field($_POST['demo_time']) : '';
+    $type    = isset($_POST['demo_type']) ? sanitize_text_field($_POST['demo_type']) : 'Online';
+    $address = isset($_POST['demo_address']) ? sanitize_textarea_field($_POST['demo_address']) : '';
 
-    if (empty($name) || empty($email) || empty($phone)) {
-        wp_send_json_error('Mohon lengkapi semua data.');
+    if (empty($name) || empty($email) || empty($phone) || empty($date) || empty($time)) {
+        wp_send_json_error('Mohon lengkapi semua data wajib.');
     }
 
     $post_id = wp_insert_post(array(
         'post_type'   => 'demo_request',
-        'post_title'  => $name . ' - ' . current_time('Y-m-d H:i'),
+        'post_title'  => $name . ' (' . $company . ') - ' . current_time('Y-m-d H:i'),
         'post_status' => 'publish',
         'meta_input'  => array(
-            'Nama Lengkap' => $name,
-            'Email'        => $email,
-            'No WhatsApp'  => $phone,
+            'Nama Lengkap'  => $name,
+            'Perusahaan'    => $company,
+            'Email'         => $email,
+            'No WhatsApp'   => $phone,
+            'Tanggal'       => $date,
+            'Jam'           => $time,
+            'Tipe'          => $type,
+            'Alamat Kantor' => $address,
         )
     ));
 
