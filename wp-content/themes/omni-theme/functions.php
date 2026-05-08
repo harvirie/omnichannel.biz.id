@@ -37,12 +37,12 @@ function omni_auto_create_pages() {
             'seo_desc' => 'Tingkatkan layanan dengan aplikasi omnichannel call center resmi. Solusi tepat untuk layanan call center perusahaan & call center pemerintah. Coba gratis sekarang!'
         ],
         'Fitur' => [
-            'seo_title' => 'Fitur Lengkap Layanan Call Center & Omnichannel | Sewa Aplikasi Call Center',
-            'seo_desc' => 'Pelajari fitur unggulan sewa aplikasi call center kami. Kelola layanan call center dan omnichannel call center dari satu platform terpadu yang canggih.'
+            'seo_title' => 'Fitur Lengkap Omnichannel & Call Center Kabayan | Sewa Layanan Call Center Pemerintah',
+            'seo_desc' => 'Fitur lengkap platform sewa omnichannel call center Kabayan: WhatsApp Blue Tick, PSTN, Bot FAQ, Unlimited Agent, Voice Recording & API Integrasi. Solusi call center pemerintah dan bisnis terpercaya di Indonesia.'
         ],
         'Use Case' => [
-            'seo_title' => 'Studi Kasus Omnichannel Call Center & Call Center Pemerintah',
-            'seo_desc' => 'Lihat bagaimana aplikasi call center resmi kami membantu berbagai industri, termasuk sektor swasta dan layanan call center pemerintah dalam melayani masyarakat.'
+            'seo_title' => 'Studi Kasus Omnichannel & Call Center Pemerintah | Sewa Layanan Call Center Kabayan',
+            'seo_desc' => 'Lihat bagaimana layanan omnichannel call center Kabayan membantu e-commerce, perbankan, klinik, instansi pemerintah & korporasi B2B. Sewa call center dan sewa omnichannel terpercaya untuk semua industri.'
         ],
         'Analitik Data' => [
             'seo_title' => 'Analitik Data & Laporan Layanan Call Center Omnichannel',
