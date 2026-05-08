@@ -118,12 +118,13 @@ function omni_sec_send_headers() {
     // Content Security Policy — blocks XSS (CVE-2026-3906/3907 mitigation)
     $csp = implode( '; ', [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://res.cloudinary.com https://fonts.googleapis.com",
+        "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://res.cloudinary.com https://fonts.googleapis.com https://www.googletagmanager.com https://static.cloudflareinsights.com blob:",
         "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com",
-        "img-src 'self' data: https://res.cloudinary.com https://secure.gravatar.com",
-        "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net",
+        "img-src 'self' data: https://res.cloudinary.com https://secure.gravatar.com https://www.google-analytics.com https://www.googletagmanager.com",
+        "font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net",
         "media-src 'self' https://res.cloudinary.com",
-        "connect-src 'self'",
+        "connect-src 'self' https://cdn.jsdelivr.net https://cloudflareinsights.com https://www.google-analytics.com https://googleads.g.doubleclick.net",
+        "worker-src 'self' blob:",
         "frame-ancestors 'self'",
         "object-src 'none'",
         "base-uri 'self'",

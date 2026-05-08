@@ -198,6 +198,23 @@ async function submitDemoForm(e) {
       const el = document.querySelector(selector);
       if (!el) return;
 
+      // Automatically disable loop if not enough slides to prevent Swiper warning
+      if (config.loop) {
+        const slides = el.querySelectorAll('.swiper-slide');
+        let maxSlidesPerView = config.slidesPerView || 1;
+        if (config.breakpoints) {
+          for (const bp in config.breakpoints) {
+            if (config.breakpoints[bp].slidesPerView > maxSlidesPerView) {
+              maxSlidesPerView = config.breakpoints[bp].slidesPerView;
+            }
+          }
+        }
+        // Swiper generally needs at least slidesPerView * 2 slides for loop mode
+        if (slides.length < maxSlidesPerView * 2) {
+          config.loop = false;
+        }
+      }
+
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {

@@ -79,7 +79,8 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
             <a href="<?php echo home_url('/'); ?>">
               <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_dark_ymby0d.svg"
                    alt="<?php bloginfo('name'); ?>"
-                   class="h-[1.4vw] xl:h-7 w-auto object-contain"
+                   class="w-auto object-contain"
+                   style="height: 50px; max-width: 100%;"
                    loading="eager">
             </a>
           </div>

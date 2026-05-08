@@ -118,7 +118,8 @@
         <!-- Logo full untuk latar gelap (mobile navbar) -->
         <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_wh_ysccoa.svg"
              alt="<?php bloginfo('name'); ?>"
-             class="h-9 w-auto object-contain"
+             class="w-auto object-contain"
+             style="height: 32px;"
              loading="eager">
       </a>
       <div class="flex items-center">
