@@ -263,10 +263,30 @@ function omni_theme_customize_register( $wp_customize ) {
         'priority' => 50,
     ) );
 
-    for ($i = 1; $i <= 4; $i++) {
+    $default_customer_names = array(
+        1 => 'Pemerintah Daerah',   2 => 'Imigrasi',
+        3 => 'Konstruksi',          4 => 'Layanan Medis',
+        5 => 'Perbankan & Keuangan',6 => 'E-Commerce',
+        7 => 'Logistik',            8 => 'Pendidikan',
+        9 => 'Asuransi',           10 => 'Retail',
+    );
+    $default_customer_descs = array(
+        1 => 'Meningkatkan responsivitas layanan publik dengan call center omnichannel terpadu.',
+        2 => 'Mengoptimalkan antrian layanan keimigrasian dengan sistem manajemen tiket cerdas.',
+        3 => 'Mengelola komunikasi proyek multi-lokasi dalam satu platform terintegrasi.',
+        4 => 'Meningkatkan koordinasi antar departemen medis dan kepuasan pasien.',
+        5 => 'Memastikan keamanan dan kecepatan layanan nasabah 24/7 di semua kanal.',
+        6 => 'Menangani ribuan permintaan pelanggan harian dengan efisiensi tinggi.',
+        7 => 'Memantau pengiriman dan mengelola keluhan pelanggan secara real-time.',
+        8 => 'Mempermudah komunikasi antara institusi, pengajar, dan orang tua siswa.',
+        9 => 'Mempercepat proses klaim dan layanan nasabah asuransi di semua saluran.',
+        10 => 'Mengintegrasikan layanan pelanggan online dan offline dalam satu dashboard.',
+    );
+
+    for ($i = 1; $i <= 10; $i++) {
         // Name
         $wp_customize->add_setting( 'omni_customer_'.$i.'_name', array(
-            'default'           => 'Pelanggan '.$i,
+            'default'           => $default_customer_names[$i] ?? 'Pelanggan '.$i,
             'sanitize_callback' => 'sanitize_text_field',
         ) );
         $wp_customize->add_control( 'omni_customer_'.$i.'_name', array(
@@ -276,7 +296,7 @@ function omni_theme_customize_register( $wp_customize ) {
         ) );
         // Description
         $wp_customize->add_setting( 'omni_customer_'.$i.'_desc', array(
-            'default'           => 'Deskripsi singkat layanan.',
+            'default'           => $default_customer_descs[$i] ?? 'Deskripsi singkat layanan.',
             'sanitize_callback' => 'sanitize_textarea_field',
         ) );
         $wp_customize->add_control( 'omni_customer_'.$i.'_desc', array(

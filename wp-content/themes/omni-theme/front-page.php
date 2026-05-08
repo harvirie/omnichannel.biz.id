@@ -336,18 +336,24 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
       <div class="swiper customers-swiper !pb-16">
         <div class="swiper-wrapper">
           <?php 
-          // Print slides twice to ensure enough elements for Swiper loop mode on large screens
+          // Print slides twice for Swiper loop mode
           for ($duplicate = 1; $duplicate <= 2; $duplicate++) :
-            for ( $i = 1; $i <= 4; $i++ ) : 
+            for ( $i = 1; $i <= 10; $i++ ) : 
               $cust_name = get_theme_mod('omni_customer_'.$i.'_name', 'Pelanggan '.$i);
               $cust_desc = get_theme_mod('omni_customer_'.$i.'_desc', 'Deskripsi pelanggan '.$i);
               $default_imgs = array(
                   1 => get_template_directory_uri() . '/assets/images/customer-1-pemerintah.webp',
                   2 => get_template_directory_uri() . '/assets/images/customer-2-imigrasi.webp',
                   3 => get_template_directory_uri() . '/assets/images/customer-3-konstruksi.webp',
-                  4 => get_template_directory_uri() . '/assets/images/customer-4-medis.webp'
+                  4 => get_template_directory_uri() . '/assets/images/customer-4-medis.webp',
+                  5 => get_template_directory_uri() . '/assets/images/customer-1-pemerintah.webp',
+                  6 => get_template_directory_uri() . '/assets/images/customer-2-imigrasi.webp',
+                  7 => get_template_directory_uri() . '/assets/images/customer-3-konstruksi.webp',
+                  8 => get_template_directory_uri() . '/assets/images/customer-4-medis.webp',
+                  9 => get_template_directory_uri() . '/assets/images/customer-1-pemerintah.webp',
+                 10 => get_template_directory_uri() . '/assets/images/customer-2-imigrasi.webp',
               );
-              $cust_img = get_theme_mod('omni_customer_'.$i.'_img', $default_imgs[$i]);
+              $cust_img = get_theme_mod('omni_customer_'.$i.'_img', $default_imgs[$i] ?? $default_imgs[1]);
             ?>
             <div class="swiper-slide h-auto">
               <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-omni-border flex flex-col group transition-all duration-300 h-full">
@@ -376,13 +382,12 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
         <div class="swiper-pagination !bottom-0 pb-2"></div>
       </div>
       
-      <!-- Outer Navigation Buttons -->
-      <!-- Menggunakan padding 10px+ (translate) agar menjauh dari card -->
-      <div class="swiper-button-prev !text-omni-dark !w-12 !h-12 !bg-white/80 hover:!bg-white backdrop-blur-sm rounded-full shadow-lg border border-omni-border transition-all !absolute !left-0 top-[40%] -translate-y-1/2 z-20 after:!hidden !hidden md:!flex items-center justify-center -ml-2 md:-ml-[10px]">
-        <i class="fa-solid fa-chevron-left text-xl"></i>
+      <!-- Outer Navigation Buttons - Gold contrast on light background -->
+      <div class="swiper-button-prev !w-12 !h-12 rounded-full shadow-lg transition-all !absolute !left-0 top-[40%] -translate-y-1/2 z-20 after:!hidden !hidden md:!flex items-center justify-center -ml-2 md:-ml-[10px]" style="background:#D4AF37;border:2px solid #B8962E;">
+        <i class="fa-solid fa-chevron-left text-lg" style="color:#0F172A;"></i>
       </div>
-      <div class="swiper-button-next !text-omni-dark !w-12 !h-12 !bg-white/80 hover:!bg-white backdrop-blur-sm rounded-full shadow-lg border border-omni-border transition-all !absolute !right-0 top-[40%] -translate-y-1/2 z-20 after:!hidden !hidden md:!flex items-center justify-center -mr-2 md:-mr-[10px]">
-        <i class="fa-solid fa-chevron-right text-xl"></i>
+      <div class="swiper-button-next !w-12 !h-12 rounded-full shadow-lg transition-all !absolute !right-0 top-[40%] -translate-y-1/2 z-20 after:!hidden !hidden md:!flex items-center justify-center -mr-2 md:-mr-[10px]" style="background:#D4AF37;border:2px solid #B8962E;">
+        <i class="fa-solid fa-chevron-right text-lg" style="color:#0F172A;"></i>
       </div>
     </div>
   </div>
