@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Penting: halaman admin WordPress tidak perlu diindex
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-content/plugins/
+Disallow: /wp-includes/
+Disallow: /?s=
+
+# Izinkan bot mengakses file tema dan aset
+Allow: /wp-content/themes/
+Allow: /wp-content/uploads/
+
+# Sitemap
+Sitemap: https://omnichannel.biz.id/sitemap.xml
