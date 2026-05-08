@@ -12,41 +12,41 @@ function omni_lc_render_widget() {
 <style>
 #omni-lc-widget *{box-sizing:border-box;font-family:'Outfit','Segoe UI',system-ui,sans-serif;}
 
-/* ── Floating trigger button ── */
+/* ── Floating trigger: bubble text + circle icon, always visible ── */
 #omni-lc-toggle{
   position:fixed;bottom:92px;right:24px;z-index:99999;
-  background:#1E40AF;color:#fff;
-  border:none;cursor:pointer;
-  display:flex;align-items:center;gap:10px;
-  border-radius:9999px;
-  padding:10px 18px 10px 10px;
-  box-shadow:0 6px 24px rgba(30,64,175,.38);
-  transition:transform .2s,box-shadow .2s;
-  text-decoration:none;
+  border:none;background:transparent;padding:0;
+  cursor:pointer;display:flex;align-items:center;gap:12px;
+  animation:omniLcPop .5s ease;
 }
-#omni-lc-toggle:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(30,64,175,.45);}
-#omni-lc-toggle-icon{
-  width:44px;height:44px;border-radius:50%;
-  background:#fff;display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;overflow:hidden;
-}
-#omni-lc-toggle-icon img{width:30px;height:30px;object-fit:contain;}
-#omni-lc-toggle-label{font-size:14px;font-weight:700;line-height:1.3;white-space:nowrap;}
-#omni-lc-toggle-label small{display:block;font-size:11px;font-weight:400;opacity:.8;}
+#omni-lc-toggle:hover #omni-lc-bubble-text{box-shadow:0 6px 24px rgba(30,64,175,.4);}
+#omni-lc-toggle:hover #omni-lc-bubble-icon{transform:scale(1.06);}
 
-/* ── Bubble greeting ── */
-#omni-lc-bubble{
-  position:fixed;bottom:152px;right:24px;z-index:99998;
-  display:flex;align-items:flex-end;gap:0;
-  animation:omniLcPop .4s ease;
-  pointer-events:none;
-}
+/* Bubble speech */
 #omni-lc-bubble-text{
   background:#1E40AF;color:#fff;
-  padding:10px 16px;border-radius:16px 16px 4px 16px;
-  font-size:13.5px;font-weight:600;
-  box-shadow:0 4px 16px rgba(30,64,175,.28);
-  max-width:210px;line-height:1.45;
+  padding:12px 18px;border-radius:20px 20px 20px 4px;
+  font-size:14px;font-weight:600;
+  box-shadow:0 4px 18px rgba(30,64,175,.3);
+  max-width:200px;line-height:1.45;text-align:left;
+  transition:box-shadow .2s;
+}
+
+/* Circle icon */
+#omni-lc-bubble-icon{
+  width:58px;height:58px;border-radius:50%;
+  background:#fff;border:2px solid #E2E8F0;
+  box-shadow:0 4px 14px rgba(0,0,0,.12);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;overflow:hidden;
+  transition:transform .2s;
+}
+#omni-lc-bubble-icon img{width:38px;height:38px;object-fit:contain;}
+
+/* Mobile: hide text, show icon only */
+@media(max-width:767px){
+  #omni-lc-bubble-text{display:none;}
+  #omni-lc-toggle{bottom:92px;right:20px;}
 }
 
 /* ── Chat window ── */
@@ -57,6 +57,9 @@ function omni_lc_render_widget() {
   box-shadow:0 20px 60px rgba(0,0,0,.18);
   display:none;flex-direction:column;overflow:hidden;
   animation:omniLcSlide .25s ease;
+}
+@media(max-width:767px){
+  #omni-lc-window{width:calc(100vw - 16px);right:8px;bottom:80px;}
 }
 #omni-lc-header{background:#1E40AF;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;}
 #omni-lc-header img{width:40px;height:40px;border-radius:50%;background:#fff;padding:4px;object-fit:contain;flex-shrink:0;}
@@ -106,19 +109,11 @@ function omni_lc_render_widget() {
 }
 </style>
 
-<!-- Bubble greeting -->
-<div id="omni-lc-bubble">
+<!-- Floating trigger: bubble text + circle logo (always visible, click to open chat) -->
+<button id="omni-lc-toggle" title="Buka Live Chat" aria-label="Buka Live Chat">
   <div id="omni-lc-bubble-text"><?php echo $greeting; ?></div>
-</div>
-
-<!-- Single floating trigger: logo + label (desktop) / logo only (mobile) -->
-<button id="omni-lc-toggle" title="Live Chat" aria-label="Buka Live Chat">
-  <div id="omni-lc-toggle-icon">
+  <div id="omni-lc-bubble-icon">
     <img src="<?php echo $logo; ?>" alt="Live Chat">
-  </div>
-  <div id="omni-lc-toggle-label">
-    Live Chat
-    <small>Online sekarang</small>
   </div>
 </button>
 
@@ -167,7 +162,6 @@ const AJAX   = '<?php echo esc_js($ajax); ?>';
 const LOGO   = '<?php echo $logo; ?>';
 let sessionKey = null, lastMsgId = 0, pollTimer = null;
 
-const bubble    = document.getElementById('omni-lc-bubble');
 const toggle    = document.getElementById('omni-lc-toggle');
 const win       = document.getElementById('omni-lc-window');
 const closeBtn  = document.getElementById('omni-lc-close-btn');
@@ -187,14 +181,11 @@ function post(data) {
     return fetch(AJAX, {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams(data)}).then(r=>r.json());
 }
 
-function openWin()  { win.style.display='flex'; bubble.style.display='none'; if(sessionKey) startPoll(); }
+function openWin()  { win.style.display='flex'; if(sessionKey) startPoll(); }
 function closeWin() { win.style.display='none'; stopPoll(); }
 
 toggle.addEventListener('click', ()=> win.style.display==='flex' ? closeWin() : openWin());
 closeBtn.addEventListener('click', closeWin);
-
-// Auto-hide bubble after 7s
-setTimeout(()=>{ bubble.style.transition='opacity .5s'; bubble.style.opacity='0'; setTimeout(()=>bubble.style.display='none',500); }, 7000);
 
 // WhatsApp digits only
 document.getElementById('lc-wa').addEventListener('input', function(){ this.value=this.value.replace(/[^0-9+]/g,''); });
