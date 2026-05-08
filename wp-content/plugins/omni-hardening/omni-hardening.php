@@ -514,6 +514,98 @@ function omni_sec_admin_page() {
 }
 
 /* ═══════════════════════════════════════════════
+   15. ANIMATED 403 FORBIDDEN PAGE
+   ═══════════════════════════════════════════════ */
+add_action( 'init', function() {
+    // Trigger 403 page for blocked bot user agents
+    $ua = $_SERVER['HTTP_USER_AGENT'] ?? '';
+    $blocked_ua = ['havij', 'nikto', 'sqlmap', 'masscan', 'zgrab'];
+    foreach ($blocked_ua as $b) {
+        if (stripos($ua, $b) !== false) {
+            omni_sec_render_403();
+        }
+    }
+} );
+
+// Also hook into WordPress 403 status
+add_filter( 'wp_die_handler', function($handler) { return 'omni_sec_wp_die_handler'; } );
+function omni_sec_wp_die_handler($message, $title = '', $args = []) {
+    $status = isset($args['response']) ? (int)$args['response'] : 500;
+    if ($status === 403) {
+        omni_sec_render_403();
+    }
+    // Fallback to default for other errors
+    _default_wp_die_handler($message, $title, $args);
+}
+
+function omni_sec_render_403() {
+    $home = home_url('/');
+    http_response_code(403);
+    echo '<!DOCTYPE html><html lang="id"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>403 - Akses Ditolak | OmniServe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;background:linear-gradient(135deg,#0F172A 0%,#1E293B 60%,#0F172A 100%);font-family:"Outfit",sans-serif;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse 70% 50% at 15% 25%,rgba(239,68,68,0.08) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 85% 75%,rgba(30,58,138,0.12) 0%,transparent 60%);animation:bgp 6s ease-in-out infinite alternate;}
+@keyframes bgp{from{opacity:.6}to{opacity:1}}
+.dot{position:absolute;border-radius:50%;animation:flt linear infinite;opacity:.12;}
+@keyframes flt{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:.12}90%{opacity:.12}100%{transform:translateY(-10vh) rotate(720deg);opacity:0}}
+.wrap{text-align:center;z-index:10;padding:2rem;animation:fiu .8s cubic-bezier(.22,1,.36,1) both;}
+@keyframes fiu{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.ico{font-size:3rem;margin-bottom:1rem;animation:bnc 2s ease-in-out infinite;}
+@keyframes bnc{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.num{font-size:clamp(6rem,20vw,14rem);font-weight:900;line-height:1;letter-spacing:-.05em;background:linear-gradient(135deg,#ef4444 0%,#fca5a5 40%,#ef4444 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shim 3s ease-in-out infinite;background-size:200% 100%;filter:drop-shadow(0 0 40px rgba(239,68,68,0.4));position:relative;display:inline-block;}
+@keyframes shim{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.num::before,.num::after{content:attr(data-text);position:absolute;top:0;left:0;right:0;background:linear-gradient(135deg,#ef4444 0%,#fca5a5 40%,#ef4444 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.num::before{animation:g1 4s infinite;clip-path:polygon(0 0,100% 0,100% 40%,0 40%);opacity:.5;}
+.num::after{animation:g2 4s infinite;clip-path:polygon(0 60%,100% 60%,100% 100%,0 100%);opacity:.5;}
+@keyframes g1{0%,90%,100%{transform:none}91%{transform:translate(-2px,-1px)}93%{transform:translate(2px,1px)}95%{transform:translate(-1px,2px)}}
+@keyframes g2{0%,90%,100%{transform:none}92%{transform:translate(2px,1px)}94%{transform:translate(-2px,-1px)}96%{transform:translate(1px,-2px)}}
+h1{font-size:clamp(1.25rem,4vw,2rem);font-weight:800;color:#fff;margin:.5rem 0;}
+p{font-size:1rem;color:rgba(255,255,255,.55);max-width:420px;margin:.75rem auto 2rem;line-height:1.7;}
+.cd-wrap{margin-bottom:2rem;}
+.cd-text{font-size:.875rem;color:rgba(255,255,255,.5);margin-bottom:8px;}
+.cd-text span{color:#ef4444;font-weight:700;font-size:1.1rem;}
+.bar-track{width:220px;height:4px;background:rgba(255,255,255,.1);border-radius:99px;margin:0 auto;overflow:hidden;}
+.bar-fill{height:100%;background:linear-gradient(90deg,#ef4444,#fca5a5);border-radius:99px;transform-origin:left;animation:shrink 10s linear forwards;}
+@keyframes shrink{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+.btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-p{background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff;font-weight:800;font-size:.9375rem;padding:.75rem 2rem;border-radius:999px;text-decoration:none;transition:all .25s;box-shadow:0 4px 20px rgba(239,68,68,.4);display:inline-flex;align-items:center;gap:.5rem;}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(239,68,68,.5);}
+.btn-g{color:rgba(255,255,255,.7);font-weight:600;font-size:.9rem;padding:.75rem 1.5rem;border-radius:999px;text-decoration:none;border:1px solid rgba(255,255,255,.2);transition:all .25s;display:inline-flex;align-items:center;gap:.5rem;}
+.btn-g:hover{border-color:rgba(255,255,255,.5);color:#fff;background:rgba(255,255,255,.05);}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="ico">🚫</div>
+  <div class="num" data-text="403">403</div>
+  <h1>Akses Ditolak</h1>
+  <p>Anda tidak memiliki izin untuk mengakses halaman ini. Aktivitas ini telah dicatat oleh sistem keamanan kami.</p>
+  <div class="cd-wrap">
+    <p class="cd-text">Kembali ke beranda dalam <span id="cd">10</span> detik</p>
+    <div class="bar-track"><div class="bar-fill"></div></div>
+  </div>
+  <div class="btns">
+    <a href="' . esc_url($home) . '" class="btn-p">🏠 Kembali ke Beranda</a>
+    <a href="javascript:history.back()" class="btn-g">← Halaman Sebelumnya</a>
+  </div>
+</div>
+<script>
+(function(){
+  var page=document.body;
+  for(var i=0;i<15;i++){var d=document.createElement("div");d.className="dot";var s=Math.random()*60+10;d.style.cssText="width:"+s+"px;height:"+s+"px;left:"+Math.random()*100+"%;background:"+(Math.random()>.5?"#ef4444":"#1E3A8A")+";animation-duration:"+(Math.random()*15+8)+"s;animation-delay:"+(Math.random()*8)+"s;";page.appendChild(d);}
+  var c=10,el=document.getElementById("cd");
+  setInterval(function(){c--;el.textContent=c;if(c<=0)window.location.href=' . json_encode($home) . ';},1000);
+})();
+</script>
+</body></html>';
+    exit;
+}
+
+/* ═══════════════════════════════════════════════
    HELPERS
    ═══════════════════════════════════════════════ */
 function omni_sec_get_ip() {
