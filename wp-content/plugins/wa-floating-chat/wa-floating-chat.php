@@ -199,7 +199,7 @@ function wa_leads_admin_page() {
 add_action('wp_footer', 'wa_floating_chat_render_widget', 100);
 function wa_floating_chat_render_widget() {
     ?>
-    <div id="wa-widget" style="position:fixed;bottom:24px;right:24px;z-index:99999;display:flex;flex-direction:column;align-items:flex-end;font-family:ui-sans-serif,system-ui,sans-serif;">
+    <div id="wa-widget" style="position:fixed;bottom:24px;right:24px;z-index:99997;display:flex;flex-direction:column;align-items:flex-end;font-family:ui-sans-serif,system-ui,sans-serif;">
       <div id="wa-form-container" style="display:none;background:white;border-radius:16px;box-shadow:0 20px 25px -5px rgba(0,0,0,.15);border:1px solid #e5e7eb;width:320px;margin-bottom:16px;overflow:hidden;opacity:0;transition:opacity .3s ease;">
         <div style="background:#25D366;color:white;padding:16px;display:flex;justify-content:space-between;align-items:center;">
           <div style="display:flex;align-items:center;gap:8px;">
