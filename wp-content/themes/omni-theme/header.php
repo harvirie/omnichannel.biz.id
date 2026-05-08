@@ -23,7 +23,7 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous"></noscript>
 
     <!-- Tailwind CSS: File statis yang dikompilasi lokal (tidak pakai CDN) -->
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/omni-theme.css">
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/omni-theme.css?v=<?php echo filemtime(get_template_directory() . '/assets/omni-theme.css'); ?>">
     <!-- Lucide Icons: defer agar tidak memblokir render -->
     <script src="https://unpkg.com/lucide@latest" defer></script>
     <style>
