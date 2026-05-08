@@ -2,15 +2,14 @@
 <footer class="bg-omni-dark text-white/70 py-12 border-t border-white/10 mt-auto">
   <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
     <div class="col-span-1 md:col-span-2">
-      <div class="flex items-center gap-2 mb-4">
-        <?php if ( function_exists( 'has_custom_logo' ) && has_custom_logo() ) : ?>
-            <?php the_custom_logo(); ?>
-        <?php else : ?>
-            <div class="bg-omni-button-hover p-2 rounded-lg">
-              <i data-lucide="headphones" class="h-5 w-5 text-white"></i>
-            </div>
-            <span class="font-bold text-xl tracking-tight text-white"><?php bloginfo( 'name' ); ?></span>
-        <?php endif; ?>
+      <div class="flex items-center mb-4">
+        <!-- Logo full untuk latar gelap (footer) -->
+        <a href="<?php echo home_url('/'); ?>">
+          <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_wh_ysccoa.svg"
+               alt="<?php bloginfo('name'); ?>"
+               class="h-9 w-auto object-contain"
+               loading="lazy">
+        </a>
       </div>
       <p class="max-w-xs text-sm leading-relaxed mb-6">
         Satu layar untuk semua saluran. Tingkatkan kepuasan pelanggan dengan sistem omnichannel terbaik.

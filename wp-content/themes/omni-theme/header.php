@@ -7,6 +7,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+
+    <!-- Favicon dari Cloudinary -->
+    <link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg">
+    <link rel="apple-touch-icon" href="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg">
 
     <!-- Google Fonts: hanya weight yang benar-benar dipakai -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -97,15 +103,12 @@
 <nav class="md:hidden fixed top-0 w-full bg-omni-dark/98 z-40 border-b border-white/10 shadow-md" style="will-change: transform;">
   <div class="px-4">
     <div class="flex justify-between items-center h-20">
-      <a href="<?php echo home_url('/'); ?>" class="flex items-center gap-2">
-        <?php if ( function_exists( 'has_custom_logo' ) && has_custom_logo() ) : ?>
-            <?php the_custom_logo(); ?>
-        <?php else : ?>
-            <div class="bg-omni-button-hover p-2 rounded-lg">
-            <i data-lucide="headphones" class="h-6 w-6 text-white"></i>
-            </div>
-            <span class="font-bold text-xl tracking-tight text-omni-dark"><?php bloginfo( 'name' ); ?></span>
-        <?php endif; ?>
+      <a href="<?php echo home_url('/'); ?>" class="flex items-center">
+        <!-- Logo full untuk latar gelap (mobile navbar) -->
+        <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_wh_ysccoa.svg"
+             alt="<?php bloginfo('name'); ?>"
+             class="h-9 w-auto object-contain"
+             loading="eager">
       </a>
       <div class="flex items-center">
         <button id="mobile-menu-btn" class="text-omni-text-muted hover:text-omni-accent transition-colors">
@@ -122,11 +125,14 @@
 <!-- Mobile Menu Drawer (Side Panel) -->
 <div id="mobile-menu-drawer" class="fixed top-0 left-0 h-full w-[80%] max-w-sm bg-omni-light z-[70] shadow-2xl transform -translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col">
   <div class="px-6 h-20 flex items-center justify-between border-b border-omni-border/50 shrink-0">
-    <div class="flex items-center gap-2">
-      <div class="bg-omni-button-hover p-2 rounded-lg shadow-sm">
-        <i data-lucide="headphones" class="h-5 w-5 text-white"></i>
-      </div>
-      <span class="font-bold text-lg tracking-tight text-omni-dark">Menu Navigasi</span>
+    <div class="flex items-center">
+      <!-- Logo full untuk latar terang (mobile drawer) -->
+      <a href="<?php echo home_url('/'); ?>">
+        <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_dark_ymby0d.svg"
+             alt="<?php bloginfo('name'); ?>"
+             class="h-8 w-auto object-contain"
+             loading="eager">
+      </a>
     </div>
     <button id="mobile-menu-close" class="text-omni-text-muted hover:text-omni-accent transition-colors bg-white p-2 rounded-full shadow-sm border border-omni-border/50">
       <i data-lucide="x" class="h-4 w-4"></i>
@@ -178,16 +184,13 @@
     <div class="px-6 h-20 flex justify-between items-center">
       <!-- Logo -->
       <div class="w-1/4">
-      <a href="<?php echo home_url('/'); ?>" class="flex items-center gap-2">
-        <?php if ( function_exists( 'has_custom_logo' ) && has_custom_logo() ) : ?>
-            <?php the_custom_logo(); ?>
-        <?php else : ?>
-            <div class="bg-omni-button-hover p-2 rounded-xl shadow-sm">
-            <i data-lucide="headphones" class="h-6 w-6 text-white"></i>
-            </div>
-            <span class="font-bold text-2xl tracking-tight text-white"><?php bloginfo( 'name' ); ?></span>
-        <?php endif; ?>
-      </a>
+        <a href="<?php echo home_url('/'); ?>" class="flex items-center">
+          <!-- Logo full untuk latar gelap (desktop header) -->
+          <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_wh_ysccoa.svg"
+               alt="<?php bloginfo('name'); ?>"
+               class="h-10 w-auto object-contain"
+               loading="eager">
+        </a>
       </div>
 
       <!-- Desktop Navigation -->
