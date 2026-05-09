@@ -264,16 +264,16 @@ body.omni-loading { overflow: hidden; }
 <nav class="md:hidden fixed top-0 w-full z-40 border-b border-white/10 shadow-md" style="background-color: #0F172A; will-change: transform;">
   <div class="px-4">
     <div class="flex justify-between items-center h-20">
-      <a href="<?php echo home_url('/'); ?>" class="flex items-center">
+      <a href="<?php echo home_url('/'); ?>" aria-label="Beranda OmniServe" class="flex items-center">
         <!-- Logo full untuk latar gelap (mobile navbar) -->
         <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_wh_ysccoa.svg"
-             alt="<?php bloginfo('name'); ?>"
+             alt="<?php echo esc_attr(get_bloginfo('name') ?: 'OmniServe Logo'); ?>"
              class="w-auto object-contain"
              style="height: 32px;"
              loading="eager">
       </a>
       <div class="flex items-center">
-        <button id="mobile-menu-btn" class="text-omni-text-muted hover:text-omni-accent transition-colors">
+        <button id="mobile-menu-btn" aria-label="Buka Menu" class="text-omni-text-muted hover:text-omni-accent transition-colors">
           <i data-lucide="menu" class="h-6 w-6 menu-icon"></i>
         </button>
       </div>
@@ -289,14 +289,14 @@ body.omni-loading { overflow: hidden; }
   <div class="px-6 h-20 flex items-center justify-between border-b border-omni-border/50 shrink-0">
     <div class="flex items-center">
       <!-- Logo full untuk latar terang (mobile drawer) -->
-      <a href="<?php echo home_url('/'); ?>">
+      <a href="<?php echo home_url('/'); ?>" aria-label="Beranda OmniServe">
         <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_dark_ymby0d.svg"
-             alt="<?php bloginfo('name'); ?>"
+             alt="<?php echo esc_attr(get_bloginfo('name') ?: 'OmniServe Logo'); ?>"
              class="h-8 w-auto object-contain"
              loading="eager">
       </a>
     </div>
-    <button id="mobile-menu-close" class="text-omni-text-muted hover:text-omni-accent transition-colors bg-white p-2 rounded-full shadow-sm border border-omni-border/50">
+    <button id="mobile-menu-close" aria-label="Tutup Menu" class="text-omni-text-muted hover:text-omni-accent transition-colors bg-white p-2 rounded-full shadow-sm border border-omni-border/50">
       <i data-lucide="x" class="h-4 w-4"></i>
     </button>
   </div>
@@ -346,10 +346,10 @@ body.omni-loading { overflow: hidden; }
     <div class="px-6 h-20 flex justify-between items-center">
       <!-- Logo -->
       <div class="w-1/4">
-        <a href="<?php echo home_url('/'); ?>" class="flex items-center">
+        <a href="<?php echo home_url('/'); ?>" aria-label="Beranda OmniServe" class="flex items-center">
           <!-- Logo full untuk latar gelap (desktop header) -->
           <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_wh_ysccoa.svg"
-               alt="<?php bloginfo('name'); ?>"
+               alt="<?php echo esc_attr(get_bloginfo('name') ?: 'OmniServe Logo'); ?>"
                class="h-10 w-auto object-contain"
                loading="eager">
         </a>

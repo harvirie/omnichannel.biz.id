@@ -4,9 +4,9 @@
     <div class="col-span-1 md:col-span-2">
       <div class="flex items-center mb-4">
         <!-- Logo full untuk latar gelap (footer) -->
-        <a href="<?php echo home_url('/'); ?>">
+        <a href="<?php echo home_url('/'); ?>" aria-label="Beranda OmniServe">
           <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_wh_ysccoa.svg"
-               alt="<?php bloginfo('name'); ?>"
+               alt="<?php echo esc_attr(get_bloginfo('name') ?: 'OmniServe Logo'); ?>"
                class="h-16 w-auto object-contain"
                loading="lazy">
         </a>

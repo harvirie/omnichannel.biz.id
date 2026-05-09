@@ -76,9 +76,9 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
         <!-- Left Content (Desktop) -->
         <div class="hidden md:flex absolute top-[7%] left-[5%] w-[38%] z-20 flex-col">
           <div class="flex items-center mb-[2.2vw] xl:mb-8">
-            <a href="<?php echo home_url('/'); ?>">
+            <a href="<?php echo home_url('/'); ?>" aria-label="Beranda OmniServe">
               <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_dark_ymby0d.svg"
-                   alt="<?php bloginfo('name'); ?>"
+                   alt="<?php echo esc_attr(get_bloginfo('name') ?: 'OmniServe Logo'); ?>"
                    class="w-auto object-contain"
                    style="height: 50px; max-width: 100%;"
                    loading="eager">
@@ -97,7 +97,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
             <a href="<?php echo home_url('/harga'); ?>" class="bg-omni-button hover:bg-omni-button-hover transition-colors text-white px-[1.2vw] py-[0.6vw] rounded-full text-[0.85vw] xl:text-sm font-semibold whitespace-nowrap">Coba Gratis</a>
             <button type="button" onclick="document.getElementById('demo-modal').classList.remove('hidden')" class="px-[1vw] py-[0.6vw] text-[0.85vw] xl:text-sm font-semibold text-omni-text-muted hover:bg-slate-50 rounded-full transition-colors shrink-0">Demo</button>
             <input type="text" name="s" placeholder="Pencarian" class="flex-1 px-3 text-[0.8vw] xl:text-sm text-slate-600 font-medium bg-transparent outline-none min-w-0" />
-            <button type="submit" class="bg-omni-accent hover:bg-omni-accent-hover transition-colors p-[0.6vw] xl:p-2.5 rounded-full text-white shadow-md flex-shrink-0">
+            <button type="submit" aria-label="Cari" class="bg-omni-accent hover:bg-omni-accent-hover transition-colors p-[0.6vw] xl:p-2.5 rounded-full text-white shadow-md flex-shrink-0">
               <i data-lucide="search" class="h-[1.1vw] w-[1.1vw] xl:h-5 xl:w-5"></i>
             </button>
           </form>
@@ -117,18 +117,18 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
         <!-- Mobile Content -->
         <div class="flex md:hidden absolute top-0 z-20 flex-col px-6 pt-8 pb-6" style="width: 100vw; left: 55vw; height: 100%;">
 
-          <a href="<?php echo home_url('/'); ?>" class="block" style="margin-top: -10px; margin-left: -10px; margin-bottom: 20px;">
+          <a href="<?php echo home_url('/'); ?>" class="block" aria-label="Beranda OmniServe" style="margin-top: -10px; margin-left: -10px; margin-bottom: 20px;">
             <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg"
-                 alt="<?php bloginfo('name'); ?>"
+                 alt="<?php echo esc_attr(get_bloginfo('name') ?: 'OmniServe Logo'); ?>"
                  class="w-auto object-contain"
                  style="height: 64px;"
                  loading="eager">
           </a>
 
           <div class="-translate-x-[10px] mb-6">
-            <h1 class="text-4xl text-omni-dark font-bold leading-[1.05] mb-3 drop-shadow-sm mt-[5px]">
+            <div role="heading" aria-level="1" class="text-4xl text-omni-dark font-bold leading-[1.05] mb-3 drop-shadow-sm mt-[5px]">
               <?php echo $hero_title; ?>
-            </h1>
+            </div>
             <div class="text-omni-text-muted text-[15px] font-medium leading-relaxed mb-5 w-[90%] omni-rich-text">
               <?php echo wpautop($hero_sub); ?>
             </div>
@@ -139,7 +139,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
             <a href="<?php echo home_url('/harga'); ?>" class="bg-omni-button hover:bg-omni-button-hover text-white px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap">Coba Gratis</a>
             <button type="button" onclick="document.getElementById('demo-modal').classList.remove('hidden')" class="px-2 py-2 text-xs font-semibold text-omni-text-muted hover:bg-slate-50 rounded-full transition-colors shrink-0">Demo</button>
             <input type="text" name="s" placeholder="Pencarian" class="flex-1 px-2 text-xs text-slate-600 font-medium bg-transparent outline-none min-w-0" />
-            <button type="submit" class="bg-omni-accent p-2 rounded-full text-white shadow-md shrink-0">
+            <button type="submit" aria-label="Cari" class="bg-omni-accent p-2 rounded-full text-white shadow-md shrink-0">
               <i data-lucide="search" class="h-4 w-4"></i>
             </button>
           </form>
@@ -402,6 +402,18 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
       <div class="swiper-button-next !w-12 !h-12 rounded-full shadow-lg transition-all !absolute !right-0 top-[40%] -translate-y-1/2 z-20 after:!hidden !hidden md:!flex items-center justify-center -mr-2 md:-mr-[10px]" style="background:#D4AF37;border:2px solid #B8962E;cursor:pointer;">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F172A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEO Content Section to improve Text-to-HTML Ratio -->
+<section class="py-16 bg-white relative">
+  <div class="max-w-5xl mx-auto px-6 md:px-12 text-center text-omni-dark">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6">Solusi Omnichannel Terbaik di Indonesia</h2>
+    <div class="text-omni-text-muted text-base leading-relaxed space-y-4 text-justify md:text-center omni-rich-text">
+      <p>OmniServe adalah platform <strong>omnichannel call center</strong> inovatif yang dirancang khusus untuk memenuhi kebutuhan instansi pemerintahan, perusahaan swasta, dan bisnis skala besar di Indonesia. Kami menyediakan solusi komunikasi terpusat yang mengintegrasikan berbagai saluran seperti WhatsApp, Instagram, Email, dan Telepon ke dalam satu dashboard cerdas yang mudah digunakan.</p>
+      <p>Dengan mengadopsi teknologi omnichannel, tim layanan pelanggan Anda dapat merespons lebih cepat, melacak riwayat percakapan secara akurat, dan meningkatkan tingkat kepuasan pelanggan secara keseluruhan. Tidak perlu lagi berpindah-pindah aplikasi; semuanya tersedia dalam satu layar. Tingkatkan produktivitas tim, pangkas waktu penyelesaian masalah (SLA), dan bangun kepercayaan masyarakat dengan layanan yang transparan dan profesional.</p>
+      <p>Bergabunglah dengan ratusan klien yang telah mempercayakan operasional layanan pelanggannya kepada OmniServe. Dapatkan kemudahan manajemen interaksi, analitik data waktu nyata (real-time analytics), dan fitur otomasi untuk memaksimalkan performa bisnis Anda. Coba sekarang dan rasakan perbedaan layanan call center masa depan bersama kami.</p>
     </div>
   </div>
 </section>
