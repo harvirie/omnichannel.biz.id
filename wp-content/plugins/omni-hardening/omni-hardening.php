@@ -163,12 +163,23 @@ function omni_sec_send_headers() {
     // Permissions policy
     header( 'Permissions-Policy: camera=(), microphone=(), geolocation=()' );
 
+    // Force OpenResty not to cache error states
+    header( 'Cache-Control: no-store, no-cache, must-revalidate, max-age=0' );
+
     // HSTS (always send as we are behind Cloudflare)
     header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains; preload' );
 
     // Remove server info
     header_remove( 'X-Powered-By' );
     header_remove( 'Server' );
+}
+
+// Fallback: Inject CSP via HTML meta tag because OpenResty strips HTTP headers
+add_action( 'wp_head', 'omni_sec_insert_meta_tags', 1 );
+function omni_sec_insert_meta_tags() {
+    if ( is_admin() ) return;
+    $csp = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://res.cloudinary.com https://fonts.googleapis.com https://www.googletagmanager.com https://static.cloudflareinsights.com https://googleads.g.doubleclick.net https://www.google.com https://www.googleadservices.com https://www.google.co.id; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https://res.cloudinary.com https://secure.gravatar.com https://www.google-analytics.com https://www.googletagmanager.com https://googleads.g.doubleclick.net https://www.google.com https://www.googleadservices.com https://www.google.co.id https://s.w.org; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; media-src 'self' https://res.cloudinary.com; connect-src 'self' https://cdn.jsdelivr.net https://cloudflareinsights.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://www.google.com https://www.googleadservices.com https://www.google.co.id;";
+    echo '<meta http-equiv="Content-Security-Policy" content="' . esc_attr($csp) . '">' . "\n";
 }
 
 /* ═══════════════════════════════════════════════
@@ -695,6 +706,32 @@ p{font-size:1rem;color:rgba(255,255,255,.55);max-width:420px;margin:.75rem auto 
 </body></html>';
     exit;
 }
+
+// PHP-Level Hard Block for Cloud Metadata and Plugins
+// Prevents OpenResty from caching Apache .htaccess 403s/404s as 200 OK
+add_action( 'init', function() {
+    $uri = $_SERVER['REQUEST_URI'] ?? '';
+    
+    // Cloud Metadata PHP Block
+    if ( stripos($uri, '/opc/v1/instance') !== false || stripos($uri, '/latest/meta-data') !== false ) {
+        omni_sec_log_scan('Cloud Metadata Probe');
+        header('HTTP/1.1 404 Not Found');
+        header('Status: 404 Not Found');
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        exit('404 Not Found');
+    }
+
+    // Wildcard Plugin 404 PHP Block (ISS-001)
+    if ( stripos($uri, '/wp-content/plugins/') === 0 ) {
+        // If we reach init hook for a plugin path, it means the physical file doesn't exist.
+        // We must hard-exit 404 to prevent WordPress from artificially returning 200 OK.
+        omni_sec_log_scan('Non-existent Plugin Probe');
+        header('HTTP/1.1 404 Not Found');
+        header('Status: 404 Not Found');
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        exit('404 Not Found');
+    }
+}, 1 );
 
 /* ═══════════════════════════════════════════════
    HELPERS
