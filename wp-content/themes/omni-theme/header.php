@@ -133,23 +133,48 @@
         // JSON-LD Schema
         ?>
         <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          "name": "<?php echo esc_js($seo_title ? $seo_title : get_bloginfo('name')); ?>",
-          "operatingSystem": "Web",
-          "applicationCategory": "BusinessApplication",
-          "url": "<?php echo esc_url($current_url); ?>",
-          "description": "<?php echo esc_js($seo_desc); ?>",
-          "publisher": {
-            "@type": "Organization",
-            "name": "Kabayan Group",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "<?php echo esc_url($og_image); ?>"
+        [
+          {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "<?php echo esc_js($seo_title ? $seo_title : get_bloginfo('name')); ?>",
+            "operatingSystem": "Web",
+            "applicationCategory": "BusinessApplication",
+            "url": "<?php echo esc_url($current_url); ?>",
+            "description": "<?php echo esc_js($seo_desc); ?>",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Kabayan Group",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "<?php echo esc_url($og_image); ?>"
+              }
             }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "OmniServe",
+            "image": "<?php echo esc_url($og_image); ?>",
+            "@id": "<?php echo esc_url($current_url); ?>",
+            "url": "<?php echo esc_url($current_url); ?>",
+            "telephone": "+6281283835553",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Pusat Bisnis Jakarta",
+              "addressLocality": "Jakarta",
+              "postalCode": "10000",
+              "addressCountry": "ID"
+            },
+            "sameAs": [
+              "https://facebook.com/omniserve",
+              "https://twitter.com/omniserve",
+              "https://instagram.com/omniserve",
+              "https://linkedin.com/company/omniserve",
+              "https://youtube.com/@omniserve"
+            ]
           }
-        }
+        ]
         </script>
         <?php
     }

@@ -31,6 +31,14 @@
         <li><a href="#" class="hover:text-omni-accent transition-colors">Karir</a></li>
         <li><a href="https://wa.me/6281283835553" target="_blank" rel="noopener noreferrer" class="hover:text-omni-accent transition-colors">Hubungi Kami</a></li>
       </ul>
+      <h4 class="text-white font-semibold mt-6 mb-4">Ikuti Kami</h4>
+      <div class="flex gap-4">
+        <a href="https://facebook.com/omniserve" target="_blank" rel="noopener noreferrer" aria-label="Facebook OmniServe" class="text-white/70 hover:text-omni-accent transition-colors"><i class="fa-brands fa-facebook text-xl"></i></a>
+        <a href="https://twitter.com/omniserve" target="_blank" rel="noopener noreferrer" aria-label="Twitter OmniServe" class="text-white/70 hover:text-omni-accent transition-colors"><i class="fa-brands fa-x-twitter text-xl"></i></a>
+        <a href="https://instagram.com/omniserve" target="_blank" rel="noopener noreferrer" aria-label="Instagram OmniServe" class="text-white/70 hover:text-omni-accent transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
+        <a href="https://linkedin.com/company/omniserve" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn OmniServe" class="text-white/70 hover:text-omni-accent transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
+        <a href="https://youtube.com/@omniserve" target="_blank" rel="noopener noreferrer" aria-label="YouTube OmniServe" class="text-white/70 hover:text-omni-accent transition-colors"><i class="fa-brands fa-youtube text-xl"></i></a>
+      </div>
     </div>
   </div>
   <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-white/10 text-sm flex flex-col md:flex-row justify-between items-center text-center gap-3">
