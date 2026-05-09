@@ -202,7 +202,17 @@ function post(data) {
     return fetch(AJAX, {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams(data)}).then(r=>r.json());
 }
 
-function openWin()  { win.style.display='flex'; if(sessionKey) { startPoll(); resetInactivity(); } }
+function openWin()  { 
+    win.style.display='flex'; 
+    if(sessionKey) { startPoll(); resetInactivity(); } 
+    
+    // Auto-close WA Chat if open
+    const waCloseBtn = document.getElementById('wa-close-btn');
+    const waForm = document.getElementById('wa-form-container');
+    if (waCloseBtn && waForm && waForm.style.display === 'block') {
+        waCloseBtn.click();
+    }
+}
 function closeWin() { win.style.display='none'; stopPoll(); }
 
 toggle.addEventListener('click', ()=> win.style.display==='flex' ? closeWin() : openWin());

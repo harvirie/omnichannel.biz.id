@@ -247,7 +247,18 @@ function wa_floating_chat_render_widget() {
         const waForm = document.getElementById('wa-chat-form');
         const msg    = document.getElementById('wa-msg');
 
-        function openForm() { form.style.display='block'; void form.offsetWidth; form.style.opacity='1'; }
+        function openForm() { 
+            form.style.display='block'; 
+            void form.offsetWidth; 
+            form.style.opacity='1'; 
+            
+            // Auto-close Live Chat if open
+            const lcCloseBtn = document.getElementById('omni-lc-close-btn');
+            const lcWindow = document.getElementById('omni-lc-window');
+            if (lcCloseBtn && lcWindow && lcWindow.style.display === 'flex') {
+                lcCloseBtn.click();
+            }
+        }
         function closeForm() { form.style.opacity='0'; setTimeout(()=>form.style.display='none',300); }
 
         toggle.addEventListener('click', () => form.style.display==='none'||form.style.display==='' ? openForm() : closeForm());
