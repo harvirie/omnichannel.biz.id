@@ -3,9 +3,9 @@
  * Plugin Name:  OmniServe Security Hardening
  * Plugin URI:   https://omnichannel.biz.id
  * Description:  Hardening otomatis WordPress: anti-bruteforce, CSP, REST API lockdown, XSS mitigation, XML/XXE disable, PHP-in-uploads block, login protection, dan file integrity. Berdasarkan CVE-2026-3906/3907/3908.
- * Version:      1.1.0
+ * Version:      1.1.1
  * Tested up to: 6.9.4
- * Update Info:  (2026-05-09) Penambahan fitur Intrusion Detection System (IDS) untuk pemindaian kerentanan WP.
+ * Update Info:  (2026-05-09) Mitigasi Pentest: Blokir Cloud Metadata, Enforce CSP/HSTS via .htaccess, Fast 404 Plugin Directory (ISS-001).
  * Author:       Harizal
  * License:      GPL-2.0+
  * Text Domain:  omni-hardening
@@ -163,10 +163,8 @@ function omni_sec_send_headers() {
     // Permissions policy
     header( 'Permissions-Policy: camera=(), microphone=(), geolocation=()' );
 
-    // HSTS (only if HTTPS)
-    if ( is_ssl() ) {
-        header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains; preload' );
-    }
+    // HSTS (always send as we are behind Cloudflare)
+    header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains; preload' );
 
     // Remove server info
     header_remove( 'X-Powered-By' );
@@ -372,9 +370,29 @@ RewriteEngine On
 RewriteCond %{QUERY_STRING} (eval\(|base64_decode|javascript:|<script|GLOBALS|_REQUEST) [NC]
 RewriteRule .* - [F,L]
 
+# Block Cloud Metadata Access (VULN-001)
+RewriteCond %{REQUEST_URI} ^/opc/v1/instance/ [NC,OR]
+RewriteCond %{REQUEST_URI} ^/latest/meta-data/ [NC]
+RewriteRule .* - [F,L]
+
+# Fast 404 for missing files in wp-content/plugins to prevent Wildcard 200 OK (ISS-001)
+RewriteCond %{REQUEST_URI} ^/wp-content/plugins/ [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* - [R=404,L]
+
 # Block common attack user agents
 RewriteCond %{HTTP_USER_AGENT} (havij|nikto|sqlmap|masscan|zgrab|python-requests\/2\.2[0-9]) [NC]
 RewriteRule .* - [F,L]
+
+# Enforce Security Headers globally (VULN-002, 003, 004, 005)
+<IfModule mod_headers.c>
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://res.cloudinary.com https://fonts.googleapis.com https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https://res.cloudinary.com https://secure.gravatar.com https://www.google-analytics.com https://www.googletagmanager.com https://s.w.org; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; media-src 'self' https://res.cloudinary.com; connect-src 'self' https://cdn.jsdelivr.net https://cloudflareinsights.com https://www.google-analytics.com; frame-ancestors 'self';"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</IfModule>
 $marker_end
 RULES;
 
