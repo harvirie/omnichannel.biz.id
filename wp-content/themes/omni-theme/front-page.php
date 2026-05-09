@@ -21,12 +21,6 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
       <!-- Top Card -->
       <div class="relative z-10 w-[300vw] -left-[55vw] md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 1163.2;">
         <svg viewBox="0 0 2000.62 1163.2" class="absolute inset-0 w-full h-full drop-shadow-xl" preserveAspectRatio="xMidYMid meet">
-          <defs>
-            <filter id="glow-filter" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
-              <feComposite in="blur" in2="SourceGraphic" operator="over"/>
-            </filter>
-          </defs>
           <path fill="#F8FAFC" d="M 64 0 A 64 64 0 0 0 0 64 L 0 950.62 A 64 64 0 0 0 64 1014.62 L 678 1014.62 A 74.29 74.29 0 0 1 752.29 1088.91 A 74.29 74.29 0 0 0 826.58 1163.2 L 1936.62 1163.2 A 64 64 0 0 0 2000.62 1099.2 L 2000.62 212.88 A 64 64 0 0 0 1936.62 148.88 L 826.58 148.88 A 74.44 74.44 0 0 1 752.14 74.44 A 74.44 74.44 0 0 0 677.7 0 Z"/>
           <path class="svg-glow-path-wide" pathLength="100" d="M 64 0 A 64 64 0 0 0 0 64 L 0 950.62 A 64 64 0 0 0 64 1014.62 L 678 1014.62 A 74.29 74.29 0 0 1 752.29 1088.91 A 74.29 74.29 0 0 0 826.58 1163.2 L 1936.62 1163.2 A 64 64 0 0 0 2000.62 1099.2 L 2000.62 212.88 A 64 64 0 0 0 1936.62 148.88 L 826.58 148.88 A 74.44 74.44 0 0 1 752.14 74.44 A 74.44 74.44 0 0 0 677.7 0 Z"/>
           <path class="svg-glow-path" pathLength="100" d="M 64 0 A 64 64 0 0 0 0 64 L 0 950.62 A 64 64 0 0 0 64 1014.62 L 678 1014.62 A 74.29 74.29 0 0 1 752.29 1088.91 A 74.29 74.29 0 0 0 826.58 1163.2 L 1936.62 1163.2 A 64 64 0 0 0 2000.62 1099.2 L 2000.62 212.88 A 64 64 0 0 0 1936.62 148.88 L 826.58 148.88 A 74.44 74.44 0 0 1 752.14 74.44 A 74.44 74.44 0 0 0 677.7 0 Z"/>
@@ -34,7 +28,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
 
         <!-- Inner Image Container (Desktop) -->
         <div class="hidden md:block absolute z-10 rounded-[2.5vw] overflow-hidden shadow-2xl" style="top: 17.55%; right: 4.5%; bottom: 11.45%; width: 43%;">
-          <video src="https://res.cloudinary.com/dtxwwevxl/video/upload/q_auto:low,f_auto/v1778211855/video_hero_wkvc4s.mp4" class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline preload="none" style="will-change: transform;"></video>
+          <video src="https://res.cloudinary.com/dtxwwevxl/video/upload/q_auto:low,f_auto/v1778211855/video_hero_wkvc4s.mp4" poster="https://res.cloudinary.com/dtxwwevxl/video/upload/q_auto:low,f_auto/v1778211855/video_hero_wkvc4s.jpg" class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline preload="auto" style="will-change: transform;"></video>
           <div class="absolute inset-0 bg-gradient-to-t from-omni-dark/90 via-omni-dark/20 to-transparent"></div>
           
           <!-- Recommended Card -->
@@ -146,7 +140,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
 
           <!-- Mobile Image Container -->
           <div class="relative mt-4 mb-4 w-full max-w-[340px] mx-auto shrink-0 h-[200px] rounded-3xl overflow-hidden shadow-xl border border-white/20 -translate-x-[10px]">
-            <video src="https://res.cloudinary.com/dtxwwevxl/video/upload/v1778211855/video_hero_wkvc4s.mp4" class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline preload="metadata"></video>
+            <video src="https://res.cloudinary.com/dtxwwevxl/video/upload/v1778211855/video_hero_wkvc4s.mp4" poster="https://res.cloudinary.com/dtxwwevxl/video/upload/v1778211855/video_hero_wkvc4s.jpg" class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline preload="auto"></video>
             <div class="absolute inset-0 bg-gradient-to-t from-omni-dark/90 via-omni-dark/20 to-transparent"></div>
             
             <div class="absolute bottom-3 left-3 right-3">
@@ -185,18 +179,11 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
 
       <!-- Bottom Card -->
       <div class="relative z-20 w-[300vw] -left-[55vw] md:w-full md:left-0 transition-all max-md:!-mt-[9.6vw]" style="aspect-ratio: 2000.62 / 448.88; margin-top: -2.99%;">
-        <svg viewBox="0 0 2000.62 448.88" class="absolute inset-0 w-full h-full text-omni-dark"
-          preserveAspectRatio="xMidYMid meet"
-          style="filter: drop-shadow(-8px 8px 0px #D4AF37);">
-          <defs>
-            <filter id="glow-filter-b" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
-              <feComposite in="blur" in2="SourceGraphic" operator="over"/>
-            </filter>
-          </defs>
+        <svg viewBox="0 0 2000.62 448.88" class="absolute inset-0 w-full h-full text-omni-dark" preserveAspectRatio="xMidYMid meet">
+          <path fill="#D4AF37" transform="translate(-8, 8)" opacity="0.8" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 384.88 A 64 64 0 0 1 1936.62 448.88 L 64 448.88 A 64 64 0 0 1 0 384.88 L 0 64 A 64 64 0 0 1 64 0 Z"/>
           <path fill="currentColor" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 384.88 A 64 64 0 0 1 1936.62 448.88 L 64 448.88 A 64 64 0 0 1 0 384.88 L 0 64 A 64 64 0 0 1 64 0 Z"/>
-          <path class="svg-glow-path-wide" pathLength="100" style="filter: url(#glow-filter-b);" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 384.88 A 64 64 0 0 1 1936.62 448.88 L 64 448.88 A 64 64 0 0 1 0 384.88 L 0 64 A 64 64 0 0 1 64 0 Z"/>
-          <path class="svg-glow-path" pathLength="100" style="filter: url(#glow-filter-b);" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 384.88 A 64 64 0 0 1 1936.62 448.88 L 64 448.88 A 64 64 0 0 1 0 384.88 L 0 64 A 64 64 0 0 1 64 0 Z"/>
+          <path class="svg-glow-path-wide" pathLength="100" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 384.88 A 64 64 0 0 1 1936.62 448.88 L 64 448.88 A 64 64 0 0 1 0 384.88 L 0 64 A 64 64 0 0 1 64 0 Z"/>
+          <path class="svg-glow-path" pathLength="100" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 384.88 A 64 64 0 0 1 1936.62 448.88 L 64 448.88 A 64 64 0 0 1 0 384.88 L 0 64 A 64 64 0 0 1 64 0 Z"/>
         </svg>
 
         <!-- Desktop Bottom Card Content -->

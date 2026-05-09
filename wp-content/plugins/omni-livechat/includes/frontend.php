@@ -170,7 +170,10 @@ function omni_lc_render_widget() {
 </div>
 
 <script>
-(function(){
+function initOmniLC() {
+    if (window.omniLCInitialized) return;
+    window.omniLCInitialized = true;
+
 'use strict';
 const NONCE      = '<?php echo $nonce; ?>';
 const AJAX       = '<?php echo esc_js($ajax); ?>';
@@ -365,7 +368,8 @@ function escHtml(s){ const d=document.createElement('div'); d.textContent=s; ret
 // Resume existing session
 if(sessionKey){ formWrap.style.display='none'; chatWrap.style.display='flex'; statusTxt.textContent='🟢 Online'; startPoll(); resetInactivity(); }
 
-})();
+}
+['mousemove', 'click', 'keydown', 'touchstart', 'wheel'].forEach(e => document.addEventListener(e, initOmniLC, {once: true, passive: true}));
 </script>
     <?php
 }

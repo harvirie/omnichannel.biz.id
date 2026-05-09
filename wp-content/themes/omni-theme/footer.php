@@ -243,12 +243,15 @@ async function submitDemoForm(e) {
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            if (typeof Swiper !== 'undefined') {
-              new Swiper(selector, config);
-            } else {
-              // Swiper belum loaded, coba lagi setelah 100ms
-              setTimeout(() => new Swiper(selector, config), 100);
-            }
+            const initSwiper = () => {
+              if (typeof Swiper !== 'undefined') {
+                new Swiper(selector, config);
+              } else {
+                setTimeout(initSwiper, 500);
+              }
+            };
+            // Defer initialization aggressively to save TBT
+            setTimeout(initSwiper, 3000);
             obs.unobserve(el);
           }
         });

@@ -17,21 +17,31 @@
     <link rel="shortcut icon" href="/brand/favicon/favicon.ico">
 
     <?php if ( is_front_page() || is_page('fitur') ) : ?>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18148308364"></script>
+    <!-- Google tag (gtag.js) - Deferred -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    function loadGTM() {
+        if (window.gtmLoaded) return;
+        window.gtmLoaded = true;
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=AW-18148308364";
+        document.head.appendChild(script);
 
-      gtag('config', 'AW-18148308364');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-18148308364');
+    }
+    ['mousemove', 'click', 'keydown', 'touchstart', 'wheel'].forEach(e => document.addEventListener(e, loadGTM, {once: true, passive: true}));
+    setTimeout(loadGTM, 5000); // Fallback
     </script>
     <?php endif; ?>
     <!-- Google Fonts: hanya weight yang benar-benar dipakai -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Swiper CSS: hanya dimuat jika dipakai, via jsDelivr cepat -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></noscript>
 
     <!-- Font Awesome: hanya brand icons yang dipakai (fa-brands saja, jauh lebih kecil) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css" media="print" onload="this.media='all'">
@@ -78,7 +88,6 @@
             animation: svgGlowLine 14s linear infinite;
             opacity: 0.9;
             /* Pakai filter SVG native via id, bukan CSS filter (menghindari kotak) */
-            filter: url(#glow-filter);
         }
         /* Path kedua: cahaya lebih tebal & lebih lambat untuk efek depth */
         .svg-glow-path-wide {
@@ -89,7 +98,6 @@
             stroke-dasharray: 5 95;
             animation: svgGlowLine 18s linear infinite reverse;
             opacity: 0.25;
-            filter: url(#glow-filter);
         }
     </style>
     <?php
@@ -260,23 +268,18 @@ body.omni-loading { overflow: hidden; }
     var loader   = document.getElementById('omni-loader');
     var bar      = document.getElementById('omni-loader-bar');
     var maxMs    = 5000;   // Maksimal 5 detik
-    var startTime = Date.now();
     var dismissed = false;
 
-    function fillBar() {
-        if (dismissed) return;
-        var elapsed = Date.now() - startTime;
-        var pct     = Math.min((elapsed / maxMs) * 100, 100);
-        bar.style.width = pct + '%';
-        if (pct < 100) {
-            requestAnimationFrame(fillBar);
-        }
-    }
-    requestAnimationFrame(fillBar);
+    // Use CSS transition instead of requestAnimationFrame for better performance
+    setTimeout(function() {
+        if (!dismissed) bar.style.transition = 'width ' + maxMs + 'ms linear';
+        if (!dismissed) bar.style.width = '100%';
+    }, 50);
 
     function dismissLoader() {
         if (dismissed) return;
         dismissed = true;
+        bar.style.transition = 'width 0.3s linear';
         bar.style.width = '100%';
         setTimeout(function() {
             loader.classList.add('omni-loader-hidden');

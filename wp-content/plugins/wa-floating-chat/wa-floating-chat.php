@@ -240,7 +240,10 @@ function wa_floating_chat_render_widget() {
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    function initWAWidget() {
+        if (window.waWidgetInitialized) return;
+        window.waWidgetInitialized = true;
+
         const toggle = document.getElementById('wa-toggle-btn');
         const form   = document.getElementById('wa-form-container');
         const close  = document.getElementById('wa-close-btn');
@@ -303,7 +306,8 @@ function wa_floating_chat_render_widget() {
             })
             .finally(() => { btn.textContent='Kirim & Lanjut Chat ➤'; btn.disabled=false; });
         });
-    });
+    }
+    ['mousemove', 'click', 'keydown', 'touchstart', 'wheel'].forEach(e => document.addEventListener(e, initWAWidget, {once: true, passive: true}));
     </script>
     <?php
 }
