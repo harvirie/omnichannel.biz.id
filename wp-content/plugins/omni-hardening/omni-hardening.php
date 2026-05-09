@@ -350,6 +350,9 @@ function omni_sec_write_htaccess_rules() {
     $rules = <<<RULES
 
 $marker_start
+# Route 403 errors to WordPress so they can be logged by the plugin
+ErrorDocument 403 /index.php?omni_error=403
+
 # Block access to sensitive files
 <FilesMatch "(wp-config\.php|xmlrpc\.php|\.htaccess|wp-config-sample\.php|readme\.html|license\.txt|install\.php)$">
     Order Allow,Deny
@@ -584,6 +587,7 @@ function omni_sec_admin_page() {
 // Handle ?omni_error=403 from .htaccess ErrorDocument
 add_action( 'init', function() {
     if ( isset( $_GET['omni_error'] ) && (int) $_GET['omni_error'] === 403 ) {
+        omni_sec_log_scan('Blocked by Apache/.htaccess');
         omni_sec_render_403();
     }
 } );
