@@ -159,6 +159,107 @@
 <body <?php body_class('min-h-screen bg-omni-secondary flex flex-col font-sans text-slate-900 overflow-x-hidden'); ?>>
 <?php wp_body_open(); ?>
 
+<!-- ===== OMNI LOADING SCREEN ===== -->
+<div id="omni-loader" style="
+    position: fixed; inset: 0; z-index: 99999;
+    background: #0F172A;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 32px;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+">
+    <!-- Logo SVG Inline (dari brand/logo_dark.svg, warna diubah ke putih) -->
+    <div id="omni-loader-logo" style="animation: omniLogoPulse 2s ease-in-out infinite;">
+        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="90" height="90" viewBox="0 0 1688.04 1786.91">
+            <defs>
+                <style>.ldr-fil {fill:#D4AF37;} .ldr-str {fill:#D4AF37;stroke:#D4AF37;stroke-width:6.24;stroke-miterlimit:22.9256;}</style>
+                <filter id="ldr-glow">
+                    <feGaussianBlur stdDeviation="18" result="coloredBlur"/>
+                    <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+            </defs>
+            <g filter="url(#ldr-glow)">
+                <rect class="ldr-fil" y="654.4" width="102.02" height="401.71" rx="51.01" ry="51.01"/>
+                <rect class="ldr-fil" x="1592.87" y="689.44" width="95.17" height="374.74" rx="47.58" ry="47.58"/>
+                <path class="ldr-fil" d="M77.97 629.15c-2.83,12.56 -15.31,20.46 -27.87,17.63 -12.57,-2.82 -20.47,-15.31 -17.64,-27.87 58.09,-256.53 214.1,-431.42 408.3,-528.28 129.9,-64.79 276.95,-94.5 423.09,-90.22 146.12,4.27 291.38,42.51 417.74,113.61 191.23,107.61 339.44,290.12 382.73,543.74 2.17,12.72 -6.38,24.79 -19.1,26.96 -12.72,2.17 -24.79,-6.38 -26.96,-19.1 -40.68,-238.3 -179.89,-409.77 -359.52,-510.84 -119.85,-67.44 -257.61,-103.71 -396.17,-107.77 -138.55,-4.05 -277.91,24.09 -400.98,85.48 -182.41,90.98 -328.99,255.39 -383.62,496.66z"/>
+                <path class="ldr-fil" d="M845.39 135.18c332.4,0 611.91,226.27 693.02,533.17l0.03 -0.06 0.43 1.76c2.8,10.7 5.34,21.51 7.66,32.39 0.23,1.09 0.48,2.16 0.7,3.24l0.69 3.32c77.92,369.43 -77.14,713.53 -367.14,1042.96 -41.9,53.39 -92.64,41.12 -65.09,-6.5 21.01,-64.13 32.23,-140.01 23.74,-239.55l0.01 -0.02c-89.73,40.41 -189.26,62.9 -294.05,62.9 -395.88,0 -716.8,-320.92 -716.8,-716.8 0,-395.88 320.92,-716.81 716.8,-716.81zm325.44 464.86c-153.04,0 -277.09,124.06 -277.09,277.09 0,153.03 124.05,277.09 277.09,277.09 31.6,0 61.96,-5.3 90.26,-15.05 -6.28,24.26 -15.71,48.46 -27.02,73.57 -11.52,26.26 1.83,49.64 28.54,21.42 65.22,-71.83 122.21,-148.59 158.71,-238.47 8.46,-17.84 15.08,-36.73 19.59,-56.42l0.03 -0.1 -0.01 0.01c4.57,-19.95 6.99,-40.72 6.99,-62.05 0,-153.03 -124.06,-277.09 -277.09,-277.09zm-614.86 -187.37c174.18,0 315.37,141.2 315.37,315.37 0,174.18 -141.19,315.37 -315.37,315.37 -35.97,0 -70.52,-6.04 -102.73,-17.13 7.15,27.61 17.88,55.16 30.75,83.74 13.11,29.88 -2.07,56.5 -32.48,24.37 -74.23,-81.75 -139.1,-169.11 -180.64,-271.41 -9.63,-20.31 -17.16,-41.8 -22.3,-64.21l-0.03 -0.11 0.01 0.01c-5.19,-22.71 -7.95,-46.35 -7.95,-70.63 0,-174.17 141.2,-315.37 315.37,-315.37z"/>
+                <circle class="ldr-str" cx="388.01" cy="726.69" r="45.65"/>
+                <circle class="ldr-str" cx="543.57" cy="726.69" r="45.65"/>
+                <circle class="ldr-str" cx="690.68" cy="726.69" r="45.65"/>
+                <circle class="ldr-str" cx="1037.64" cy="884.47" r="38.47"/>
+                <circle class="ldr-str" cx="1168.73" cy="884.47" r="38.47"/>
+                <circle class="ldr-str" cx="1292.69" cy="884.47" r="38.47"/>
+            </g>
+        </svg>
+    </div>
+
+    <!-- Brand Name -->
+    <div style="text-align:center;">
+        <div style="color:#D4AF37; font-family:'Outfit',sans-serif; font-size:13px; letter-spacing:0.25em; text-transform:uppercase; font-weight:600; opacity:0.8;">OmniServe</div>
+    </div>
+
+    <!-- Progress Bar Container -->
+    <div style="width: 200px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 999px; overflow: hidden;">
+        <div id="omni-loader-bar" style="
+            height: 100%; width: 0%; background: linear-gradient(90deg, #D4AF37, #F5D978);
+            border-radius: 999px;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 8px rgba(212,175,55,0.8);
+        "></div>
+    </div>
+</div>
+
+<style>
+@keyframes omniLogoPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%       { transform: scale(1.08); opacity: 0.85; }
+}
+#omni-loader.omni-loader-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+body.omni-loading { overflow: hidden; }
+</style>
+
+<script>
+(function() {
+    document.body.classList.add('omni-loading');
+    var loader   = document.getElementById('omni-loader');
+    var bar      = document.getElementById('omni-loader-bar');
+    var maxMs    = 5000;   // Maksimal 5 detik
+    var startTime = Date.now();
+    var dismissed = false;
+
+    function fillBar() {
+        if (dismissed) return;
+        var elapsed = Date.now() - startTime;
+        var pct     = Math.min((elapsed / maxMs) * 100, 100);
+        bar.style.width = pct + '%';
+        if (pct < 100) {
+            requestAnimationFrame(fillBar);
+        }
+    }
+    requestAnimationFrame(fillBar);
+
+    function dismissLoader() {
+        if (dismissed) return;
+        dismissed = true;
+        bar.style.width = '100%';
+        setTimeout(function() {
+            loader.classList.add('omni-loader-hidden');
+            document.body.classList.remove('omni-loading');
+        }, 300);
+    }
+
+    // Dismiss saat DOM + resource utama siap
+    window.addEventListener('load', dismissLoader);
+    // Fallback: maksimal 5 detik
+    setTimeout(dismissLoader, maxMs);
+})();
+</script>
+<!-- ===== END OMNI LOADING SCREEN ===== -->
+
+
 <!-- Mobile Navbar -->
 <nav class="md:hidden fixed top-0 w-full z-40 border-b border-white/10 shadow-md" style="background-color: #0F172A; will-change: transform;">
   <div class="px-4">
