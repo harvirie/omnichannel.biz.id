@@ -3,7 +3,9 @@
  * Plugin Name:  OmniServe Security Hardening
  * Plugin URI:   https://omnichannel.biz.id
  * Description:  Hardening otomatis WordPress: anti-bruteforce, CSP, REST API lockdown, XSS mitigation, XML/XXE disable, PHP-in-uploads block, login protection, dan file integrity. Berdasarkan CVE-2026-3906/3907/3908.
- * Version:      1.0.0
+ * Version:      1.1.0
+ * Tested up to: 6.9.4
+ * Update Info:  (2026-05-09) Penambahan fitur Intrusion Detection System (IDS) untuk pemindaian kerentanan WP.
  * Author:       Harizal
  * License:      GPL-2.0+
  * Text Domain:  omni-hardening
@@ -11,7 +13,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'OMNI_SEC_VERSION', '1.0.0' );
+define( 'OMNI_SEC_VERSION', '1.1.0' );
 define( 'OMNI_SEC_PATH',    plugin_dir_path( __FILE__ ) );
 define( 'OMNI_SEC_URL',     plugin_dir_url( __FILE__ ) );
 define( 'OMNI_SEC_LOG',     WP_CONTENT_DIR . '/omni-security.log' );

@@ -3,7 +3,9 @@
  * Plugin Name: WhatsApp Floating Chat with Lead Form
  * Plugin URI: https://omnichannel.biz.id
  * Description: Floating WhatsApp dengan form lead. Data tersimpan di database dan bisa diexport CSV.
- * Version: 2.0.0
+ * Version: 2.0.1
+ * Tested up to: 6.9.4
+ * Update Info: (2026-05-09) Perbaikan posisi Z-index dan max-height agar tidak terpotong di mobile.
  * Author: Harizal
  * License: GPL2
  */

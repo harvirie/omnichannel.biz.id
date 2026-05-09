@@ -1,3 +1,10 @@
+/*
+Theme Name: Omni Theme
+Description: Custom Tailwind CSS theme for omnichannel.biz.id
+Version: 1.1.0
+Tested up to: 6.9.4
+Update Info: (2026-05-09) Performance optimization (TBT reduction, LCP fixes, Lazy Init JS).
+*/
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;

@@ -3,7 +3,9 @@
  * Plugin Name: OmniServe Live Chat
  * Plugin URI:  https://omnichannel.biz.id
  * Description: Live Chat widget dengan bot menu, panel admin, jam operasional, dan inbox percakapan.
- * Version:     1.1.0
+ * Version:     1.1.1
+ * Tested up to: 6.9.4
+ * Update Info: (2026-05-09) Penyesuaian pengecekan state form WA untuk mencegah tumpang tindih UI.
  * Author:      Harizal
  * License:     GPL2
  */
