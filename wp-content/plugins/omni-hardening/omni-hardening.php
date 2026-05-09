@@ -37,6 +37,20 @@ function omni_sec_activate() {
     require_once ABSPATH . 'wp-admin/includes/upgrade.php';
     dbDelta( $sql );
 
+    $table_scans = $wpdb->prefix . 'omni_sec_scans';
+    $sql_scans = "CREATE TABLE IF NOT EXISTS $table_scans (
+        id         BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+        ip_address VARCHAR(45) NOT NULL,
+        location   VARCHAR(200) DEFAULT '',
+        user_agent VARCHAR(255) DEFAULT '',
+        endpoint   VARCHAR(255) DEFAULT '',
+        attempted  DATETIME NOT NULL,
+        PRIMARY KEY (id),
+        KEY ip_address (ip_address),
+        KEY attempted (attempted)
+    ) $charset;";
+    dbDelta( $sql_scans );
+
     // Block PHP execution in uploads via .htaccess
     omni_sec_protect_uploads_dir();
 
@@ -429,6 +443,9 @@ function omni_sec_admin_page() {
         $window
     ) );
 
+    $table_scans = $wpdb->prefix . 'omni_sec_scans';
+    $scans = $wpdb->get_results( "SELECT * FROM $table_scans ORDER BY attempted DESC LIMIT 20" );
+
     $checks = [
         'WordPress Core Update'     => version_compare( get_bloginfo('version'), '6.9.4', '>=' ),
         'File Editor Disabled'      => defined('DISALLOW_FILE_EDIT') && DISALLOW_FILE_EDIT,
@@ -489,6 +506,29 @@ function omni_sec_admin_page() {
                 <?php endif; ?>
             </div>
 
+            <div class="omni-sec-card" style="grid-column: 1 / -1;">
+                <h2>🕵️ Deteksi Pemindaian Keamanan (Web Scanners)</h2>
+                <p style="font-size:13px;color:#64748b;margin-bottom:12px;">Mendeteksi aktivitas pemindaian kerentanan (seperti WPScan, Nikto) berdasarkan akses file sensitif dan user-agent anomali.</p>
+                <?php if ( $scans ): ?>
+                <table class="omni-sec-table">
+                    <thead><tr><th>Waktu</th><th>IP Address</th><th>Lokasi</th><th>User Agent</th><th>Target Endpoint</th></tr></thead>
+                    <tbody>
+                    <?php foreach ( $scans as $s ): ?>
+                        <tr>
+                            <td><?php echo esc_html(get_date_from_gmt($s->attempted, 'd/m H:i:s')); ?></td>
+                            <td><strong><?php echo esc_html($s->ip_address); ?></strong></td>
+                            <td><?php echo esc_html($s->location ?: 'Tidak diketahui'); ?></td>
+                            <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="<?php echo esc_attr($s->user_agent); ?>"><?php echo esc_html($s->user_agent); ?></td>
+                            <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="<?php echo esc_attr($s->endpoint); ?>"><?php echo esc_html($s->endpoint); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <?php else: ?>
+                    <p style="color:#22c55e;margin-top:8px;">✅ Belum ada aktivitas pemindaian kerentanan yang terdeteksi.</p>
+                <?php endif; ?>
+            </div>
+
             <div class="omni-sec-card">
                 <h2>🔍 CVE Mitigasi Aktif</h2>
                 <ul class="omni-cve-list">
@@ -531,10 +571,25 @@ add_action( 'init', function() {
 add_action( 'init', function() {
     // Trigger 403 page for blocked bot user agents
     $ua = $_SERVER['HTTP_USER_AGENT'] ?? '';
-    $blocked_ua = ['havij', 'nikto', 'sqlmap', 'masscan', 'zgrab'];
+    $blocked_ua = ['havij', 'nikto', 'sqlmap', 'masscan', 'zgrab', 'wpscan', 'acunetix', 'nmap'];
     foreach ($blocked_ua as $b) {
         if (stripos($ua, $b) !== false) {
+            omni_sec_log_scan('Blocked UA: ' . $b);
             omni_sec_render_403();
+        }
+    }
+} );
+
+// Log 404s on sensitive files as scans
+add_action( 'template_redirect', function() {
+    if ( is_404() ) {
+        $uri = $_SERVER['REQUEST_URI'] ?? '';
+        $sensitive = ['.env', 'wp-config.php.bak', '.git', 'xmlrpc.php', 'wp-admin/includes', 'debug.log'];
+        foreach ($sensitive as $s) {
+            if (stripos($uri, $s) !== false) {
+                omni_sec_log_scan('Sensitive File Probe');
+                omni_sec_render_403();
+            }
         }
     }
 } );
@@ -634,4 +689,37 @@ function omni_sec_get_ip() {
 function omni_sec_log( $msg ) {
     $line = '[' . gmdate('Y-m-d H:i:s') . '] ' . $msg . PHP_EOL;
     file_put_contents( OMNI_SEC_LOG, $line, FILE_APPEND | LOCK_EX );
+}
+
+function omni_sec_log_scan( $reason = 'Manual/Rewrite' ) {
+    global $wpdb;
+    $ip = omni_sec_get_ip();
+    $ua = sanitize_text_field(substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 250));
+    $endpoint = sanitize_text_field(substr($_SERVER['REQUEST_URI'] ?? '', 0, 250));
+    
+    $table = $wpdb->prefix . 'omni_sec_scans';
+    // Mencegah spam log jika ada request beruntun dari IP yang sama
+    $recent = $wpdb->get_var($wpdb->prepare("SELECT id FROM $table WHERE ip_address = %s AND attempted > %s", $ip, gmdate('Y-m-d H:i:s', time() - 300)));
+    
+    if ( ! $recent ) {
+        $location = '';
+        $api_url = "http://ip-api.com/json/{$ip}?fields=status,country,city";
+        $response = wp_remote_get($api_url, ['timeout' => 2]);
+        if ( ! is_wp_error($response) ) {
+            $body = json_decode(wp_remote_retrieve_body($response), true);
+            if ( ! empty($body) && $body['status'] === 'success' ) {
+                $location = $body['city'] . ', ' . $body['country'];
+            }
+        }
+        
+        $wpdb->insert($table, [
+            'ip_address' => $ip,
+            'location'   => $location,
+            'user_agent' => $ua,
+            'endpoint'   => $endpoint . ' [' . $reason . ']',
+            'attempted'  => current_time('mysql', true)
+        ], ['%s', '%s', '%s', '%s', '%s']);
+        
+        omni_sec_log("SCAN DETECTED: $ip ($location) -> $endpoint ($reason)");
+    }
 }
