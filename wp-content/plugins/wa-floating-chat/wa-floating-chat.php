@@ -199,7 +199,7 @@ function wa_leads_admin_page() {
 add_action('wp_footer', 'wa_floating_chat_render_widget', 100);
 function wa_floating_chat_render_widget() {
     ?>
-    <div id="wa-widget" style="position:fixed;bottom:24px;right:24px;z-index:99997;display:flex;flex-direction:column;align-items:flex-end;font-family:ui-sans-serif,system-ui,sans-serif;">
+    <div id="wa-widget" style="position:fixed;bottom:24px;right:24px;z-index:100000;display:flex;flex-direction:column;align-items:flex-end;font-family:ui-sans-serif,system-ui,sans-serif;">
       <div id="wa-form-container" style="display:none;position:absolute;bottom:80px;right:0;background:white;border-radius:16px;box-shadow:0 20px 25px -5px rgba(0,0,0,.15);border:1px solid #e5e7eb;width:320px;max-height:calc(100vh - 120px);display:flex;flex-direction:column;overflow:hidden;opacity:0;transition:opacity .3s ease;">
         <div style="background:#25D366;color:white;padding:16px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
           <div style="display:flex;align-items:center;gap:8px;">
@@ -251,7 +251,7 @@ function wa_floating_chat_render_widget() {
         const msg    = document.getElementById('wa-msg');
 
         function openForm() { 
-            form.style.display='block'; 
+            form.style.display='flex'; 
             void form.offsetWidth; 
             form.style.opacity='1'; 
             

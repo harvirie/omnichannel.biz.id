@@ -212,7 +212,7 @@ function openWin()  {
     // Auto-close WA Chat if open
     const waCloseBtn = document.getElementById('wa-close-btn');
     const waForm = document.getElementById('wa-form-container');
-    if (waCloseBtn && waForm && waForm.style.display === 'block') {
+    if (waCloseBtn && waForm && (waForm.style.display === 'flex' || waForm.style.display === 'block')) {
         waCloseBtn.click();
     }
 }
