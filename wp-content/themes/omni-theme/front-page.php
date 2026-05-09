@@ -1,8 +1,8 @@
 <?php 
 get_header(); 
 $front_id = get_option('page_on_front');
-$hero_title = get_post_meta($front_id, 'omni_hero_title', true) ?: 'Satu Layar untuk<br/>Semua Saluran.';
-$hero_sub = get_post_meta($front_id, 'omni_hero_sub', true) ?: 'Tingkatkan kepuasan pelanggan dan produktivitas tim yang menghubungkan suara, chat, email, dan sosmed dalam satu tempat.';
+$hero_title = get_post_meta($front_id, 'omni_hero_title', true) ?: 'Aplikasi Omnichannel<br/>Call Center Terbaik.';
+$hero_sub = get_post_meta($front_id, 'omni_hero_sub', true) ?: 'Tingkatkan kepuasan pelanggan dengan software aplikasi omnichannel call center yang mengintegrasikan WhatsApp API, telepon, email, dan media sosial dalam satu dashboard terpadu.';
 $hero_badge1 = get_post_meta($front_id, 'omni_hero_badge1', true) ?: 'Tanpa Kartu Kredit';
 $hero_badge2 = get_post_meta($front_id, 'omni_hero_badge2', true) ?: 'Setup 5 Menit';
 $integration_title = get_post_meta($front_id, 'omni_integration_title', true) ?: 'Integrasi<br/><em class="text-omni-accent italic">Tanpa Batas</em>';

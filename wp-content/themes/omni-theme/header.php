@@ -9,10 +9,12 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
 
-    <!-- Favicon dari Cloudinary -->
-    <link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg">
-    <link rel="shortcut icon" type="image/svg+xml" href="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg">
-    <link rel="apple-touch-icon" href="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/brand/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/brand/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/brand/favicon/site.webmanifest">
+    <link rel="shortcut icon" href="/brand/favicon/favicon.ico">
 
     <?php if ( is_front_page() || is_page('fitur') ) : ?>
     <!-- Google tag (gtag.js) -->
@@ -96,6 +98,9 @@
         if (!$seo_desc && is_front_page()) {
             $front_id = get_option('page_on_front');
             $seo_desc = get_post_meta($front_id, '_omni_seo_desc', true);
+            if (!$seo_desc) {
+                $seo_desc = "Tingkatkan layanan pelanggan Anda dengan OmniServe, Aplikasi Omnichannel dan Software Call Center terintegrasi WhatsApp API, Instagram, dan Email. Coba gratis sekarang!";
+            }
         }
         if ($seo_desc) {
             echo '<meta name="description" content="' . esc_attr($seo_desc) . '">' . "\n";
@@ -107,6 +112,9 @@
         if (!$seo_title && is_front_page()) {
             $front_id = get_option('page_on_front');
             $seo_title = get_post_meta($front_id, '_omni_seo_title', true);
+            if (!$seo_title) {
+                $seo_title = "Aplikasi Omnichannel & Software Call Center Terbaik | OmniServe";
+            }
         }
         if ($seo_title) {
             add_filter('pre_get_document_title', function($title) use ($seo_title) {
