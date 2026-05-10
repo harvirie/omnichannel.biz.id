@@ -293,9 +293,9 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
         </div>
       </div>
     </div>
-    <!-- Dark blue filler to cover any potential gaps at the bottom of the section -->
-    <div class="absolute bottom-0 left-0 w-[100vw] bg-omni-dark h-[150px] z-0 left-1/2 -translate-x-1/2" style="bottom: -1px;"></div>
   </div>
+  <!-- Dark blue filler to cover any potential gaps at the bottom of the section -->
+  <div class="absolute bottom-0 left-0 w-full bg-omni-dark h-[150px] z-0" style="bottom: -1px;"></div>
 </section>
 
 <!-- CTA Section Harmonized with OmniServe Colors -->
