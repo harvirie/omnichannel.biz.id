@@ -3,8 +3,8 @@
 <div class="flex-1 bg-white w-full">
 
   <!-- Hero Section -->
-  <div class="bg-slate-50 pt-24 pb-32 md:pb-48 lg:pb-64 text-center px-6 relative overflow-hidden">
-    <div class="relative z-10">
+  <div class="bg-slate-50 pt-24 text-center px-6 relative overflow-hidden">
+    <div class="relative z-10 pb-16 md:pb-20">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="tag" class="h-4 w-4"></i>
         Harga OmniServe
@@ -19,7 +19,7 @@
     </div>
     
     <!-- Animated SVG Boundary Line -->
-    <div class="absolute bottom-0 left-0 w-full z-0 pointer-events-none" style="line-height: 0;">
+    <div class="w-full z-0 pointer-events-none" style="line-height: 0;">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3973.17 333.48" class="text-omni-dark" preserveAspectRatio="xMidYMax meet" style="display: block; width: 100%; height: auto;">
         <!-- White filler below the curve to blend with the next section -->
         <path fill="#ffffff" d="M3973.17 333.48 l-717.15 0 -0.03 -0.03c-34.38,-0.22 -66.48,-11.11 -95.36,-28.68 -32.86,-20 -61.55,-48.7 -84.61,-80.14l-0.42 -0.63 -82.73 -135.38c-12.18,-20.97 -29.12,-40.5 -51.49,-53.66 -18.67,-10.99 -41.27,-17.6 -68.25,-16.98l-0.17 0.03 -2872.96 0 L0 400 L3973.17 400 Z" />
