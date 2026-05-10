@@ -10,11 +10,8 @@
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/brand/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/brand/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/brand/favicon/site.webmanifest">
-    <link rel="shortcut icon" href="/brand/favicon/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicon.ico">
 
     <?php if ( is_front_page() || is_page('fitur') ) : ?>
     <!-- Google tag (gtag.js) - Deferred -->
