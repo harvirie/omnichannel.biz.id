@@ -3,7 +3,7 @@
 <div class="flex-1 bg-white w-full">
 
   <!-- Hero Section -->
-  <div class="pt-24 text-center px-6 relative overflow-hidden" style="background-color: #f1f5f9;">
+  <div class="-mt-20 md:-mt-32 pt-40 md:pt-52 text-center px-6 relative overflow-hidden" style="background-color: #f1f5f9;">
     <div class="relative z-10" style="padding-bottom: 20px;">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="tag" class="h-4 w-4"></i>
@@ -32,7 +32,7 @@
   </div>
 
   <!-- Pricing Cards -->
-  <div class="max-w-6xl mx-auto px-6 pb-24 -mt-10 md:-mt-16 relative z-10">
+  <div class="max-w-6xl mx-auto px-6 pb-24 pt-4 md:pt-8 relative z-10">
     <div class="grid md:grid-cols-2 gap-8 items-stretch">
 
       <!-- ===== PAKET STANDARD ===== -->

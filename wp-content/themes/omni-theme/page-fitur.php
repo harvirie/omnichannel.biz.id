@@ -24,7 +24,7 @@ add_action('wp_head', function() {
 <div class="flex-1 bg-white w-full">
 
   <!-- Hero Header -->
-  <div class="pt-20 relative overflow-hidden" style="background-color: #f1f5f9;">
+  <div class="-mt-20 md:-mt-32 pt-40 md:pt-52 relative overflow-hidden" style="background-color: #f1f5f9;">
     <div class="max-w-7xl mx-auto px-6 text-center relative z-10" style="padding-bottom: 20px;">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="zap" class="h-4 w-4"></i>
@@ -52,7 +52,7 @@ add_action('wp_head', function() {
   </div>
 
   <!-- Hero Illustration — WebP dengan fallback PNG untuk LCP optimal -->
-  <div class="max-w-4xl lg:max-w-3xl mx-auto px-6 -mt-12 md:-mt-20 mb-4 relative z-10">
+  <div class="max-w-4xl lg:max-w-3xl mx-auto px-6 pt-4 mb-4 relative z-10">
     <picture>
       <source
         srcset="<?php echo get_template_directory_uri(); ?>/assets/img/fitur-hero.webp"
