@@ -9,9 +9,16 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicon.ico">
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/assets/img/favicon.ico">
+    <!-- Favicon (Base64 inline to bypass hosting JS challenge) -->
+    <?php
+    $favicon_path = get_template_directory() . '/assets/img/favicon.ico';
+    if (file_exists($favicon_path)) {
+        $base64 = base64_encode(file_get_contents($favicon_path));
+        $data_uri = 'data:image/x-icon;base64,' . $base64;
+        echo '<link rel="icon" type="image/x-icon" href="' . $data_uri . '">' . "\n";
+        echo '<link rel="shortcut icon" type="image/x-icon" href="' . $data_uri . '">' . "\n";
+    }
+    ?>
 
     <?php if ( is_front_page() || is_page('fitur') ) : ?>
     <!-- Google tag (gtag.js) - Deferred -->

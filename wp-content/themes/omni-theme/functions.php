@@ -6,11 +6,16 @@ add_action( 'wp_enqueue_scripts', 'omni_theme_enqueue_styles' );
 
 // Add Favicon to Admin and Login Pages
 function omni_add_favicon() {
-    echo '<link rel="icon" type="image/x-icon" href="' . get_template_directory_uri() . '/assets/img/favicon.ico">' . "\n";
-    echo '<link rel="shortcut icon" type="image/x-icon" href="' . get_template_directory_uri() . '/assets/img/favicon.ico">' . "\n";
+    $favicon_path = get_template_directory() . '/assets/img/favicon.ico';
+    if (file_exists($favicon_path)) {
+        $base64 = base64_encode(file_get_contents($favicon_path));
+        $data_uri = 'data:image/x-icon;base64,' . $base64;
+        echo '<link rel="icon" type="image/x-icon" href="' . $data_uri . '">' . "\n";
+        echo '<link rel="shortcut icon" type="image/x-icon" href="' . $data_uri . '">' . "\n";
+    }
 }
-add_action('admin_head', 'omni_add_favicon');
-add_action('login_head', 'omni_add_favicon');
+add_action('admin_head', 'omni_add_favicon', 999);
+add_action('login_head', 'omni_add_favicon', 999);
 
 // Setup theme support
 function omni_theme_setup() {
