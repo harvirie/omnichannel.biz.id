@@ -25,7 +25,7 @@ add_action('wp_head', function() {
 
   <!-- Hero Header -->
   <div class="bg-slate-50 pt-20 relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 text-center relative z-10 pb-16 md:pb-20">
+    <div class="max-w-7xl mx-auto px-6 text-center relative z-10" style="padding-bottom: 20px;">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="zap" class="h-4 w-4"></i>
         Platform Omnichannel Terpadu

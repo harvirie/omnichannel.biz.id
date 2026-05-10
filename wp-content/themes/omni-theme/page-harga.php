@@ -4,7 +4,7 @@
 
   <!-- Hero Section -->
   <div class="bg-slate-50 pt-24 text-center px-6 relative overflow-hidden">
-    <div class="relative z-10 pb-16 md:pb-20">
+    <div class="relative z-10" style="padding-bottom: 20px;">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="tag" class="h-4 w-4"></i>
         Harga OmniServe
