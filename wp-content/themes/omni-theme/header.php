@@ -379,6 +379,8 @@ body.omni-loading { overflow: hidden; }
             ['path' => 'artikel', 'name' => 'Artikel', 'icon' => 'file-text'],
         ];
         foreach ($links as $link) {
+            // Skip if View Switch plugin marks this path as hidden
+            if ( function_exists('omni_vsw_path_is_hidden') && omni_vsw_path_is_hidden($link['path']) ) continue;
             $is_active = ($current_path === $link['path']);
             $class = $is_active ? 'text-omni-accent bg-omni-dark/5 shadow-inner' : 'text-omni-text-muted hover:text-omni-button hover:bg-omni-dark/5 hover:translate-x-1';
             echo '<a href="' . home_url('/' . $link['path']) . '" class="flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all duration-300 ' . $class . '">';
@@ -435,6 +437,8 @@ body.omni-loading { overflow: hidden; }
                 ['path' => 'artikel', 'name' => 'Artikel'],
             ];
             foreach ($links as $link) {
+                // Skip if View Switch plugin marks this path as hidden
+                if ( function_exists('omni_vsw_path_is_hidden') && omni_vsw_path_is_hidden($link['path']) ) continue;
                 $is_active = ($current_path === $link['path']);
                 $text_color = $is_active ? 'text-omni-accent' : 'text-white';
                 $line_classes = $is_active ? 'w-full opacity-100' : 'w-1 opacity-0 group-hover:opacity-100 group-hover:w-full';
