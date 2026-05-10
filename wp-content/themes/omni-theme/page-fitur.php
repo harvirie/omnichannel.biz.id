@@ -24,7 +24,7 @@ add_action('wp_head', function() {
 <div class="flex-1 bg-white w-full">
 
   <!-- Hero Header -->
-  <div class="bg-omni-light py-20 border-b border-omni-border">
+  <div class="bg-white py-20 border-b border-omni-border">
     <div class="max-w-7xl mx-auto px-6 text-center">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="zap" class="h-4 w-4"></i>

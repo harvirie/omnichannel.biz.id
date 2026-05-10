@@ -1,21 +1,21 @@
 <?php get_header(); ?>
 
-<div class="flex-1 bg-omni-light w-full">
+<div class="flex-1 bg-white w-full">
   <!-- Header Area -->
-  <div class="bg-omni-dark py-20 relative overflow-hidden">
-    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-omni-button-hover/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+  <div class="bg-white py-20 relative overflow-hidden border-b border-omni-border">
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-omni-button-hover/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
     <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-omni-accent/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2"></div>
     
     <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-omni-accent/20 border border-omni-accent/30 text-omni-accent mb-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-omni-dark/10 text-omni-button-hover mb-6">
         <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
         <span class="text-sm font-semibold tracking-wide uppercase">Analitik Data</span>
       </div>
-      <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+      <h1 class="text-4xl md:text-6xl font-bold text-omni-dark mb-6">
         Berhenti Sekadar Merespon.<br />
-        <span class="text-omni-accent">Ubah Interaksi Menjadi Data.</span>
+        <span class="text-omni-button-hover">Ubah Interaksi Menjadi Data.</span>
       </h1>
-      <p class="text-omni-light text-lg md:text-xl max-w-2xl mx-auto">
+      <p class="text-omni-text-muted text-lg md:text-xl max-w-2xl mx-auto">
         Pelayanan pelanggan bukan lagi sekadar cost center. Melalui OmniServe, setiap keluhan, pertanyaan, dan saran direkam, dianalisis, dan divisualisasikan.
       </p>
     </div>

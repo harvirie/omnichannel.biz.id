@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div class="flex-1 w-full" style="background: linear-gradient(135deg, #F8FAFC 0%, #ffffff 50%, #F8FAFC 100%);">
+<div class="flex-1 bg-white w-full">
 
   <!-- Hero Header -->
   <div class="py-20 text-center max-w-3xl mx-auto px-6">

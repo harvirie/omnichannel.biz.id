@@ -24,22 +24,22 @@ add_action('wp_head', function() {
 <div class="flex-1 bg-white w-full">
 
   <!-- Hero Header -->
-  <div class="bg-omni-secondary py-24 relative overflow-hidden">
+  <div class="bg-white py-24 relative overflow-hidden border-b border-omni-border">
     <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
-      <div class="inline-flex items-center gap-2 bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
+      <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="briefcase" class="h-4 w-4"></i>
         Solusi Nyata untuk Bisnis Nyata
       </div>
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight drop-shadow-sm">
-        Bagaimana OmniServe <span class="text-omni-accent">Mengubah Operasional</span><br>di Berbagai Industri
+      <h1 class="text-4xl md:text-5xl font-bold text-omni-dark mb-6 leading-tight">
+        Bagaimana OmniServe <span class="text-omni-button-hover">Mengubah Operasional</span><br>di Berbagai Industri
       </h1>
-      <p class="text-omni-light text-lg md:text-xl max-w-2xl mx-auto drop-shadow-sm">
+      <p class="text-omni-text-muted text-lg md:text-xl max-w-2xl mx-auto">
         Dari WhatsApp Unlimited hingga Telepon PSTN dengan Recording — pelajari bagaimana fitur-fitur nyata kami menyelesaikan tantangan nyata di lapangan.
       </p>
     </div>
     <!-- Background shapes -->
-    <div class="absolute top-10 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-10 right-10 w-80 h-80 bg-omni-dark/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-10 left-10 w-64 h-64 bg-omni-accent/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 right-10 w-80 h-80 bg-omni-dark/5 rounded-full blur-3xl"></div>
   </div>
 
   <!-- Use Case Hero Illustration — WebP dengan fallback PNG untuk LCP optimal -->
