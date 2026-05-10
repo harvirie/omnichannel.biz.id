@@ -28,7 +28,7 @@
         <div class="order-2 lg:order-1 relative">
           <div class="absolute -inset-4 bg-omni-secondary/20 rounded-[2.5rem] transform -rotate-2"></div>
           <img
-            src="https://images.unsplash.com/photo-1759752394755-1241472b589d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXRhJTIwYW5hbHl0aWNzJTIwZGFzaGJvYXJkJTIwc2NyZWVufGVufDF8fHx8MTc3ODE0NTkwNnww&ixlib=rb-4.1.0&q=80&w=1080"
+            src="<?php echo get_template_directory_uri(); ?>/assets/img/analytics-dashboard.webp"
             alt="Data Analytics"
             class="relative rounded-2xl shadow-2xl border border-white/50 object-cover h-[450px] w-full"
           />
