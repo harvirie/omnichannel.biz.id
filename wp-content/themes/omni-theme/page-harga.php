@@ -3,7 +3,7 @@
 <div class="flex-1 bg-white w-full">
 
   <!-- Hero Section -->
-  <div class="bg-slate-50 pt-24 pb-24 md:pb-32 text-center px-6 relative overflow-hidden">
+  <div class="bg-slate-50 pt-24 pb-32 md:pb-48 lg:pb-64 text-center px-6 relative overflow-hidden">
     <div class="relative z-10">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="tag" class="h-4 w-4"></i>

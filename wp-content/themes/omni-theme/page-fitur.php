@@ -24,7 +24,7 @@ add_action('wp_head', function() {
 <div class="flex-1 bg-white w-full">
 
   <!-- Hero Header -->
-  <div class="bg-slate-50 pt-20 pb-24 md:pb-32 relative overflow-hidden">
+  <div class="bg-slate-50 pt-20 pb-32 md:pb-48 lg:pb-64 relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="zap" class="h-4 w-4"></i>
