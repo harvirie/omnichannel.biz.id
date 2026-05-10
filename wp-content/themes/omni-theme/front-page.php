@@ -13,7 +13,12 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
 ?>
 
 <!-- Hero Section -->
-<section class="p-4 pb-0 md:p-6 bg-omni-secondary flex flex-col justify-center relative flex-1 overflow-x-hidden" style="min-height: clamp(600px, calc(100vh - 6rem), 100vh);">
+<style>
+  @media (min-width: 768px) {
+    .hero-desktop-min-h { min-height: clamp(600px, calc(100vh - 6rem), 100vh); }
+  }
+</style>
+<section class="p-4 pb-0 md:p-6 bg-omni-secondary flex flex-col justify-center relative flex-1 overflow-x-hidden hero-desktop-min-h">
   <div class="relative w-full max-w-[1400px] mx-auto flex flex-col items-center justify-center pt-8 lg:pt-0">
     
     <!-- Responsive Hero (Desktop & Mobile) -->
