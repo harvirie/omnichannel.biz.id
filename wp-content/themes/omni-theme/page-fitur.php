@@ -93,7 +93,20 @@ add_action('wp_head', function() {
             <p class="text-xs text-omni-text-muted mt-1">Blue Tick Verified</p>
           </div>
           <div class="bg-omni-light rounded-2xl p-6 border border-omni-border text-center">
-            <i data-lucide="instagram" class="h-10 w-10 text-[#E1306C] mx-auto mb-3"></i>
+            <svg class="h-10 w-10 mx-auto mb-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="ig-grad-fitur" cx="30%" cy="107%" r="150%">
+                  <stop offset="0%" stop-color="#fdf497"/>
+                  <stop offset="5%" stop-color="#fdf497"/>
+                  <stop offset="45%" stop-color="#fd5949"/>
+                  <stop offset="60%" stop-color="#d6249f"/>
+                  <stop offset="90%" stop-color="#285AEB"/>
+                </radialGradient>
+              </defs>
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="url(#ig-grad-fitur)"/>
+              <circle cx="12" cy="12" r="4.5" fill="none" stroke="white" stroke-width="1.8"/>
+              <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+            </svg>
             <p class="font-bold text-omni-dark text-sm">Instagram</p>
             <p class="text-xs text-omni-text-muted mt-1">Direct Message</p>
           </div>

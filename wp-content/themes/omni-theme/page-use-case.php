@@ -263,7 +263,19 @@ add_action('wp_head', function() {
                 <p class="text-xs text-omni-text-muted mt-1">Skalakan tim tanpa biaya tambahan per agen.</p>
               </div>
               <div class="bg-white rounded-xl p-4 border border-omni-border">
-                <i data-lucide="instagram" class="h-5 w-5 text-omni-secondary mb-2"></i>
+                <svg class="h-5 w-5 mb-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <radialGradient id="ig-grad-usecase" cx="30%" cy="107%" r="150%">
+                      <stop offset="0%" stop-color="#fdf497"/>
+                      <stop offset="45%" stop-color="#fd5949"/>
+                      <stop offset="60%" stop-color="#d6249f"/>
+                      <stop offset="90%" stop-color="#285AEB"/>
+                    </radialGradient>
+                  </defs>
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="url(#ig-grad-usecase)"/>
+                  <circle cx="12" cy="12" r="4.5" fill="none" stroke="white" stroke-width="1.8"/>
+                  <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+                </svg>
                 <p class="text-xs font-bold text-omni-dark">WA + Instagram</p>
                 <p class="text-xs text-omni-text-muted mt-1">Kelola semua akun sosial klien dari satu inbox.</p>
               </div>
