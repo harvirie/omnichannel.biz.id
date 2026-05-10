@@ -818,3 +818,13 @@ add_action('template_redirect', function() {
         exit;
     }
 }, 0);
+
+// Ambil gambar pertama dari konten artikel jika tidak ada post thumbnail
+function omni_get_first_image_url($post_content) {
+    preg_match('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post_content, $matches);
+    if(isset($matches[1])) {
+        return $matches[1];
+    }
+    return false;
+}
+

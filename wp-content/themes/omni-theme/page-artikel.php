@@ -30,12 +30,22 @@
                             </a>
                             <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
                         </div>
+                    <?php else: 
+                        $first_image = function_exists('omni_get_first_image_url') ? omni_get_first_image_url(get_the_content()) : false;
+                        if($first_image) :
+                    ?>
+                        <div class="h-48 overflow-hidden relative">
+                            <a href="<?php the_permalink(); ?>" class="block w-full h-full">
+                                <img src="<?php echo esc_url($first_image); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="<?php the_title_attribute(); ?>">
+                            </a>
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+                        </div>
                     <?php else: ?>
                         <div class="h-48 bg-omni-dark flex items-center justify-center relative overflow-hidden">
                              <a href="<?php the_permalink(); ?>" class="absolute inset-0 z-10"></a>
                              <i data-lucide="image" class="w-12 h-12 text-white/20"></i>
                         </div>
-                    <?php endif; ?>
+                    <?php endif; endif; ?>
                     
                     <div class="p-6 flex flex-col flex-1">
                         <div class="text-xs text-omni-accent font-bold mb-3 tracking-wide uppercase">
