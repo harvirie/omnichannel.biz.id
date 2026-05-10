@@ -77,33 +77,36 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* SVG Glow Animation — pakai stroke-dashoffset agar cahaya berjalan mengitari outline */
-        @keyframes svgGlowLine {
-            0%   { stroke-dashoffset: 0; }
-            100% { stroke-dashoffset: -100; }
+        /* Efek Signal Realistis & Dramatis */
+        @keyframes svgGlowSignal {
+            0%   { stroke-dashoffset: 100; }
+            100% { stroke-dashoffset: 0; }
         }
-        /* Path utama: cahaya emas tipis berjalan */
+        /* Inti Signal: Putih kekuningan terang, sangat tipis dan tajam */
         .svg-glow-path {
             fill: none;
-            stroke: var(--omni-accent);
-            stroke-width: 3px;
+            stroke: #FFFFFF;
+            stroke-width: 2px;
             stroke-linecap: round;
-            stroke-dasharray: 5 95;
-            animation: svgGlowLine 10s linear infinite;
+            stroke-dasharray: 1 32.33; /* 3 sinyal sekaligus */
+            animation: svgGlowSignal 12s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
             opacity: 1;
             vector-effect: non-scaling-stroke;
+            filter: drop-shadow(0 0 4px #D4AF37) drop-shadow(0 0 8px #D4AF37);
+            z-index: 20;
         }
-        /* Path kedua: cahaya lebih tebal & lebih lambat untuk efek depth */
+        /* Ekor Signal (Tail/Aura): Emas memudar, lebih panjang, tebal, dan buram */
         .svg-glow-path-wide {
             fill: none;
             stroke: var(--omni-accent);
             stroke-width: 8px;
             stroke-linecap: round;
-            stroke-dasharray: 3 97;
-            animation: svgGlowLine 14s linear infinite reverse;
-            opacity: 0.4;
+            stroke-dasharray: 5 28.33; /* Harus pas dengan periode 33.33 */
+            animation: svgGlowSignal 12s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+            opacity: 0.6;
             vector-effect: non-scaling-stroke;
-            filter: blur(2px);
+            filter: blur(3px) drop-shadow(0 0 15px rgba(212,175,55,0.8));
+            z-index: 10;
         }
     </style>
     <?php
