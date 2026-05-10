@@ -18,6 +18,7 @@ function omni_lc_render_widget() {
   border:none;background:transparent;padding:0;
   cursor:pointer;display:flex;align-items:center;gap:12px;
   animation:omniLcPop .5s ease;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
 }
 #omni-lc-toggle:hover #omni-lc-bubble-text{box-shadow:0 6px 24px rgba(30,64,175,.4);}
 #omni-lc-toggle:hover #omni-lc-bubble-icon{transform:scale(1.06);}
@@ -29,6 +30,7 @@ function omni_lc_render_widget() {
   box-shadow:0 4px 18px rgba(30,64,175,.3);
   max-width:200px;line-height:1.45;text-align:left;
   transition:box-shadow .2s;
+  pointer-events:none;
 }
 #omni-lc-bubble-icon{
   width:58px;height:58px;border-radius:50%;
@@ -36,6 +38,7 @@ function omni_lc_render_widget() {
   box-shadow:0 4px 14px rgba(0,0,0,.12);
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;overflow:hidden;transition:transform .2s;
+  pointer-events:none;
 }
 #omni-lc-bubble-icon img{width:38px;height:38px;object-fit:contain;}
 
@@ -55,7 +58,7 @@ function omni_lc_render_widget() {
   animation:omniLcSlide .25s ease;
 }
 @media(max-width:767px){
-  #omni-lc-window{width:calc(100vw - 16px);right:8px;bottom:80px;max-height:calc(100vh - 180px);}
+  #omni-lc-window{width:calc(100vw - 16px);right:8px;bottom:160px;max-height:calc(100vh - 200px);}
 }
 #omni-lc-header{background:#1E40AF;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;}
 #omni-lc-header img{width:40px;height:40px;border-radius:50%;background:#fff;padding:4px;object-fit:contain;flex-shrink:0;}
@@ -109,9 +112,8 @@ function omni_lc_render_widget() {
 @keyframes omniLcSlide{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
 
 @media(max-width:767px){
-  #omni-lc-toggle{padding:8px;border-radius:50%;width:52px;height:52px;justify-content:center;}
-  #omni-lc-window{width:calc(100vw - 16px);right:8px;bottom:80px;}
-  #omni-lc-bubble{right:8px;bottom:112px;}
+  #omni-lc-toggle{padding:8px;border-radius:50%;width:56px;height:56px;justify-content:center;}
+  #omni-lc-window{width:calc(100vw - 16px);right:8px;bottom:160px;}
 }
 </style>
 
@@ -138,14 +140,14 @@ function omni_lc_render_widget() {
   <div id="omni-lc-form-wrap">
     <div id="omni-lc-msg-error"></div>
     <label>Nama <span class="lc-required">*</span></label>
-    <input type="text" id="lc-nama" placeholder="Nama lengkap Anda" autocomplete="name">
+    <input type="text" id="lc-nama" placeholder="Nama lengkap Anda" autocomplete="name" tabindex="-1">
     <label>Perusahaan <span class="lc-required">*</span></label>
-    <input type="text" id="lc-perusahaan" placeholder="Nama perusahaan">
+    <input type="text" id="lc-perusahaan" placeholder="Nama perusahaan" tabindex="-1">
     <label>Email <span class="lc-required">*</span></label>
-    <input type="email" id="lc-email" placeholder="email@perusahaan.com" autocomplete="email">
+    <input type="email" id="lc-email" placeholder="email@perusahaan.com" autocomplete="email" tabindex="-1">
     <label>WhatsApp <span class="lc-required">*</span></label>
-    <input type="tel" id="lc-wa" placeholder="08xxxxxxxxxx" inputmode="numeric">
-    <button id="omni-lc-submit">Kirim</button>
+    <input type="tel" id="lc-wa" placeholder="08xxxxxxxxxx" inputmode="numeric" tabindex="-1">
+    <button id="omni-lc-submit" tabindex="-1">Kirim</button>
   </div>
 
   <!-- Chat area -->
@@ -205,20 +207,44 @@ function post(data) {
     return fetch(AJAX, {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams(data)}).then(r=>r.json());
 }
 
+function enableFormInputs() {
+    document.querySelectorAll('#omni-lc-form-wrap input, #omni-lc-form-wrap button').forEach(el => el.removeAttribute('tabindex'));
+}
+
 function openWin()  { 
     win.style.display='flex'; 
-    if(sessionKey) { startPoll(); resetInactivity(); } 
+    if(sessionKey) { startPoll(); resetInactivity(); }
+    // Enable form inputs after a delay so mobile keyboard doesn't auto-open
+    setTimeout(enableFormInputs, 350);
     
     // Auto-close WA Chat if open
     const waCloseBtn = document.getElementById('wa-close-btn');
-    const waForm = document.getElementById('wa-form-container');
-    if (waCloseBtn && waForm && (waForm.style.display === 'flex' || waForm.style.display === 'block')) {
+    const waFormEl = document.getElementById('wa-form-container');
+    if (waCloseBtn && waFormEl && waFormEl.style.display !== 'none' && waFormEl.style.opacity !== '0') {
         waCloseBtn.click();
     }
 }
-function closeWin() { win.style.display='none'; stopPoll(); }
+function closeWin() {
+    win.style.display='none'; stopPoll();
+    // Re-disable tabindex to prevent keyboard on next open
+    document.querySelectorAll('#omni-lc-form-wrap input, #omni-lc-form-wrap button').forEach(el => el.setAttribute('tabindex','-1'));
+}
 
-toggle.addEventListener('click', ()=> win.style.display==='flex' ? closeWin() : openWin());
+// Use touchend instead of click to prevent ghost-click keyboard popup on mobile
+let lcTouchMoved = false;
+toggle.addEventListener('touchstart', () => { lcTouchMoved = false; }, { passive: true });
+toggle.addEventListener('touchmove', () => { lcTouchMoved = true; }, { passive: true });
+toggle.addEventListener('touchend', (e) => {
+    if (lcTouchMoved) return;
+    e.preventDefault(); // Prevent the ghost click that can trigger keyboard
+    win.style.display==='flex' ? closeWin() : openWin();
+});
+toggle.addEventListener('click', (e) => {
+    // Only handle click on non-touch devices
+    if (e.pointerType !== 'touch') {
+        win.style.display==='flex' ? closeWin() : openWin();
+    }
+});
 closeBtn.addEventListener('click', closeWin);
 document.getElementById('lc-wa').addEventListener('input', function(){ this.value=this.value.replace(/[^0-9+]/g,''); });
 
@@ -369,7 +395,12 @@ function escHtml(s){ const d=document.createElement('div'); d.textContent=s; ret
 if(sessionKey){ formWrap.style.display='none'; chatWrap.style.display='flex'; statusTxt.textContent='🟢 Online'; startPoll(); resetInactivity(); }
 
 }
-['mousemove', 'click', 'keydown', 'touchstart', 'wheel'].forEach(e => document.addEventListener(e, initOmniLC, {once: true, passive: true}));
+// Initialize immediately on DOM ready — avoids the flash/delay on mobile
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initOmniLC);
+} else {
+    initOmniLC();
+}
 </script>
     <?php
 }
