@@ -22,7 +22,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
   <div class="relative w-full max-w-[1400px] mx-auto flex flex-col items-center justify-center pt-8 lg:pt-0">
     
     <!-- Responsive Hero (Desktop & Mobile) -->
-    <div class="w-full relative pb-10 md:pb-0 max-md:pb-0">
+    <div class="w-full relative pb-0 md:pb-0">
       <!-- Top Card -->
       <div class="relative z-10 w-[300vw] -left-[55vw] md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 1163.2;">
         <svg viewBox="0 0 2000.62 1163.2" class="absolute inset-0 w-full h-full drop-shadow-xl" preserveAspectRatio="none">
@@ -184,11 +184,11 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
 
       <!-- Bottom Card -->
       <div class="relative z-20 w-[300vw] -left-[55vw] md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 448.88; margin-top: -2.99%; margin-bottom: 0;">
-        <svg viewBox="0 0 2000.62 448.88" class="absolute inset-0 w-full h-full text-omni-dark overflow-visible" preserveAspectRatio="xMidYMid meet">
-          <path fill="#D4AF37" transform="translate(-8, 8)" opacity="0.8" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 800 L 0 800 L 0 64 A 64 64 0 0 1 64 0 Z"/>
-          <path fill="currentColor" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 800 L 0 800 L 0 64 A 64 64 0 0 1 64 0 Z"/>
-          <path class="svg-glow-path-wide" pathLength="100" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 800 L 0 800 L 0 64 A 64 64 0 0 1 64 0 Z"/>
-          <path class="svg-glow-path" pathLength="100" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 800 L 0 800 L 0 64 A 64 64 0 0 1 64 0 Z"/>
+        <svg viewBox="0 0 2000.62 448.88" class="absolute inset-0 w-full h-full text-omni-dark" preserveAspectRatio="xMidYMid meet" style="overflow: visible;">
+          <path fill="#D4AF37" transform="translate(-8, 8)" opacity="0.8" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 600 L 0 600 L 0 64 A 64 64 0 0 1 64 0 Z"/>
+          <path fill="currentColor" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 600 L 0 600 L 0 64 A 64 64 0 0 1 64 0 Z"/>
+          <path class="svg-glow-path-wide" pathLength="100" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 600 L 0 600 L 0 64 A 64 64 0 0 1 64 0 Z"/>
+          <path class="svg-glow-path" pathLength="100" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 600 L 0 600 L 0 64 A 64 64 0 0 1 64 0 Z"/>
         </svg>
 
         <!-- Desktop Bottom Card Content -->
@@ -299,8 +299,6 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
       </div>
     </div>
   </div>
-  <!-- Dark blue filler to cover any potential gaps at the bottom of the section -->
-  <div class="absolute bottom-0 left-0 w-full bg-omni-dark h-[150px] z-0" style="bottom: -1px;"></div>
 </section>
 
 <!-- CTA Section Harmonized with OmniServe Colors -->
