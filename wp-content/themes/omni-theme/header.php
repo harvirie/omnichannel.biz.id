@@ -108,6 +108,29 @@
             filter: blur(3px) drop-shadow(0 0 15px rgba(212,175,55,0.8));
             z-index: 10;
         }
+
+        /* Prevent Swiper FOUC (Flash of Unstyled Content) */
+        .swiper:not(.swiper-initialized) {
+            display: flex;
+            overflow: hidden;
+        }
+        .customers-swiper:not(.swiper-initialized) .swiper-slide {
+            width: 100%;
+            flex-shrink: 0;
+        }
+        @media (min-width: 640px) {
+            .customers-swiper:not(.swiper-initialized) .swiper-slide { width: 50%; }
+        }
+        @media (min-width: 1024px) {
+            .customers-swiper:not(.swiper-initialized) .swiper-slide { width: 33.333%; }
+        }
+        @media (min-width: 1280px) {
+            .customers-swiper:not(.swiper-initialized) .swiper-slide { width: 25%; }
+        }
+        .integration-swiper:not(.swiper-initialized) .swiper-slide {
+            width: 50%;
+            flex-shrink: 0;
+        }
     </style>
     <?php
     if (is_singular() || is_front_page()) {
