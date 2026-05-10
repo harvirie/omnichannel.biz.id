@@ -427,9 +427,12 @@ add_action( 'init', 'omni_sec_write_htaccess_rules' );
 // Sanitize nav menu labels to prevent stored XSS
 add_filter( 'wp_nav_menu_items', function( $items ) {
     return wp_kses( $items, [
-        'li' => ['class' => [], 'id' => [], 'itemscope' => [], 'itemtype' => []],
-        'a'  => ['href' => [], 'title' => [], 'class' => [], 'target' => [], 'rel' => []],
+        'li'   => ['class' => [], 'id' => [], 'itemscope' => [], 'itemtype' => []],
+        'a'    => ['href' => [], 'title' => [], 'class' => [], 'target' => [], 'rel' => []],
         'span' => ['class' => [], 'aria-hidden' => []],
+        'i'    => ['class' => [], 'data-lucide' => []],
+        'svg'  => ['class' => [], 'viewbox' => [], 'fill' => [], 'xmlns' => [], 'width' => [], 'height' => []],
+        'path' => ['d' => [], 'fill' => [], 'stroke' => [], 'stroke-width' => [], 'stroke-linecap' => [], 'stroke-linejoin' => []],
     ] );
 } );
 
