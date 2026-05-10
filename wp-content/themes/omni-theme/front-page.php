@@ -299,7 +299,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
 </section>
 
 <!-- CTA Section Harmonized with OmniServe Colors -->
-<section class="py-20 bg-omni-dark relative overflow-hidden">
+<section class="py-20 bg-omni-dark relative overflow-hidden mt-[-30px] md:mt-0 z-10 pt-24 md:pt-20">
   <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-omni-button-hover/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
   <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-omni-accent/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2"></div>
 
