@@ -33,14 +33,14 @@ function omni_lc_render_widget() {
   pointer-events:none;
 }
 #omni-lc-bubble-icon{
-  width:58px;height:58px;border-radius:50%;
+  width:40px;height:40px;border-radius:50%;
   background:#fff;border:2px solid #E2E8F0;
   box-shadow:0 4px 14px rgba(0,0,0,.12);
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;overflow:hidden;transition:transform .2s;
   pointer-events:none;
 }
-#omni-lc-bubble-icon img{width:38px;height:38px;object-fit:contain;}
+#omni-lc-bubble-icon img{width:24px;height:24px;object-fit:contain;}
 
 @media(max-width:767px){
   #omni-lc-bubble-text{display:none;}
@@ -112,7 +112,7 @@ function omni_lc_render_widget() {
 @keyframes omniLcSlide{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
 
 @media(max-width:767px){
-  #omni-lc-toggle{padding:8px;border-radius:50%;width:56px;height:56px;justify-content:center;}
+  #omni-lc-toggle{padding:4px;border-radius:50%;width:40px;height:40px;justify-content:center;}
   #omni-lc-window{width:calc(100vw - 16px);right:8px;bottom:160px;}
 }
 </style>

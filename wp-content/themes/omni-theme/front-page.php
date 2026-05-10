@@ -109,7 +109,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
         </div>
 
         <!-- Mobile Content -->
-        <div class="flex md:hidden absolute top-0 z-20 flex-col px-6 pt-8 pb-6" style="width: 100vw; left: 55vw; overflow-y: auto; max-height: 100%;">
+        <div class="flex md:hidden absolute top-0 z-20 flex-col px-6 pt-8 pb-6" style="width: 100vw; left: 55vw;">
 
           <a href="<?php echo home_url('/'); ?>" class="block" aria-label="Beranda OmniServe" style="margin-top: -10px; margin-left: -10px; margin-bottom: 20px;">
             <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg"
