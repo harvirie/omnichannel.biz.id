@@ -2,23 +2,34 @@
 
 <div class="flex-1 bg-white w-full">
 
-  <!-- Hero Header -->
-  <div class="py-20 text-center max-w-3xl mx-auto px-6">
-    <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
-      <i data-lucide="shield-check" class="h-4 w-4"></i>
-      Harga Resmi & Transparan
+  <!-- Hero Section -->
+  <div class="bg-white pt-24 pb-24 md:pb-32 text-center px-6 relative overflow-hidden">
+    <div class="relative z-10">
+      <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
+        <i data-lucide="tag" class="h-4 w-4"></i>
+        Harga OmniServe
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold text-omni-dark mb-6 leading-tight">
+        Investasi Tepat untuk <span class="text-omni-button-hover">Layanan Hebat</span>
+      </h1>
+      <p class="text-omni-text-muted text-lg max-w-2xl mx-auto leading-relaxed">
+        Solusi call center omnichannel profesional dengan harga transparan.<br>
+        Tanpa biaya tersembunyi. Dukungan penuh dari tim kami.
+      </p>
     </div>
-    <h1 class="text-4xl md:text-5xl font-bold text-omni-dark mb-6 leading-tight">
-      Pilih Paket Sesuai <span class="text-omni-secondary">Kebutuhan Bisnis</span> Anda
-    </h1>
-    <p class="text-omni-text-muted text-lg leading-relaxed">
-      Solusi call center omnichannel profesional dengan harga transparan.<br>
-      Tanpa biaya tersembunyi. Dukungan penuh dari tim kami.
-    </p>
+    
+    <!-- Animated SVG Boundary Line -->
+    <div class="absolute bottom-0 left-0 w-full z-0 pointer-events-none" style="line-height: 0;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3973.17 333.48" class="text-omni-dark" preserveAspectRatio="xMidYMax meet" style="display: block; width: 100%; height: auto;">
+        <path fill="currentColor" d="M0 0.01l2872.96 0 0 0.03c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06l82.35 134.74c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08l0 -0.03 717.15 0 0 18 -717.15 0 -0.03 -0.03c-34.38,-0.22 -66.48,-11.11 -95.36,-28.68 -32.86,-20 -61.55,-48.7 -84.61,-80.14l-0.42 -0.63 -82.73 -135.38c-12.18,-20.97 -29.12,-40.5 -51.49,-53.66 -18.67,-10.99 -41.27,-17.6 -68.25,-16.98l-0.17 0.03 -2872.96 0 0 -18z"/>
+        <path class="svg-glow-path-wide" pathLength="100" d="M0 0.01l2872.96 0 0 0.03c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06l82.35 134.74c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08l0 -0.03 717.15 0 0 18 -717.15 0 -0.03 -0.03c-34.38,-0.22 -66.48,-11.11 -95.36,-28.68 -32.86,-20 -61.55,-48.7 -84.61,-80.14l-0.42 -0.63 -82.73 -135.38c-12.18,-20.97 -29.12,-40.5 -51.49,-53.66 -18.67,-10.99 -41.27,-17.6 -68.25,-16.98l-0.17 0.03 -2872.96 0 0 -18z"/>
+        <path class="svg-glow-path" pathLength="100" d="M0 0.01l2872.96 0 0 0.03c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06l82.35 134.74c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08l0 -0.03 717.15 0 0 18 -717.15 0 -0.03 -0.03c-34.38,-0.22 -66.48,-11.11 -95.36,-28.68 -32.86,-20 -61.55,-48.7 -84.61,-80.14l-0.42 -0.63 -82.73 -135.38c-12.18,-20.97 -29.12,-40.5 -51.49,-53.66 -18.67,-10.99 -41.27,-17.6 -68.25,-16.98l-0.17 0.03 -2872.96 0 0 -18z"/>
+      </svg>
+    </div>
   </div>
 
   <!-- Pricing Cards -->
-  <div class="max-w-6xl mx-auto px-6 pb-24">
+  <div class="max-w-6xl mx-auto px-6 pb-24 -mt-10 md:-mt-16 relative z-10">
     <div class="grid md:grid-cols-2 gap-8 items-stretch">
 
       <!-- ===== PAKET STANDARD ===== -->

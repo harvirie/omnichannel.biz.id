@@ -1,17 +1,14 @@
 <?php get_header(); ?>
 
 <div class="flex-1 bg-white w-full">
-  <!-- Header Area -->
-  <div class="bg-white py-20 relative overflow-hidden border-b border-omni-border">
-    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-omni-button-hover/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
-    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-omni-accent/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2"></div>
-    
-    <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-omni-dark/10 text-omni-button-hover mb-6">
-        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
-        <span class="text-sm font-semibold tracking-wide uppercase">Analitik Data</span>
+  <!-- Hero Header -->
+  <div class="bg-white pt-20 pb-24 md:pb-32 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+      <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
+        <i data-lucide="bar-chart-2" class="h-4 w-4"></i>
+        Analitik Komprehensif
       </div>
-      <h1 class="text-4xl md:text-6xl font-bold text-omni-dark mb-6">
+      <h1 class="text-4xl md:text-5xl font-bold text-omni-dark mb-6 leading-tight">
         Berhenti Sekadar Merespon.<br />
         <span class="text-omni-button-hover">Ubah Interaksi Menjadi Data.</span>
       </h1>
@@ -19,10 +16,19 @@
         Pelayanan pelanggan bukan lagi sekadar cost center. Melalui OmniServe, setiap keluhan, pertanyaan, dan saran direkam, dianalisis, dan divisualisasikan.
       </p>
     </div>
+    
+    <!-- Animated SVG Boundary Line -->
+    <div class="absolute bottom-0 left-0 w-full z-0 pointer-events-none" style="line-height: 0;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3973.17 333.48" class="text-omni-dark" preserveAspectRatio="xMidYMax meet" style="display: block; width: 100%; height: auto;">
+        <path fill="currentColor" d="M0 0.01l2872.96 0 0 0.03c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06l82.35 134.74c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08l0 -0.03 717.15 0 0 18 -717.15 0 -0.03 -0.03c-34.38,-0.22 -66.48,-11.11 -95.36,-28.68 -32.86,-20 -61.55,-48.7 -84.61,-80.14l-0.42 -0.63 -82.73 -135.38c-12.18,-20.97 -29.12,-40.5 -51.49,-53.66 -18.67,-10.99 -41.27,-17.6 -68.25,-16.98l-0.17 0.03 -2872.96 0 0 -18z"/>
+        <path class="svg-glow-path-wide" pathLength="100" d="M0 0.01l2872.96 0 0 0.03c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06l82.35 134.74c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08l0 -0.03 717.15 0 0 18 -717.15 0 -0.03 -0.03c-34.38,-0.22 -66.48,-11.11 -95.36,-28.68 -32.86,-20 -61.55,-48.7 -84.61,-80.14l-0.42 -0.63 -82.73 -135.38c-12.18,-20.97 -29.12,-40.5 -51.49,-53.66 -18.67,-10.99 -41.27,-17.6 -68.25,-16.98l-0.17 0.03 -2872.96 0 0 -18z"/>
+        <path class="svg-glow-path" pathLength="100" d="M0 0.01l2872.96 0 0 0.03c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06l82.35 134.74c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08l0 -0.03 717.15 0 0 18 -717.15 0 -0.03 -0.03c-34.38,-0.22 -66.48,-11.11 -95.36,-28.68 -32.86,-20 -61.55,-48.7 -84.61,-80.14l-0.42 -0.63 -82.73 -135.38c-12.18,-20.97 -29.12,-40.5 -51.49,-53.66 -18.67,-10.99 -41.27,-17.6 -68.25,-16.98l-0.17 0.03 -2872.96 0 0 -18z"/>
+      </svg>
+    </div>
   </div>
 
   <!-- Main Content Area -->
-  <section class="py-24">
+  <section class="pb-24 pt-16 md:pt-24 -mt-10 md:-mt-16 relative z-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div class="order-2 lg:order-1 relative">
