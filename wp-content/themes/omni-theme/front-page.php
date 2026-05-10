@@ -13,11 +13,11 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
 ?>
 
 <!-- Hero Section -->
-<section class="p-4 md:p-6 bg-omni-secondary flex flex-col justify-center relative flex-1 min-h-[calc(100vh-6rem)] overflow-x-hidden">
+<section class="p-4 md:p-6 bg-omni-secondary flex flex-col justify-center relative flex-1 overflow-x-hidden" style="min-height: clamp(600px, calc(100vh - 6rem), 100vh);">
   <div class="relative w-full max-w-[1400px] mx-auto flex flex-col items-center justify-center pt-8 lg:pt-0">
     
     <!-- Responsive Hero (Desktop & Mobile) -->
-    <div class="w-full relative pb-10 md:pb-0">
+    <div class="w-full relative pb-10 md:pb-0 max-md:pb-[30px]">
       <!-- Top Card -->
       <div class="relative z-10 w-[300vw] -left-[55vw] md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 1163.2;">
         <svg viewBox="0 0 2000.62 1163.2" class="absolute inset-0 w-full h-full drop-shadow-xl" preserveAspectRatio="xMidYMid meet">
@@ -109,7 +109,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
         </div>
 
         <!-- Mobile Content -->
-        <div class="flex md:hidden absolute top-0 z-20 flex-col px-6 pt-8 pb-6" style="width: 100vw; left: 55vw; height: 100%;">
+        <div class="flex md:hidden absolute top-0 z-20 flex-col px-6 pt-8 pb-6" style="width: 100vw; left: 55vw; overflow-y: auto; max-height: 100%;">
 
           <a href="<?php echo home_url('/'); ?>" class="block" aria-label="Beranda OmniServe" style="margin-top: -10px; margin-left: -10px; margin-bottom: 20px;">
             <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg"
@@ -139,7 +139,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
           </form>
 
           <!-- Mobile Image Container -->
-          <div class="relative mt-4 mb-4 w-full max-w-[340px] mx-auto shrink-0 h-[200px] rounded-3xl overflow-hidden shadow-xl border border-white/20 -translate-x-[10px]">
+          <div class="relative mt-4 mb-4 w-full max-w-[340px] mx-auto shrink-0 rounded-3xl overflow-hidden shadow-xl border border-white/20 -translate-x-[10px]" style="height: clamp(200px, 35vh, 320px);">
             <video src="https://res.cloudinary.com/dtxwwevxl/video/upload/v1778211855/video_hero_wkvc4s.mp4" poster="https://res.cloudinary.com/dtxwwevxl/video/upload/v1778211855/video_hero_wkvc4s.jpg" class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline preload="auto"></video>
             <div class="absolute inset-0 bg-gradient-to-t from-omni-dark/90 via-omni-dark/20 to-transparent"></div>
             
@@ -178,7 +178,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
       </div>
 
       <!-- Bottom Card -->
-      <div class="relative z-20 w-[300vw] -left-[55vw] md:w-full md:left-0 transition-all max-md:!-mt-[9.6vw]" style="aspect-ratio: 2000.62 / 448.88; margin-top: -2.99%;">
+      <div class="relative z-20 w-[300vw] -left-[55vw] md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 448.88; margin-top: -2.99%; margin-bottom: 30px;">
         <svg viewBox="0 0 2000.62 448.88" class="absolute inset-0 w-full h-full text-omni-dark" preserveAspectRatio="xMidYMid meet">
           <path fill="#D4AF37" transform="translate(-8, 8)" opacity="0.8" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 384.88 A 64 64 0 0 1 1936.62 448.88 L 64 448.88 A 64 64 0 0 1 0 384.88 L 0 64 A 64 64 0 0 1 64 0 Z"/>
           <path fill="currentColor" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 384.88 A 64 64 0 0 1 1936.62 448.88 L 64 448.88 A 64 64 0 0 1 0 384.88 L 0 64 A 64 64 0 0 1 64 0 Z"/>
