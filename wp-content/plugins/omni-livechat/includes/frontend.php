@@ -14,12 +14,14 @@ function omni_lc_render_widget() {
 
 /* ── Floating trigger ── */
 #omni-lc-toggle{
-  position:fixed;bottom:92px;right:24px;z-index:99999;
+  position:fixed;bottom:84px;right:24px;z-index:99999;
   border:none;background:transparent;padding:0;
   cursor:pointer;display:flex;align-items:center;gap:12px;
   animation:omniLcPop .5s ease;
   touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  transition: transform .15s cubic-bezier(0.4, 0, 0.2, 1);
 }
+#omni-lc-toggle:active{transform:scale(0.85) !important;}
 #omni-lc-toggle:hover #omni-lc-bubble-text{box-shadow:0 6px 24px rgba(30,64,175,.4);}
 #omni-lc-toggle:hover #omni-lc-bubble-icon{transform:scale(1.06);}
 
@@ -33,18 +35,18 @@ function omni_lc_render_widget() {
   pointer-events:none;
 }
 #omni-lc-bubble-icon{
-  width:40px;height:40px;border-radius:50%;
+  width:48px;height:48px;border-radius:50%;
   background:#fff;border:2px solid #E2E8F0;
   box-shadow:0 4px 14px rgba(0,0,0,.12);
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;overflow:hidden;transition:transform .2s;
   pointer-events:none;
 }
-#omni-lc-bubble-icon img{width:24px;height:24px;object-fit:contain;}
+#omni-lc-bubble-icon img{width:28px;height:28px;object-fit:contain;}
 
 @media(max-width:767px){
   #omni-lc-bubble-text{display:none;}
-  #omni-lc-toggle{bottom:92px;right:20px;}
+  #omni-lc-toggle{bottom:80px;right:20px;}
   #omni-lc-window{width:calc(100vw - 16px);right:8px;bottom:160px;max-height:65vh;}
 }
 
@@ -112,7 +114,7 @@ function omni_lc_render_widget() {
 @keyframes omniLcSlide{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
 
 @media(max-width:767px){
-  #omni-lc-toggle{padding:4px;border-radius:50%;width:40px;height:40px;justify-content:center;}
+  #omni-lc-toggle{padding:4px;border-radius:50%;width:48px;height:48px;justify-content:center;}
   #omni-lc-window{width:calc(100vw - 16px);right:8px;bottom:160px;}
 }
 </style>
