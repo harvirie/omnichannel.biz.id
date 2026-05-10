@@ -234,14 +234,14 @@ function wa_floating_chat_render_widget() {
             ?>
             <div>
               <label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:4px;"><?php echo $label; ?> <span style="color:#ef4444;">*</span></label>
-              <input type="<?php echo $type; ?>" id="<?php echo $id; ?>" required tabindex="-1" style="width:100%;padding:10px 12px;font-size:14px;border:1.5px solid #d1d5db;border-radius:8px;outline:none;box-sizing:border-box;transition:border-color .2s;">
+              <input type="<?php echo $type; ?>" id="<?php echo $id; ?>" required readonly style="width:100%;padding:10px 12px;font-size:14px;border:1.5px solid #d1d5db;border-radius:8px;outline:none;box-sizing:border-box;transition:border-color .2s;">
             </div>
             <?php endforeach; ?>
             <div>
               <label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:4px;">Pertanyaan <span style="color:#ef4444;">*</span></label>
-              <textarea id="wa-pertanyaan" required rows="3" tabindex="-1" style="width:100%;padding:10px 12px;font-size:14px;border:1.5px solid #d1d5db;border-radius:8px;outline:none;box-sizing:border-box;resize:vertical;transition:border-color .2s;"></textarea>
+              <textarea id="wa-pertanyaan" required rows="3" readonly style="width:100%;padding:10px 12px;font-size:14px;border:1.5px solid #d1d5db;border-radius:8px;outline:none;box-sizing:border-box;resize:vertical;transition:border-color .2s;"></textarea>
             </div>
-            <button type="submit" id="wa-submit-btn" tabindex="-1" style="background:#25D366;color:white;font-weight:700;font-size:15px;padding:12px;border-radius:8px;border:none;cursor:pointer;transition:background .2s;">Kirim &amp; Lanjut Chat ➤</button>
+            <button type="submit" id="wa-submit-btn" style="background:#25D366;color:white;font-weight:700;font-size:15px;padding:12px;border-radius:8px;border:none;cursor:pointer;transition:background .2s;">Kirim &amp; Lanjut Chat ➤</button>
           </form>
         </div>
       </div>
@@ -262,18 +262,18 @@ function wa_floating_chat_render_widget() {
         const msg    = document.getElementById('wa-msg');
 
         function enableFormInputs() {
-            form.querySelectorAll('input, textarea, button').forEach(el => el.removeAttribute('tabindex'));
+            form.querySelectorAll('input, textarea').forEach(el => el.removeAttribute('readonly'));
         }
-        function disableFormInputs() {
-            form.querySelectorAll('input, textarea, button').forEach(el => el.setAttribute('tabindex', '-1'));
+        function lockFormInputs() {
+            form.querySelectorAll('input, textarea').forEach(el => el.setAttribute('readonly', ''));
         }
 
         function openForm() {
             form.classList.add('is-open');
             void form.offsetWidth;
             form.style.opacity = '1';
-            // Enable inputs after animation so keyboard doesn't auto-open
-            setTimeout(enableFormInputs, 350);
+            // Remove readonly after animation — iOS Safari blocks keyboard on readonly inputs
+            setTimeout(enableFormInputs, 400);
 
             // Auto-close Live Chat if open
             const lcCloseBtn = document.getElementById('omni-lc-close-btn');
@@ -284,7 +284,7 @@ function wa_floating_chat_render_widget() {
         }
         function closeForm() {
             form.style.opacity = '0';
-            disableFormInputs();
+            lockFormInputs();
             setTimeout(() => form.classList.remove('is-open'), 300);
         }
         function isOpen() { return form.classList.contains('is-open'); }

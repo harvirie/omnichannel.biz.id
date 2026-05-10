@@ -140,14 +140,14 @@ function omni_lc_render_widget() {
   <div id="omni-lc-form-wrap">
     <div id="omni-lc-msg-error"></div>
     <label>Nama <span class="lc-required">*</span></label>
-    <input type="text" id="lc-nama" placeholder="Nama lengkap Anda" autocomplete="name" tabindex="-1">
+    <input type="text" id="lc-nama" placeholder="Nama lengkap Anda" autocomplete="name" readonly>
     <label>Perusahaan <span class="lc-required">*</span></label>
-    <input type="text" id="lc-perusahaan" placeholder="Nama perusahaan" tabindex="-1">
+    <input type="text" id="lc-perusahaan" placeholder="Nama perusahaan" readonly>
     <label>Email <span class="lc-required">*</span></label>
-    <input type="email" id="lc-email" placeholder="email@perusahaan.com" autocomplete="email" tabindex="-1">
+    <input type="email" id="lc-email" placeholder="email@perusahaan.com" autocomplete="email" readonly>
     <label>WhatsApp <span class="lc-required">*</span></label>
-    <input type="tel" id="lc-wa" placeholder="08xxxxxxxxxx" inputmode="numeric" tabindex="-1">
-    <button id="omni-lc-submit" tabindex="-1">Kirim</button>
+    <input type="tel" id="lc-wa" placeholder="08xxxxxxxxxx" inputmode="numeric" readonly>
+    <button id="omni-lc-submit">Kirim</button>
   </div>
 
   <!-- Chat area -->
@@ -161,7 +161,7 @@ function omni_lc_render_widget() {
     </div>
     <div id="omni-lc-input-bar">
       <div id="omni-lc-input-row">
-        <input type="text" id="omni-lc-input" placeholder="Silakan ketik...">
+        <input type="text" id="omni-lc-input" placeholder="Silakan ketik..." readonly>
         <button id="omni-lc-send-btn" aria-label="Kirim">
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
         </button>
@@ -207,15 +207,21 @@ function post(data) {
     return fetch(AJAX, {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams(data)}).then(r=>r.json());
 }
 
+// iOS Safari ignores tabindex=-1; readonly is the only reliable way to block keyboard
 function enableFormInputs() {
-    document.querySelectorAll('#omni-lc-form-wrap input, #omni-lc-form-wrap button').forEach(el => el.removeAttribute('tabindex'));
+    document.querySelectorAll('#omni-lc-form-wrap input').forEach(el => el.removeAttribute('readonly'));
+    if (sessionKey) input.removeAttribute('readonly');
+}
+function lockFormInputs() {
+    document.querySelectorAll('#omni-lc-form-wrap input').forEach(el => el.setAttribute('readonly', ''));
+    input.setAttribute('readonly', '');
 }
 
 function openWin()  { 
     win.style.display='flex'; 
     if(sessionKey) { startPoll(); resetInactivity(); }
-    // Enable form inputs after a delay so mobile keyboard doesn't auto-open
-    setTimeout(enableFormInputs, 350);
+    // Remove readonly after panel animation so iOS doesn't auto-open keyboard
+    setTimeout(enableFormInputs, 400);
     
     // Auto-close WA Chat if open
     const waCloseBtn = document.getElementById('wa-close-btn');
@@ -226,8 +232,7 @@ function openWin()  {
 }
 function closeWin() {
     win.style.display='none'; stopPoll();
-    // Re-disable tabindex to prevent keyboard on next open
-    document.querySelectorAll('#omni-lc-form-wrap input, #omni-lc-form-wrap button').forEach(el => el.setAttribute('tabindex','-1'));
+    lockFormInputs(); // Re-lock so next open doesn't trigger keyboard
 }
 
 // Use touchend instead of click to prevent ghost-click keyboard popup on mobile
