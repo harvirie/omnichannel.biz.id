@@ -4,6 +4,14 @@ function omni_theme_enqueue_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'omni_theme_enqueue_styles' );
 
+// Add Favicon to Admin and Login Pages
+function omni_add_favicon() {
+    echo '<link rel="icon" type="image/x-icon" href="' . get_template_directory_uri() . '/assets/img/favicon.ico">' . "\n";
+    echo '<link rel="shortcut icon" type="image/x-icon" href="' . get_template_directory_uri() . '/assets/img/favicon.ico">' . "\n";
+}
+add_action('admin_head', 'omni_add_favicon');
+add_action('login_head', 'omni_add_favicon');
+
 // Setup theme support
 function omni_theme_setup() {
     add_theme_support( 'custom-logo', array(
