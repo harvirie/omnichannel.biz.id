@@ -201,7 +201,7 @@
     ?>
     <?php wp_head(); ?>
 </head>
-<body <?php body_class('min-h-screen bg-omni-secondary flex flex-col font-sans text-slate-900 overflow-x-hidden'); ?>>
+<body <?php body_class('min-h-screen ' . (is_front_page() ? 'bg-omni-secondary' : 'bg-white') . ' flex flex-col font-sans text-slate-900 overflow-x-hidden'); ?>>
 <?php wp_body_open(); ?>
 
 <!-- ===== OMNI LOADING SCREEN ===== -->

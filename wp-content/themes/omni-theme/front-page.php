@@ -13,11 +13,11 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
 ?>
 
 <!-- Hero Section -->
-<section class="p-4 md:p-6 bg-omni-secondary flex flex-col justify-center relative flex-1 overflow-x-hidden" style="min-height: clamp(600px, calc(100vh - 6rem), 100vh);">
+<section class="p-4 pb-0 md:p-6 bg-omni-secondary flex flex-col justify-center relative flex-1 overflow-x-hidden" style="min-height: clamp(600px, calc(100vh - 6rem), 100vh);">
   <div class="relative w-full max-w-[1400px] mx-auto flex flex-col items-center justify-center pt-8 lg:pt-0">
     
     <!-- Responsive Hero (Desktop & Mobile) -->
-    <div class="w-full relative pb-10 md:pb-0 max-md:pb-[30px]">
+    <div class="w-full relative pb-10 md:pb-0 max-md:pb-0">
       <!-- Top Card -->
       <div class="relative z-10 w-[300vw] -left-[55vw] md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 1163.2;">
         <svg viewBox="0 0 2000.62 1163.2" class="absolute inset-0 w-full h-full drop-shadow-xl" preserveAspectRatio="none">
@@ -291,12 +291,10 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
           </div>
         </div>
       </div>
-    </div>
-  </div>
 </section>
 
 <!-- CTA Section Harmonized with OmniServe Colors -->
-<section class="pt-0 md:pt-20 pb-20 bg-omni-dark relative overflow-hidden">
+<section class="py-20 bg-omni-dark relative overflow-hidden">
   <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-omni-button-hover/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
   <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-omni-accent/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2"></div>
 
