@@ -186,6 +186,8 @@ async function submitDemoForm(e) {
   function initLucide() {
     if (typeof lucide !== 'undefined') {
       lucide.createIcons();
+      // Fallback ke-2: setelah 500ms untuk icon yang di-render lewat PHP loop
+      setTimeout(function() { lucide.createIcons(); }, 500);
     } else {
       setTimeout(initLucide, 100);
     }
@@ -203,6 +205,8 @@ async function submitDemoForm(e) {
       mobileDrawer.classList.remove('-translate-x-full');
       mobileOverlay.classList.remove('opacity-0', 'pointer-events-none');
       document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      // Re-render Lucide icons di dalam drawer setiap kali dibuka
+      if (typeof lucide !== 'undefined') { lucide.createIcons(); }
     }
 
     function closeMobileMenu() {
