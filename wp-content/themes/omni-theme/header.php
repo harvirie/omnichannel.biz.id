@@ -86,22 +86,24 @@
         .svg-glow-path {
             fill: none;
             stroke: var(--omni-accent);
-            stroke-width: 40;
+            stroke-width: 3px;
             stroke-linecap: round;
             stroke-dasharray: 5 95;
             animation: svgGlowLine 10s linear infinite;
             opacity: 1;
-            /* Pakai filter SVG native via id, bukan CSS filter (menghindari kotak) */
+            vector-effect: non-scaling-stroke;
         }
         /* Path kedua: cahaya lebih tebal & lebih lambat untuk efek depth */
         .svg-glow-path-wide {
             fill: none;
             stroke: var(--omni-accent);
-            stroke-width: 100;
+            stroke-width: 8px;
             stroke-linecap: round;
             stroke-dasharray: 3 97;
             animation: svgGlowLine 14s linear infinite reverse;
-            opacity: 0.3;
+            opacity: 0.4;
+            vector-effect: non-scaling-stroke;
+            filter: blur(2px);
         }
     </style>
     <?php
