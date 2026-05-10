@@ -32,7 +32,7 @@
   </div>
 
   <!-- Pricing Cards -->
-  <div class="max-w-6xl mx-auto px-6 pb-24 mt-3 md:-mt-5 relative z-10">
+  <div class="max-w-6xl mx-auto px-6 pb-24 mt-8 md:mt-0 relative z-10">
     <div class="grid md:grid-cols-2 gap-8 items-stretch">
 
       <!-- ===== PAKET STANDARD ===== -->

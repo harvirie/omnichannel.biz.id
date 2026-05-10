@@ -31,7 +31,7 @@
   </div>
 
   <!-- Main Content Area -->
-  <section class="pb-24 -mt-6 md:-mt-20 relative z-10">
+  <section class="pb-24 mt-0 md:-mt-[60px] relative z-10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div class="order-2 lg:order-1 relative">
