@@ -47,9 +47,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></noscript>
 
-    <!-- Font Awesome: hanya brand icons yang dipakai (fa-brands saja, jauh lebih kecil) -->
+    <!-- Font Awesome: hanya brand icons yang dipakai -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/fontawesome.min.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css"></noscript>
+    <noscript>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/fontawesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css">
+    </noscript>
 
     <!-- Tailwind CSS: File statis yang dikompilasi lokal (tidak pakai CDN) -->
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/omni-theme.css?v=<?php echo filemtime(get_template_directory() . '/assets/omni-theme.css'); ?>">
@@ -111,18 +115,22 @@
 
         /* Prevent Swiper FOUC (Flash of Unstyled Content) */
         .swiper:not(.swiper-initialized) {
-            display: flex;
             overflow: hidden;
+        }
+        .swiper:not(.swiper-initialized) .swiper-wrapper {
+            display: flex;
         }
         .customers-swiper:not(.swiper-initialized) .swiper-slide {
             width: 100%;
             flex-shrink: 0;
+            box-sizing: border-box;
+            padding-right: 20px; /* spaceBetween simulate */
         }
         @media (min-width: 640px) {
             .customers-swiper:not(.swiper-initialized) .swiper-slide { width: 50%; }
         }
         @media (min-width: 1024px) {
-            .customers-swiper:not(.swiper-initialized) .swiper-slide { width: 33.333%; }
+            .customers-swiper:not(.swiper-initialized) .swiper-slide { width: 33.333%; padding-right: 30px; }
         }
         @media (min-width: 1280px) {
             .customers-swiper:not(.swiper-initialized) .swiper-slide { width: 25%; }
@@ -130,6 +138,8 @@
         .integration-swiper:not(.swiper-initialized) .swiper-slide {
             width: 50%;
             flex-shrink: 0;
+            box-sizing: border-box;
+            padding-right: 12px; /* simulate spaceBetween */
         }
     </style>
     <?php
