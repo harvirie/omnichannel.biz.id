@@ -52,7 +52,7 @@ add_action('wp_head', function() {
   </div>
 
   <!-- Hero Illustration — WebP dengan fallback PNG untuk LCP optimal -->
-  <div class="max-w-6xl mx-auto px-6 mt-5 md:-mt-[40px] mb-4 relative z-10">
+  <div class="w-full mt-0 mb-4 relative z-10">
     <picture>
       <source
         srcset="<?php echo get_template_directory_uri(); ?>/assets/img/fitur-hero-updated.webp"
@@ -62,7 +62,7 @@ add_action('wp_head', function() {
         src="<?php echo get_template_directory_uri(); ?>/assets/img/fitur-hero-updated.png"
         alt="Dashboard omnichannel call center Kabayan — WhatsApp, Instagram, PSTN dalam satu inbox terpadu"
         width="1886" height="834"
-        class="w-full h-auto rounded-3xl shadow-2xl border border-omni-border object-cover"
+        class="w-full h-auto object-cover"
         fetchpriority="high"
         loading="eager"
         decoding="async"
