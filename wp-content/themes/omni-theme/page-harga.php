@@ -31,7 +31,7 @@ add_action('wp_head', function() {
 
   <!-- Hero Section -->
   <div class="-mt-20 md:-mt-32 pt-40 md:pt-52 relative overflow-hidden" style="background-color: #f1f5f9;">
-    <div class="max-w-7xl mx-auto px-6 text-center relative z-10 pb-20 md:pb-24">
+    <div class="max-w-7xl mx-auto px-6 text-center relative z-10" style="padding-bottom: 100px;">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="tag" class="h-4 w-4"></i>
         Harga OmniServe
