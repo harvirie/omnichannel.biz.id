@@ -16,7 +16,7 @@ add_action('wp_head', function() {
     echo '<meta property="og:type" content="website">' . "\n";
     echo '<link rel="canonical" href="' . esc_url(home_url('/fitur')) . '">' . "\n";
     // Preload LCP hero image (WebP) agar LCP turun signifikan
-    echo '<link rel="preload" as="image" href="' . get_template_directory_uri() . '/assets/img/fitur-hero.webp" type="image/webp">' . "\n";
+    echo '<link rel="preload" as="image" href="' . get_template_directory_uri() . '/assets/img/fitur-hero-updated.webp" type="image/webp">' . "\n";
 }, 5);
 ?>
 <?php get_header(); ?>
@@ -52,17 +52,17 @@ add_action('wp_head', function() {
   </div>
 
   <!-- Hero Illustration — WebP dengan fallback PNG untuk LCP optimal -->
-  <div class="max-w-4xl lg:max-w-3xl mx-auto px-6 mt-5 md:-mt-[40px] mb-4 relative z-10">
+  <div class="max-w-6xl mx-auto px-6 mt-5 md:-mt-[40px] mb-4 relative z-10">
     <picture>
       <source
-        srcset="<?php echo get_template_directory_uri(); ?>/assets/img/fitur-hero.webp"
+        srcset="<?php echo get_template_directory_uri(); ?>/assets/img/fitur-hero-updated.webp"
         type="image/webp"
       >
       <img
-        src="<?php echo get_template_directory_uri(); ?>/assets/img/fitur-hero.png"
+        src="<?php echo get_template_directory_uri(); ?>/assets/img/fitur-hero-updated.png"
         alt="Dashboard omnichannel call center Kabayan — WhatsApp, Instagram, PSTN dalam satu inbox terpadu"
-        width="1024" height="1024"
-        class="w-full rounded-3xl shadow-2xl border border-omni-border object-cover"
+        width="1886" height="834"
+        class="w-full h-auto rounded-3xl shadow-2xl border border-omni-border object-cover"
         fetchpriority="high"
         loading="eager"
         decoding="async"
