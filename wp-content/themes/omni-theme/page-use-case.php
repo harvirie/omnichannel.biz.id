@@ -20,11 +20,11 @@ add_action('wp_head', function() {
     // Custom style to pull hero illustration up behind the SVG curve responsively
     echo '<style>
       .hero-illustration-container {
-        margin-top: -62px;
+        margin-top: -66px;
       }
       @media (min-width: 768px) {
         .hero-illustration-container {
-          margin-top: -8.5%;
+          margin-top: -9.2%;
         }
       }
     </style>' . "\n";
@@ -53,8 +53,8 @@ add_action('wp_head', function() {
     <div class="absolute bottom-10 right-10 w-80 h-80 bg-omni-dark/5 rounded-full blur-3xl z-0"></div>
     
     <!-- Animated SVG Boundary Line -->
-    <div class="w-full relative z-20 pointer-events-none" style="line-height: 0;">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3973.17 333.48" class="text-omni-dark h-[60px] md:h-auto" preserveAspectRatio="none" style="display: block; width: 100%;">
+    <div class="w-full relative z-20 pointer-events-none" style="line-height: 0; margin-top: -3px;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3973.17 333.48" class="text-omni-dark h-[60px] md:h-auto" preserveAspectRatio="none" style="display: block; width: 100%; shape-rendering: geometricPrecision;">
         <!-- Gray filler above the curve to mask the image underneath -->
         <path fill="#f1f5f9" d="M3973.17 333.48 L3973.17 0 L0 0 L0 0.01 l2872.96 0 0 0.03 c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06 l82.35 134.74 c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08 l0 -0.03 717.15 0 Z" />
         <path fill="currentColor" d="M0 0.01l2872.96 0 0 0.03c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06l82.35 134.74c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08l0 -0.03 717.15 0 0 18 -717.15 0 -0.03 -0.03c-34.38,-0.22 -66.48,-11.11 -95.36,-28.68 -32.86,-20 -61.55,-48.7 -84.61,-80.14l-0.42 -0.63 -82.73 -135.38c-12.18,-20.97 -29.12,-40.5 -51.49,-53.66 -18.67,-10.99 -41.27,-17.6 -68.25,-16.98l-0.17 0.03 -2872.96 0 0 -18z"/>
