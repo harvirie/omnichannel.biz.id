@@ -1,6 +1,6 @@
 /* =====================================================
-   Omni Animations CSS — v2.2
-   Swup page transitions — FAST, SMOOTH, NO BLANK SCREEN
+   Omni Animations CSS — v3.0
+   Swup page transitions + GSAP Scroll Reveal
    ===================================================== */
 
 /* ── GPU-accelerated base: applied always ─────────── */
@@ -15,8 +15,7 @@
 }
 
 /* ══════════════════════════════════════════════════
-   LEAVING — page dims slightly and blurs (Wait for server)
-   We do NOT fade to opacity: 0 to prevent "ngeblan" (blank)
+   LEAVING — page dims & blurs (wait for server)
    ══════════════════════════════════════════════════ */
 html.is-animating.is-leaving #swup {
     transition:
@@ -47,10 +46,10 @@ html.is-animating.is-leaving #swup.transition-scale {
 }
 
 /* ══════════════════════════════════════════════════
-   ENTERING — Instantly start at partial opacity/blur, then fade up
+   ENTERING — instant jump to partial state, then fade up
    ══════════════════════════════════════════════════ */
 html.is-animating:not(.is-leaving) #swup {
-    transition: none !important; /* Instant jump to this state before enter animation */
+    transition: none !important;
 }
 
 html.is-animating:not(.is-leaving) #swup.transition-fade {
@@ -75,9 +74,24 @@ html.is-animating:not(.is-leaving) #swup.transition-scale {
 }
 
 /* ══════════════════════════════════════════════════
-   DONE — is-animating removed → Swup cleans up classes
-   The base #swup transition above returns to opacity:1, filter:none
+   GSAP SCROLL REVEAL — Smooth bounce-up prep
+   GSAP sets opacity/transform via inline styles.
+   These classes are here for reference & reset safety.
    ══════════════════════════════════════════════════ */
+
+/* Ensure GSAP-targeted elements don't flash before JS runs */
+#swup section h1,
+#swup section h2,
+#swup section h3 {
+    will-change: transform, opacity;
+}
+
+/* Prevent flash of un-animated content on very fast connections */
+#swup section.py-20 .max-w-4xl,
+#swup section.py-24 .text-center,
+#swup section.py-16 .max-w-5xl {
+    backface-visibility: hidden;
+}
 
 /* ── Progress bar overlay for visual feedback ─────── */
 #omni-page-progress {
