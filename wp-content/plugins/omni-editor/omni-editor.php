@@ -46,6 +46,15 @@ add_action('admin_enqueue_scripts', function ($hook) {
         true
     );
 
+    // Lucide Icons for editor UI
+    wp_enqueue_script(
+        'lucide-icons',
+        'https://unpkg.com/lucide@latest',
+        [],
+        null,
+        false
+    );
+
     // Our editor CSS
     wp_enqueue_style(
         'omni-editor-css',
