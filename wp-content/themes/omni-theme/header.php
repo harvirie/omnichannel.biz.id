@@ -84,20 +84,20 @@
         /* ── SVG Signal Pulse — dikontrol sepenuhnya oleh GSAP ─── */
         .svg-glow-path {
             fill: none;
-            stroke: #FFE566;           /* Gold terang agar feFlood + feComposite bekerja */
-            stroke-width: 5px;         /* Cukup tebal agar filter area jelas terlihat */
+            stroke: var(--omni-accent);  /* Konsisten dengan warna tombol/accent theme */
+            stroke-width: 5px;
             stroke-linecap: round;
             stroke-linejoin: round;
-            stroke-dasharray: 2 98;    /* ~2% panjang visible — titik mulus */
+            stroke-dasharray: 2 98;
             will-change: stroke-dashoffset, opacity;
         }
         .svg-glow-path-wide {
             fill: none;
-            stroke: #FFD700;           /* Gold murni untuk aura */
-            stroke-width: 12px;        /* Lebar untuk aura tebal */
+            stroke: var(--omni-accent);  /* Sama — konsisten UI/UX */
+            stroke-width: 12px;
             stroke-linecap: round;
             stroke-linejoin: round;
-            stroke-dasharray: 5 95;    /* ~5% visible — ekor lebih panjang */
+            stroke-dasharray: 5 95;
             will-change: stroke-dashoffset, opacity;
         }
         svg:has(.svg-glow-path) {

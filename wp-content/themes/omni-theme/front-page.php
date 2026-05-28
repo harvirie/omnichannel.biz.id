@@ -31,22 +31,17 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
         <svg viewBox="0 0 2000.62 1163.2" class="absolute inset-0 w-full h-full drop-shadow-xl" preserveAspectRatio="none" style="overflow:visible;">
           <defs>
             <filter id="omni-glow-filter" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
-              <!-- Buat source gold dari stroke path -->
-              <feFlood flood-color="#FFD700" flood-opacity="1" result="gold"/>
+              <!-- flood-color = --omni-accent (#D4AF37) untuk konsistensi UI -->
+              <feFlood flood-color="#D4AF37" flood-opacity="1" result="gold"/>
               <feComposite in="gold" in2="SourceGraphic" operator="in" result="gold-src"/>
-              <!-- Layer 1: glow inti — sangat terang & tajam -->
               <feGaussianBlur in="gold-src" stdDeviation="8" result="glow-core"/>
-              <!-- Layer 2: glow menengah -->
               <feGaussianBlur in="gold-src" stdDeviation="25" result="glow-mid"/>
-              <!-- Layer 3: aura lebar & halus -->
               <feGaussianBlur in="gold-src" stdDeviation="60" result="glow-wide"/>
-              <!-- Boost intensitas layer core -->
               <feComponentTransfer in="glow-core" result="glow-core-bright">
-                <feFuncR type="linear" slope="3"/>
-                <feFuncG type="linear" slope="2.5"/>
-                <feFuncB type="linear" slope="1"/>
+                <feFuncR type="linear" slope="2.5"/>
+                <feFuncG type="linear" slope="2"/>
+                <feFuncB type="linear" slope="0.8"/>
               </feComponentTransfer>
-              <!-- Gabungkan semua layer -->
               <feMerge>
                 <feMergeNode in="glow-wide"/>
                 <feMergeNode in="glow-mid"/>

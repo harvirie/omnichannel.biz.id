@@ -55,15 +55,16 @@ add_action('wp_head', function() {
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3973.17 333.48" class="text-omni-dark h-[60px] md:h-auto" preserveAspectRatio="none" style="display: block; width: 100%; shape-rendering: geometricPrecision; overflow: visible;">
         <defs>
           <filter id="omni-glow-filter-fitur" x="-40%" y="-200%" width="180%" height="500%" color-interpolation-filters="sRGB">
-            <feFlood flood-color="#FFD700" flood-opacity="1" result="gold"/>
+            <!-- flood-color = --omni-accent (#D4AF37) untuk konsistensi UI -->
+            <feFlood flood-color="#D4AF37" flood-opacity="1" result="gold"/>
             <feComposite in="gold" in2="SourceGraphic" operator="in" result="gold-src"/>
             <feGaussianBlur in="gold-src" stdDeviation="6" result="glow-core"/>
             <feGaussianBlur in="gold-src" stdDeviation="20" result="glow-mid"/>
             <feGaussianBlur in="gold-src" stdDeviation="50" result="glow-wide"/>
             <feComponentTransfer in="glow-core" result="glow-core-bright">
-              <feFuncR type="linear" slope="3"/>
-              <feFuncG type="linear" slope="2.5"/>
-              <feFuncB type="linear" slope="1"/>
+              <feFuncR type="linear" slope="2.5"/>
+              <feFuncG type="linear" slope="2"/>
+              <feFuncB type="linear" slope="0.8"/>
             </feComponentTransfer>
             <feMerge>
               <feMergeNode in="glow-wide"/>
