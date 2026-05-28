@@ -100,7 +100,7 @@ class Omni_Animations {
         
         // Enqueue Swup v4 dan pluginnya dari cdn.jsdelivr.net
         wp_enqueue_script('omni-swup', 'https://cdn.jsdelivr.net/npm/swup@4/dist/Swup.umd.js', array(), null, true);
-        wp_enqueue_script('omni-swup-scripts', 'https://cdn.jsdelivr.net/npm/@swup/scripts-plugin@3/dist/index.umd.js', array('omni-swup'), null, true);
+        wp_enqueue_script('omni-swup-scripts', 'https://cdn.jsdelivr.net/npm/@swup/scripts-plugin@2/dist/index.umd.js', array('omni-swup'), null, true);
         
         // Enqueue Custom Assets
         wp_enqueue_style('omni-animations-css', plugin_dir_url(__FILE__) . 'assets/omni-animations.css', [], '1.0.0');
