@@ -39,6 +39,7 @@
   font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--oe-text);
   background: var(--oe-bg);
+  border-left: 10px solid var(--oe-bg);
   height: calc(100vh - 32px);
   display: flex;
   flex-direction: column;
@@ -489,7 +490,7 @@
 
 /* Rich text (contenteditable) */
 .oe-rt-toolbar {
-  display: flex;
+  display: none; /* Hidden by default */
   align-items: center;
   gap: 4px;
   background: var(--oe-bg2);
@@ -497,6 +498,11 @@
   border-bottom: none;
   border-radius: 8px 8px 0 0;
   padding: 6px;
+}
+
+/* Show toolbar when the field is focused */
+.oe-field:focus-within .oe-rt-toolbar {
+  display: flex;
 }
 
 .oe-rt-toolbar select, .oe-rt-toolbar button {
@@ -516,7 +522,7 @@
 
 #omni-editor-root .oe-richtext {
   width: 100%;
-  min-height: 80px;
+  min-height: 42px;
   background: var(--oe-bg3);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 0 0 8px 8px;

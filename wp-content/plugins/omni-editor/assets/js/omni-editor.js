@@ -399,6 +399,14 @@ jQuery(document).ready(function ($) {
     }
 
     function createField(label, bindPath, value, type = 'text', hint = '') {
+        // Auto-upgrade text and textarea to richtext, except for technical fields
+        if (type === 'text' || type === 'textarea') {
+            const isTech = bindPath.includes('url') || bindPath.includes('.id') || bindPath.includes('icon') || bindPath.includes('whatsapp') || label.toLowerCase().includes('url') || label.toLowerCase().includes('icon');
+            if (!isTech) {
+                type = 'richtext';
+            }
+        }
+
         let inputHtml = '';
         if (type === 'richtext') {
             const fontOptions = `
@@ -425,10 +433,10 @@ jQuery(document).ready(function ($) {
                 <select class="oe-rt-fontsize" onchange="document.execCommand('fontSize', false, this.value); this.selectedIndex = 0;">
                     ${sizeOptions}
                 </select>
-                <button type="button" onclick="document.execCommand('bold', false, null)" title="Bold"><b>B</b></button>
-                <button type="button" onclick="document.execCommand('italic', false, null)" title="Italic"><i>I</i></button>
-                <button type="button" onclick="const url = prompt('Enter link URL:'); if(url) document.execCommand('createLink', false, url);" title="Link">🔗</button>
-                <button type="button" onclick="document.execCommand('unlink', false, null)" title="Remove Link">🚫</button>
+                <button type="button" onmousedown="event.preventDefault()" onclick="document.execCommand('bold', false, null)" title="Bold"><b>B</b></button>
+                <button type="button" onmousedown="event.preventDefault()" onclick="document.execCommand('italic', false, null)" title="Italic"><i>I</i></button>
+                <button type="button" onmousedown="event.preventDefault()" onclick="const url = prompt('Enter link URL:'); if(url) document.execCommand('createLink', false, url);" title="Link">🔗</button>
+                <button type="button" onmousedown="event.preventDefault()" onclick="document.execCommand('unlink', false, null)" title="Remove Link">🚫</button>
             </div>
             <div class="oe-richtext" contenteditable="true" data-bind="${bindPath}" data-placeholder="Ketik disini...">${value}</div>`;
         } else if (type === 'textarea') {
