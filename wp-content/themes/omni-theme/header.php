@@ -489,7 +489,19 @@ body.omni-loading { overflow: hidden; }
 
       <!-- Sign In Button -->
       <div class="w-1/4 flex justify-end">
-        <a href="https://omnichannel.biz.id/wp-login.php?redirect_to=https%3A%2F%2Fomnichannel.biz.id%2Fwp-admin%2Fadmin.php%3Fpage%3Domni-hardening&reauth=1" class="group relative flex items-center shadow-lg rounded-full bg-omni-accent p-1 pr-1.5 cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-[0_8px_20px_rgba(253,184,84,0.4)] hover:-translate-y-0.5 active:scale-95">
+        <?php if ( is_user_logged_in() ) : ?>
+        <a href="<?php echo esc_url( admin_url('admin.php?page=omni-hardening') ); ?>" class="group relative flex items-center shadow-lg rounded-full bg-omni-accent p-1 pr-1.5 cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-[0_8px_20px_rgba(253,184,84,0.4)] hover:-translate-y-0.5 active:scale-95">
+          <div class="absolute inset-0 w-full h-full pointer-events-none rounded-full overflow-hidden z-0">
+            <div class="absolute top-[120%] left-[-50%] w-[200%] h-[200%] bg-white/20 rounded-[40%] transition-all duration-700 ease-in-out group-hover:top-[-20%] group-hover:rotate-90"></div>
+            <div class="absolute top-[120%] left-[-50%] w-[200%] h-[200%] bg-white/30 rounded-[45%] transition-all duration-1000 ease-in-out delay-75 group-hover:top-[-20%] group-hover:rotate-[120deg]"></div>
+          </div>
+          <span class="relative z-10 text-white px-6 py-1.5 font-bold text-sm tracking-wide">Dashboard</span>
+          <div class="relative z-10 bg-omni-accent-hover text-white p-1.5 rounded-full transition-all duration-300 group-hover:rotate-45 group-hover:scale-110 shadow-sm">
+            <i data-lucide="arrow-right" class="h-4 w-4"></i>
+          </div>
+        </a>
+        <?php else : ?>
+        <a href="<?php echo esc_url( wp_login_url( admin_url('admin.php?page=omni-hardening') ) ); ?>" class="group relative flex items-center shadow-lg rounded-full bg-omni-accent p-1 pr-1.5 cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-[0_8px_20px_rgba(253,184,84,0.4)] hover:-translate-y-0.5 active:scale-95">
           <div class="absolute inset-0 w-full h-full pointer-events-none rounded-full overflow-hidden z-0">
             <div class="absolute top-[120%] left-[-50%] w-[200%] h-[200%] bg-white/20 rounded-[40%] transition-all duration-700 ease-in-out group-hover:top-[-20%] group-hover:rotate-90"></div>
             <div class="absolute top-[120%] left-[-50%] w-[200%] h-[200%] bg-white/30 rounded-[45%] transition-all duration-1000 ease-in-out delay-75 group-hover:top-[-20%] group-hover:rotate-[120deg]"></div>
@@ -499,6 +511,7 @@ body.omni-loading { overflow: hidden; }
             <i data-lucide="arrow-right" class="h-4 w-4"></i>
           </div>
         </a>
+        <?php endif; ?>
       </div>
     </div>
   </header>
