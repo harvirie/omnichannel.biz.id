@@ -241,12 +241,13 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 9px 28px;
+  margin: 2px 16px;
+  padding: 9px 12px;
   font-size: 13px;
   font-weight: 500;
   color: var(--oe-muted);
   cursor: pointer;
-  border-left: 3px solid transparent;
+  border-radius: 8px;
   transition: all 0.15s ease;
 }
 
@@ -260,8 +261,7 @@
 }
 
 .oe-nav-item.active {
-  background: rgba(212,175,55,0.08);
-  border-left-color: var(--oe-accent);
+  background: rgba(212,175,55,0.12);
   color: var(--oe-accent);
 }
 
@@ -270,7 +270,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  padding: 0 12px 12px;
+  padding: 0 28px 12px;
   align-items: center;
 }
 
@@ -298,7 +298,7 @@
 .oe-save-status {
   font-size: 11px;
   color: var(--oe-muted);
-  padding: 0 16px;
+  padding: 0 28px;
   margin-top: auto;
 }
 
