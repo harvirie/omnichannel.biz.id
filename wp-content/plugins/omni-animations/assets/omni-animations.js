@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initGSAPParallax();
 
     // 2. Initialize Swup for Page Transitions
-    if (typeof Swup !== 'undefined' && typeof SwupScriptsPlugin !== 'undefined') {
+    if (typeof Swup !== 'undefined' && typeof SwupScriptsPlugin !== 'undefined' && typeof SwupBodyClassPlugin !== 'undefined') {
         const swup = new Swup({
             containers: ['#swup'],
             plugins: [
@@ -56,7 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     head: true,
                     body: true,
                     optin: false // Menjalankan semua script ulang secara default
-                })
+                }),
+                new SwupBodyClassPlugin()
             ]
         });
 
