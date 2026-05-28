@@ -94,17 +94,17 @@ class Omni_Animations {
     }
     
     public function enqueue_assets() {
-        // Enqueue GSAP & ScrollTrigger
-        wp_enqueue_script('gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', [], null, true);
-        wp_enqueue_script('gsap-scrolltrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js', ['gsap'], null, true);
+        // Enqueue library pihak ketiga dari cdn.jsdelivr.net
+        wp_enqueue_script('omni-gsap', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', array(), null, true);
+        wp_enqueue_script('omni-scrolltrigger', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', array('omni-gsap'), null, true);
         
-        // Enqueue Swup
-        wp_enqueue_script('swup', 'https://unpkg.com/swup@4', [], null, true);
-        wp_enqueue_script('swup-scripts-plugin', 'https://unpkg.com/@swup/scripts-plugin@3', ['swup'], null, true);
+        // Enqueue Swup v4 dan pluginnya dari cdn.jsdelivr.net
+        wp_enqueue_script('omni-swup', 'https://cdn.jsdelivr.net/npm/swup@4/dist/Swup.umd.js', array(), null, true);
+        wp_enqueue_script('omni-swup-scripts', 'https://cdn.jsdelivr.net/npm/@swup/scripts-plugin@3/dist/index.umd.js', array('omni-swup'), null, true);
         
         // Enqueue Custom Assets
         wp_enqueue_style('omni-animations-css', plugin_dir_url(__FILE__) . 'assets/omni-animations.css', [], '1.0.0');
-        wp_enqueue_script('omni-animations-js', plugin_dir_url(__FILE__) . 'assets/omni-animations.js', ['gsap', 'gsap-scrolltrigger', 'swup', 'swup-scripts-plugin'], filemtime(plugin_dir_path(__FILE__) . 'assets/omni-animations.js'), true);
+        wp_enqueue_script('omni-animations-js', plugin_dir_url(__FILE__) . 'assets/omni-animations.js', ['omni-scrolltrigger', 'omni-swup-scripts'], '1.0.0', true);
         
         // Pass parallax status to JS
         $is_parallax_enabled = false;
