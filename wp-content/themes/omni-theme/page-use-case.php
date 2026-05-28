@@ -20,11 +20,11 @@ add_action('wp_head', function() {
     // Custom style to pull hero illustration up deeply behind the solid gray background
     echo '<style>
       .hero-illustration-container {
-        margin-top: -80px;
+        margin-top: -70px;
       }
       @media (min-width: 768px) {
         .hero-illustration-container {
-          margin-top: -12%;
+          margin-top: -10%;
         }
       }
     </style>' . "\n";
@@ -35,8 +35,8 @@ add_action('wp_head', function() {
 <div class="flex-1 bg-white w-full">
 
   <!-- Hero Section -->
-  <div class="-mt-20 md:-mt-32 pt-40 md:pt-52 relative overflow-hidden z-30" style="background-color: #f1f5f9;">
-    <div class="max-w-7xl mx-auto px-6 text-center relative z-10" style="padding-bottom: 100px;">
+  <div class="-mt-20 md:-mt-32 pt-40 md:pt-52 relative overflow-hidden" style="background-color: #f1f5f9; z-index: 30;">
+    <div class="max-w-7xl mx-auto px-6 text-center relative" style="padding-bottom: 100px; z-index: 10;">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="briefcase" class="h-4 w-4"></i>
         Solusi Nyata untuk Bisnis Nyata
@@ -54,7 +54,7 @@ add_action('wp_head', function() {
   </div>
     
   <!-- Animated SVG Boundary Line -->
-  <div class="w-full relative z-20 pointer-events-none" style="line-height: 0; margin-top: -1px;">
+  <div class="w-full relative pointer-events-none" style="line-height: 0; margin-top: -1px; z-index: 20;">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3973.17 333.48" class="text-omni-dark h-[60px] md:h-auto" preserveAspectRatio="none" style="display: block; width: 100%; shape-rendering: geometricPrecision;">
         <!-- Gray filler above the curve to mask the image underneath -->
         <path fill="#f1f5f9" d="M3973.17 333.48 L3973.17 0 L0 0 L0 0.01 l2872.96 0 0 0.03 c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06 l82.35 134.74 c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08 l0 -0.03 717.15 0 Z" />
@@ -65,7 +65,7 @@ add_action('wp_head', function() {
   </div>
 
   <!-- Hero Illustration — WebP dengan fallback PNG untuk LCP optimal -->
-  <div class="w-full relative z-0 hero-illustration-container">
+  <div class="w-full relative hero-illustration-container" style="z-index: 0;">
     <picture>
       <source
         srcset="<?php echo get_template_directory_uri(); ?>/assets/img/usecase-hero-updated.webp"
