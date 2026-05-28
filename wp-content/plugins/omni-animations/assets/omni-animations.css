@@ -1,62 +1,101 @@
 /* =====================================================
-   Omni Animations CSS — v2.0
-   Swup page transitions.
-   Classes applied to <html>:
-     .is-animating  → transition in progress
-     .is-leaving    → current page animating out
-   Class on #swup:
-     .transition-fade / .transition-slide_up / etc.
+   Omni Animations CSS — v2.1
+   Swup page transitions — FAST, SMOOTH, LIGHTWEIGHT
+   
+   Total transition budget: ~300ms
+     Leave  : 120ms (out)  — server fetch runs in parallel
+     Enter  : 180ms (in)   — fast fade-up
    ===================================================== */
 
-/* ── Shared transition timing ─────────────────────── */
+/* ── GPU-accelerated base: applied always ─────────── */
 #swup {
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition:
+        opacity 0.18s cubic-bezier(0.4, 0, 1, 1),
+        transform 0.18s cubic-bezier(0.4, 0, 1, 1);
     will-change: opacity, transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 /* ══════════════════════════════════════════════════
-   LEAVING — animate the old page OUT
+   LEAVING — page fades out fast (120ms)
+   is-animating + is-leaving applied simultaneously by Swup
    ══════════════════════════════════════════════════ */
+html.is-animating.is-leaving #swup {
+    /* Override transition speed for LEAVE phase — very fast */
+    transition:
+        opacity 0.12s cubic-bezier(0.4, 0, 1, 1),
+        transform 0.12s cubic-bezier(0.4, 0, 1, 1) !important;
+}
+
 html.is-animating.is-leaving #swup.transition-fade {
     opacity: 0;
     transform: none;
 }
 html.is-animating.is-leaving #swup.transition-slide_up {
     opacity: 0;
-    transform: translateY(-30px);
+    transform: translateY(-16px);
 }
 html.is-animating.is-leaving #swup.transition-slide_down {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(16px);
 }
 html.is-animating.is-leaving #swup.transition-scale {
     opacity: 0;
-    transform: scale(0.97);
+    transform: scale(0.98);
 }
 
 /* ══════════════════════════════════════════════════
-   ENTERING — start state of the new page
-   (Swup inserts new content while is-animating is still active
-    but is-leaving is removed → this rule fires)
+   ENTERING — new page starts invisible, then transitions in (180ms)
+   is-leaving is removed, new content injected, transition fires
    ══════════════════════════════════════════════════ */
+html.is-animating:not(.is-leaving) #swup {
+    transition:
+        opacity 0.22s cubic-bezier(0, 0, 0.2, 1),
+        transform 0.22s cubic-bezier(0, 0, 0.2, 1) !important;
+}
+
 html.is-animating:not(.is-leaving) #swup.transition-fade {
     opacity: 0;
     transform: none;
 }
 html.is-animating:not(.is-leaving) #swup.transition-slide_up {
     opacity: 0;
-    transform: translateY(25px);
+    transform: translateY(14px);
 }
 html.is-animating:not(.is-leaving) #swup.transition-slide_down {
     opacity: 0;
-    transform: translateY(-25px);
+    transform: translateY(-14px);
 }
 html.is-animating:not(.is-leaving) #swup.transition-scale {
     opacity: 0;
-    transform: scale(1.03);
+    transform: scale(1.02);
 }
 
 /* ══════════════════════════════════════════════════
-   DONE — is-animating removed → transition to final state
-   is handled by the base #swup transition above.
+   DONE — is-animating removed → Swup cleans up classes
+   The base #swup transition above returns to opacity:1
    ══════════════════════════════════════════════════ */
+
+/* ── Progress bar overlay for visual feedback ─────── */
+#omni-page-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, #D4AF37, #FDB854, #D4AF37);
+    z-index: 99999;
+    pointer-events: none;
+    opacity: 0;
+    transition: width 0.2s ease, opacity 0.15s ease;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
+}
+#omni-page-progress.omni-progress-active {
+    opacity: 1;
+}
+#omni-page-progress.omni-progress-done {
+    width: 100% !important;
+    opacity: 0;
+    transition: width 0.1s ease, opacity 0.3s ease 0.1s;
+}
