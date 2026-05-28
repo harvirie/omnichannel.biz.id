@@ -590,6 +590,7 @@ async function submitDemoForm(e) {
 
     // Tutup sementara (tanpa simpan consent — banner muncul lagi next visit)
     window.omniConsentTempHide = function() {
+        sessionStorage.setItem(CONSENT_KEY + '_dismissed', '1');
         hideBanner();
     };
 
@@ -598,9 +599,10 @@ async function submitDemoForm(e) {
         showBanner();
     };
 
-    // Tampilkan banner hanya jika belum pernah consent
+    // Tampilkan banner hanya jika belum pernah consent dan belum di-dismiss di sesi ini
     var existing = localStorage.getItem(CONSENT_KEY);
-    if (!existing) {
+    var dismissed = sessionStorage.getItem(CONSENT_KEY + '_dismissed');
+    if (!existing && !dismissed) {
         setTimeout(showBanner, 1200); // Setelah loading screen
     }
 })();

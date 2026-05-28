@@ -19,18 +19,26 @@ document.addEventListener('DOMContentLoaded', () => {
             // Jika tidak ada class khusus, kita beri efek ringan pada semua gambar besar
             const images = swupContainer.querySelectorAll('img');
             images.forEach(img => {
-                // Terapkan hanya pada gambar yang lumayan besar (menghindari icon)
-                if (img.clientHeight > 150) {
-                    gsap.to(img, {
-                        y: -40, // Bergerak 40px ke atas secara relatif saat di-scroll
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: img,
-                            start: "top bottom", // Mulai saat bagian atas gambar menyentuh bagian bawah layar
-                            end: "bottom top",   // Selesai saat bagian bawah gambar menyentuh bagian atas layar
-                            scrub: true          // Animasi mengikuti scroll
-                        }
-                    });
+                const initParallaxOnImg = () => {
+                    // Terapkan hanya pada gambar yang lumayan besar (menghindari icon)
+                    if (img.clientHeight > 50) {
+                        gsap.to(img, {
+                            y: -40, // Bergerak 40px ke atas secara relatif saat di-scroll
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: img,
+                                start: "top bottom", // Mulai saat bagian atas gambar menyentuh bagian bawah layar
+                                end: "bottom top",   // Selesai saat bagian bawah gambar menyentuh bagian atas layar
+                                scrub: true          // Animasi mengikuti scroll
+                            }
+                        });
+                    }
+                };
+                
+                if (img.complete) {
+                    initParallaxOnImg();
+                } else {
+                    img.addEventListener('load', initParallaxOnImg);
                 }
             });
         }
