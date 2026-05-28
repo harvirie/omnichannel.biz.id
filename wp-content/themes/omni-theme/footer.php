@@ -543,6 +543,7 @@ async function submitDemoForm(e) {
     function hideBanner() {
         banner.style.transform = 'translateY(120%)';
         banner.style.pointerEvents = 'none';
+        setTimeout(function() { banner.style.opacity = '0'; }, 600);
     }
 
     function saveConsent(type, prefs) {
@@ -550,7 +551,10 @@ async function submitDemoForm(e) {
             version: 1, type: type, timestamp: new Date().toISOString(),
             prefs: prefs || cookieState
         };
-        localStorage.setItem(CONSENT_KEY, JSON.stringify(record));
+        try {
+            localStorage.setItem(CONSENT_KEY, JSON.stringify(record));
+        } catch(e) { console.error('Consent storage failed', e); }
+        
         hideBanner();
         omniConsentHideDetail();
     }
@@ -590,18 +594,26 @@ async function submitDemoForm(e) {
 
     // Tutup sementara (tanpa simpan consent — banner muncul lagi next visit)
     window.omniConsentTempHide = function() {
-        sessionStorage.setItem(CONSENT_KEY + '_dismissed', '1');
+        try {
+            sessionStorage.setItem(CONSENT_KEY + '_dismissed', '1');
+        } catch(e) {}
         hideBanner();
     };
 
     // Buka kembali dari footer
     window.omniConsentShowBanner = function() {
+        banner.style.opacity = '1';
         showBanner();
     };
 
     // Tampilkan banner hanya jika belum pernah consent dan belum di-dismiss di sesi ini
-    var existing = localStorage.getItem(CONSENT_KEY);
-    var dismissed = sessionStorage.getItem(CONSENT_KEY + '_dismissed');
+    var existing = null;
+    var dismissed = null;
+    try {
+        existing = localStorage.getItem(CONSENT_KEY);
+        dismissed = sessionStorage.getItem(CONSENT_KEY + '_dismissed');
+    } catch(e) {}
+    
     if (!existing && !dismissed) {
         setTimeout(showBanner, 1200); // Setelah loading screen
     }
