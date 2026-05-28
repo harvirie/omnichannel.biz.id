@@ -724,13 +724,11 @@
 
 .oe-preview-frame-wrap {
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
   background: #0A1120;
   padding: 12px;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .oe-preview-frame-wrap[data-device="desktop"] iframe {

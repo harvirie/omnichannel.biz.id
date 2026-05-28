@@ -115,12 +115,17 @@ jQuery(document).ready(function ($) {
         const availableW = wrapW - paddingX;
         
         const scale = Math.min(1, availableW / targetW);
+        const scaledW = targetW * scale;
         
         $iframe.css({
+            position: 'absolute',
+            left: '50%',
+            top: '12px', // matches wrapper padding
+            marginLeft: -(scaledW / 2) + 'px',
             width: targetW + 'px',
-            height: (wrapH / scale) + 'px',
+            height: ((wrapH - 24) / scale) + 'px',
             transform: `scale(${scale})`,
-            transformOrigin: 'top center'
+            transformOrigin: 'top left'
         });
     }
     
