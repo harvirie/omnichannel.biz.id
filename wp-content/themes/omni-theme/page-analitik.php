@@ -12,24 +12,20 @@ add_action('wp_head', function() {
     echo '<link rel="canonical" href="' . esc_url(home_url('/analitik')) . '">' . "\n";
     // Preload LCP hero image (WebP) agar LCP turun signifikan
     echo '<link rel="preload" as="image" href="' . get_template_directory_uri() . '/assets/img/analitik-hero-updated.webp" type="image/webp">' . "\n";
-    // Custom style to pull hero illustration up behind the SVG curve responsively
+    // Custom style: hero-wrap menutup area putih di bawah SVG wave
     echo '<style>
-      .hero-illustration-container {
-        margin-top: -62px;
-      }
-      @media (min-width: 768px) {
-        .hero-illustration-container {
-          margin-top: -8.5%;
-        }
-      }
+      .hero-wrap { position: relative; }
+      .hero-wrap .hero-svg-boundary { position: absolute; bottom: 0; left: 0; width: 100%; line-height: 0; z-index: 20; pointer-events: none; }
+      .hero-wrap .hero-svg-boundary svg { display: block; width: 100%; }
+      .hero-illustration-container { position: relative; z-index: 10; margin-top: 0; }
     </style>' . "\n";
 }, 5);
 ?>
 <?php get_header(); ?>
 
 <div class="flex-1 bg-white w-full">
-  <!-- Hero Header -->
-  <div class="-mt-20 md:-mt-32 pt-40 md:pt-52 relative overflow-hidden" style="background-color: #f1f5f9;">
+  <!-- Hero Section + Illustration dalam satu wrapper untuk zero-gap -->
+  <div class="-mt-20 md:-mt-32 pt-40 md:pt-52 hero-wrap" style="background-color: #f1f5f9;">
     <div class="max-w-7xl mx-auto px-6 text-center relative z-10" style="padding-bottom: 100px;">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="bar-chart-2" class="h-4 w-4"></i>
@@ -43,37 +39,30 @@ add_action('wp_head', function() {
         Pelayanan pelanggan bukan lagi sekadar cost center. Melalui OmniServe, setiap keluhan, pertanyaan, dan saran direkam, dianalisis, dan divisualisasikan.
       </p>
     </div>
-    
-    <!-- Animated SVG Boundary Line -->
-    <div class="w-full relative z-20 pointer-events-none" style="line-height: 0; margin-top: -2px;">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3973.17 333.48" class="text-omni-dark h-[60px] md:h-auto" preserveAspectRatio="none" style="display: block; width: 100%; shape-rendering: geometricPrecision;">
-        <!-- Gray filler above the curve to mask the image underneath -->
-        <path fill="#f1f5f9" d="M3973.17 333.48 L3973.17 0 L0 0 L0 0.01 l2872.96 0 0 0.03 c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06 l82.35 134.74 c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08 l0 -0.03 717.15 0 Z" />
-        
-        <path fill="currentColor" d="M0 0.01l2872.96 0 0 0.03c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06l82.35 134.74c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08l0 -0.03 717.15 0 0 18 -717.15 0 -0.03 -0.03c-34.38,-0.22 -66.48,-11.11 -95.36,-28.68 -32.86,-20 -61.55,-48.7 -84.61,-80.14l-0.42 -0.63 -82.73 -135.38c-12.18,-20.97 -29.12,-40.5 -51.49,-53.66 -18.67,-10.99 -41.27,-17.6 -68.25,-16.98l-0.17 0.03 -2872.96 0 0 -18z"/>
-        <path class="svg-glow-path-wide" pathLength="100" d="M0 0.01 l2872.96 0 0 0.03 c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06 l82.35 134.74 c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08 l0 -0.03 717.15 0"/>
-        <path class="svg-glow-path" pathLength="100" d="M0 0.01 l2872.96 0 0 0.03 c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06 l82.35 134.74 c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08 l0 -0.03 717.15 0"/>
-      </svg>
-    </div>
-  </div>
 
-  <!-- Hero Illustration — WebP dengan fallback PNG untuk LCP optimal -->
-  <div class="w-full relative z-10 hero-illustration-container">
-    <picture>
-      <source
-        srcset="<?php echo get_template_directory_uri(); ?>/assets/img/analitik-hero-updated.webp"
-        type="image/webp"
-      >
-      <img
-        src="<?php echo get_template_directory_uri(); ?>/assets/img/analitik-hero-updated.png"
-        alt="Dashboard Analitik OmniServe — Pantau CSAT, waktu respon agen, volume pesan secara real-time"
-        width="1886" height="834"
-        class="w-full h-auto object-cover"
-        fetchpriority="high"
-        loading="eager"
-        decoding="async"
-      >
-    </picture>
+    <!-- Hero Illustration + SVG overlay dalam satu container = zero gap -->
+    <div class="hero-illustration-container w-full">
+      <div class="hero-svg-boundary">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3973.17 333.48" class="text-omni-dark h-[60px] md:h-auto" preserveAspectRatio="none" style="shape-rendering: geometricPrecision;">
+          <path fill="#f1f5f9" d="M3973.17 333.48 L3973.17 0 L0 0 L0 0.01 l2872.96 0 0 0.03 c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06 l82.35 134.74 c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08 l0 -0.03 717.15 0 Z" />
+          <path fill="currentColor" d="M0 0.01l2872.96 0 0 0.03c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06l82.35 134.74c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08l0 -0.03 717.15 0 0 18 -717.15 0 -0.03 -0.03c-34.38,-0.22 -66.48,-11.11 -95.36,-28.68 -32.86,-20 -61.55,-48.7 -84.61,-80.14l-0.42 -0.63 -82.73 -135.38c-12.18,-20.97 -29.12,-40.5 -51.49,-53.66 -18.67,-10.99 -41.27,-17.6 -68.25,-16.98l-0.17 0.03 -2872.96 0 0 -18z"/>
+          <path class="svg-glow-path-wide" pathLength="100" d="M0 0.01 l2872.96 0 0 0.03 c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06 l82.35 134.74 c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08 l0 -0.03 717.15 0"/>
+          <path class="svg-glow-path" pathLength="100" d="M0 0.01 l2872.96 0 0 0.03 c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06 l82.35 134.74 c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08 l0 -0.03 717.15 0"/>
+        </svg>
+      </div>
+      <picture>
+        <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/analitik-hero-updated.webp" type="image/webp">
+        <img
+          src="<?php echo get_template_directory_uri(); ?>/assets/img/analitik-hero-updated.png"
+          alt="Dashboard Analitik OmniServe — Pantau CSAT, waktu respon agen, volume pesan secara real-time"
+          width="1886" height="834"
+          class="w-full h-auto block"
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+        >
+      </picture>
+    </div>
   </div>
 
   <!-- Main Content Area -->
