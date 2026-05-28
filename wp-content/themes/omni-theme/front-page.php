@@ -24,7 +24,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
     <!-- Responsive Hero (Desktop & Mobile) -->
     <div class="w-full relative pb-0 md:pb-0">
       <!-- Top Card -->
-      <div class="relative z-10 w-[300vw] -left-[55vw] md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 1163.2;">
+      <div class="relative z-10 w-[400vw] -left-[75vw] md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 1163.2;">
         <svg viewBox="0 0 2000.62 1163.2" class="absolute inset-0 w-full h-full drop-shadow-xl" preserveAspectRatio="none">
           <path fill="#F8FAFC" d="M 64 0 A 64 64 0 0 0 0 64 L 0 950.62 A 64 64 0 0 0 64 1014.62 L 678 1014.62 A 74.29 74.29 0 0 1 752.29 1088.91 A 74.29 74.29 0 0 0 826.58 1163.2 L 1936.62 1163.2 A 64 64 0 0 0 2000.62 1099.2 L 2000.62 212.88 A 64 64 0 0 0 1936.62 148.88 L 826.58 148.88 A 74.44 74.44 0 0 1 752.14 74.44 A 74.44 74.44 0 0 0 677.7 0 Z"/>
           <path class="svg-glow-path-wide" pathLength="100" d="M 64 0 A 64 64 0 0 0 0 64 L 0 950.62 A 64 64 0 0 0 64 1014.62 L 678 1014.62 A 74.29 74.29 0 0 1 752.29 1088.91 A 74.29 74.29 0 0 0 826.58 1163.2 L 1936.62 1163.2 A 64 64 0 0 0 2000.62 1099.2 L 2000.62 212.88 A 64 64 0 0 0 1936.62 148.88 L 826.58 148.88 A 74.44 74.44 0 0 1 752.14 74.44 A 74.44 74.44 0 0 0 677.7 0 Z"/>
@@ -114,7 +114,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
         </div>
 
         <!-- Mobile Content -->
-        <div class="flex md:hidden relative z-20 flex-col px-6 pt-8 pb-12" style="width: 100vw; margin-left: 55vw;">
+        <div class="flex md:hidden relative z-20 flex-col px-6 pt-8 pb-12" style="width: 100vw; margin-left: 75vw;">
 
           <a href="<?php echo home_url('/'); ?>" class="block" aria-label="Beranda OmniServe" style="margin-top: -10px; margin-left: -10px; margin-bottom: 20px;">
             <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg"
@@ -183,7 +183,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
       </div>
 
       <!-- Bottom Card -->
-      <div class="relative z-20 w-[300vw] -left-[55vw] md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 448.88; margin-top: -2.99%; margin-bottom: 0;">
+      <div class="relative z-20 w-[400vw] -left-[75vw] md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 448.88; margin-top: -2.99%; margin-bottom: 0;">
         <svg viewBox="0 0 2000.62 448.88" class="absolute inset-0 w-full h-full text-omni-dark" preserveAspectRatio="xMidYMid meet" style="overflow: visible;">
           <path fill="#D4AF37" transform="translate(-8, 8)" opacity="0.8" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 600 L 0 600 L 0 64 A 64 64 0 0 1 64 0 Z"/>
           <path fill="currentColor" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 600 L 0 600 L 0 64 A 64 64 0 0 1 64 0 Z"/>
@@ -226,7 +226,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
         </div>
 
         <!-- Mobile Bottom Card Content -->
-        <div class="flex md:hidden absolute top-[15%] z-10 flex-col justify-center px-6 -translate-y-[10px] -translate-x-[20px]" style="width: 100vw; left: 55vw; height: 85%;">
+        <div class="flex md:hidden absolute top-[15%] z-10 flex-col justify-center px-6 -translate-y-[10px] -translate-x-[20px]" style="width: 100vw; left: 75vw; height: 85%;">
           <div class="text-white mb-5">
             <h2 class="text-3xl mb-3 text-omni-light leading-tight">
               <?php echo $integration_title; ?>
