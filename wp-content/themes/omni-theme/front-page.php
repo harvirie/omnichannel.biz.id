@@ -17,6 +17,9 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
   @media (min-width: 768px) {
     .hero-desktop-min-h { min-height: clamp(600px, calc(100vh - 6rem), 100vh); }
   }
+  @media (max-width: 767px) {
+    .mobile-scale-w { width: 400vw !important; left: -75vw !important; }
+  }
 </style>
 <section class="p-4 pb-0 md:p-6 bg-omni-secondary flex flex-col justify-center relative flex-1 overflow-x-hidden hero-desktop-min-h">
   <div class="relative w-full max-w-[1400px] mx-auto flex flex-col items-center justify-center pt-8 lg:pt-0">
@@ -24,7 +27,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
     <!-- Responsive Hero (Desktop & Mobile) -->
     <div class="w-full relative pb-0 md:pb-0">
       <!-- Top Card -->
-      <div class="relative z-10 w-[400vw] -left-[75vw] md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 1163.2;">
+      <div class="relative z-10 w-[300vw] -left-[55vw] mobile-scale-w md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 1163.2;">
         <svg viewBox="0 0 2000.62 1163.2" class="absolute inset-0 w-full h-full drop-shadow-xl" preserveAspectRatio="none">
           <path fill="#F8FAFC" d="M 64 0 A 64 64 0 0 0 0 64 L 0 950.62 A 64 64 0 0 0 64 1014.62 L 678 1014.62 A 74.29 74.29 0 0 1 752.29 1088.91 A 74.29 74.29 0 0 0 826.58 1163.2 L 1936.62 1163.2 A 64 64 0 0 0 2000.62 1099.2 L 2000.62 212.88 A 64 64 0 0 0 1936.62 148.88 L 826.58 148.88 A 74.44 74.44 0 0 1 752.14 74.44 A 74.44 74.44 0 0 0 677.7 0 Z"/>
           <path class="svg-glow-path-wide" pathLength="100" d="M 64 0 A 64 64 0 0 0 0 64 L 0 950.62 A 64 64 0 0 0 64 1014.62 L 678 1014.62 A 74.29 74.29 0 0 1 752.29 1088.91 A 74.29 74.29 0 0 0 826.58 1163.2 L 1936.62 1163.2 A 64 64 0 0 0 2000.62 1099.2 L 2000.62 212.88 A 64 64 0 0 0 1936.62 148.88 L 826.58 148.88 A 74.44 74.44 0 0 1 752.14 74.44 A 74.44 74.44 0 0 0 677.7 0 Z"/>
@@ -183,7 +186,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
       </div>
 
       <!-- Bottom Card -->
-      <div class="relative z-20 w-[400vw] -left-[75vw] md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 448.88; margin-top: -2.99%; margin-bottom: 0;">
+      <div class="relative z-20 w-[300vw] -left-[55vw] mobile-scale-w md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 448.88; margin-top: -2.99%; margin-bottom: 0;">
         <svg viewBox="0 0 2000.62 448.88" class="absolute inset-0 w-full h-full text-omni-dark" preserveAspectRatio="xMidYMid meet" style="overflow: visible;">
           <path fill="#D4AF37" transform="translate(-8, 8)" opacity="0.8" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 600 L 0 600 L 0 64 A 64 64 0 0 1 64 0 Z"/>
           <path fill="currentColor" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 600 L 0 600 L 0 64 A 64 64 0 0 1 64 0 Z"/>
