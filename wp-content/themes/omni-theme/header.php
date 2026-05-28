@@ -437,7 +437,7 @@ body.omni-loading { overflow: hidden; }
     </a>
     <?php else : ?>
     <a href="<?php echo esc_url( wp_login_url( admin_url('admin.php?page=omni-hardening') ) ); ?>" class="flex justify-center items-center w-full shadow-md rounded-xl bg-omni-accent hover:bg-omni-accent-hover transition-all p-3 text-white font-bold">
-      Masuk / Coba Gratis
+      Masuk
     </a>
     <?php endif; ?>
   </div>
@@ -512,7 +512,7 @@ body.omni-loading { overflow: hidden; }
             <div class="absolute top-[120%] left-[-50%] w-[200%] h-[200%] bg-white/20 rounded-[40%] transition-all duration-700 ease-in-out group-hover:top-[-20%] group-hover:rotate-90"></div>
             <div class="absolute top-[120%] left-[-50%] w-[200%] h-[200%] bg-white/30 rounded-[45%] transition-all duration-1000 ease-in-out delay-75 group-hover:top-[-20%] group-hover:rotate-[120deg]"></div>
           </div>
-          <span class="relative z-10 text-white px-6 py-1.5 font-bold text-sm tracking-wide">Masuk / Coba Gratis</span>
+          <span class="relative z-10 text-white px-6 py-1.5 font-bold text-sm tracking-wide">Masuk</span>
           <div class="relative z-10 bg-omni-accent-hover text-white p-1.5 rounded-full transition-all duration-300 group-hover:rotate-45 group-hover:scale-110 shadow-sm">
             <i data-lucide="arrow-right" class="h-4 w-4"></i>
           </div>
