@@ -1,6 +1,17 @@
 /* Omni Editor Admin UI — v1.0.0 */
 
 /* ── Reset & Base ──────────────────────────────────────────── */
+/* WordPress Admin full-screen overrides */
+#wpcontent, #wpbody {
+  padding: 0 !important;
+}
+#wpbody-content {
+  padding-bottom: 0 !important;
+}
+#wpfooter {
+  display: none !important;
+}
+
 #omni-editor-root *,
 #omni-editor-root *::before,
 #omni-editor-root *::after {
