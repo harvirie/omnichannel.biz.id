@@ -18,9 +18,7 @@ class OmniEditorData {
         $pages = ['home', 'fitur', 'usecase', 'analitik', 'harga', 'footer'];
         $result = [];
         foreach ($pages as $page) {
-            $saved    = get_option(self::OPTION_PREFIX . $page, []);
-            $defaults = self::defaults($page);
-            $result[$page] = self::merge_deep($defaults, is_array($saved) ? $saved : []);
+            $result[$page] = self::get($page);
         }
         return $result;
     }
@@ -39,7 +37,30 @@ class OmniEditorData {
     public static function get(string $page): array {
         $saved    = get_option(self::OPTION_PREFIX . $page, []);
         $defaults = self::defaults($page);
-        return self::merge_deep($defaults, is_array($saved) ? $saved : []);
+        $merged   = self::merge_deep($defaults, is_array($saved) ? $saved : []);
+        
+        // Fallback for home page if no options saved yet
+        if ($page === 'home' && empty($saved)) {
+            $front_id = get_option('page_on_front');
+            if ($front_id) {
+                $old_title = get_post_meta($front_id, 'omni_hero_title', true);
+                if ($old_title) $merged['hero']['title'] = $old_title;
+                
+                $old_sub = get_post_meta($front_id, 'omni_hero_subtitle', true);
+                if ($old_sub) $merged['hero']['subtitle'] = $old_sub;
+                
+                $old_b1 = get_post_meta($front_id, 'omni_hero_badge1', true);
+                if ($old_b1) $merged['hero']['badge1'] = $old_b1;
+                
+                $old_b2 = get_post_meta($front_id, 'omni_hero_badge2', true);
+                if ($old_b2) $merged['hero']['badge2'] = $old_b2;
+                
+                $old_cta = get_post_meta($front_id, 'omni_hero_cta_primary', true);
+                if ($old_cta) $merged['hero']['cta_primary'] = $old_cta;
+            }
+        }
+        
+        return $merged;
     }
 
     /** Save data for one page */

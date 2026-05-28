@@ -58,7 +58,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 20px 0 28px;
   gap: 16px;
   flex-shrink: 0;
 }
@@ -224,7 +224,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--oe-muted);
-  padding: 0 16px 8px;
+  padding: 0 28px 8px;
 }
 
 .oe-sidebar-divider {
@@ -241,7 +241,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 9px 16px;
+  padding: 9px 28px;
   font-size: 13px;
   font-weight: 500;
   color: var(--oe-muted);
@@ -488,13 +488,39 @@
 #omni-editor-root textarea.oe-input::placeholder { color: rgba(148,163,184,0.5); }
 
 /* Rich text (contenteditable) */
+.oe-rt-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--oe-bg2);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  padding: 6px;
+}
+
+.oe-rt-toolbar select, .oe-rt-toolbar button {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid transparent;
+  color: var(--oe-text);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  outline: none;
+}
+.oe-rt-toolbar select:hover, .oe-rt-toolbar button:hover {
+  background: rgba(255,255,255,0.1);
+}
+.oe-rt-toolbar select { padding-right: 16px; }
+
 #omni-editor-root .oe-richtext {
   width: 100%;
-  min-height: 60px;
+  min-height: 80px;
   background: var(--oe-bg3);
   border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px;
-  padding: 9px 12px;
+  border-radius: 0 0 8px 8px;
+  padding: 12px 16px;
   color: var(--oe-text);
   font-family: inherit;
   font-size: 14px;

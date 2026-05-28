@@ -401,7 +401,36 @@ jQuery(document).ready(function ($) {
     function createField(label, bindPath, value, type = 'text', hint = '') {
         let inputHtml = '';
         if (type === 'richtext') {
-            inputHtml = `<div class="oe-richtext" contenteditable="true" data-bind="${bindPath}" data-placeholder="Ketik disini...">${value}</div>`;
+            const fontOptions = `
+                <option value="">Font Family</option>
+                <option value="Inter, sans-serif">Inter</option>
+                <option value="Outfit, sans-serif">Outfit</option>
+                <option value="Roboto, sans-serif">Roboto</option>
+                <option value="'Open Sans', sans-serif">Open Sans</option>
+                <option value="Georgia, serif">Georgia</option>
+            `;
+            const sizeOptions = `
+                <option value="">Size</option>
+                <option value="1">Small</option>
+                <option value="3">Normal</option>
+                <option value="4">Large</option>
+                <option value="5">X-Large</option>
+                <option value="6">Huge</option>
+            `;
+            inputHtml = `
+            <div class="oe-rt-toolbar">
+                <select class="oe-rt-fontname" onchange="document.execCommand('fontName', false, this.value); this.selectedIndex = 0;">
+                    ${fontOptions}
+                </select>
+                <select class="oe-rt-fontsize" onchange="document.execCommand('fontSize', false, this.value); this.selectedIndex = 0;">
+                    ${sizeOptions}
+                </select>
+                <button type="button" onclick="document.execCommand('bold', false, null)" title="Bold"><b>B</b></button>
+                <button type="button" onclick="document.execCommand('italic', false, null)" title="Italic"><i>I</i></button>
+                <button type="button" onclick="const url = prompt('Enter link URL:'); if(url) document.execCommand('createLink', false, url);" title="Link">🔗</button>
+                <button type="button" onclick="document.execCommand('unlink', false, null)" title="Remove Link">🚫</button>
+            </div>
+            <div class="oe-richtext" contenteditable="true" data-bind="${bindPath}" data-placeholder="Ketik disini...">${value}</div>`;
         } else if (type === 'textarea') {
             inputHtml = `<textarea class="oe-input" data-bind="${bindPath}" rows="3">${value}</textarea>`;
         } else if (type === 'image') {
