@@ -1,80 +1,82 @@
 /* =====================================================
-   Omni Animations CSS — v2.1
-   Swup page transitions — FAST, SMOOTH, LIGHTWEIGHT
-   
-   Total transition budget: ~300ms
-     Leave  : 120ms (out)  — server fetch runs in parallel
-     Enter  : 180ms (in)   — fast fade-up
+   Omni Animations CSS — v2.2
+   Swup page transitions — FAST, SMOOTH, NO BLANK SCREEN
    ===================================================== */
 
 /* ── GPU-accelerated base: applied always ─────────── */
 #swup {
     transition:
-        opacity 0.18s cubic-bezier(0.4, 0, 1, 1),
-        transform 0.18s cubic-bezier(0.4, 0, 1, 1);
-    will-change: opacity, transform;
+        opacity 0.25s cubic-bezier(0.25, 0.1, 0.25, 1),
+        transform 0.25s cubic-bezier(0.25, 0.1, 0.25, 1),
+        filter 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+    will-change: opacity, transform, filter;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
 }
 
 /* ══════════════════════════════════════════════════
-   LEAVING — page fades out fast (120ms)
-   is-animating + is-leaving applied simultaneously by Swup
+   LEAVING — page dims slightly and blurs (Wait for server)
+   We do NOT fade to opacity: 0 to prevent "ngeblan" (blank)
    ══════════════════════════════════════════════════ */
 html.is-animating.is-leaving #swup {
-    /* Override transition speed for LEAVE phase — very fast */
     transition:
-        opacity 0.12s cubic-bezier(0.4, 0, 1, 1),
-        transform 0.12s cubic-bezier(0.4, 0, 1, 1) !important;
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        filter 0.2s ease !important;
 }
 
 html.is-animating.is-leaving #swup.transition-fade {
-    opacity: 0;
-    transform: none;
+    opacity: 0.4;
+    filter: blur(4px);
+    transform: scale(0.98);
 }
 html.is-animating.is-leaving #swup.transition-slide_up {
-    opacity: 0;
-    transform: translateY(-16px);
+    opacity: 0.4;
+    filter: blur(4px);
+    transform: translateY(-15px) scale(0.98);
 }
 html.is-animating.is-leaving #swup.transition-slide_down {
-    opacity: 0;
-    transform: translateY(16px);
+    opacity: 0.4;
+    filter: blur(4px);
+    transform: translateY(15px) scale(0.98);
 }
 html.is-animating.is-leaving #swup.transition-scale {
-    opacity: 0;
-    transform: scale(0.98);
+    opacity: 0.4;
+    filter: blur(4px);
+    transform: scale(0.95);
 }
 
 /* ══════════════════════════════════════════════════
-   ENTERING — new page starts invisible, then transitions in (180ms)
-   is-leaving is removed, new content injected, transition fires
+   ENTERING — Instantly start at partial opacity/blur, then fade up
    ══════════════════════════════════════════════════ */
 html.is-animating:not(.is-leaving) #swup {
-    transition:
-        opacity 0.22s cubic-bezier(0, 0, 0.2, 1),
-        transform 0.22s cubic-bezier(0, 0, 0.2, 1) !important;
+    transition: none !important; /* Instant jump to this state before enter animation */
 }
 
 html.is-animating:not(.is-leaving) #swup.transition-fade {
-    opacity: 0;
-    transform: none;
+    opacity: 0.2;
+    filter: blur(4px);
+    transform: scale(1.02);
 }
 html.is-animating:not(.is-leaving) #swup.transition-slide_up {
-    opacity: 0;
-    transform: translateY(14px);
+    opacity: 0.2;
+    filter: blur(4px);
+    transform: translateY(15px) scale(1.02);
 }
 html.is-animating:not(.is-leaving) #swup.transition-slide_down {
-    opacity: 0;
-    transform: translateY(-14px);
+    opacity: 0.2;
+    filter: blur(4px);
+    transform: translateY(-15px) scale(1.02);
 }
 html.is-animating:not(.is-leaving) #swup.transition-scale {
-    opacity: 0;
-    transform: scale(1.02);
+    opacity: 0.2;
+    filter: blur(4px);
+    transform: scale(1.05);
 }
 
 /* ══════════════════════════════════════════════════
    DONE — is-animating removed → Swup cleans up classes
-   The base #swup transition above returns to opacity:1
+   The base #swup transition above returns to opacity:1, filter:none
    ══════════════════════════════════════════════════ */
 
 /* ── Progress bar overlay for visual feedback ─────── */
