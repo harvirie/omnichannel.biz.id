@@ -18,13 +18,12 @@ add_action('wp_head', function() {
       .hero-illustration-container { position: relative; }
       .hero-illustration-container .hero-svg-boundary {
         position: absolute;
-        top: 0;
+        top: -2px;
         left: 0;
         width: 100%;
         line-height: 0;
         z-index: 20;
         pointer-events: none;
-        transform: translateY(-99%);
       }
       .hero-illustration-container .hero-svg-boundary svg { display: block; width: 100%; }
     </style>' . "\n";
