@@ -82,38 +82,34 @@
         }
 
         /* ── SVG Signal Pulse — dikontrol sepenuhnya oleh GSAP ─── */
-        /* Inti Signal: titik putih keemasan bergerak di sepanjang path */
+        /* Hanya definisi stroke dasar — opacity & dashoffset diset GSAP via inline style */
         .svg-glow-path {
             fill: none;
-            stroke: #FFFBE6;
-            stroke-width: 2px;
+            stroke: #FFFDE8;
+            stroke-width: 2.5px;
             stroke-linecap: round;
-            stroke-dasharray: 1.2 98.8;  /* 1 titik kecil per 100 unit path */
-            stroke-dashoffset: 100;      /* GSAP animasikan dari 100 → 0 loop */
-            opacity: 0;
-            vector-effect: non-scaling-stroke;
-            /* drop-shadow saja — BUKAN blur() agar tidak ada kotak di corner */
-            filter: drop-shadow(0 0 3px #D4AF37) drop-shadow(0 0 7px #D4AF37) drop-shadow(0 0 14px rgba(212,175,55,0.6));
+            stroke-linejoin: round;
+            stroke-dasharray: 1.5 98.5;  /* titik kecil per 100 pathLength unit */
+            /* stroke-dashoffset: GSAP sets this via inline style */
+            /* opacity: GSAP sets this via inline style */
+            /* NO vector-effect: non-scaling-stroke — interferes with SVG filter */
+            /* NO CSS filter — using SVG <filter> element directly on path */
             will-change: stroke-dashoffset, opacity;
         }
-        /* Aura Signal: ekor emas lebar, semi-transparan */
         .svg-glow-path-wide {
             fill: none;
             stroke: #D4AF37;
-            stroke-width: 6px;
+            stroke-width: 7px;
             stroke-linecap: round;
-            stroke-dasharray: 4 96;      /* ekor sedikit lebih panjang */
-            stroke-dashoffset: 100;
-            opacity: 0;
-            vector-effect: non-scaling-stroke;
-            /* drop-shadow (bukan blur) agar tidak ada bounding-box artefak */
-            filter: drop-shadow(0 0 8px rgba(212,175,55,0.7)) drop-shadow(0 0 20px rgba(212,175,55,0.4));
+            stroke-linejoin: round;
+            stroke-dasharray: 4.5 95.5;  /* ekor lebih panjang */
+            /* stroke-dashoffset: GSAP sets this via inline style */
+            /* opacity: GSAP sets this via inline style */
             will-change: stroke-dashoffset, opacity;
         }
-        /* SVG container: overflow visible agar glow tidak terpotong border card */
-        .svg-glow-path,
-        .svg-glow-path-wide {
-            overflow: visible;
+        /* SVG containers yang pakai glow: harus overflow visible */
+        svg:has(.svg-glow-path) {
+            overflow: visible !important;
         }
 
         /* Prevent Swiper FOUC (Flash of Unstyled Content) */
