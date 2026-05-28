@@ -13,6 +13,11 @@ define('OMNI_EDITOR_VERSION',  '1.0.0');
 define('OMNI_EDITOR_PATH',     plugin_dir_path(__FILE__));
 define('OMNI_EDITOR_URL',      plugin_dir_url(__FILE__));
 
+// Disable admin bar for preview iframe
+if (isset($_GET['omni_preview']) && $_GET['omni_preview'] == '1') {
+    show_admin_bar(false);
+}
+
 // ─── Load sub-modules ──────────────────────────────────────────
 require_once OMNI_EDITOR_PATH . 'includes/class-data.php';
 require_once OMNI_EDITOR_PATH . 'includes/ajax.php';
@@ -194,7 +199,7 @@ function omni_editor_admin_page() {
                     </a>
                 </div>
                 <div class="oe-preview-frame-wrap" id="oe-preview-wrap" data-device="desktop">
-                    <iframe id="oe-preview-iframe" src="<?php echo home_url('/'); ?>" title="Live Preview"></iframe>
+                    <iframe id="oe-preview-iframe" src="<?php echo home_url('/?omni_preview=1'); ?>" title="Live Preview"></iframe>
                 </div>
             </div>
 

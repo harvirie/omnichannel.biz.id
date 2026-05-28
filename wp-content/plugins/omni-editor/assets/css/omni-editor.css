@@ -734,23 +734,15 @@
 }
 
 .oe-preview-frame-wrap[data-device="desktop"] iframe {
-  width: 100%;
-  height: 100%;
   border-radius: 6px;
 }
 
 .oe-preview-frame-wrap[data-device="tablet"] iframe {
-  width: 768px;
-  max-width: 100%;
-  height: 100%;
   border-radius: 12px;
   border: 6px solid #1E293B;
 }
 
 .oe-preview-frame-wrap[data-device="mobile"] iframe {
-  width: 375px;
-  max-width: 100%;
-  height: 100%;
   border-radius: 18px;
   border: 8px solid #1E293B;
 }

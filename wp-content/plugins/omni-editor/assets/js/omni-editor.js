@@ -59,7 +59,8 @@ jQuery(document).ready(function ($) {
             $('#oe-current-page-label').text($(this).text().trim());
             
             // Update preview URL
-            const previewUrl = config.pages[currentPage] || config.siteUrl;
+            let previewUrl = config.pages[currentPage] || config.siteUrl;
+            previewUrl += (previewUrl.indexOf('?') !== -1 ? '&' : '?') + 'omni_preview=1';
             $('#oe-preview-url').text(previewUrl);
             $('#oe-preview-open').attr('href', previewUrl);
             
@@ -81,10 +82,45 @@ jQuery(document).ready(function ($) {
             $('.oe-preview-device').removeClass('active');
             $(this).addClass('active');
             $('#oe-preview-wrap').attr('data-device', $(this).data('device'));
+            resizePreview();
         });
         
         $('#oe-refresh-preview').on('click', function() {
             refreshPreview();
+        });
+
+        $(window).on('resize', function() {
+            resizePreview();
+        });
+        
+        // Initial resize
+        setTimeout(resizePreview, 100);
+    }
+    
+    function resizePreview() {
+        const $wrap = $('#oe-preview-wrap');
+        const $iframe = $('#oe-preview-iframe');
+        if (!$wrap.length || !$iframe.length) return;
+        
+        const device = $wrap.attr('data-device');
+        const wrapW = $wrap.width();
+        const wrapH = $wrap.height();
+        
+        // Target widths for different devices
+        let targetW = 1440;
+        if (device === 'tablet') targetW = 768;
+        else if (device === 'mobile') targetW = 375;
+        
+        const paddingX = device === 'desktop' ? 0 : 40;
+        const availableW = wrapW - paddingX;
+        
+        const scale = Math.min(1, availableW / targetW);
+        
+        $iframe.css({
+            width: targetW + 'px',
+            height: (wrapH / scale) + 'px',
+            transform: `scale(${scale})`,
+            transformOrigin: 'top center'
         });
     }
     
