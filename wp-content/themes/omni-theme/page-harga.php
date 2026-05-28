@@ -15,11 +15,11 @@ add_action('wp_head', function() {
     // Custom style to pull hero illustration up behind the SVG curve responsively
     echo '<style>
       .hero-illustration-container {
-        margin-top: -58px;
+        margin-top: -62px;
       }
       @media (min-width: 768px) {
         .hero-illustration-container {
-          margin-top: -8.15%;
+          margin-top: -8.5%;
         }
       }
     </style>' . "\n";
