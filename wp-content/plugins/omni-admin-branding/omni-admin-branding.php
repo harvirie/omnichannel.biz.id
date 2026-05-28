@@ -113,6 +113,10 @@ add_action( 'login_enqueue_scripts', function() {
         #loginform input[type="text"],
         #loginform input[type="password"],
         #loginform input[type="email"],
+        #loginform input[type="number"],
+        #loginform input[type="tel"],
+        #loginform input[name*="tfa"],
+        #loginform input[name*="twofactor"],
         #lostpasswordform input[type="text"],
         #lostpasswordform input[type="email"] {
             border: 1.5px solid var(--omni-border) !important;
@@ -130,6 +134,10 @@ add_action( 'login_enqueue_scripts', function() {
         #loginform input[type="text"]:focus,
         #loginform input[type="password"]:focus,
         #loginform input[type="email"]:focus,
+        #loginform input[type="number"]:focus,
+        #loginform input[type="tel"]:focus,
+        #loginform input[name*="tfa"]:focus,
+        #loginform input[name*="twofactor"]:focus,
         #lostpasswordform input:focus {
             border-color: var(--omni-accent) !important;
             background: #fff !important;

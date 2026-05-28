@@ -324,7 +324,13 @@ function omni_sec_scan_upload( $file ) {
    10. LOGIN PAGE HARDENING
    ═══════════════════════════════════════════════ */
 // Disable login hints (don't reveal if user/pass is wrong)
-add_filter( 'login_errors', fn() => 'Kredensial tidak valid. Silakan coba lagi.' );
+add_filter( 'login_errors', function( $error ) {
+    // Biarkan error bawaan jika berisi form 2FA (mencegah bentrok dengan plugin Two Factor Authentication)
+    if ( stripos( $error, '<input' ) !== false || stripos( $error, 'two factor' ) !== false || stripos( $error, 'tfa' ) !== false ) {
+        return $error;
+    }
+    return 'Kredensial tidak valid. Silakan coba lagi.';
+} );
 
 // Redirect login to custom URL (obscure wp-login.php)
 // Note: kept disabled by default — enable if needed
