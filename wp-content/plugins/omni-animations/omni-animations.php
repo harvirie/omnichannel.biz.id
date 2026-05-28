@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Omni Animations
  * Description: Kontrol efek parallax dan transisi halaman (Page Transitions) canggih menggunakan GSAP dan Swup.
- * Version: 1.0.0
+ * Version: 2.0.0
  * Author: Omni Theme
  */
 
@@ -94,27 +94,19 @@ class Omni_Animations {
     }
     
     public function enqueue_assets() {
-        // Enqueue library pihak ketiga dari cdn.jsdelivr.net
+        // GSAP + ScrollTrigger dari jsdelivr (sesuai CSP whitelist)
         wp_enqueue_script('omni-gsap', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', array(), null, true);
         wp_enqueue_script('omni-scrolltrigger', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', array('omni-gsap'), null, true);
         
-        // Enqueue Swup v4 dan pluginnya dari cdn.jsdelivr.net
+        // Swup v4 dari jsdelivr — TANPA SwupScriptsPlugin (penyebab blinking & loading screen re-trigger)
         wp_enqueue_script('omni-swup', 'https://cdn.jsdelivr.net/npm/swup@4/dist/Swup.umd.js', array(), null, true);
-        wp_enqueue_script('omni-swup-scripts', 'https://cdn.jsdelivr.net/npm/@swup/scripts-plugin@2/dist/index.umd.js', array('omni-swup'), null, true);
+        
+        // SwupBodyClassPlugin — update body classes saat navigasi antar halaman
         wp_enqueue_script('omni-swup-body-class', 'https://cdn.jsdelivr.net/npm/@swup/body-class-plugin@3/dist/index.umd.js', array('omni-swup'), null, true);
         
-        // Enqueue Custom Assets
-        wp_enqueue_style('omni-animations-css', plugin_dir_url(__FILE__) . 'assets/omni-animations.css', [], '1.0.0');
-        wp_enqueue_script('omni-animations-js', plugin_dir_url(__FILE__) . 'assets/omni-animations.js', ['omni-scrolltrigger', 'omni-swup-scripts', 'omni-swup-body-class'], '1.0.0', true);
-        
-        // Pass parallax status to JS
-        $is_parallax_enabled = false;
-        if (is_singular()) {
-            $is_parallax_enabled = get_post_meta(get_the_ID(), '_omni_enable_parallax', true) === 'yes';
-        }
-        wp_localize_script('omni-animations-js', 'OmniAnimConfig', [
-            'parallaxEnabled' => $is_parallax_enabled
-        ]);
+        // Custom Assets
+        wp_enqueue_style('omni-animations-css', plugin_dir_url(__FILE__) . 'assets/omni-animations.css', [], '2.0.0');
+        wp_enqueue_script('omni-animations-js', plugin_dir_url(__FILE__) . 'assets/omni-animations.js', array('omni-scrolltrigger', 'omni-swup-body-class'), '2.0.0', true);
     }
 }
 

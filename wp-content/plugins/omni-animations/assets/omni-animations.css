@@ -1,27 +1,62 @@
-/* Omni Animations CSS - Swup Transitions */
+/* =====================================================
+   Omni Animations CSS — v2.0
+   Swup page transitions.
+   Classes applied to <html>:
+     .is-animating  → transition in progress
+     .is-leaving    → current page animating out
+   Class on #swup:
+     .transition-fade / .transition-slide_up / etc.
+   ===================================================== */
 
-/* Base transition settings for #swup container */
+/* ── Shared transition timing ─────────────────────── */
 #swup {
-    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    opacity: 1;
-    transform: none;
-    will-change: transform, opacity;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    will-change: opacity, transform;
 }
 
-/* === LEAVING STATE (Current page fading out) === */
-html.is-animating.is-leaving #swup.transition-fade { opacity: 0; }
-html.is-animating.is-leaving #swup.transition-slide_up { opacity: 0; transform: translateY(-40px); }
-html.is-animating.is-leaving #swup.transition-slide_down { opacity: 0; transform: translateY(40px); }
-html.is-animating.is-leaving #swup.transition-scale { opacity: 0; transform: scale(0.96); }
+/* ══════════════════════════════════════════════════
+   LEAVING — animate the old page OUT
+   ══════════════════════════════════════════════════ */
+html.is-animating.is-leaving #swup.transition-fade {
+    opacity: 0;
+    transform: none;
+}
+html.is-animating.is-leaving #swup.transition-slide_up {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+html.is-animating.is-leaving #swup.transition-slide_down {
+    opacity: 0;
+    transform: translateY(30px);
+}
+html.is-animating.is-leaving #swup.transition-scale {
+    opacity: 0;
+    transform: scale(0.97);
+}
 
-/* === ENTERING STATE (New page loaded, but still animating in) === */
-/* Kapan is-leaving dicabut oleh Swup, elemen akan mengambil state ini sblm animasi selesai */
-html.is-animating:not(.is-leaving) #swup.transition-fade { opacity: 0; }
-html.is-animating:not(.is-leaving) #swup.transition-slide_up { opacity: 0; transform: translateY(40px); }
-html.is-animating:not(.is-leaving) #swup.transition-slide_down { opacity: 0; transform: translateY(-40px); }
-html.is-animating:not(.is-leaving) #swup.transition-scale { opacity: 0; transform: scale(1.04); }
+/* ══════════════════════════════════════════════════
+   ENTERING — start state of the new page
+   (Swup inserts new content while is-animating is still active
+    but is-leaving is removed → this rule fires)
+   ══════════════════════════════════════════════════ */
+html.is-animating:not(.is-leaving) #swup.transition-fade {
+    opacity: 0;
+    transform: none;
+}
+html.is-animating:not(.is-leaving) #swup.transition-slide_up {
+    opacity: 0;
+    transform: translateY(25px);
+}
+html.is-animating:not(.is-leaving) #swup.transition-slide_down {
+    opacity: 0;
+    transform: translateY(-25px);
+}
+html.is-animating:not(.is-leaving) #swup.transition-scale {
+    opacity: 0;
+    transform: scale(1.03);
+}
 
-/* Note: 
-Ketika is-animating dicabut (setelah 0.5s), container akan kembali 
-ke Base transition settings (opacity 1, transform none) dengan sangat mulus. 
-*/
+/* ══════════════════════════════════════════════════
+   DONE — is-animating removed → transition to final state
+   is handled by the base #swup transition above.
+   ══════════════════════════════════════════════════ */

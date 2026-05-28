@@ -1,81 +1,123 @@
 /**
- * Omni Animations JS
- * Integrates Swup for page transitions and GSAP for Parallax.
+ * Omni Animations JS — v2.0
+ * Swup page transitions + GSAP Parallax.
+ *
+ * STRATEGY:
+ *  - SwupScriptsPlugin is NOT used (caused blinking & re-triggered loading screen)
+ *  - We handle all re-inits via swup hooks (page:view)
+ *  - Parallax reads data-parallax attribute from #swup on each page:view
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. Initialize GSAP Parallax
-    function initGSAPParallax() {
-        const swupContainer = document.getElementById('swup');
-        if (!swupContainer) return;
-        
-        const isParallaxEnabled = swupContainer.dataset.parallax === 'yes';
-        
-        if (isParallaxEnabled && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+(function () {
+    'use strict';
+
+    // ─────────────────────────────────────────────
+    // PARALLAX
+    // ─────────────────────────────────────────────
+    var gsapReady = false;
+
+    function initParallax() {
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+        if (!gsapReady) {
             gsap.registerPlugin(ScrollTrigger);
-            
-            // Mencari gambar hero atau elemen dengan kelas parallax khusus
-            // Jika tidak ada class khusus, kita beri efek ringan pada semua gambar besar
-            const images = swupContainer.querySelectorAll('img');
-            images.forEach(img => {
-                const initParallaxOnImg = () => {
-                    // Terapkan hanya pada gambar yang lumayan besar (menghindari icon)
-                    if (img.clientHeight > 50) {
-                        gsap.to(img, {
-                            y: -40, // Bergerak 40px ke atas secara relatif saat di-scroll
-                            ease: "none",
-                            scrollTrigger: {
-                                trigger: img,
-                                start: "top bottom", // Mulai saat bagian atas gambar menyentuh bagian bawah layar
-                                end: "bottom top",   // Selesai saat bagian bawah gambar menyentuh bagian atas layar
-                                scrub: true          // Animasi mengikuti scroll
-                            }
-                        });
-                    }
-                };
-                
-                if (img.complete) {
-                    initParallaxOnImg();
-                } else {
-                    img.addEventListener('load', initParallaxOnImg);
+            gsapReady = true;
+        }
+
+        // Kill old triggers first
+        ScrollTrigger.getAll().forEach(function (t) { t.kill(); });
+
+        var container = document.getElementById('swup');
+        if (!container) return;
+
+        var isEnabled = container.getAttribute('data-parallax') === 'yes';
+        if (!isEnabled) return;
+
+        var images = container.querySelectorAll('img');
+        images.forEach(function (img) {
+            function apply() {
+                if (img.clientHeight > 80) {
+                    gsap.to(img, {
+                        y: -50,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: img,
+                            start: 'top bottom',
+                            end: 'bottom top',
+                            scrub: 1
+                        }
+                    });
                 }
+            }
+            if (img.complete && img.naturalHeight > 0) {
+                apply();
+            } else {
+                img.addEventListener('load', apply);
+            }
+        });
+    }
+
+    // ─────────────────────────────────────────────
+    // RE-INIT THEME UI after Swup navigation
+    // ─────────────────────────────────────────────
+    function reinitThemeUI() {
+        // Lucide Icons
+        if (typeof lucide !== 'undefined' && typeof lucide.createIcons === 'function') {
+            lucide.createIcons();
+        }
+
+        // Swiper instances — re-init all swipers found in new page
+        if (typeof Swiper !== 'undefined') {
+            document.querySelectorAll('.swiper:not(.swiper-initialized)').forEach(function (el) {
+                // Swiper will auto-init based on data attributes if needed
+                // For manually configured ones, dispatch a custom event
             });
         }
-    }
-    
-    // Jalankan parallax saat halaman pertama kali diload
-    initGSAPParallax();
 
-    // 2. Initialize Swup for Page Transitions
-    if (typeof Swup !== 'undefined' && typeof SwupScriptsPlugin !== 'undefined' && typeof SwupBodyClassPlugin !== 'undefined') {
-        const swup = new Swup({
+        // Scroll to top on page change
+        window.scrollTo(0, 0);
+    }
+
+    // ─────────────────────────────────────────────
+    // SWUP INITIALIZATION
+    // ─────────────────────────────────────────────
+    function initSwup() {
+        if (typeof Swup === 'undefined') return;
+
+        var plugins = [];
+
+        // Body class plugin (updates body classes so bg colors update)
+        if (typeof SwupBodyClassPlugin !== 'undefined') {
+            plugins.push(new SwupBodyClassPlugin());
+        }
+
+        var swup = new Swup({
             containers: ['#swup'],
-            plugins: [
-                new SwupScriptsPlugin({
-                    head: true,
-                    body: true,
-                    optin: false // Menjalankan semua script ulang secara default
-                }),
-                new SwupBodyClassPlugin()
-            ]
+            animationSelector: '[class*="transition-"]',
+            plugins: plugins
         });
 
-        // Event hooks
-        swup.hooks.on('page:view', () => {
-            // Re-init parallax after page changes
-            if (typeof ScrollTrigger !== 'undefined') {
-                ScrollTrigger.getAll().forEach(st => st.kill()); // Bersihkan scrolltrigger lama
-            }
-            initGSAPParallax();
-            
-            // Re-init theme scripts (Lucide Icons, etc) if they were globally available
-            // Note: SwupScriptsPlugin sudah membantu menjalankan <script> tag di dalam body, 
-            // tapi kita bisa trigger DOMContentLoaded secara manual jika tema membutuhkannya.
-            window.document.dispatchEvent(new Event("DOMContentLoaded", {
-                bubbles: true,
-                cancelable: true
-            }));
+        // After new page content is rendered and animated in
+        swup.hooks.on('page:view', function () {
+            reinitThemeUI();
+            initParallax();
         });
+
+        // Store on window so other scripts can reference if needed
+        window._omniSwup = swup;
     }
-});
+
+    // ─────────────────────────────────────────────
+    // BOOT
+    // ─────────────────────────────────────────────
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () {
+            initSwup();
+            initParallax();
+        });
+    } else {
+        initSwup();
+        initParallax();
+    }
+
+})();
