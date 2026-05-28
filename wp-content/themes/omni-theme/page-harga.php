@@ -12,12 +12,21 @@ add_action('wp_head', function() {
     echo '<link rel="canonical" href="' . esc_url(home_url('/harga')) . '">' . "\n";
     // Preload LCP hero image (WebP) agar LCP turun signifikan
     echo '<link rel="preload" as="image" href="' . get_template_directory_uri() . '/assets/img/harga-hero-updated.webp" type="image/webp">' . "\n";
-    // Custom style: hero-wrap menutup area putih di bawah SVG wave
+    // Custom style: SVG ditempatkan di atas gambar, translateY(-100%) agar menutupi area transisi
     echo '<style>
-      .hero-wrap { position: relative; }
-      .hero-wrap .hero-svg-boundary { position: absolute; bottom: 0; left: 0; width: 100%; line-height: 0; z-index: 20; pointer-events: none; }
-      .hero-wrap .hero-svg-boundary svg { display: block; width: 100%; }
-      .hero-illustration-container { position: relative; z-index: 10; margin-top: 0; }
+      .hero-wrap { position: relative; overflow: hidden; }
+      .hero-illustration-container { position: relative; }
+      .hero-illustration-container .hero-svg-boundary {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        line-height: 0;
+        z-index: 20;
+        pointer-events: none;
+        transform: translateY(-99%);
+      }
+      .hero-illustration-container .hero-svg-boundary svg { display: block; width: 100%; }
     </style>' . "\n";
 }, 5);
 ?>
