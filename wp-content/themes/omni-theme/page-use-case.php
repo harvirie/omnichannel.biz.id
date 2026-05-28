@@ -19,7 +19,7 @@ add_action('wp_head', function() {
     echo '<link rel="preload" as="image" href="' . get_template_directory_uri() . '/assets/img/usecase-hero-updated.webp" type="image/webp">' . "\n";
     // Custom style: SVG ditempatkan di atas gambar, translateY(-100%) agar menutupi area transisi
     echo '<style>
-      .hero-wrap { position: relative; overflow: hidden; }
+      .hero-wrap { position: relative; }
       .hero-illustration-container { position: relative; }
       .hero-illustration-container .hero-svg-boundary {
         position: absolute;
