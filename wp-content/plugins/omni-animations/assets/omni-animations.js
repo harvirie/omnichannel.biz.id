@@ -71,8 +71,13 @@
         var isEnabled = container.getAttribute('data-parallax') === 'yes';
         if (!isEnabled) return;
 
+        // Exclude hero-illustration-container images from parallax
+        // (parallax on these creates a gap between the SVG curve and the image)
         var images = container.querySelectorAll('img');
         images.forEach(function (img) {
+            // Skip hero illustration images — they sit flush against the SVG wave
+            if (img.closest('.hero-illustration-container')) return;
+
             function apply() {
                 if (img.clientHeight > 80) {
                     gsap.to(img, {
