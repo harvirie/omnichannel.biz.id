@@ -1,14 +1,15 @@
 /**
- * Omni Animations JS — v3.0
- * Swup page transitions (FAST + SMOOTH) + GSAP Parallax + GSAP Scroll Reveal.
+ * Omni Animations JS — v3.1
+ * Swup page transitions + GSAP Parallax + GSAP Scroll Reveal + GSAP SVG Signal Pulse.
  *
  * STRATEGY:
  *  - animateHistoryBrowsing: true → back/forward also animated
- *  - LeaveDelay: 120ms (fast out) — server fetch runs in parallel
  *  - Thin gold progress bar for visual feedback during fetch
- *  - Scroll reset BEFORE entering content (no jump)
- *  - GSAP only registered once, triggers rebuilt per page:view
- *  - NEW: GSAP ScrollTrigger bounce-up reveal on all major sections
+ *  - GSAP ScrollTrigger bounce-up reveal on all major sections
+ *  - GSAP SVG Signal: dot travels svg path + heartbeat pulse while moving
+ *    * Uses pathLength="100" normalization → smooth through all rounded corners
+ *    * drop-shadow only (NO blur) → no boxy artifact at corners
+ *    * Two layers: core dot (white-gold) + wide aura (gold) — offset in time
  */
 
 (function () {
@@ -61,6 +62,124 @@
         gsap.registerPlugin(ScrollTrigger);
         gsapReady = true;
         return true;
+    }
+
+    // ─────────────────────────────────────────────
+    // SVG SIGNAL PULSE (GSAP)
+    // ─────────────────────────────────────────────
+    var _signalTweens = [];
+
+    function killSignalTweens() {
+        _signalTweens.forEach(function (t) { if (t && t.kill) t.kill(); });
+        _signalTweens = [];
+    }
+
+    function initSvgSignal() {
+        if (typeof gsap === 'undefined') return;
+        killSignalTweens();
+
+        var corePaths = Array.from(document.querySelectorAll('.svg-glow-path'));
+        var auraPaths = Array.from(document.querySelectorAll('.svg-glow-path-wide'));
+
+        if (!corePaths.length && !auraPaths.length) return;
+
+        // ── CORE DOT (white-gold, sharp, fast) ──────────────────────
+        corePaths.forEach(function (path, i) {
+            var TRAVEL  = 9;      // seconds for full loop
+            var DELAY   = i * 0.18; // stagger if multiple paths
+
+            // Set initial state
+            gsap.set(path, { attr: { strokeDashoffset: 100 }, opacity: 0 });
+
+            // Travel timeline: 100 → 0 on strokeDashoffset, loop forever
+            var travel = gsap.timeline({ repeat: -1, delay: DELAY });
+            travel.fromTo(
+                path,
+                { attr: { strokeDashoffset: 100 }, opacity: 0 },
+                {
+                    attr: { strokeDashoffset: 0 },
+                    opacity: 1,
+                    duration: TRAVEL,
+                    ease: 'none'   // linear travel
+                }
+            );
+            // Brief fade-out at end of each loop before restart
+            travel.to(path, { opacity: 0, duration: 0.4, ease: 'power2.in' }, TRAVEL - 0.4);
+            _signalTweens.push(travel);
+
+            // Heartbeat pulse on opacity — runs independently on top
+            // Only starts after initial fade-in (~0.3s into travel)
+            var pulse = gsap.to(path, {
+                keyframes: [
+                    { opacity: 1,    duration: 0.15, ease: 'power3.out' },  // spike up
+                    { opacity: 0.45, duration: 0.25, ease: 'power2.in'  },  // drop
+                    { opacity: 0.95, duration: 0.15, ease: 'power3.out' },  // second spike
+                    { opacity: 0.5,  duration: 0.45, ease: 'power1.out' },  // settle
+                ],
+                repeat: -1,
+                repeatDelay: 0.3,   // pause between heartbeats
+                delay: DELAY + 0.5  // start after path fades in
+            });
+            _signalTweens.push(pulse);
+
+            // Stroke-width breathe pulse (subtle)
+            var widthPulse = gsap.to(path, {
+                attr: { strokeWidth: 3.2 },
+                duration: 0.5,
+                ease: 'sine.inOut',
+                yoyo: true,
+                repeat: -1,
+                delay: DELAY + 0.5
+            });
+            _signalTweens.push(widthPulse);
+        });
+
+        // ── AURA (gold, wider, softer — offset behind core) ──────────
+        auraPaths.forEach(function (path, i) {
+            var TRAVEL     = 9;
+            var AURA_DELAY = i * 0.18 + 0.08; // slightly behind core dot
+
+            gsap.set(path, { attr: { strokeDashoffset: 100 }, opacity: 0 });
+
+            var travel = gsap.timeline({ repeat: -1, delay: AURA_DELAY });
+            travel.fromTo(
+                path,
+                { attr: { strokeDashoffset: 100 }, opacity: 0 },
+                {
+                    attr: { strokeDashoffset: 0 },
+                    opacity: 0.75,
+                    duration: TRAVEL,
+                    ease: 'none'
+                }
+            );
+            travel.to(path, { opacity: 0, duration: 0.5, ease: 'power2.in' }, TRAVEL - 0.5);
+            _signalTweens.push(travel);
+
+            // Aura pulse — slower, more ethereal
+            var pulse = gsap.to(path, {
+                keyframes: [
+                    { opacity: 0.75, duration: 0.2, ease: 'power2.out' },
+                    { opacity: 0.2,  duration: 0.3, ease: 'power2.in'  },
+                    { opacity: 0.7,  duration: 0.2, ease: 'power2.out' },
+                    { opacity: 0.3,  duration: 0.5, ease: 'sine.out'   },
+                ],
+                repeat: -1,
+                repeatDelay: 0.4,
+                delay: AURA_DELAY + 0.5
+            });
+            _signalTweens.push(pulse);
+
+            // Aura stroke-width pulse (wider range for visible breathing)
+            var widthPulse = gsap.to(path, {
+                attr: { strokeWidth: 9 },
+                duration: 0.55,
+                ease: 'sine.inOut',
+                yoyo: true,
+                repeat: -1,
+                delay: AURA_DELAY + 0.5
+            });
+            _signalTweens.push(widthPulse);
+        });
     }
 
     // ─────────────────────────────────────────────
@@ -142,10 +261,7 @@
                 y: 0, opacity: 1, scale: 1,
                 duration: duration,
                 ease: ease,
-                stagger: {
-                    each: stagger,
-                    from: 'start'
-                },
+                stagger: { each: stagger, from: 'start' },
                 scrollTrigger: {
                     trigger: triggerEl || els[0],
                     start: startPos,
@@ -156,7 +272,6 @@
     }
 
     function revealSplit(headingEl, subtitleEl, restEls, sectionEl) {
-        // Heading: slides up with bounce
         if (headingEl) {
             gsap.fromTo(headingEl,
                 { y: 50, opacity: 0 },
@@ -172,7 +287,6 @@
                 }
             );
         }
-        // Subtitle: delayed after heading
         if (subtitleEl) {
             gsap.fromTo(subtitleEl,
                 { y: 35, opacity: 0 },
@@ -189,7 +303,6 @@
                 }
             );
         }
-        // Rest: stagger
         if (restEls && restEls.length) {
             gsap.fromTo(restEls,
                 { y: 40, opacity: 0, scale: 0.97 },
@@ -215,138 +328,82 @@
         var container = document.getElementById('swup');
         if (!container) return;
 
-        /* ── 1. HERO SECTION — left text block (desktop) ── */
+        /* ── 1. HERO SECTION ── */
         var heroSection = container.querySelector('section:first-of-type');
         if (heroSection) {
-            // Desktop hero text
-            var heroH1        = heroSection.querySelector('.hidden.md\\:flex h1, .hidden.md\\:block ~ div h1');
-            var heroDesktop   = heroSection.querySelector('.hidden.md\\:flex');
+            var heroDesktop = heroSection.querySelector('.hidden.md\\:flex');
             if (heroDesktop) {
-                var hdH1      = heroDesktop.querySelector('h1');
-                var hdSub     = heroDesktop.querySelector('[class*="text-omni-text-muted"]');
-                var hdForm    = heroDesktop.querySelector('form');
-                var hdBadge   = heroDesktop.querySelector('[class*="flex items-center gap"]');
+                var hdLogo  = heroDesktop.querySelector('a[aria-label]');
+                var hdH1    = heroDesktop.querySelector('h1');
+                var hdSub   = heroDesktop.querySelector('[class*="text-omni-text-muted"]');
+                var hdForm  = heroDesktop.querySelector('form');
+                var hdBadge = heroDesktop.querySelector('[class*="flex items-center gap"]');
 
-                // Logo: slide down from top
-                var hdLogo = heroDesktop.querySelector('a[aria-label]');
-                if (hdLogo) {
-                    gsap.fromTo(hdLogo,
-                        { y: -30, opacity: 0 },
-                        { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', delay: 0.1 }
-                    );
-                }
-
-                if (hdH1) {
-                    gsap.fromTo(hdH1,
-                        { y: 40, opacity: 0 },
-                        { y: 0, opacity: 1, duration: 1, ease: 'back.out(1.4)', delay: 0.2 }
-                    );
-                }
-                if (hdSub) {
-                    gsap.fromTo(hdSub,
-                        { y: 30, opacity: 0 },
-                        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.38 }
-                    );
-                }
-                if (hdForm) {
-                    gsap.fromTo(hdForm,
-                        { y: 30, opacity: 0, scale: 0.97 },
-                        { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.5)', delay: 0.52 }
-                    );
-                }
-                if (hdBadge) {
-                    gsap.fromTo(hdBadge,
-                        { y: 20, opacity: 0 },
-                        { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out', delay: 0.68 }
-                    );
-                }
+                if (hdLogo)  gsap.fromTo(hdLogo,  { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', delay: 0.1 });
+                if (hdH1)    gsap.fromTo(hdH1,    { y: 40,  opacity: 0 }, { y: 0, opacity: 1, duration: 1.0, ease: 'back.out(1.4)', delay: 0.2 });
+                if (hdSub)   gsap.fromTo(hdSub,   { y: 30,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.38 });
+                if (hdForm)  gsap.fromTo(hdForm,  { y: 30,  opacity: 0, scale: 0.97 }, { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.5)', delay: 0.52 });
+                if (hdBadge) gsap.fromTo(hdBadge, { y: 20,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out', delay: 0.68 });
             }
 
-            // Video/image card: scale in from right
             var heroVideoCard = heroSection.querySelector('.hidden.md\\:block.absolute');
             if (heroVideoCard) {
                 gsap.fromTo(heroVideoCard,
                     { x: 60, opacity: 0, scale: 0.95 },
-                    { x: 0, opacity: 1, scale: 1, duration: 1.1, ease: 'power3.out', delay: 0.3 }
+                    { x: 0,  opacity: 1, scale: 1,   duration: 1.1, ease: 'power3.out', delay: 0.3 }
                 );
             }
 
-            // Bottom card: slide up
-            var heroBottomCard = heroSection.querySelectorAll('div.relative.z-20.w-\\[300vw\\]');
-            heroBottomCard.forEach(function(card) {
+            var heroBottomCards = heroSection.querySelectorAll('div.relative.z-20.w-\\[300vw\\]');
+            heroBottomCards.forEach(function(card) {
                 gsap.fromTo(card,
                     { y: 50, opacity: 0 },
-                    { y: 0, opacity: 1, duration: 0.9, ease: 'back.out(1.3)', delay: 0.5 }
+                    { y: 0,  opacity: 1, duration: 0.9, ease: 'back.out(1.3)', delay: 0.5 }
                 );
             });
         }
 
-        /* ── 2. CTA SECTION — "Siap Mengubah..." ── */
+        /* ── 2. CTA SECTION ── */
         var ctaSection = container.querySelector('section.py-20');
         if (ctaSection) {
-            var ctaInner   = ctaSection.querySelector('.max-w-4xl');
-            var ctaH2      = ctaSection.querySelector('h2');
-            var ctaSub     = ctaSection.querySelector('[class*="text-omni-light"]');
-            var ctaBtns    = Array.from(ctaSection.querySelectorAll('[class*="flex flex-col"] a, [class*="flex-col"] a, [class*="flex-row"] a'));
-
+            var ctaH2   = ctaSection.querySelector('h2');
+            var ctaSub  = ctaSection.querySelector('[class*="text-omni-light"]');
+            var ctaBtns = Array.from(ctaSection.querySelectorAll('[class*="flex flex-col"] a, [class*="flex-col"] a, [class*="flex-row"] a'));
             revealSplit(ctaH2, ctaSub, ctaBtns, ctaSection);
 
-            // Decorative blobs: scale in
             var blobs = ctaSection.querySelectorAll('div.absolute[class*="blur"]');
             blobs.forEach(function(blob, i) {
                 gsap.fromTo(blob,
                     { scale: 0, opacity: 0 },
-                    {
-                        scale: 1, opacity: 1,
-                        duration: 1.4,
-                        ease: 'power2.out',
-                        delay: i * 0.2,
-                        scrollTrigger: {
-                            trigger: ctaSection,
-                            start: 'top 92%',
-                            toggleActions: 'play none none none'
-                        }
+                    { scale: 1, opacity: 1, duration: 1.4, ease: 'power2.out', delay: i * 0.2,
+                      scrollTrigger: { trigger: ctaSection, start: 'top 92%', toggleActions: 'play none none none' }
                     }
                 );
             });
         }
 
-        /* ── 3. CUSTOMERS SECTION — "Dipercaya Oleh..." ── */
+        /* ── 3. CUSTOMERS SECTION ── */
         var custSection = container.querySelector('section.py-24');
         if (custSection) {
-            var custH2   = custSection.querySelector('h2');
-            var custSub  = custSection.querySelector('[class*="text-omni-text-muted"]');
+            var custH2    = custSection.querySelector('h2');
+            var custSub   = custSection.querySelector('[class*="text-omni-text-muted"]');
             var custCards = Array.from(custSection.querySelectorAll('.swiper-slide'));
-
-            // Heading + subtitle
             revealSplit(custH2, custSub, null, custSection);
-
-            // Cards: staggered bounce-up
             if (custCards.length) {
-                // Only animate the first set (not duplicates for loop)
-                var halfLen  = Math.ceil(custCards.length / 2);
-                var firstSet = custCards.slice(0, halfLen);
+                var firstSet = custCards.slice(0, Math.ceil(custCards.length / 2));
                 revealGroup(firstSet, custSection, 0.1, 65, 0.85, 'back.out(1.6)', 'top 85%');
             }
-
-            // Navigation buttons
             var navBtns = Array.from(custSection.querySelectorAll('.swiper-button-prev, .swiper-button-next'));
-            if (navBtns.length) {
-                revealGroup(navBtns, custSection, 0.15, 20, 0.6, 'power2.out', 'top 75%');
-            }
+            if (navBtns.length) revealGroup(navBtns, custSection, 0.15, 20, 0.6, 'power2.out', 'top 75%');
         }
 
-        /* ── 4. SEO CONTENT SECTION — "Solusi Omnichannel..." ── */
+        /* ── 4. SEO CONTENT SECTION ── */
         var seoSection = container.querySelector('section.py-16');
         if (seoSection) {
             var seoH2   = seoSection.querySelector('h2');
             var seoParas = Array.from(seoSection.querySelectorAll('p'));
-
-            if (seoH2) revealOne(seoH2, 0, 45, 0.85, 'back.out(1.4)');
-
-            if (seoParas.length) {
-                revealGroup(seoParas, seoSection, 0.14, 40, 0.75, 'power3.out', 'top 88%');
-            }
+            if (seoH2)         revealOne(seoH2, 0, 45, 0.85, 'back.out(1.4)');
+            if (seoParas.length) revealGroup(seoParas, seoSection, 0.14, 40, 0.75, 'power3.out', 'top 88%');
         }
     }
 
@@ -367,7 +424,6 @@
         if (typeof Swup === 'undefined') return;
 
         var plugins = [];
-
         if (typeof SwupBodyClassPlugin !== 'undefined') {
             plugins.push(new SwupBodyClassPlugin());
         }
@@ -386,12 +442,13 @@
         });
 
         swup.hooks.on('page:view', function () {
-            // Kill all old ScrollTriggers before re-initing
             if (typeof ScrollTrigger !== 'undefined') {
                 ScrollTrigger.getAll().forEach(function (t) { t.kill(); });
             }
+            killSignalTweens();
             initParallax();
             initScrollReveal();
+            initSvgSignal();
             progressDone();
         });
 
@@ -408,11 +465,13 @@
             initSwup();
             initParallax();
             initScrollReveal();
+            initSvgSignal();
         });
     } else {
         initSwup();
         initParallax();
         initScrollReveal();
+        initSvgSignal();
     }
 
 })();

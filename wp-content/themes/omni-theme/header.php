@@ -81,36 +81,39 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* Efek Signal Realistis & Dramatis */
-        @keyframes svgGlowSignal {
-            0%   { stroke-dashoffset: 100; }
-            100% { stroke-dashoffset: 0; }
-        }
-        /* Inti Signal: Putih kekuningan terang, sangat tipis dan tajam */
+        /* ── SVG Signal Pulse — dikontrol sepenuhnya oleh GSAP ─── */
+        /* Inti Signal: titik putih keemasan bergerak di sepanjang path */
         .svg-glow-path {
             fill: none;
-            stroke: #FFFFFF;
+            stroke: #FFFBE6;
             stroke-width: 2px;
             stroke-linecap: round;
-            stroke-dasharray: 1 32.33; /* 3 sinyal sekaligus */
-            animation: svgGlowSignal 12s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
-            opacity: 1;
+            stroke-dasharray: 1.2 98.8;  /* 1 titik kecil per 100 unit path */
+            stroke-dashoffset: 100;      /* GSAP animasikan dari 100 → 0 loop */
+            opacity: 0;
             vector-effect: non-scaling-stroke;
-            filter: drop-shadow(0 0 4px #D4AF37) drop-shadow(0 0 8px #D4AF37);
-            z-index: 20;
+            /* drop-shadow saja — BUKAN blur() agar tidak ada kotak di corner */
+            filter: drop-shadow(0 0 3px #D4AF37) drop-shadow(0 0 7px #D4AF37) drop-shadow(0 0 14px rgba(212,175,55,0.6));
+            will-change: stroke-dashoffset, opacity;
         }
-        /* Ekor Signal (Tail/Aura): Emas memudar, lebih panjang, tebal, dan buram */
+        /* Aura Signal: ekor emas lebar, semi-transparan */
         .svg-glow-path-wide {
             fill: none;
-            stroke: var(--omni-accent);
-            stroke-width: 8px;
+            stroke: #D4AF37;
+            stroke-width: 6px;
             stroke-linecap: round;
-            stroke-dasharray: 5 28.33; /* Harus pas dengan periode 33.33 */
-            animation: svgGlowSignal 12s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
-            opacity: 0.6;
+            stroke-dasharray: 4 96;      /* ekor sedikit lebih panjang */
+            stroke-dashoffset: 100;
+            opacity: 0;
             vector-effect: non-scaling-stroke;
-            filter: blur(3px) drop-shadow(0 0 15px rgba(212,175,55,0.8));
-            z-index: 10;
+            /* drop-shadow (bukan blur) agar tidak ada bounding-box artefak */
+            filter: drop-shadow(0 0 8px rgba(212,175,55,0.7)) drop-shadow(0 0 20px rgba(212,175,55,0.4));
+            will-change: stroke-dashoffset, opacity;
+        }
+        /* SVG container: overflow visible agar glow tidak terpotong border card */
+        .svg-glow-path,
+        .svg-glow-path-wide {
+            overflow: visible;
         }
 
         /* Prevent Swiper FOUC (Flash of Unstyled Content) */

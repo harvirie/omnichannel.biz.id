@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Omni Animations
  * Description: Kontrol efek parallax dan transisi halaman (Page Transitions) canggih menggunakan GSAP dan Swup.
- * Version: 3.0.0
+ * Version: 3.1.0
  * Author: Omni Theme
  */
 
@@ -105,8 +105,8 @@ class Omni_Animations {
         wp_enqueue_script('omni-swup-body-class', 'https://cdn.jsdelivr.net/npm/@swup/body-class-plugin@3/dist/index.umd.js', array('omni-swup'), null, true);
         
         // Custom Assets
-        wp_enqueue_style('omni-animations-css', plugin_dir_url(__FILE__) . 'assets/omni-animations.css', [], '3.0.0');
-        wp_enqueue_script('omni-animations-js', plugin_dir_url(__FILE__) . 'assets/omni-animations.js', array('omni-scrolltrigger', 'omni-swup-body-class'), '3.0.0', true);
+        wp_enqueue_style('omni-animations-css', plugin_dir_url(__FILE__) . 'assets/omni-animations.css', [], '3.1.0');
+        wp_enqueue_script('omni-animations-js', plugin_dir_url(__FILE__) . 'assets/omni-animations.js', array('omni-scrolltrigger', 'omni-swup-body-class'), '3.1.0', true);
     }
 }
 
