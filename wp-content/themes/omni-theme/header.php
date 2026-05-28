@@ -321,7 +321,7 @@
 body.omni-loading { overflow: hidden; }
 </style>
 
-<script>
+<script data-swup-ignore-script>
 (function() {
     document.body.classList.add('omni-loading');
     var loader   = document.getElementById('omni-loader');
