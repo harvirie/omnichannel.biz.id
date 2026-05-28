@@ -1,5 +1,5 @@
 /**
- * Omni Animations JS — v3.3.0
+ * Omni Animations JS — v3.3.2
  * Swup + GSAP ScrollTrigger + GSAP SVG Signal Pulse + GSAP Text Animations.
  *
  * NEW v3.3:
@@ -535,6 +535,36 @@
         window.scrollTo({ top: 0, behavior: 'instant' });
     }
 
+    // ─────────────────────────────────────────────────────────────
+    // HEAD STYLE INJECTION — Fix gap pada Swup navigation
+    //
+    // Swup hanya replace innerHTML #swup — inline <style> di <head>
+    // (dari wp_head action) TIDAK ikut terupdate. Fungsi ini:
+    //  1. Ambil semua <style> dari head halaman yang baru di-fetch
+    //  2. Inject ke <head> dokumen saat ini
+    //  3. Hapus injected styles dari navigasi sebelumnya
+    // ─────────────────────────────────────────────────────────────
+    var _injectedHeadStyles = [];
+
+    function injectPageHeadStyles(visit) {
+        // 1. Hapus style yang di-inject dari navigasi sebelumnya
+        _injectedHeadStyles.forEach(function (el) {
+            if (el && el.parentNode) el.parentNode.removeChild(el);
+        });
+        _injectedHeadStyles = [];
+
+        // 2. Inject styles dari halaman baru (via Swup visit.to.document)
+        if (!visit || !visit.to || !visit.to.document) return;
+        var headStyles = visit.to.document.querySelectorAll('head > style');
+        headStyles.forEach(function (style) {
+            var newStyle = document.createElement('style');
+            newStyle.textContent = style.textContent;
+            newStyle.setAttribute('data-swup-head-injected', 'true');
+            document.head.appendChild(newStyle);
+            _injectedHeadStyles.push(newStyle);
+        });
+    }
+
     // Clean up data-anim-done markers dari Swup sebelumnya
     function clearAnimDone() {
         document.querySelectorAll('[data-anim-done]').forEach(function (el) {
@@ -558,7 +588,13 @@
         });
 
         swup.hooks.on('link:click', progressStart);
-        swup.hooks.on('content:replace', reinitThemeUI);
+        // content:replace: inject head styles DULU, kemudian reinit UI
+        // Ini fix utama untuk gap yang terjadi karena wp_head CSS tidak
+        // diupdate oleh Swup (Swup hanya replace #swup innerHTML)
+        swup.hooks.on('content:replace', function (visit) {
+            injectPageHeadStyles(visit);
+            reinitThemeUI();
+        });
         swup.hooks.on('page:view', function () {
             if (typeof ScrollTrigger !== 'undefined') {
                 ScrollTrigger.getAll().forEach(function (t) { t.kill(); });

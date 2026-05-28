@@ -12,20 +12,21 @@ add_action('wp_head', function() {
     echo '<link rel="canonical" href="' . esc_url(home_url('/harga')) . '">' . "\n";
     // Preload LCP hero image (WebP) agar LCP turun signifikan
     echo '<link rel="preload" as="image" href="' . get_template_directory_uri() . '/assets/img/harga-hero-updated.webp" type="image/webp">' . "\n";
-    // Custom style to pull hero illustration up deeply behind the solid gray background
-    echo '<style>
-      .hero-illustration-container {
-        margin-top: -70px;
-      }
-      @media (min-width: 768px) {
-        .hero-illustration-container {
-          margin-top: -10%;
-        }
-      }
-    </style>' . "\n";
 }, 5);
 ?>
 <?php get_header(); ?>
+
+<!-- CSS inline di dalam #swup agar tetap aktif saat Swup navigation -->
+<style data-page="harga">
+  .hero-illustration-container {
+    margin-top: -70px;
+  }
+  @media (min-width: 768px) {
+    .hero-illustration-container {
+      margin-top: -10%;
+    }
+  }
+</style>
 
 <div class="flex-1 bg-white w-full">
 
