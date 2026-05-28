@@ -1,0 +1,27 @@
+/* Omni Animations CSS - Swup Transitions */
+
+/* Base transition settings for #swup container */
+#swup {
+    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    opacity: 1;
+    transform: none;
+    will-change: transform, opacity;
+}
+
+/* === LEAVING STATE (Current page fading out) === */
+html.is-animating.is-leaving #swup.transition-fade { opacity: 0; }
+html.is-animating.is-leaving #swup.transition-slide_up { opacity: 0; transform: translateY(-40px); }
+html.is-animating.is-leaving #swup.transition-slide_down { opacity: 0; transform: translateY(40px); }
+html.is-animating.is-leaving #swup.transition-scale { opacity: 0; transform: scale(0.96); }
+
+/* === ENTERING STATE (New page loaded, but still animating in) === */
+/* Kapan is-leaving dicabut oleh Swup, elemen akan mengambil state ini sblm animasi selesai */
+html.is-animating:not(.is-leaving) #swup.transition-fade { opacity: 0; }
+html.is-animating:not(.is-leaving) #swup.transition-slide_up { opacity: 0; transform: translateY(40px); }
+html.is-animating:not(.is-leaving) #swup.transition-slide_down { opacity: 0; transform: translateY(-40px); }
+html.is-animating:not(.is-leaving) #swup.transition-scale { opacity: 0; transform: scale(1.04); }
+
+/* Note: 
+Ketika is-animating dicabut (setelah 0.5s), container akan kembali 
+ke Base transition settings (opacity 1, transform none) dengan sangat mulus. 
+*/

@@ -523,4 +523,23 @@ body.omni-loading { overflow: hidden; }
   </header>
 </div>
 
-<main class="flex-1 md:pt-32 pt-20 flex flex-col">
+<?php 
+  // Fetch animation settings from post meta
+  $transition_class = 'transition-fade'; // default
+  $parallax_data = 'no';
+  
+  if (is_singular()) {
+      $enable_trans = get_post_meta(get_the_ID(), '_omni_enable_transitions', true);
+      $trans_type = get_post_meta(get_the_ID(), '_omni_transition_type', true);
+      $enable_parallax = get_post_meta(get_the_ID(), '_omni_enable_parallax', true);
+      
+      if ($enable_trans === 'yes' && !empty($trans_type) && $trans_type !== 'none') {
+          $transition_class = 'transition-' . $trans_type;
+      }
+      
+      if ($enable_parallax === 'yes') {
+          $parallax_data = 'yes';
+      }
+  }
+?>
+<main id="swup" class="flex-1 md:pt-32 pt-20 flex flex-col <?php echo esc_attr($transition_class); ?>" data-parallax="<?php echo esc_attr($parallax_data); ?>">
