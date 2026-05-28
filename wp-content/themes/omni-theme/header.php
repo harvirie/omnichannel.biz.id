@@ -543,23 +543,21 @@ body.omni-loading { overflow: hidden; }
       }
   }
 ?>
-<main id="swup" class="flex-1 md:pt-32 pt-20 flex flex-col <?php echo esc_attr($transition_class); ?>" data-parallax="<?php echo esc_attr($parallax_data); ?>">
-
-<!-- ===== OMNI NAV ACTIVE STATE + CLICK RIPPLE ===== -->
+<!-- ===== OMNI NAV ACTIVE STATE + CLICK RIPPLE (outside #swup so never re-rendered) ===== -->
 <script data-swup-ignore-script>
 (function() {
     /* ── Update active nav item based on current URL ─────────────── */
     function updateActiveNav() {
         var currentPath = window.location.pathname.replace(/^\/|\/$/, '');
-        // Handle root/home
         var isHome = (currentPath === '' || currentPath === '/');
 
-        document.querySelectorAll('header nav a, nav a').forEach(function(link) {
+        document.querySelectorAll('header nav a').forEach(function(link) {
             var href = link.getAttribute('href') || '';
             var linkPath = href.replace(/https?:\/\/[^/]+/, '').replace(/^\/|\/$/, '');
-            var isActive = isHome ? (linkPath === '' || linkPath === '/') : (linkPath !== '' && currentPath.indexOf(linkPath) === 0);
+            var isActive = isHome
+                ? (linkPath === '' || linkPath === 'home')
+                : (linkPath !== '' && currentPath.startsWith(linkPath));
 
-            // Remove existing active classes
             link.classList.remove('text-omni-accent');
             link.classList.add('text-white');
             var indicator = link.querySelector('span');
@@ -589,52 +587,55 @@ body.omni-loading { overflow: hidden; }
             link.addEventListener('click', function(e) {
                 var rect = link.getBoundingClientRect();
                 var ripple = document.createElement('span');
-                var size = Math.max(rect.width, rect.height) * 2;
+                var size = Math.max(rect.width, rect.height) * 2.5;
                 ripple.style.cssText = [
                     'position:absolute',
                     'border-radius:50%',
                     'pointer-events:none',
-                    'background:rgba(212,175,55,0.35)',
+                    'background:rgba(212,175,55,0.3)',
                     'width:' + size + 'px',
                     'height:' + size + 'px',
                     'left:' + (e.clientX - rect.left - size/2) + 'px',
                     'top:' + (e.clientY - rect.top - size/2) + 'px',
                     'transform:scale(0)',
-                    'animation:omniNavRipple 0.55s ease-out forwards',
+                    'animation:omniNavRipple 0.6s cubic-bezier(0.4,0,0.2,1) forwards',
                     'z-index:99'
                 ].join(';');
                 link.appendChild(ripple);
-                setTimeout(function() { ripple.remove(); }, 600);
+                setTimeout(function() { ripple.remove(); }, 700);
             });
         });
     }
 
-    /* ── Inject keyframe ──────────────────────────────────────────── */
+    /* ── Inject keyframe once ─────────────────────────────────────── */
     if (!document.getElementById('omni-ripple-style')) {
         var s = document.createElement('style');
         s.id = 'omni-ripple-style';
-        s.textContent = '@keyframes omniNavRipple { to { transform:scale(1); opacity:0; } }';
+        s.textContent = '@keyframes omniNavRipple{from{transform:scale(0);opacity:1}to{transform:scale(1);opacity:0}}';
         document.head.appendChild(s);
     }
 
-    /* ── Run on load and on Swup navigation ───────────────────────── */
     function boot() {
         updateActiveNav();
         addRippleToNavLinks();
     }
 
-    document.addEventListener('DOMContentLoaded', boot);
+    /* ── Initial run ─────────────────────────────────────────────── */
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', boot);
+    } else {
+        boot();
+    }
 
-    // Hook into Swup page view
-    document.addEventListener('swup:page:view', boot);
-    // Also hook via window._omniSwup if available
-    var swupCheckInterval = setInterval(function() {
+    /* ── Hook into Swup after it initializes ─────────────────────── */
+    var checkSwup = setInterval(function() {
         if (window._omniSwup) {
-            clearInterval(swupCheckInterval);
-            window._omniSwup.hooks.on('page:view', boot);
+            clearInterval(checkSwup);
+            window._omniSwup.hooks.on('page:view', updateActiveNav);
         }
-    }, 100);
-    setTimeout(function() { clearInterval(swupCheckInterval); }, 5000);
+    }, 150);
+    setTimeout(function() { clearInterval(checkSwup); }, 8000);
 })();
 </script>
 <!-- ===== END OMNI NAV ACTIVE STATE ===== -->
+<main id="swup" class="flex-1 md:pt-32 pt-20 flex flex-col <?php echo esc_attr($transition_class); ?>" data-parallax="<?php echo esc_attr($parallax_data); ?>">
