@@ -82,32 +82,24 @@
         }
 
         /* ── SVG Signal Pulse — dikontrol sepenuhnya oleh GSAP ─── */
-        /* Hanya definisi stroke dasar — opacity & dashoffset diset GSAP via inline style */
         .svg-glow-path {
             fill: none;
-            stroke: #FFFDE8;
-            stroke-width: 2.5px;
+            stroke: #FFE566;           /* Gold terang agar feFlood + feComposite bekerja */
+            stroke-width: 5px;         /* Cukup tebal agar filter area jelas terlihat */
             stroke-linecap: round;
             stroke-linejoin: round;
-            stroke-dasharray: 1.5 98.5;  /* titik kecil per 100 pathLength unit */
-            /* stroke-dashoffset: GSAP sets this via inline style */
-            /* opacity: GSAP sets this via inline style */
-            /* NO vector-effect: non-scaling-stroke — interferes with SVG filter */
-            /* NO CSS filter — using SVG <filter> element directly on path */
+            stroke-dasharray: 2 98;    /* ~2% panjang visible — titik mulus */
             will-change: stroke-dashoffset, opacity;
         }
         .svg-glow-path-wide {
             fill: none;
-            stroke: #D4AF37;
-            stroke-width: 7px;
+            stroke: #FFD700;           /* Gold murni untuk aura */
+            stroke-width: 12px;        /* Lebar untuk aura tebal */
             stroke-linecap: round;
             stroke-linejoin: round;
-            stroke-dasharray: 4.5 95.5;  /* ekor lebih panjang */
-            /* stroke-dashoffset: GSAP sets this via inline style */
-            /* opacity: GSAP sets this via inline style */
+            stroke-dasharray: 5 95;    /* ~5% visible — ekor lebih panjang */
             will-change: stroke-dashoffset, opacity;
         }
-        /* SVG containers yang pakai glow: harus overflow visible */
         svg:has(.svg-glow-path) {
             overflow: visible !important;
         }

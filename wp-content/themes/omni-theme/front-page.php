@@ -30,10 +30,29 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
       <div class="relative z-10 w-[300vw] -left-[55vw] mobile-scale-w md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 1163.2;">
         <svg viewBox="0 0 2000.62 1163.2" class="absolute inset-0 w-full h-full drop-shadow-xl" preserveAspectRatio="none" style="overflow:visible;">
           <defs>
-            <filter id="omni-glow-filter" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
-              <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#D4AF37" flood-opacity="0.9" result="glow1"/>
-              <feDropShadow dx="0" dy="0" stdDeviation="14" flood-color="#D4AF37" flood-opacity="0.5" result="glow2"/>
-              <feMerge><feMergeNode in="glow2"/><feMergeNode in="glow1"/><feMergeNode in="SourceGraphic"/></feMerge>
+            <filter id="omni-glow-filter" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
+              <!-- Buat source gold dari stroke path -->
+              <feFlood flood-color="#FFD700" flood-opacity="1" result="gold"/>
+              <feComposite in="gold" in2="SourceGraphic" operator="in" result="gold-src"/>
+              <!-- Layer 1: glow inti — sangat terang & tajam -->
+              <feGaussianBlur in="gold-src" stdDeviation="8" result="glow-core"/>
+              <!-- Layer 2: glow menengah -->
+              <feGaussianBlur in="gold-src" stdDeviation="25" result="glow-mid"/>
+              <!-- Layer 3: aura lebar & halus -->
+              <feGaussianBlur in="gold-src" stdDeviation="60" result="glow-wide"/>
+              <!-- Boost intensitas layer core -->
+              <feComponentTransfer in="glow-core" result="glow-core-bright">
+                <feFuncR type="linear" slope="3"/>
+                <feFuncG type="linear" slope="2.5"/>
+                <feFuncB type="linear" slope="1"/>
+              </feComponentTransfer>
+              <!-- Gabungkan semua layer -->
+              <feMerge>
+                <feMergeNode in="glow-wide"/>
+                <feMergeNode in="glow-mid"/>
+                <feMergeNode in="glow-core-bright"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
             </filter>
           </defs>
           <path fill="#F8FAFC" d="M 64 0 A 64 64 0 0 0 0 64 L 0 950.62 A 64 64 0 0 0 64 1014.62 L 678 1014.62 A 74.29 74.29 0 0 1 752.29 1088.91 A 74.29 74.29 0 0 0 826.58 1163.2 L 1936.62 1163.2 A 64 64 0 0 0 2000.62 1099.2 L 2000.62 212.88 A 64 64 0 0 0 1936.62 148.88 L 826.58 148.88 A 74.44 74.44 0 0 1 752.14 74.44 A 74.44 74.44 0 0 0 677.7 0 Z"/>

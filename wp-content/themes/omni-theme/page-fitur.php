@@ -52,12 +52,32 @@ add_action('wp_head', function() {
     
   <!-- Animated SVG Boundary Line -->
   <div class="w-full relative pointer-events-none" style="line-height: 0; margin-top: -1px; z-index: 20;">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3973.17 333.48" class="text-omni-dark h-[60px] md:h-auto" preserveAspectRatio="none" style="display: block; width: 100%; shape-rendering: geometricPrecision;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3973.17 333.48" class="text-omni-dark h-[60px] md:h-auto" preserveAspectRatio="none" style="display: block; width: 100%; shape-rendering: geometricPrecision; overflow: visible;">
+        <defs>
+          <filter id="omni-glow-filter-fitur" x="-40%" y="-200%" width="180%" height="500%" color-interpolation-filters="sRGB">
+            <feFlood flood-color="#FFD700" flood-opacity="1" result="gold"/>
+            <feComposite in="gold" in2="SourceGraphic" operator="in" result="gold-src"/>
+            <feGaussianBlur in="gold-src" stdDeviation="6" result="glow-core"/>
+            <feGaussianBlur in="gold-src" stdDeviation="20" result="glow-mid"/>
+            <feGaussianBlur in="gold-src" stdDeviation="50" result="glow-wide"/>
+            <feComponentTransfer in="glow-core" result="glow-core-bright">
+              <feFuncR type="linear" slope="3"/>
+              <feFuncG type="linear" slope="2.5"/>
+              <feFuncB type="linear" slope="1"/>
+            </feComponentTransfer>
+            <feMerge>
+              <feMergeNode in="glow-wide"/>
+              <feMergeNode in="glow-mid"/>
+              <feMergeNode in="glow-core-bright"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
         <!-- Gray filler above the curve to mask the image underneath -->
         <path fill="#f1f5f9" d="M3973.17 333.48 L3973.17 0 L0 0 L0 0.01 l2872.96 0 0 0.03 c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06 l82.35 134.74 c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08 l0 -0.03 717.15 0 Z" />
         <path fill="currentColor" d="M0 0.01l2872.96 0 0 0.03c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06l82.35 134.74c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08l0 -0.03 717.15 0 0 18 -717.15 0 -0.03 -0.03c-34.38,-0.22 -66.48,-11.11 -95.36,-28.68 -32.86,-20 -61.55,-48.7 -84.61,-80.14l-0.42 -0.63 -82.73 -135.38c-12.18,-20.97 -29.12,-40.5 -51.49,-53.66 -18.67,-10.99 -41.27,-17.6 -68.25,-16.98l-0.17 0.03 -2872.96 0 0 -18z"/>
-        <path class="svg-glow-path-wide" pathLength="100" d="M0 0.01 l2872.96 0 0 0.03 c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06 l82.35 134.74 c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08 l0 -0.03 717.15 0"/>
-        <path class="svg-glow-path" pathLength="100" d="M0 0.01 l2872.96 0 0 0.03 c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06 l82.35 134.74 c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08 l0 -0.03 717.15 0"/>
+        <path class="svg-glow-path-wide" pathLength="100" filter="url(#omni-glow-filter-fitur)" d="M0 0.01 l2872.96 0 0 0.03 c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06 l82.35 134.74 c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08 l0 -0.03 717.15 0"/>
+        <path class="svg-glow-path" pathLength="100" filter="url(#omni-glow-filter-fitur)" d="M0 0.01 l2872.96 0 0 0.03 c30.48,-0.66 56.16,6.9 77.49,19.45 25.33,14.9 44.35,36.72 57.92,60.06 l82.35 134.74 c21.74,29.59 48.64,56.5 79.27,75.14 26.25,15.98 55.24,25.88 86.03,26.08 l0 -0.03 717.15 0"/>
       </svg>
   </div>
 
