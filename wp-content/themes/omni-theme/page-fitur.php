@@ -341,4 +341,6 @@ add_action('wp_head', function() {
 
 </div>
 
+</main>
+
 <?php get_footer(); ?>

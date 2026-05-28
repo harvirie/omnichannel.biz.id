@@ -414,4 +414,6 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
   </div>
 </section>
 
+</main>
+
 <?php get_footer(); ?>

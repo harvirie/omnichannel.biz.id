@@ -315,4 +315,6 @@ main { padding-top: 0 !important; }
     </div>
 </div>
 
+</main>
+
 <?php get_footer(); ?>

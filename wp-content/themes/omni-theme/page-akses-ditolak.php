@@ -155,4 +155,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
+</main>
+
 <?php get_footer(); ?>
