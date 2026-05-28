@@ -19,7 +19,19 @@ add_action('wp_head', function() {
     echo '<link rel="preload" as="image" href="' . get_template_directory_uri() . '/assets/img/usecase-hero-updated.webp" type="image/webp">' . "\n";
 }, 5);
 ?>
-<?php get_header(); ?>
+<?php get_header(); 
+
+// Fetch data from Omni Editor
+$omni_usecase = get_option('omni_editor_usecase', []);
+
+// Setup fallbacks if empty
+$hero_badge = $omni_usecase['hero']['badge'] ?? 'Solusi Nyata untuk Bisnis Nyata';
+$hero_title = $omni_usecase['hero']['title'] ?? 'Bagaimana OmniServe <span class="text-omni-button-hover">Mengubah Operasional</span><br>di Berbagai Industri';
+$hero_sub   = $omni_usecase['hero']['subtitle'] ?? 'Dari WhatsApp Unlimited hingga Telepon PSTN dengan Recording — pelajari bagaimana fitur-fitur nyata kami menyelesaikan tantangan nyata di lapangan.';
+$hero_img   = !empty($omni_usecase['hero']['image_url']) ? $omni_usecase['hero']['image_url'] : get_template_directory_uri() . '/assets/img/usecase-hero-updated.png';
+
+$sections   = !empty($omni_usecase['sections']) ? $omni_usecase['sections'] : [];
+?>
 
 <!-- CSS inline di dalam #swup agar tetap aktif saat Swup navigation -->
 <style data-page="use-case">
@@ -40,14 +52,14 @@ add_action('wp_head', function() {
     <div class="max-w-7xl mx-auto px-6 text-center relative" style="padding-bottom: 100px; z-index: 10;">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="briefcase" class="h-4 w-4"></i>
-        Solusi Nyata untuk Bisnis Nyata
+        <?php echo esc_html($hero_badge); ?>
       </div>
       <h1 class="text-4xl md:text-5xl font-bold text-omni-dark mb-6 leading-tight">
-        Bagaimana OmniServe <span class="text-omni-button-hover">Mengubah Operasional</span><br>di Berbagai Industri
+        <?php echo $hero_title; ?>
       </h1>
-      <p class="text-omni-text-muted text-lg md:text-xl max-w-2xl mx-auto">
-        Dari WhatsApp Unlimited hingga Telepon PSTN dengan Recording — pelajari bagaimana fitur-fitur nyata kami menyelesaikan tantangan nyata di lapangan.
-      </p>
+      <div class="text-omni-text-muted text-lg md:text-xl max-w-2xl mx-auto omni-rich-text">
+        <?php echo wpautop($hero_sub); ?>
+      </div>
     </div>
     <!-- Background shapes -->
     <div class="absolute top-10 left-10 w-64 h-64 bg-omni-accent/10 rounded-full blur-3xl z-0"></div>
@@ -65,23 +77,17 @@ add_action('wp_head', function() {
       </svg>
   </div>
 
-  <!-- Hero Illustration — WebP dengan fallback PNG untuk LCP optimal -->
+  <!-- Hero Illustration -->
   <div class="w-full relative hero-illustration-container" style="z-index: 0;">
-    <picture>
-      <source
-        srcset="<?php echo get_template_directory_uri(); ?>/assets/img/usecase-hero-updated.webp"
-        type="image/webp"
-      >
       <img
-        src="<?php echo get_template_directory_uri(); ?>/assets/img/usecase-hero-updated.png"
-        alt="Solusi omnichannel call center untuk berbagai industri: e-commerce, perbankan, klinik, pemerintah, dan B2B"
+        src="<?php echo esc_url($hero_img); ?>"
+        alt="Solusi omnichannel call center"
         width="1886" height="834"
         class="w-full h-auto object-cover"
         fetchpriority="high"
         loading="eager"
         decoding="async"
       >
-    </picture>
   </div>
 
   <!-- Package Context Banner -->
@@ -105,207 +111,78 @@ add_action('wp_head', function() {
   <section class="py-20">
     <div class="max-w-7xl mx-auto px-6 space-y-10">
 
-      <!-- E-Commerce -->
-      <div class="bg-omni-light rounded-3xl p-8 md:p-10 border border-omni-border hover:shadow-xl transition-shadow duration-300">
-        <div class="flex flex-col md:flex-row gap-8">
-          <div class="shrink-0 bg-white p-4 rounded-2xl shadow-sm h-fit">
-            <i data-lucide="shopping-bag" class="w-10 h-10 text-omni-accent"></i>
-          </div>
-          <div class="flex-1">
-            <div class="flex flex-wrap items-center gap-3 mb-3">
-              <h2 class="text-2xl font-bold text-omni-dark">E-Commerce & Ritel</h2>
-              <span class="inline-flex items-center gap-1.5 bg-omni-secondary/20 text-omni-button-hover text-xs font-bold px-3 py-1 rounded-full">
-                <div class="w-2 h-2 rounded-full bg-omni-secondary"></div>
-                Cocok: Paket Standard
-              </span>
-            </div>
-            <p class="text-omni-text-muted mb-6 leading-relaxed">
-              Lonjakan pesan saat flash sale atau Harbolnas bisa ditangani tanpa menambah agen. Dengan <strong>WhatsApp Unlimited Interaction</strong>, tidak ada pesan yang terlewat meski ribuan order masuk dalam satu momen. Bot <strong>Multilevel Menu</strong> menangani cek status pengiriman secara otomatis.
-            </p>
-            <div class="grid sm:grid-cols-3 gap-4">
-              <div class="bg-white rounded-xl p-4 border border-omni-border">
-                <i data-lucide="infinity" class="h-5 w-5 text-omni-secondary mb-2"></i>
-                <p class="text-xs font-bold text-omni-dark">Unlimited Interaction</p>
-                <p class="text-xs text-omni-text-muted mt-1">Tanpa batas volume chat WhatsApp & Instagram.</p>
-              </div>
-              <div class="bg-white rounded-xl p-4 border border-omni-border">
-                <i data-lucide="bot" class="h-5 w-5 text-omni-secondary mb-2"></i>
-                <p class="text-xs font-bold text-omni-dark">FAQ & Multilevel Bot</p>
-                <p class="text-xs text-omni-text-muted mt-1">Status order, retur, promo — dijawab otomatis.</p>
-              </div>
-              <div class="bg-white rounded-xl p-4 border border-omni-border">
-                <i data-lucide="code-2" class="h-5 w-5 text-omni-secondary mb-2"></i>
-                <p class="text-xs font-bold text-omni-dark">API Integrasi Custom</p>
-                <p class="text-xs text-omni-text-muted mt-1">Hubungkan data pengiriman langsung ke chat agen.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- Dynamic Use Cases -->
+      <?php 
+      if (empty($sections)) {
+          // Fallback if no sections in options
+          if (class_exists('OmniEditorData')) {
+              $sections = OmniEditorData::defaults('usecase')['sections'];
+          }
+      }
+      ?>
 
-      <!-- Financial Services -->
-      <div class="bg-omni-light rounded-3xl p-8 md:p-10 border border-omni-border hover:shadow-xl transition-shadow duration-300">
+      <?php foreach ($sections as $sec): 
+          $is_dark = ($sec['style'] ?? 'light') === 'dark';
+          
+          $bg_class = $is_dark ? 'bg-omni-dark border-2 border-omni-accent hover:shadow-[0_20px_60px_rgba(253,184,84,0.25)]' : 'bg-omni-light border border-omni-border hover:shadow-xl';
+          $icon_bg = $is_dark ? 'bg-white/10' : 'bg-white shadow-sm';
+          $icon_color = $is_dark ? 'text-omni-accent' : 'text-omni-accent'; // Default fallback if not custom styled, let's just use accent
+          
+          $badge_bg = $is_dark ? 'bg-omni-accent/20 text-omni-accent' : 'bg-omni-secondary/20 text-omni-button-hover';
+          
+          $title_color = $is_dark ? 'text-white' : 'text-omni-dark';
+          $desc_color = $is_dark ? 'text-white/70' : 'text-omni-text-muted';
+          
+          $item_bg = $is_dark ? 'bg-white/10 border-white/20' : 'bg-white border-omni-border';
+          $item_title = $is_dark ? 'text-white' : 'text-omni-dark';
+          $item_desc = $is_dark ? 'text-white/60' : 'text-omni-text-muted';
+      ?>
+      <div class="rounded-3xl p-8 md:p-10 transition-shadow duration-300 <?php echo $bg_class; ?>">
         <div class="flex flex-col md:flex-row gap-8">
-          <div class="shrink-0 bg-white p-4 rounded-2xl shadow-sm h-fit">
-            <i data-lucide="building-2" class="w-10 h-10 text-omni-button-hover"></i>
+          <div class="shrink-0 p-4 rounded-2xl h-fit <?php echo $icon_bg; ?>">
+            <?php 
+            $sec_icon = $sec['icon'] ?? 'briefcase';
+            if (strpos($sec_icon, 'fa-') !== false) {
+                echo '<i class="text-4xl ' . esc_attr($sec_icon) . ' ' . $icon_color . '"></i>';
+            } else {
+                echo '<i data-lucide="' . esc_attr($sec_icon) . '" class="w-10 h-10 ' . $icon_color . '"></i>';
+            }
+            ?>
           </div>
           <div class="flex-1">
             <div class="flex flex-wrap items-center gap-3 mb-3">
-              <h2 class="text-2xl font-bold text-omni-dark">Layanan Keuangan & Perbankan</h2>
-              <span class="inline-flex items-center gap-1.5 bg-omni-accent/20 text-omni-dark text-xs font-bold px-3 py-1 rounded-full">
-                <div class="w-2 h-2 rounded-full bg-omni-accent"></div>
-                Ideal: Paket Professional Plus
+              <h2 class="text-2xl font-bold <?php echo $title_color; ?>"><?php echo esc_html($sec['title']); ?></h2>
+              <?php if (!empty($sec['badge'])): ?>
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full <?php echo $badge_bg; ?>">
+                <div class="w-2 h-2 rounded-full <?php echo $is_dark ? 'bg-omni-accent' : 'bg-omni-secondary'; ?>"></div>
+                <?php echo esc_html($sec['badge']); ?>
               </span>
+              <?php endif; ?>
             </div>
-            <p class="text-omni-text-muted mb-6 leading-relaxed">
-              Kepercayaan nasabah dibangun dari konsistensi pelayanan. <strong>Voice Call Recording</strong> memastikan setiap percakapan telepon terdokumentasi untuk kebutuhan audit dan kepatuhan. <strong>Dashboard Analytics</strong> membantu manajer operasional memantau performa tim secara real-time.
-            </p>
+            <div class="mb-6 leading-relaxed omni-rich-text <?php echo $desc_color; ?>">
+              <?php echo wpautop($sec['description']); ?>
+            </div>
             <div class="grid sm:grid-cols-3 gap-4">
-              <div class="bg-white rounded-xl p-4 border border-omni-border">
-                <i data-lucide="mic" class="h-5 w-5 text-omni-accent mb-2"></i>
-                <p class="text-xs font-bold text-omni-dark">Voice Call Recording</p>
-                <p class="text-xs text-omni-text-muted mt-1">Semua panggilan terekam untuk audit & kepatuhan.</p>
+              <?php foreach (($sec['items'] ?? []) as $item): ?>
+              <div class="rounded-xl p-4 border <?php echo $item_bg; ?>">
+                <?php 
+                $item_icon = $item['icon'] ?? 'check-circle';
+                $item_icon_color = $is_dark ? 'text-omni-accent' : 'text-omni-secondary';
+                if (strpos($item_icon, 'fa-') !== false) {
+                    echo '<i class="text-xl mb-2 ' . esc_attr($item_icon) . ' ' . $item_icon_color . '"></i>';
+                } else {
+                    echo '<i data-lucide="' . esc_attr($item_icon) . '" class="h-5 w-5 mb-2 ' . $item_icon_color . '"></i>';
+                }
+                ?>
+                <p class="text-xs font-bold mt-1 <?php echo $item_title; ?>"><?php echo esc_html($item['title']); ?></p>
+                <p class="text-xs mt-1 <?php echo $item_desc; ?>"><?php echo esc_html($item['desc']); ?></p>
               </div>
-              <div class="bg-white rounded-xl p-4 border border-omni-border">
-                <i data-lucide="phone-call" class="h-5 w-5 text-omni-accent mb-2"></i>
-                <p class="text-xs font-bold text-omni-dark">PSTN + Nomor 021</p>
-                <p class="text-xs text-omni-text-muted mt-1">Tampil profesional dengan nomor lokal Jakarta.</p>
-              </div>
-              <div class="bg-white rounded-xl p-4 border border-omni-border">
-                <i data-lucide="bar-chart-2" class="h-5 w-5 text-omni-accent mb-2"></i>
-                <p class="text-xs font-bold text-omni-dark">Dashboard Analytics</p>
-                <p class="text-xs text-omni-text-muted mt-1">Monitoring real-time untuk SLA dan KPI layanan.</p>
-              </div>
+              <?php endforeach; ?>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Healthcare -->
-      <div class="bg-omni-light rounded-3xl p-8 md:p-10 border border-omni-border hover:shadow-xl transition-shadow duration-300">
-        <div class="flex flex-col md:flex-row gap-8">
-          <div class="shrink-0 bg-white p-4 rounded-2xl shadow-sm h-fit">
-            <i data-lucide="stethoscope" class="w-10 h-10 text-omni-secondary"></i>
-          </div>
-          <div class="flex-1">
-            <div class="flex flex-wrap items-center gap-3 mb-3">
-              <h2 class="text-2xl font-bold text-omni-dark">Layanan Kesehatan & Klinik</h2>
-              <span class="inline-flex items-center gap-1.5 bg-omni-secondary/20 text-omni-button-hover text-xs font-bold px-3 py-1 rounded-full">
-                <div class="w-2 h-2 rounded-full bg-omni-secondary"></div>
-                Cocok: Paket Standard
-              </span>
-            </div>
-            <p class="text-omni-text-muted mb-6 leading-relaxed">
-              Antrean telepon pasien tidak perlu panjang. Bot <strong>FAQ Database</strong> menjawab pertanyaan umum seputar jadwal dokter, prosedur pendaftaran, hingga estimasi biaya. Notifikasi pengingat janji temu dikirim otomatis via <strong>WhatsApp Blue Tick</strong> yang dipercaya pasien.
-            </p>
-            <div class="grid sm:grid-cols-3 gap-4">
-              <div class="bg-white rounded-xl p-4 border border-omni-border">
-                <i data-lucide="message-circle" class="h-5 w-5 text-omni-secondary mb-2"></i>
-                <p class="text-xs font-bold text-omni-dark">WhatsApp Blue Tick</p>
-                <p class="text-xs text-omni-text-muted mt-1">Notifikasi & pengingat dari nomor terverifikasi.</p>
-              </div>
-              <div class="bg-white rounded-xl p-4 border border-omni-border">
-                <i data-lucide="bot" class="h-5 w-5 text-omni-secondary mb-2"></i>
-                <p class="text-xs font-bold text-omni-dark">FAQ Database</p>
-                <p class="text-xs text-omni-text-muted mt-1">Jawab otomatis info jadwal, biaya & prosedur.</p>
-              </div>
-              <div class="bg-white rounded-xl p-4 border border-omni-border">
-                <i data-lucide="users" class="h-5 w-5 text-omni-secondary mb-2"></i>
-                <p class="text-xs font-bold text-omni-dark">Unlimited Agent</p>
-                <p class="text-xs text-omni-text-muted mt-1">Tambah petugas reservasi tanpa biaya ekstra.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Government / Enterprise -->
-      <div class="bg-omni-dark rounded-3xl p-8 md:p-10 border-2 border-omni-accent hover:shadow-[0_20px_60px_rgba(253,184,84,0.25)] transition-shadow duration-300">
-        <div class="flex flex-col md:flex-row gap-8">
-          <div class="shrink-0 bg-white/10 p-4 rounded-2xl h-fit">
-            <i data-lucide="landmark" class="w-10 h-10 text-omni-accent"></i>
-          </div>
-          <div class="flex-1">
-            <div class="flex flex-wrap items-center gap-3 mb-3">
-              <h2 class="text-2xl font-bold text-white">Instansi Pemerintah & Korporasi</h2>
-              <span class="inline-flex items-center gap-1.5 bg-omni-accent/20 text-omni-accent text-xs font-bold px-3 py-1 rounded-full">
-                <div class="w-2 h-2 rounded-full bg-omni-accent"></div>
-                Ideal: Paket Professional Plus
-              </span>
-            </div>
-            <p class="text-white/70 mb-6 leading-relaxed">
-              Layanan publik skala besar membutuhkan sistem yang andal dan terukur. <strong class="text-white">Custom Agent Setup</strong> dengan 5 dedicated lines memastikan distribusi beban yang terstruktur. <strong class="text-white">Laporan bulanan tercetak</strong> mendukung kebutuhan dokumentasi dan transparansi anggaran.
-            </p>
-            <div class="grid sm:grid-cols-3 gap-4">
-              <div class="bg-white/10 rounded-xl p-4 border border-white/20">
-                <i data-lucide="user-check" class="h-5 w-5 text-omni-accent mb-2"></i>
-                <p class="text-xs font-bold text-white">Custom Agent Setup</p>
-                <p class="text-xs text-white/60 mt-1">5 dedicated lines dikonfigurasi sesuai struktur Anda.</p>
-              </div>
-              <div class="bg-white/10 rounded-xl p-4 border border-white/20">
-                <i data-lucide="file-text" class="h-5 w-5 text-omni-accent mb-2"></i>
-                <p class="text-xs font-bold text-white">Laporan Bulanan Cetak</p>
-                <p class="text-xs text-white/60 mt-1">Dokumentasi formal siap pakai untuk manajemen.</p>
-              </div>
-              <div class="bg-white/10 rounded-xl p-4 border border-white/20">
-                <i data-lucide="server" class="h-5 w-5 text-omni-accent mb-2"></i>
-                <p class="text-xs font-bold text-white">Cloud Server Terkelola</p>
-                <p class="text-xs text-white/60 mt-1">Infrastruktur enterprise tanpa beban IT internal.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- B2B / Agency -->
-      <div class="bg-omni-light rounded-3xl p-8 md:p-10 border border-omni-border hover:shadow-xl transition-shadow duration-300">
-        <div class="flex flex-col md:flex-row gap-8">
-          <div class="shrink-0 bg-white p-4 rounded-2xl shadow-sm h-fit">
-            <i data-lucide="briefcase" class="w-10 h-10 text-omni-dark"></i>
-          </div>
-          <div class="flex-1">
-            <div class="flex flex-wrap items-center gap-3 mb-3">
-              <h2 class="text-2xl font-bold text-omni-dark">Layanan B2B & Agensi Digital</h2>
-              <span class="inline-flex items-center gap-1.5 bg-omni-secondary/20 text-omni-button-hover text-xs font-bold px-3 py-1 rounded-full">
-                <div class="w-2 h-2 rounded-full bg-omni-secondary"></div>
-                Cocok: Semua Paket
-              </span>
-            </div>
-            <p class="text-omni-text-muted mb-6 leading-relaxed">
-              Kelola komunikasi multi-klien dari satu platform. <strong>API Integrasi Custom</strong> memungkinkan koneksi ke berbagai CRM dan sistem tiket. <strong>Unlimited Agent</strong> di Paket Standard ideal untuk agensi yang terus berkembang tanpa khawatir biaya per kursi.
-            </p>
-            <div class="grid sm:grid-cols-3 gap-4">
-              <div class="bg-white rounded-xl p-4 border border-omni-border">
-                <i data-lucide="code-2" class="h-5 w-5 text-omni-secondary mb-2"></i>
-                <p class="text-xs font-bold text-omni-dark">API Custom</p>
-                <p class="text-xs text-omni-text-muted mt-1">Integrasi CRM & sistem tiket klien Anda.</p>
-              </div>
-              <div class="bg-white rounded-xl p-4 border border-omni-border">
-                <i data-lucide="users" class="h-5 w-5 text-omni-secondary mb-2"></i>
-                <p class="text-xs font-bold text-omni-dark">Unlimited Agent</p>
-                <p class="text-xs text-omni-text-muted mt-1">Skalakan tim tanpa biaya tambahan per agen.</p>
-              </div>
-              <div class="bg-white rounded-xl p-4 border border-omni-border">
-                <svg class="h-5 w-5 mb-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <radialGradient id="ig-grad-usecase" cx="30%" cy="107%" r="150%">
-                      <stop offset="0%" stop-color="#fdf497"/>
-                      <stop offset="45%" stop-color="#fd5949"/>
-                      <stop offset="60%" stop-color="#d6249f"/>
-                      <stop offset="90%" stop-color="#285AEB"/>
-                    </radialGradient>
-                  </defs>
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="url(#ig-grad-usecase)"/>
-                  <circle cx="12" cy="12" r="4.5" fill="none" stroke="white" stroke-width="1.8"/>
-                  <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
-                </svg>
-                <p class="text-xs font-bold text-omni-dark">WA + Instagram</p>
-                <p class="text-xs text-omni-text-muted mt-1">Kelola semua akun sosial klien dari satu inbox.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <?php endforeach; ?>
 
     </div>
   </section>

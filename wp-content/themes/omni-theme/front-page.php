@@ -1,15 +1,47 @@
 <?php 
 get_header(); 
 $front_id = get_option('page_on_front');
-$hero_title = get_post_meta($front_id, 'omni_hero_title', true) ?: 'Aplikasi Omnichannel<br/>Call Center Terbaik.';
-$hero_sub = get_post_meta($front_id, 'omni_hero_sub', true) ?: 'Tingkatkan kepuasan pelanggan dengan software aplikasi omnichannel call center yang mengintegrasikan WhatsApp API, telepon, email, dan media sosial dalam satu dashboard terpadu.';
-$hero_badge1 = get_post_meta($front_id, 'omni_hero_badge1', true) ?: 'Tanpa Kartu Kredit';
-$hero_badge2 = get_post_meta($front_id, 'omni_hero_badge2', true) ?: 'Setup 5 Menit';
-$integration_title = get_post_meta($front_id, 'omni_integration_title', true) ?: 'Integrasi<br/><em class="text-omni-accent italic">Tanpa Batas</em>';
-$cta_title = get_post_meta($front_id, 'omni_cta_title', true) ?: 'Siap Mengubah Cara Anda Melayani?';
-$cta_sub = get_post_meta($front_id, 'omni_cta_sub', true) ?: 'Bergabunglah dengan ratusan perusahaan lain yang telah mendigitalisasi pusat layanan pelanggan mereka dengan OmniServe.';
-$trusted_title = get_post_meta($front_id, 'omni_trusted_title', true) ?: 'Dipercaya Oleh Berbagai Instansi';
-$trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabunglah dengan perusahaan terkemuka yang telah bertransformasi bersama kami.';
+
+// Fetch data from Omni Editor if available
+$omni_home = get_option('omni_editor_home', []);
+
+// Function to safely get nested array values with fallback
+$get_home_val = function($path, $fallback) use ($omni_home, $front_id) {
+    $keys = explode('.', $path);
+    $val = $omni_home;
+    foreach ($keys as $key) {
+        if (!isset($val[$key])) {
+            $val = null;
+            break;
+        }
+        $val = $val[$key];
+    }
+    
+    if ($val) return $val;
+    
+    // Fallback to old post_meta for backwards compatibility
+    $old_meta_key = 'omni_' . str_replace('.', '_', $path);
+    $old_val = get_post_meta($front_id, $old_meta_key, true);
+    
+    return $old_val ?: $fallback;
+};
+
+$hero_title = $get_home_val('hero.title', 'Aplikasi Omnichannel<br/>Call Center Terbaik.');
+$hero_sub = $get_home_val('hero.subtitle', 'Tingkatkan kepuasan pelanggan dengan software aplikasi omnichannel call center yang mengintegrasikan WhatsApp API, telepon, email, dan media sosial dalam satu dashboard terpadu.');
+$hero_badge1 = $get_home_val('hero.badge1', 'Tanpa Kartu Kredit');
+$hero_badge2 = $get_home_val('hero.badge2', 'Setup 5 Menit');
+$hero_cta_text = $get_home_val('hero.cta_primary', 'Coba Demo Gratis');
+$hero_cta_url = $get_home_val('hero.cta_primary_url', '/?demo=1');
+
+$integration_title = $get_home_val('integration.title', 'Integrasi<br/><em class="text-omni-accent italic">Tanpa Batas</em>');
+
+$cta_title = $get_home_val('cta.title', 'Siap Mengubah Cara Anda Melayani?');
+$cta_sub = $get_home_val('cta.subtitle', 'Bergabunglah dengan ratusan perusahaan lain yang telah mendigitalisasi pusat layanan pelanggan mereka dengan OmniServe.');
+$cta_btn_text = $get_home_val('cta.btn_text', 'Mulai Uji Coba Gratis');
+$cta_btn_url = $get_home_val('cta.btn_url', '/harga');
+
+$trusted_title = $get_home_val('trusted.title', 'Dipercaya Oleh Berbagai Instansi');
+$trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan terkemuka yang telah bertransformasi bersama kami.');
 ?>
 
 <!-- Hero Section -->
@@ -117,7 +149,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
 
           <!-- Search Bar -->
           <form method="get" action="<?php echo esc_url(home_url('/')); ?>" class="flex items-center bg-white p-[0.4vw] xl:p-1.5 rounded-full w-full shadow-sm mb-[2.2vw] xl:mb-8 border border-omni-border">
-            <a href="<?php echo home_url('/harga'); ?>" class="bg-omni-button hover:bg-omni-button-hover transition-colors text-white px-[1.2vw] py-[0.6vw] rounded-full text-[0.85vw] xl:text-sm font-semibold whitespace-nowrap">Coba Gratis</a>
+            <a href="<?php echo esc_url($hero_cta_url); ?>" class="bg-omni-button hover:bg-omni-button-hover transition-colors text-white px-[1.2vw] py-[0.6vw] rounded-full text-[0.85vw] xl:text-sm font-semibold whitespace-nowrap"><?php echo esc_html($hero_cta_text); ?></a>
             <button type="button" onclick="document.getElementById('demo-modal').classList.remove('hidden')" class="px-[1vw] py-[0.6vw] text-[0.85vw] xl:text-sm font-semibold text-omni-text-muted hover:bg-slate-50 rounded-full transition-colors shrink-0">Demo</button>
             <input type="text" name="s" placeholder="Pencarian" class="flex-1 px-3 text-[0.8vw] xl:text-sm text-slate-600 font-medium bg-transparent outline-none min-w-0" />
             <button type="submit" aria-label="Cari" class="bg-omni-accent hover:bg-omni-accent-hover transition-colors p-[0.6vw] xl:p-2.5 rounded-full text-white shadow-md flex-shrink-0">
@@ -159,7 +191,7 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
 
           <!-- Search Bar -->
           <form method="get" action="<?php echo esc_url(home_url('/')); ?>" class="flex items-center bg-white p-1.5 rounded-full shadow-sm mb-5 border border-omni-border w-full max-w-[340px]">
-            <a href="<?php echo home_url('/harga'); ?>" class="bg-omni-button hover:bg-omni-button-hover text-white px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap">Coba Gratis</a>
+            <a href="<?php echo esc_url($hero_cta_url); ?>" class="bg-omni-button hover:bg-omni-button-hover text-white px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap"><?php echo esc_html($hero_cta_text); ?></a>
             <button type="button" onclick="document.getElementById('demo-modal').classList.remove('hidden')" class="px-2 py-2 text-xs font-semibold text-omni-text-muted hover:bg-slate-50 rounded-full transition-colors shrink-0">Demo</button>
             <input type="text" name="s" placeholder="Pencarian" class="flex-1 px-2 text-xs text-slate-600 font-medium bg-transparent outline-none min-w-0" />
             <button type="submit" aria-label="Cari" class="bg-omni-accent p-2 rounded-full text-white shadow-md shrink-0">
@@ -336,8 +368,8 @@ $trusted_sub = get_post_meta($front_id, 'omni_trusted_sub', true) ?: 'Bergabungl
       <?php echo wpautop($cta_sub); ?>
     </div>
     <div class="flex flex-col sm:flex-row justify-center gap-4">
-      <a href="<?php echo home_url('/harga'); ?>" class="bg-omni-accent text-white hover:bg-omni-accent-hover px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
-        Mulai Uji Coba Gratis
+      <a href="<?php echo esc_url($cta_btn_url); ?>" class="bg-omni-accent text-white hover:bg-omni-accent-hover px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+        <?php echo esc_html($cta_btn_text); ?>
       </a>
       <a href="https://wa.me/6281283835553" target="_blank" rel="noopener noreferrer" class="bg-transparent text-white hover:bg-white/10 border border-white/30 px-8 py-4 rounded-full font-bold text-lg transition-all flex items-center justify-center">
         Hubungi Sales Kami

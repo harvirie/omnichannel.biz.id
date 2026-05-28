@@ -1,3 +1,38 @@
+<?php 
+// Fetch data
+$omni_footer = get_option('omni_editor_footer', []);
+
+// Fallbacks
+$logo_url = !empty($omni_footer['logo_url']) ? $omni_footer['logo_url'] : 'https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_wh_ysccoa.svg';
+$description = $omni_footer['description'] ?? 'Satu layar untuk semua saluran. Tingkatkan kepuasan pelanggan dengan sistem omnichannel terbaik.';
+$columns = !empty($omni_footer['columns']) ? $omni_footer['columns'] : [
+    [
+        'title' => 'Produk',
+        'links' => [
+            ['label' => 'Fitur Utama', 'url' => '/fitur'],
+            ['label' => 'Analitik Data', 'url' => '/analitik'],
+            ['label' => 'Use Case', 'url' => '/use-case'],
+            ['label' => 'Harga', 'url' => '/harga'],
+        ]
+    ],
+    [
+        'title' => 'Perusahaan',
+        'links' => [
+            ['label' => 'Tentang Kami', 'url' => '#'],
+            ['label' => 'Karir', 'url' => '#'],
+            ['label' => 'Hubungi Kami', 'url' => 'https://wa.me/6281283835553'],
+        ]
+    ]
+];
+$socials = !empty($omni_footer['socials']) ? $omni_footer['socials'] : [
+    ['icon' => 'facebook', 'url' => 'https://facebook.com/omniserve', 'label' => 'Facebook OmniServe'],
+    ['icon' => 'x-twitter', 'url' => 'https://twitter.com/omniserve', 'label' => 'Twitter OmniServe'],
+    ['icon' => 'instagram', 'url' => 'https://instagram.com/omniserve', 'label' => 'Instagram OmniServe'],
+    ['icon' => 'linkedin', 'url' => 'https://linkedin.com/company/omniserve', 'label' => 'LinkedIn OmniServe'],
+    ['icon' => 'youtube', 'url' => 'https://youtube.com/@omniserve', 'label' => 'YouTube OmniServe']
+];
+$copyright = $omni_footer['copyright'] ?? 'Theme Design by Harizal.';
+?>
 <!-- Shared Footer -->
 <footer class="bg-omni-dark text-white/70 py-12 border-t border-white/10 mt-auto">
   <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -5,44 +40,39 @@
       <div class="flex items-center mb-4">
         <!-- Logo full untuk latar gelap (footer) -->
         <a href="<?php echo home_url('/'); ?>" aria-label="Beranda OmniServe">
-          <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_wh_ysccoa.svg"
+          <img src="<?php echo esc_url($logo_url); ?>"
                alt="<?php echo esc_attr(get_bloginfo('name') ?: 'OmniServe Logo'); ?>"
                class="h-16 w-auto object-contain"
                loading="lazy">
         </a>
       </div>
-      <p class="max-w-xs text-sm leading-relaxed mb-6">
-        Satu layar untuk semua saluran. Tingkatkan kepuasan pelanggan dengan sistem omnichannel terbaik.
-      </p>
-    </div>
-    <div>
-      <h4 class="text-white font-semibold mb-4">Produk</h4>
-      <ul class="space-y-2 text-sm">
-        <li><a href="<?php echo home_url('/fitur'); ?>" class="hover:text-omni-accent transition-colors">Fitur Utama</a></li>
-        <li><a href="<?php echo home_url('/analitik'); ?>" class="hover:text-omni-accent transition-colors">Analitik Data</a></li>
-        <li><a href="<?php echo home_url('/use-case'); ?>" class="hover:text-omni-accent transition-colors">Use Case</a></li>
-        <li><a href="<?php echo home_url('/harga'); ?>" class="hover:text-omni-accent transition-colors">Harga</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4 class="text-white font-semibold mb-4">Perusahaan</h4>
-      <ul class="space-y-2 text-sm">
-        <li><a href="#" class="hover:text-omni-accent transition-colors">Tentang Kami</a></li>
-        <li><a href="#" class="hover:text-omni-accent transition-colors">Karir</a></li>
-        <li><a href="https://wa.me/6281283835553" target="_blank" rel="noopener noreferrer" class="hover:text-omni-accent transition-colors">Hubungi Kami</a></li>
-      </ul>
-      <h4 class="text-white font-semibold mt-6 mb-4">Ikuti Kami</h4>
-      <div class="flex gap-4">
-        <a href="https://facebook.com/omniserve" target="_blank" rel="noopener noreferrer" aria-label="Facebook OmniServe" class="text-white/70 hover:text-omni-accent transition-colors"><i class="fa-brands fa-facebook text-xl"></i></a>
-        <a href="https://twitter.com/omniserve" target="_blank" rel="noopener noreferrer" aria-label="Twitter OmniServe" class="text-white/70 hover:text-omni-accent transition-colors"><i class="fa-brands fa-x-twitter text-xl"></i></a>
-        <a href="https://instagram.com/omniserve" target="_blank" rel="noopener noreferrer" aria-label="Instagram OmniServe" class="text-white/70 hover:text-omni-accent transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
-        <a href="https://linkedin.com/company/omniserve" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn OmniServe" class="text-white/70 hover:text-omni-accent transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
-        <a href="https://youtube.com/@omniserve" target="_blank" rel="noopener noreferrer" aria-label="YouTube OmniServe" class="text-white/70 hover:text-omni-accent transition-colors"><i class="fa-brands fa-youtube text-xl"></i></a>
+      <div class="max-w-xs text-sm leading-relaxed mb-6 omni-rich-text">
+        <?php echo wpautop($description); ?>
       </div>
     </div>
+    
+    <?php foreach ($columns as $idx => $col): ?>
+    <div>
+      <h4 class="text-white font-semibold mb-4"><?php echo esc_html($col['title']); ?></h4>
+      <ul class="space-y-2 text-sm">
+        <?php foreach (($col['links'] ?? []) as $link): ?>
+        <li><a href="<?php echo esc_url(str_starts_with($link['url'], '/') ? home_url($link['url']) : $link['url']); ?>" class="hover:text-omni-accent transition-colors" <?php echo str_starts_with($link['url'], 'http') ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html($link['label']); ?></a></li>
+        <?php endforeach; ?>
+      </ul>
+      
+      <?php if ($idx === count($columns) - 1 && !empty($socials)): ?>
+      <h4 class="text-white font-semibold mt-6 mb-4">Ikuti Kami</h4>
+      <div class="flex gap-4">
+        <?php foreach ($socials as $soc): ?>
+        <a href="<?php echo esc_url($soc['url']); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr($soc['label']); ?>" class="text-white/70 hover:text-omni-accent transition-colors"><i class="fa-brands fa-<?php echo esc_attr($soc['icon']); ?> text-xl"></i></a>
+        <?php endforeach; ?>
+      </div>
+      <?php endif; ?>
+    </div>
+    <?php endforeach; ?>
   </div>
   <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-white/10 text-sm flex flex-col md:flex-row justify-between items-center text-center gap-3">
-    <p>&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>. Hak Cipta Dilindungi. Theme Design by Harizal.</p>
+    <p>&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>. Hak Cipta Dilindungi. <?php echo esc_html($copyright); ?></p>
     <button onclick="omniConsentShowBanner()" style="
         background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.3);
         color:#D4AF37; padding:6px 14px; border-radius:8px;

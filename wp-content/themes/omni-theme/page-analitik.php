@@ -14,7 +14,39 @@ add_action('wp_head', function() {
     echo '<link rel="preload" as="image" href="' . get_template_directory_uri() . '/assets/img/analitik-hero-updated.webp" type="image/webp">' . "\n";
 }, 5);
 ?>
-<?php get_header(); ?>
+<?php get_header(); 
+
+// Fetch data from Omni Editor
+$omni_analitik = get_option('omni_editor_analitik', []);
+
+// Fallbacks mapping
+$hero_badge = $omni_analitik['hero']['badge'] ?? 'Analitik Komprehensif';
+$hero_title = $omni_analitik['hero']['title'] ?? 'Berhenti Sekadar Merespon.<br /><span class="text-omni-button-hover">Ubah Interaksi Menjadi Data.</span>';
+$hero_sub = $omni_analitik['hero']['subtitle'] ?? 'Pelayanan pelanggan bukan lagi sekadar cost center. Melalui OmniServe, setiap keluhan, pertanyaan, dan saran direkam, dianalisis, dan divisualisasikan.';
+$hero_img = !empty($omni_analitik['hero']['image_url']) ? $omni_analitik['hero']['image_url'] : get_template_directory_uri() . '/assets/img/analitik-hero-updated.png';
+
+$content_title = $omni_analitik['content']['title'] ?? 'Wawasan Real-Time untuk Keputusan Bisnis Cerdas';
+$content_sub = $omni_analitik['content']['subtitle'] ?? 'Platform analitik kami dirancang khusus untuk memantau sentimen pelanggan dan mengukur produktivitas agen secara komprehensif.';
+$content_img = !empty($omni_analitik['content']['image_url']) ? $omni_analitik['content']['image_url'] : get_template_directory_uri() . '/assets/img/analytics-dashboard.webp';
+$content_features = !empty($omni_analitik['content']['features']) ? $omni_analitik['content']['features'] : [
+    ['title' => 'Identifikasi tren keluhan sebelum menjadi krisis'],
+    ['title' => 'Ukur kinerja agen secara objektif dengan metrik akurat'],
+    ['title' => 'Pahami preferensi saluran komunikasi pelanggan Anda'],
+    ['title' => 'Prediksi lonjakan panggilan berdasarkan riwayat data']
+];
+
+$metrics_title = $omni_analitik['metrics']['title'] ?? 'Metrik Utama yang Dipantau';
+$metrics_sub = $omni_analitik['metrics']['subtitle'] ?? 'Segala indikator kinerja kunci (KPI) pusat layanan dalam satu layar.';
+$metrics_items = !empty($omni_analitik['metrics']['items']) ? $omni_analitik['metrics']['items'] : [
+    [ 'title' => 'Customer Satisfaction (CSAT)', 'val' => '98%', 'desc' => 'Tingkat kepuasan rata-rata dari interaksi', 'icon' => 'users' ],
+    [ 'title' => 'First Contact Resolution', 'val' => '85%', 'desc' => 'Persentase masalah yang diselesaikan di kontak pertama', 'icon' => 'check-circle-2' ],
+    [ 'title' => 'Average Handling Time', 'val' => '3.2m', 'desc' => 'Waktu rata-rata penyelesaian masalah pelanggan', 'icon' => 'trending-up' ]
+];
+
+$cta_title = $omni_analitik['cta']['title'] ?? 'Mulai Gunakan Analisis Data Hari Ini';
+$cta_btn = $omni_analitik['cta']['btn_text'] ?? 'Lihat Paket Harga';
+$cta_url = $omni_analitik['cta']['btn_url'] ?? '/harga';
+?>
 
 <!-- CSS inline di dalam #swup agar tetap aktif saat Swup navigation -->
 <style data-page="analitik">
@@ -34,15 +66,14 @@ add_action('wp_head', function() {
     <div class="max-w-7xl mx-auto px-6 text-center relative" style="padding-bottom: 100px; z-index: 10;">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="bar-chart-2" class="h-4 w-4"></i>
-        Analitik Komprehensif
+        <?php echo esc_html($hero_badge); ?>
       </div>
       <h1 class="text-4xl md:text-5xl font-bold text-omni-dark mb-6 leading-tight">
-        Berhenti Sekadar Merespon.<br />
-        <span class="text-omni-button-hover">Ubah Interaksi Menjadi Data.</span>
+        <?php echo $hero_title; ?>
       </h1>
-      <p class="text-omni-text-muted text-lg md:text-xl max-w-2xl mx-auto">
-        Pelayanan pelanggan bukan lagi sekadar cost center. Melalui OmniServe, setiap keluhan, pertanyaan, dan saran direkam, dianalisis, dan divisualisasikan.
-      </p>
+      <div class="text-omni-text-muted text-lg md:text-xl max-w-2xl mx-auto omni-rich-text">
+        <?php echo wpautop($hero_sub); ?>
+      </div>
     </div>
   </div>
     
@@ -58,23 +89,17 @@ add_action('wp_head', function() {
       </svg>
   </div>
 
-  <!-- Hero Illustration — WebP dengan fallback PNG untuk LCP optimal -->
+  <!-- Hero Illustration -->
   <div class="w-full relative hero-illustration-container" style="z-index: 0;">
-    <picture>
-      <source
-        srcset="<?php echo get_template_directory_uri(); ?>/assets/img/analitik-hero-updated.webp"
-        type="image/webp"
-      >
       <img
-        src="<?php echo get_template_directory_uri(); ?>/assets/img/analitik-hero-updated.png"
-        alt="Dashboard Analitik OmniServe — Pantau CSAT, waktu respon agen, volume pesan secara real-time"
+        src="<?php echo esc_url($hero_img); ?>"
+        alt="Dashboard Analitik OmniServe"
         width="1886" height="834"
         class="w-full h-auto object-cover"
         fetchpriority="high"
         loading="eager"
         decoding="async"
       >
-    </picture>
   </div>
 
   <!-- Main Content Area -->
@@ -84,7 +109,7 @@ add_action('wp_head', function() {
         <div class="order-2 lg:order-1 relative">
           <div class="absolute -inset-4 bg-omni-secondary/20 rounded-[2.5rem] transform -rotate-2"></div>
           <img
-            src="<?php echo get_template_directory_uri(); ?>/assets/img/analytics-dashboard.webp"
+            src="<?php echo esc_url($content_img); ?>"
             alt="Data Analytics"
             class="relative rounded-2xl shadow-2xl border border-white/50 object-cover h-[450px] w-full"
           />
@@ -92,27 +117,19 @@ add_action('wp_head', function() {
         
         <div class="order-1 lg:order-2 space-y-8">
           <h2 class="text-3xl font-bold leading-tight text-omni-dark">
-            Wawasan Real-Time untuk Keputusan Bisnis Cerdas
+            <?php echo esc_html($content_title); ?>
           </h2>
-          <p class="text-omni-text-muted text-lg leading-relaxed">
-            Platform analitik kami dirancang khusus untuk memantau sentimen pelanggan dan mengukur produktivitas agen secara komprehensif.
-          </p>
+          <div class="text-omni-text-muted text-lg leading-relaxed omni-rich-text">
+            <?php echo wpautop($content_sub); ?>
+          </div>
           
           <ul class="space-y-4 pt-4">
-            <?php
-              $items = [
-                'Identifikasi tren keluhan sebelum menjadi krisis',
-                'Ukur kinerja agen secara objektif dengan metrik akurat',
-                'Pahami preferensi saluran komunikasi pelanggan Anda',
-                'Prediksi lonjakan panggilan berdasarkan riwayat data'
-              ];
-              foreach ($items as $item) :
-            ?>
+            <?php foreach ($content_features as $item) : ?>
               <li class="flex items-start gap-3 bg-white p-4 rounded-xl shadow-sm border border-omni-border">
                 <div class="bg-omni-light p-1.5 rounded-full mt-0.5 shrink-0">
                   <i data-lucide="check-circle-2" class="h-5 w-5 text-omni-button-hover"></i>
                 </div>
-                <span class="text-omni-dark font-medium"><?php echo esc_html($item); ?></span>
+                <span class="text-omni-dark font-medium"><?php echo esc_html($item['title'] ?? ''); ?></span>
               </li>
             <?php endforeach; ?>
           </ul>
@@ -125,22 +142,22 @@ add_action('wp_head', function() {
   <section class="bg-white py-24 border-t border-omni-border">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold text-omni-dark mb-4">Metrik Utama yang Dipantau</h2>
-        <p class="text-omni-text-muted">Segala indikator kinerja kunci (KPI) pusat layanan dalam satu layar.</p>
+        <h2 class="text-3xl font-bold text-omni-dark mb-4"><?php echo esc_html($metrics_title); ?></h2>
+        <p class="text-omni-text-muted"><?php echo esc_html($metrics_sub); ?></p>
       </div>
       
       <div class="grid md:grid-cols-3 gap-8">
-        <?php
-          $metrics = [
-            [ 'title' => 'Customer Satisfaction (CSAT)', 'val' => '98%', 'desc' => 'Tingkat kepuasan rata-rata dari interaksi', 'icon' => 'users' ],
-            [ 'title' => 'First Contact Resolution', 'val' => '85%', 'desc' => 'Persentase masalah yang diselesaikan di kontak pertama', 'icon' => 'check-circle-2' ],
-            [ 'title' => 'Average Handling Time', 'val' => '3.2m', 'desc' => 'Waktu rata-rata penyelesaian masalah pelanggan', 'icon' => 'trending-up' ]
-          ];
-          foreach ($metrics as $metric) :
-        ?>
+        <?php foreach ($metrics_items as $metric) : ?>
           <div class="bg-omni-light rounded-2xl p-8 border border-omni-border text-center hover:-translate-y-1 transition-transform">
             <div class="bg-omni-accent w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-white shadow-md">
-              <i data-lucide="<?php echo esc_attr($metric['icon']); ?>" class="w-6 h-6"></i>
+              <?php 
+              $icon = $metric['icon'] ?? 'check-circle-2';
+              if (strpos($icon, 'fa-') !== false) {
+                  echo '<i class="text-xl ' . esc_attr($icon) . '"></i>';
+              } else {
+                  echo '<i data-lucide="' . esc_attr($icon) . '" class="w-6 h-6"></i>';
+              }
+              ?>
             </div>
             <h3 class="text-omni-text-muted font-medium mb-2"><?php echo esc_html($metric['title']); ?></h3>
             <div class="text-4xl font-bold text-omni-dark mb-3"><?php echo esc_html($metric['val']); ?></div>
@@ -153,9 +170,9 @@ add_action('wp_head', function() {
   
   <!-- Mini CTA -->
   <section class="bg-omni-secondary py-16 text-center">
-    <h2 class="text-2xl font-bold text-white mb-6">Mulai Gunakan Analisis Data Hari Ini</h2>
-    <a href="<?php echo home_url('/harga'); ?>" class="inline-block bg-omni-accent text-white px-8 py-3 rounded-full font-bold hover:bg-omni-accent-hover transition-colors shadow-lg">
-      Lihat Paket Harga
+    <h2 class="text-2xl font-bold text-white mb-6"><?php echo esc_html($cta_title); ?></h2>
+    <a href="<?php echo esc_url($cta_url); ?>" class="inline-block bg-omni-accent text-white px-8 py-3 rounded-full font-bold hover:bg-omni-accent-hover transition-colors shadow-lg">
+      <?php echo esc_html($cta_btn); ?>
     </a>
   </section>
 </div>
