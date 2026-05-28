@@ -39,7 +39,7 @@
   font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--oe-text);
   background: var(--oe-bg);
-  border-left: 10px solid var(--oe-bg);
+  border-left: 10px solid var(--oe-bg2);
   height: calc(100vh - 32px);
   display: flex;
   flex-direction: column;
