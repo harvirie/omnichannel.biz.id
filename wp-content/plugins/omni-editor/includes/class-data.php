@@ -67,6 +67,10 @@ class OmniEditorData {
     public static function save(string $page, array $data): bool {
         $allowed = ['home','fitur','usecase','analitik','harga','footer'];
         if (!in_array($page, $allowed)) return false;
+        
+        $old_data = get_option(self::OPTION_PREFIX . $page, []);
+        if ($old_data === $data) return true;
+        
         return update_option(self::OPTION_PREFIX . $page, $data, false);
     }
 

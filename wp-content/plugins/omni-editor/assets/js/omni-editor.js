@@ -860,9 +860,26 @@ jQuery(document).ready(function ($) {
         }
     }
 
+    function flushDataInputs() {
+        $panel.find('[data-bind]').each(function() {
+            const $el = $(this);
+            const bindPath = $el.attr('data-bind');
+            if ($el.hasClass('oe-richtext')) {
+                updateDataByPath(bindPath, $el.html());
+            } else if ($el.is(':checkbox')) {
+                updateDataByPath(bindPath, $el.is(':checked'));
+            } else {
+                updateDataByPath(bindPath, $el.val());
+            }
+        });
+    }
+
     function saveCurrentPage(showFeedback = false) {
         if (isSaving) return;
         isSaving = true;
+        
+        flushDataInputs();
+
         
         if (showFeedback) {
             $saveBtn.html('<span class="oe-spinner" style="width:14px;height:14px;border-width:2px;margin-right:6px"></span>Menyimpan...');
