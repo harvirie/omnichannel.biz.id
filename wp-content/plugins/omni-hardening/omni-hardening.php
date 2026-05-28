@@ -365,7 +365,7 @@ $marker_start
 ErrorDocument 403 /index.php?omni_error=403
 
 # Block access to sensitive files
-<FilesMatch "(wp-config\.php|xmlrpc\.php|\.htaccess|wp-config-sample\.php|readme\.html|license\.txt|install\.php)$">
+<FilesMatch "^(wp-config\.php|xmlrpc\.php|\.htaccess|wp-config-sample\.php|readme\.html|license\.txt|install\.php)$">
     Order Allow,Deny
     Deny from all
 </FilesMatch>
