@@ -326,10 +326,9 @@ body.omni-loading { overflow: hidden; }
     document.body.classList.add('omni-loading');
     var loader   = document.getElementById('omni-loader');
     var bar      = document.getElementById('omni-loader-bar');
-    var maxMs    = 5000;   // Maksimal 5 detik
+    var maxMs    = 1500;   // Maksimal 1.5 detik
     var dismissed = false;
 
-    // Use CSS transition instead of requestAnimationFrame for better performance
     setTimeout(function() {
         if (!dismissed) bar.style.transition = 'width ' + maxMs + 'ms linear';
         if (!dismissed) bar.style.width = '100%';
@@ -338,17 +337,19 @@ body.omni-loading { overflow: hidden; }
     function dismissLoader() {
         if (dismissed) return;
         dismissed = true;
-        bar.style.transition = 'width 0.3s linear';
+        bar.style.transition = 'width 0.3s ease';
         bar.style.width = '100%';
         setTimeout(function() {
             loader.classList.add('omni-loader-hidden');
             document.body.classList.remove('omni-loading');
-        }, 300);
+        }, 250);
     }
 
-    // Dismiss saat DOM + resource utama siap
     window.addEventListener('load', dismissLoader);
-    // Fallback: maksimal 5 detik
+    // Dismiss lebih cepat saat DOMContentLoaded juga
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(dismissLoader, 200);
+    });
     setTimeout(dismissLoader, maxMs);
 })();
 </script>
@@ -543,3 +544,97 @@ body.omni-loading { overflow: hidden; }
   }
 ?>
 <main id="swup" class="flex-1 md:pt-32 pt-20 flex flex-col <?php echo esc_attr($transition_class); ?>" data-parallax="<?php echo esc_attr($parallax_data); ?>">
+
+<!-- ===== OMNI NAV ACTIVE STATE + CLICK RIPPLE ===== -->
+<script data-swup-ignore-script>
+(function() {
+    /* ── Update active nav item based on current URL ─────────────── */
+    function updateActiveNav() {
+        var currentPath = window.location.pathname.replace(/^\/|\/$/, '');
+        // Handle root/home
+        var isHome = (currentPath === '' || currentPath === '/');
+
+        document.querySelectorAll('header nav a, nav a').forEach(function(link) {
+            var href = link.getAttribute('href') || '';
+            var linkPath = href.replace(/https?:\/\/[^/]+/, '').replace(/^\/|\/$/, '');
+            var isActive = isHome ? (linkPath === '' || linkPath === '/') : (linkPath !== '' && currentPath.indexOf(linkPath) === 0);
+
+            // Remove existing active classes
+            link.classList.remove('text-omni-accent');
+            link.classList.add('text-white');
+            var indicator = link.querySelector('span');
+            if (indicator) {
+                indicator.classList.remove('w-full', 'opacity-100');
+                indicator.classList.add('w-1', 'opacity-0');
+            }
+
+            if (isActive) {
+                link.classList.add('text-omni-accent');
+                link.classList.remove('text-white');
+                if (indicator) {
+                    indicator.classList.add('w-full', 'opacity-100');
+                    indicator.classList.remove('w-1', 'opacity-0');
+                }
+            }
+        });
+    }
+
+    /* ── Ripple click effect on nav links ─────────────────────────── */
+    function addRippleToNavLinks() {
+        document.querySelectorAll('header nav a').forEach(function(link) {
+            if (link.dataset.rippleReady) return;
+            link.dataset.rippleReady = '1';
+            link.style.position = 'relative';
+            link.style.overflow = 'hidden';
+            link.addEventListener('click', function(e) {
+                var rect = link.getBoundingClientRect();
+                var ripple = document.createElement('span');
+                var size = Math.max(rect.width, rect.height) * 2;
+                ripple.style.cssText = [
+                    'position:absolute',
+                    'border-radius:50%',
+                    'pointer-events:none',
+                    'background:rgba(212,175,55,0.35)',
+                    'width:' + size + 'px',
+                    'height:' + size + 'px',
+                    'left:' + (e.clientX - rect.left - size/2) + 'px',
+                    'top:' + (e.clientY - rect.top - size/2) + 'px',
+                    'transform:scale(0)',
+                    'animation:omniNavRipple 0.55s ease-out forwards',
+                    'z-index:99'
+                ].join(';');
+                link.appendChild(ripple);
+                setTimeout(function() { ripple.remove(); }, 600);
+            });
+        });
+    }
+
+    /* ── Inject keyframe ──────────────────────────────────────────── */
+    if (!document.getElementById('omni-ripple-style')) {
+        var s = document.createElement('style');
+        s.id = 'omni-ripple-style';
+        s.textContent = '@keyframes omniNavRipple { to { transform:scale(1); opacity:0; } }';
+        document.head.appendChild(s);
+    }
+
+    /* ── Run on load and on Swup navigation ───────────────────────── */
+    function boot() {
+        updateActiveNav();
+        addRippleToNavLinks();
+    }
+
+    document.addEventListener('DOMContentLoaded', boot);
+
+    // Hook into Swup page view
+    document.addEventListener('swup:page:view', boot);
+    // Also hook via window._omniSwup if available
+    var swupCheckInterval = setInterval(function() {
+        if (window._omniSwup) {
+            clearInterval(swupCheckInterval);
+            window._omniSwup.hooks.on('page:view', boot);
+        }
+    }, 100);
+    setTimeout(function() { clearInterval(swupCheckInterval); }, 5000);
+})();
+</script>
+<!-- ===== END OMNI NAV ACTIVE STATE ===== -->
