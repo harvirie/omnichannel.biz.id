@@ -151,7 +151,7 @@ html.is-animating:not(.is-leaving) #swup.transition-scale {
 
 /* Layer 2: Abu tua dots (larger spacing) */
 .omni-luma-dot-2 {
-    background-image: radial-gradient(#94a3b8 2px, transparent 2px);
+    background-image: radial-gradient(#94a3b8 4px, transparent 4px);
     background-size: 48px 48px;
     opacity: 0.8;
 }
