@@ -28,12 +28,9 @@ $hero_img = !empty($omni_analitik['hero']['image_url']) ? $omni_analitik['hero']
 $content_title = $omni_analitik['content']['title'] ?? 'Wawasan Real-Time untuk Keputusan Bisnis Cerdas';
 $content_sub = $omni_analitik['content']['subtitle'] ?? 'Platform analitik kami dirancang khusus untuk memantau sentimen pelanggan dan mengukur produktivitas agen secara komprehensif.';
 $content_img = !empty($omni_analitik['content']['image_url']) ? $omni_analitik['content']['image_url'] : get_template_directory_uri() . '/assets/img/analytics-dashboard.webp';
-$content_features = !empty($omni_analitik['content']['features']) ? $omni_analitik['content']['features'] : [
-    ['title' => 'Identifikasi tren keluhan sebelum menjadi krisis'],
-    ['title' => 'Ukur kinerja agen secara objektif dengan metrik akurat'],
-    ['title' => 'Pahami preferensi saluran komunikasi pelanggan Anda'],
-    ['title' => 'Prediksi lonjakan panggilan berdasarkan riwayat data']
-];
+$content_items = !empty($omni_analitik['content']['items']) ? $omni_analitik['content']['items'] : (
+    class_exists('OmniEditorData') ? OmniEditorData::defaults('analitik')['content']['items'] : []
+);
 
 $metrics_title = $omni_analitik['metrics']['title'] ?? 'Metrik Utama yang Dipantau';
 $metrics_sub = $omni_analitik['metrics']['subtitle'] ?? 'Segala indikator kinerja kunci (KPI) pusat layanan dalam satu layar.';
@@ -124,12 +121,12 @@ $cta_url = $omni_analitik['cta']['btn_url'] ?? '/harga';
           </div>
           
           <ul class="space-y-4 pt-4">
-            <?php foreach ($content_features as $item) : ?>
+            <?php foreach ($content_items as $item) : ?>
               <li class="flex items-start gap-3 bg-white p-4 rounded-xl shadow-sm border border-omni-border">
                 <div class="bg-omni-light p-1.5 rounded-full mt-0.5 shrink-0">
                   <i data-lucide="check-circle-2" class="h-5 w-5 text-omni-button-hover"></i>
                 </div>
-                <span class="text-omni-dark font-medium"><?php echo esc_html($item['title'] ?? ''); ?></span>
+                <span class="text-omni-dark font-medium"><?php echo esc_html($item); ?></span>
               </li>
             <?php endforeach; ?>
           </ul>

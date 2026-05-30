@@ -95,35 +95,37 @@ $cta_url = $omni_harga['cta']['btn_url'] ?? 'https://wa.me/6281283835553';
 
       <!-- Dynamic Packages -->
       <?php 
-      if (empty($packages)) {
-          if (class_exists('OmniEditorData')) {
-              $packages = OmniEditorData::defaults('harga')['packages'];
-          }
-      }
+      $packages = [];
+      $pkg_std = $omni_harga['paket_standard'] ?? (class_exists('OmniEditorData') ? OmniEditorData::defaults('harga')['paket_standard'] : null);
+      $pkg_pro = $omni_harga['paket_pro'] ?? (class_exists('OmniEditorData') ? OmniEditorData::defaults('harga')['paket_pro'] : null);
+      
+      if ($pkg_std) $packages[] = $pkg_std;
+      if ($pkg_pro) $packages[] = $pkg_pro;
       ?>
 
-      <?php foreach ($packages as $pkg): 
-          $is_dark = ($pkg['style'] ?? 'light') === 'dark';
+      <?php foreach ($packages as $index => $pkg): 
+          $is_dark = $index === 1; // Second package (Pro) is dark
           
           $bg_class = $is_dark ? 'bg-omni-dark border-2 border-omni-accent shadow-2xl hover:shadow-[0_30px_80px_rgba(212,175,55,0.3)]' : 'bg-white border border-omni-border shadow-lg hover:shadow-2xl';
           $extra_style = $is_dark ? 'filter: drop-shadow(-6px 6px 0px #D4AF37);' : '';
           
           $badge_bg = $is_dark ? 'bg-white/10 text-omni-accent' : 'bg-omni-light text-omni-button-hover';
           $title_color = $is_dark ? 'text-white' : 'text-omni-dark';
-          $desc_color = $is_dark ? 'text-white/70' : 'text-omni-text-muted';
           
           $price_box = $is_dark ? 'bg-white/10 border border-white/20' : 'bg-omni-light';
           $price_monthly_color = $is_dark ? 'text-omni-accent' : 'text-omni-dark';
           $price_total_color = $is_dark ? 'text-omni-accent' : 'text-omni-secondary';
           
           $btn_class = $is_dark ? 'bg-omni-accent hover:bg-omni-accent-hover text-white shadow-lg hover:shadow-omni-accent/50' : 'bg-omni-light text-omni-button-hover hover:bg-omni-border border border-omni-border';
+          $btn_text = $is_dark ? 'Mulai Sekarang' : 'Konsultasi Gratis';
+          $btn_url = '/?demo=1';
       ?>
       <div class="rounded-3xl p-8 flex flex-col relative group hover:-translate-y-1 transition-all duration-300 <?php echo $bg_class; ?>" style="<?php echo $extra_style; ?>">
         
-        <?php if (!empty($pkg['is_popular'])): ?>
+        <?php if (!empty($pkg['badge'])): ?>
         <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-omni-accent text-white px-5 py-1.5 rounded-full text-sm font-bold shadow-lg whitespace-nowrap flex items-center gap-2">
           <i data-lucide="star" class="h-3.5 w-3.5 fill-white"></i>
-          Paling Direkomendasikan
+          <?php echo esc_html($pkg['badge']); ?>
         </div>
         <div class="mt-2"></div>
         <?php endif; ?>
@@ -131,22 +133,19 @@ $cta_url = $omni_harga['cta']['btn_url'] ?? 'https://wa.me/6281283835553';
         <div class="mb-6">
           <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold mb-4 <?php echo $badge_bg; ?>">
             <i data-lucide="<?php echo $is_dark ? 'zap' : 'layers'; ?>" class="h-3.5 w-3.5"></i>
-            <?php echo $pkg['badge']; ?>
+            <?php echo $is_dark ? 'Professional Plus' : 'Standard'; ?>
           </div>
-          <h2 class="text-3xl font-extrabold mb-2 <?php echo $title_color; ?>"><?php echo $pkg['title']; ?></h2>
-          <div class="text-sm leading-relaxed omni-rich-text <?php echo $desc_color; ?>">
-            <?php echo wpautop($pkg['description']); ?>
-          </div>
+          <h2 class="text-3xl font-extrabold mb-2 <?php echo $title_color; ?>"><?php echo esc_html($pkg['name'] ?? ''); ?></h2>
         </div>
 
         <!-- Price -->
         <div class="rounded-2xl p-5 mb-6 <?php echo $price_box; ?>">
           <div class="flex items-end gap-2 mb-1">
-            <span class="text-3xl md:text-4xl font-extrabold <?php echo $price_monthly_color; ?>"><?php echo $pkg['price_monthly']; ?></span>
-            <span class="font-medium mb-1 <?php echo $is_dark ? 'text-white/70' : 'text-omni-text-muted'; ?>">/Bulan*</span>
+            <span class="text-3xl md:text-4xl font-extrabold <?php echo $price_monthly_color; ?>"><?php echo esc_html($pkg['price'] ?? ''); ?></span>
+            <span class="font-medium mb-1 <?php echo $is_dark ? 'text-white/70' : 'text-omni-text-muted'; ?>"><?php echo esc_html($pkg['price_unit'] ?? ''); ?></span>
           </div>
-          <p class="text-sm font-semibold <?php echo $price_total_color; ?>"><?php echo $pkg['price_total']; ?></p>
-          <p class="text-xs mt-1 <?php echo $is_dark ? 'text-white/60' : 'text-omni-text-muted'; ?>"><?php echo $pkg['price_note']; ?></p>
+          <p class="text-sm font-semibold <?php echo $price_total_color; ?>"><?php echo esc_html($pkg['total'] ?? ''); ?></p>
+          <p class="text-xs mt-1 <?php echo $is_dark ? 'text-white/60' : 'text-omni-text-muted'; ?>"><?php echo esc_html($pkg['duration'] ?? ''); ?></p>
         </div>
 
         <!-- Features Table -->
@@ -186,10 +185,10 @@ $cta_url = $omni_harga['cta']['btn_url'] ?? 'https://wa.me/6281283835553';
           <?php endforeach; ?>
         </ul>
 
-        <a href="<?php echo esc_url($pkg['btn_url']); ?>" <?php if(strpos($pkg['btn_url'], 'demo=1')!==false) echo 'onclick="document.getElementById(\'demo-modal\')?.classList.remove(\'hidden\'); return false;"'; ?>
+        <a href="<?php echo esc_url($btn_url); ?>" <?php if(strpos($btn_url, 'demo=1')!==false) echo 'onclick="document.getElementById(\'demo-modal\')?.classList.remove(\'hidden\'); return false;"'; ?>
            class="w-full py-4 rounded-xl font-bold text-center transition-all flex items-center justify-center gap-2 <?php echo $btn_class; ?>">
           <i data-lucide="arrow-right" class="h-5 w-5"></i>
-          <?php echo $pkg['btn_text']; ?>
+          <?php echo esc_html($btn_text); ?>
         </a>
       </div>
       <?php endforeach; ?>
