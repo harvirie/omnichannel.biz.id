@@ -61,7 +61,7 @@ jQuery(document).ready(function ($) {
             
             // Update preview URL
             let previewUrl = config.pages[currentPage] || config.siteUrl;
-            previewUrl += (previewUrl.indexOf('?') !== -1 ? '&' : '?') + 'omni_preview=1';
+            previewUrl += (previewUrl.indexOf('?') !== -1 ? '&' : '?') + 'omni_preview=1&_t=' + new Date().getTime();
             $('#oe-preview-url').text(previewUrl);
             $('#oe-preview-open').attr('href', previewUrl);
             
@@ -131,7 +131,15 @@ jQuery(document).ready(function ($) {
     }
     
     function refreshPreview() {
-        $previewIframe.attr('src', $previewIframe.attr('src'));
+        let currentUrl = $previewIframe.attr('src');
+        if (!currentUrl) return;
+        const newTime = new Date().getTime();
+        if (currentUrl.indexOf('_t=') !== -1) {
+            currentUrl = currentUrl.replace(/_t=[0-9]+/, '_t=' + newTime);
+        } else {
+            currentUrl += (currentUrl.indexOf('?') !== -1 ? '&' : '?') + '_t=' + newTime;
+        }
+        $previewIframe.attr('src', currentUrl);
         showToast('Preview direfresh', 'info');
     }
 
