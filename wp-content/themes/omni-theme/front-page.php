@@ -49,8 +49,22 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
   @media (min-width: 768px) {
     .hero-desktop-min-h { min-height: clamp(600px, calc(100vh - 6rem), 100vh); }
   }
+  
+  /* Mobile (0 - 767px) */
   @media (max-width: 767px) {
+    :root { --mob-offset: 75vw; }
     .mobile-scale-w { width: 400vw !important; left: -75vw !important; }
+  }
+
+  /* Tablet Override (768px - 1023px) */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    :root { --mob-offset: 30vw; }
+    /* Override md:w-full and md:left-0 */
+    .mobile-scale-w { width: 220vw !important; left: -30vw !important; }
+    /* Force mobile content to show */
+    .tablet-force-show { display: flex !important; }
+    /* Force desktop content to hide */
+    .tablet-force-hide { display: none !important; }
   }
 </style>
 <section class="p-4 pb-0 md:p-6 bg-omni-secondary flex flex-col justify-center relative flex-1 overflow-x-hidden hero-desktop-min-h">
@@ -88,7 +102,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
         </svg>
 
         <!-- Inner Image Container (Desktop) -->
-        <div class="hidden md:block absolute z-10 rounded-[2.5vw] overflow-hidden shadow-2xl" style="top: 17.55%; right: 4.5%; bottom: 11.45%; width: 43%;">
+        <div class="hidden md:block tablet-force-hide absolute z-10 rounded-[2.5vw] overflow-hidden shadow-2xl" style="top: 17.55%; right: 4.5%; bottom: 11.45%; width: 43%;">
           <video src="https://res.cloudinary.com/dtxwwevxl/video/upload/q_auto:low,f_auto/v1778211855/video_hero_wkvc4s.mp4" poster="https://res.cloudinary.com/dtxwwevxl/video/upload/q_auto:low,f_auto/v1778211855/video_hero_wkvc4s.jpg" class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline preload="auto" style="will-change: transform;"></video>
           <div class="absolute inset-0 bg-gradient-to-t from-omni-dark/90 via-omni-dark/20 to-transparent"></div>
           
@@ -129,7 +143,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
         </div>
 
         <!-- Left Content (Desktop) -->
-        <div class="hidden md:flex absolute top-[7%] left-[5%] w-[38%] z-20 flex-col">
+        <div class="hidden md:flex tablet-force-hide absolute top-[7%] left-[5%] w-[38%] z-20 flex-col">
           <div class="flex items-center mb-[2.2vw] xl:mb-8">
             <a href="<?php echo home_url('/'); ?>" aria-label="Beranda OmniServe">
               <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_dark_ymby0d.svg"
@@ -170,7 +184,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
         </div>
 
         <!-- Mobile Content -->
-        <div class="flex md:hidden relative z-20 flex-col px-6 pt-8 pb-12" style="width: 100vw; margin-left: 75vw;">
+        <div class="flex md:hidden tablet-force-show relative z-20 flex-col px-6 pt-8 pb-12" style="width: 100vw; margin-left: var(--mob-offset, 75vw);">
 
           <a href="<?php echo home_url('/'); ?>" class="block" aria-label="Beranda OmniServe" style="margin-top: -10px; margin-left: -10px; margin-bottom: 20px;">
             <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg"
@@ -248,7 +262,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
         </svg>
 
         <!-- Desktop Bottom Card Content -->
-        <div class="hidden md:flex absolute inset-0 z-10 items-center justify-between px-[6%]">
+        <div class="hidden md:flex tablet-force-hide absolute inset-0 z-10 items-center justify-between px-[6%]">
           <div class="text-white">
             <h2 class="text-[2.5vw] xl:text-5xl mb-[1.38vw] xl:mb-5 text-omni-light leading-tight">
               <?php echo $integration_title; ?>
@@ -282,7 +296,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
         </div>
 
         <!-- Mobile Bottom Card Content -->
-        <div class="flex md:hidden absolute top-[15%] z-10 flex-col justify-center px-6 -translate-y-[10px] -translate-x-[20px]" style="width: 100vw; left: 75vw; height: 85%;">
+        <div class="flex md:hidden tablet-force-show absolute top-[15%] z-10 flex-col justify-center px-6 -translate-y-[10px] -translate-x-[20px]" style="width: 100vw; left: var(--mob-offset, 75vw); height: 85%;">
           <div class="text-white mb-5">
             <h2 class="text-3xl mb-3 text-omni-light leading-tight">
               <?php echo $integration_title; ?>
