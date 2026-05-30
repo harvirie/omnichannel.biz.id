@@ -80,22 +80,12 @@ function omni_optimizer_minify_and_cache($html) {
         return $html;
     }
 
-    // Minify HTML (hapus spasi, tab, newlines antar tag)
-    $search = array(
-        '/\>[^\S ]+/s',     // strip whitespaces after tags, except space
-        '/[^\S ]+\</s',     // strip whitespaces before tags, except space
-        '/(\s)+/s',         // shorten multiple whitespace sequences
-        '/<!--(.|\s)*?-->/' // Remove HTML comments
-    );
-    $replace = array('>', '<', '\\1', '');
-    $minified = preg_replace($search, $replace, $html);
-
-    // Pastikan tidak menghapus komentar penting seperti IE conditionals atau Swup ignores (kalau ada)
-    // RegExp di atas menghapus semua komentar. Jika butuh pengecualian, bisa disesuaikan.
-    // Tapi untuk OmniServe, aman.
+    // Minification regex sering merusak inline JS (terutama jika ada // komentar JS atau kurang titik koma)
+    // Karena Cache statis sudah sangat cepat, kita hindari minifikasi ekstrim untuk menjaga stabilitas.
+    $minified = $html;
 
     // Tambahkan signature di bawah
-    $minified .= "\n<!-- Omni Optimizer: Cached & Minified -->";
+    $minified .= "\n<!-- Omni Optimizer: Cached -->";
 
     // Simpan ke file cache
     if (!file_exists(OMNI_OPTIMIZER_CACHE_DIR)) {
