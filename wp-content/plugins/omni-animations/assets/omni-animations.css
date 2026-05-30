@@ -1,48 +1,46 @@
 /* =====================================================
-   Omni Animations CSS — v3.0
+   Omni Animations CSS — v4.0.0
    Swup page transitions + GSAP Scroll Reveal
+   
+   v4.0: Removed Luma Dots CSS entirely.
+         Removed blur() from all Swup transitions (GPU expensive).
+         Removed global will-change on headings.
    ===================================================== */
 
-/* ── GPU-accelerated base: applied always ─────────── */
+/* ── GPU-accelerated base ─────────────────────────── */
 #swup {
     transition:
-        opacity 0.25s cubic-bezier(0.25, 0.1, 0.25, 1),
-        transform 0.25s cubic-bezier(0.25, 0.1, 0.25, 1),
-        filter 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
-    will-change: opacity, transform, filter;
+        opacity 0.22s cubic-bezier(0.25, 0.1, 0.25, 1),
+        transform 0.22s cubic-bezier(0.25, 0.1, 0.25, 1);
+    will-change: opacity, transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
 }
 
 /* ══════════════════════════════════════════════════
-   LEAVING — page dims & blurs (wait for server)
+   LEAVING — page dims (NO blur — too expensive on mobile GPU)
    ══════════════════════════════════════════════════ */
 html.is-animating.is-leaving #swup {
     transition:
-        opacity 0.2s ease,
-        transform 0.2s ease,
-        filter 0.2s ease !important;
+        opacity 0.18s ease,
+        transform 0.18s ease !important;
 }
 
 html.is-animating.is-leaving #swup.transition-fade {
-    opacity: 0.4;
-    filter: blur(4px);
-    transform: scale(0.98);
+    opacity: 0.3;
+    transform: scale(0.99);
 }
 html.is-animating.is-leaving #swup.transition-slide_up {
-    opacity: 0.4;
-    filter: blur(4px);
-    transform: translateY(-15px) scale(0.98);
+    opacity: 0.3;
+    transform: translateY(-12px) scale(0.99);
 }
 html.is-animating.is-leaving #swup.transition-slide_down {
-    opacity: 0.4;
-    filter: blur(4px);
-    transform: translateY(15px) scale(0.98);
+    opacity: 0.3;
+    transform: translateY(12px) scale(0.99);
 }
 html.is-animating.is-leaving #swup.transition-scale {
-    opacity: 0.4;
-    filter: blur(4px);
-    transform: scale(0.95);
+    opacity: 0.3;
+    transform: scale(0.96);
 }
 
 /* ══════════════════════════════════════════════════
@@ -53,47 +51,23 @@ html.is-animating:not(.is-leaving) #swup {
 }
 
 html.is-animating:not(.is-leaving) #swup.transition-fade {
-    opacity: 0.2;
-    filter: blur(4px);
-    transform: scale(1.02);
+    opacity: 0.15;
+    transform: scale(1.01);
 }
 html.is-animating:not(.is-leaving) #swup.transition-slide_up {
-    opacity: 0.2;
-    filter: blur(4px);
-    transform: translateY(15px) scale(1.02);
+    opacity: 0.15;
+    transform: translateY(12px) scale(1.01);
 }
 html.is-animating:not(.is-leaving) #swup.transition-slide_down {
-    opacity: 0.2;
-    filter: blur(4px);
-    transform: translateY(-15px) scale(1.02);
+    opacity: 0.15;
+    transform: translateY(-12px) scale(1.01);
 }
 html.is-animating:not(.is-leaving) #swup.transition-scale {
-    opacity: 0.2;
-    filter: blur(4px);
-    transform: scale(1.05);
+    opacity: 0.15;
+    transform: scale(1.04);
 }
 
-/* ══════════════════════════════════════════════════
-   GSAP SCROLL REVEAL — Smooth bounce-up prep
-   GSAP sets opacity/transform via inline styles.
-   These classes are here for reference & reset safety.
-   ══════════════════════════════════════════════════ */
-
-/* Ensure GSAP-targeted elements don't flash before JS runs */
-#swup section h1,
-#swup section h2,
-#swup section h3 {
-    will-change: transform, opacity;
-}
-
-/* Prevent flash of un-animated content on very fast connections */
-#swup section.py-20 .max-w-4xl,
-#swup section.py-24 .text-center,
-#swup section.py-16 .max-w-5xl {
-    backface-visibility: hidden;
-}
-
-/* ── Progress bar overlay for visual feedback ─────── */
+/* ── Progress bar ─────────────────────────────────── */
 #omni-page-progress {
     position: fixed;
     top: 0;
@@ -116,112 +90,9 @@ html.is-animating:not(.is-leaving) #swup.transition-scale {
     transition: width 0.1s ease, opacity 0.3s ease 0.1s;
 }
 
-/* ─────────────────────────────────────────────────────────────
-   LUMA DOTS BACKGROUND
-   ───────────────────────────────────────────────────────────── */
-.omni-luma-dots {
-    position: relative;
-    background-color: #f1f5f9; /* abu sangat muda */
-    z-index: 1;
-}
-
-.omni-luma-dots-layer {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-    overflow: hidden;
-    /* Soft overall fade at the edges so it blends into the background */
-    mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 90%);
-    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 90%);
-}
-
-.omni-luma-dot-1,
-.omni-luma-dot-2,
-.omni-luma-dot-3 {
-    position: absolute;
-    inset: -200px;
-    background-repeat: repeat;
-    background-size: 16px 16px;
-    background-position: 0 0;
-    
-    /* Hardware acceleration & Performance */
-    will-change: background-position;
-    transform: translateZ(0);
+/* ── Ensure GSAP-targeted elements don't flash ────── */
+#swup section h1,
+#swup section h2 {
+    /* No global will-change here — GSAP sets it per-element during animation only */
     backface-visibility: hidden;
-    
-    /* Auto-pause when off-screen */
-    animation-play-state: paused;
-}
-
-/* Run animation only when visible */
-.omni-luma-dots.is-visible .omni-luma-dot-1,
-.omni-luma-dots.is-visible .omni-luma-dot-2,
-.omni-luma-dots.is-visible .omni-luma-dot-3 {
-    animation-play-state: running;
-}
-
-/* Layer 1: Palung (Trough) - Abu Tua, Titik Kecil */
-.omni-luma-dot-1 {
-    background-image: radial-gradient(#94a3b8 1.5px, transparent 1.5px);
-    opacity: 0.7;
-    animation: luma-bg-drift-1 6s linear infinite;
-}
-
-/* Layer 2: Transisi - Abu Muda, Titik Sedang */
-.omni-luma-dot-2 {
-    background-image: radial-gradient(#cbd5e1 3px, transparent 3px);
-    mask-image: 
-        radial-gradient(circle at 25% 25%, black 10%, transparent 45%),
-        radial-gradient(circle at 75% 75%, black 10%, transparent 45%),
-        radial-gradient(circle at 75% 25%, black 10%, transparent 45%),
-        radial-gradient(circle at 25% 75%, black 10%, transparent 45%);
-    mask-size: 800px 800px;
-    -webkit-mask-image: 
-        radial-gradient(circle at 25% 25%, black 10%, transparent 45%),
-        radial-gradient(circle at 75% 75%, black 10%, transparent 45%),
-        radial-gradient(circle at 75% 25%, black 10%, transparent 45%),
-        radial-gradient(circle at 25% 75%, black 10%, transparent 45%);
-    -webkit-mask-size: 800px 800px;
-    animation: 
-        luma-bg-drift-2 8s linear infinite,
-        luma-mask-wave-2 20s linear infinite;
-}
-
-/* Layer 3: Puncak (Crest) - Abu Lebih Muda, Titik Besar */
-.omni-luma-dot-3 {
-    background-image: radial-gradient(#e2e8f0 4.5px, transparent 4.5px);
-    mask-image: 
-        radial-gradient(circle at 25% 25%, black 0%, transparent 25%),
-        radial-gradient(circle at 75% 75%, black 0%, transparent 25%),
-        radial-gradient(circle at 75% 25%, black 0%, transparent 25%),
-        radial-gradient(circle at 25% 75%, black 0%, transparent 25%);
-    mask-size: 800px 800px;
-    -webkit-mask-image: 
-        radial-gradient(circle at 25% 25%, black 0%, transparent 25%),
-        radial-gradient(circle at 75% 75%, black 0%, transparent 25%),
-        radial-gradient(circle at 75% 25%, black 0%, transparent 25%),
-        radial-gradient(circle at 25% 75%, black 0%, transparent 25%);
-    -webkit-mask-size: 800px 800px;
-    animation: 
-        luma-bg-drift-3 10s linear infinite,
-        luma-mask-wave-3 15s linear infinite;
-}
-
-/* --- Pure CSS Keyframes (GPU Accelerated) --- */
-@keyframes luma-bg-drift-1 { 100% { background-position: 16px 16px; } }
-@keyframes luma-bg-drift-2 { 100% { background-position: 16px -16px; } }
-@keyframes luma-bg-drift-3 { 100% { background-position: -16px 16px; } }
-
-@keyframes luma-mask-wave-2 {
-    100% {
-        mask-position: 800px 800px;
-        -webkit-mask-position: 800px 800px;
-    }
-}
-@keyframes luma-mask-wave-3 {
-    100% {
-        mask-position: -800px 800px;
-        -webkit-mask-position: -800px 800px;
-    }
 }

@@ -73,7 +73,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
     .tablet-landscape-aspect { aspect-ratio: 2000 / 1400 !important; }
   }
 </style>
-<section class="p-4 pb-0 md:p-6 bg-omni-secondary omni-luma-dots flex flex-col justify-center relative flex-1 overflow-x-hidden hero-desktop-min-h">
+<section class="p-4 pb-0 md:p-6 bg-omni-secondary flex flex-col justify-center relative flex-1 overflow-x-hidden hero-desktop-min-h">
   <div class="relative w-full max-w-[1400px] mx-auto flex flex-col items-center justify-center pt-8 lg:pt-0">
     
     <!-- Responsive Hero (Desktop & Mobile) -->

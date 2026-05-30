@@ -298,11 +298,8 @@
 
 <style>
 #omni-loader-logo {
-    animation: omniLogoPulse 3s ease-in-out infinite;
-}
-@keyframes omniLogoPulse {
-    0%, 100% { filter: drop-shadow(0 0 8px rgba(212,175,55,0.5)); }
-    50%       { filter: drop-shadow(0 0 22px rgba(212,175,55,0.95)); }
+    /* Static — no pulse animation to save CPU during initial load */
+    filter: drop-shadow(0 0 10px rgba(212,175,55,0.6));
 }
 #omni-loader.omni-loader-hidden {
     opacity: 0 !important;
@@ -349,7 +346,7 @@ body.omni-loading { overflow: hidden; }
 
 
 <!-- Mobile Navbar -->
-<nav class="md:hidden fixed top-0 w-full z-40 border-b border-white/10 shadow-md" style="background-color: #0F172A; will-change: transform;">
+<nav class="md:hidden fixed top-0 w-full z-40 border-b border-white/10 shadow-md" style="background-color: #0F172A;">
   <div class="px-4">
     <div class="flex justify-between items-center h-20">
       <a href="<?php echo home_url('/'); ?>" aria-label="Beranda OmniServe" class="flex items-center">
@@ -438,7 +435,7 @@ body.omni-loading { overflow: hidden; }
 
 <!-- Desktop & Tablet Header Wrapper (Floating Rounded Square) -->
 <div class="hidden md:flex fixed top-6 left-0 w-full z-50 justify-center pointer-events-none px-4">
-  <header class="w-full max-w-[1100px] pointer-events-auto transition-shadow duration-300 border border-white/10 shadow-2xl rounded-[2rem]" style="background-color: #0F172A; will-change: transform;">
+  <header class="w-full max-w-[1100px] pointer-events-auto transition-shadow duration-300 border border-white/10 shadow-2xl rounded-[2rem]" style="background-color: #0F172A;">
     <div class="px-6 h-20 flex justify-between items-center">
       <!-- Logo -->
       <div class="w-1/4">
@@ -517,21 +514,15 @@ body.omni-loading { overflow: hidden; }
 </div>
 
 <?php 
-  // Fetch animation settings from post meta
+  // Fetch page transition settings
   $transition_class = 'transition-fade'; // default
-  $parallax_data = 'no';
   
   if (is_singular()) {
       $enable_trans = get_post_meta(get_the_ID(), '_omni_enable_transitions', true);
       $trans_type = get_post_meta(get_the_ID(), '_omni_transition_type', true);
-      $enable_parallax = get_post_meta(get_the_ID(), '_omni_enable_parallax', true);
       
       if ($enable_trans === 'yes' && !empty($trans_type) && $trans_type !== 'none') {
           $transition_class = 'transition-' . $trans_type;
-      }
-      
-      if ($enable_parallax === 'yes') {
-          $parallax_data = 'yes';
       }
   }
 ?>
@@ -630,4 +621,4 @@ body.omni-loading { overflow: hidden; }
 })();
 </script>
 <!-- ===== END OMNI NAV ACTIVE STATE ===== -->
-<main id="swup" class="flex-1 md:pt-32 pt-20 flex flex-col <?php echo esc_attr($transition_class); ?> overflow-x-hidden" data-parallax="<?php echo esc_attr($parallax_data); ?>">
+<main id="swup" class="flex-1 md:pt-32 pt-20 flex flex-col <?php echo esc_attr($transition_class); ?> overflow-x-hidden">
