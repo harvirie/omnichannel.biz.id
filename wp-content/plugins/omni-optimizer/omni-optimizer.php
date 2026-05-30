@@ -12,7 +12,9 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('OMNI_OPTIMIZER_CACHE_DIR', WP_CONTENT_DIR . '/cache/omni-optimizer');
+error_log('OMNI OPTIMIZER LOADED!');
+
+define('OMNI_OPTIMIZER_CACHE_DIR', WP_CONTENT_DIR . '/uploads/omni-optimizer');
 
 // 1. BUAT FOLDER CACHE JIKA BELUM ADA
 register_activation_hook(__FILE__, 'omni_optimizer_activate');
