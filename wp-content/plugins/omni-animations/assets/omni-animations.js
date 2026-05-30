@@ -628,7 +628,7 @@
             layer.appendChild(dot2);
             container.insertBefore(layer, container.firstChild);
 
-            // GSAP Animations
+            // GSAP Animations - Continuous slow drifting
             gsap.to(dot1, {
                 backgroundPosition: "32px 32px",
                 duration: 2.5,
@@ -643,22 +643,21 @@
                 repeat: -1
             });
 
-            gsap.to(dot1, {
-                opacity: 0.5,
-                duration: 1.5,
-                ease: "sine.inOut",
-                yoyo: true,
-                repeat: -1
-            });
-            
-            gsap.to(dot2, {
-                opacity: 0.35,
-                duration: 2.2,
-                ease: "sine.inOut",
-                yoyo: true,
-                repeat: -1,
-                delay: 0.5
-            });
+            // GSAP Animations - Diagonal wave (mask movement) instead of opacity breathing
+            gsap.fromTo(layer, 
+                { 
+                    maskPosition: "0% 0%", 
+                    webkitMaskPosition: "0% 0%" 
+                },
+                {
+                    maskPosition: "100% 100%",
+                    webkitMaskPosition: "100% 100%",
+                    duration: 6,
+                    ease: "sine.inOut",
+                    yoyo: true,
+                    repeat: -1
+                }
+            );
         });
     }
 
