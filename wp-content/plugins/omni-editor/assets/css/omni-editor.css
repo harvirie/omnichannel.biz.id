@@ -220,7 +220,7 @@
   border-right: 1px solid var(--oe-border);
   display: flex;
   flex-direction: column;
-  padding: 16px 0;
+  padding: 20px;
   flex-shrink: 0;
   overflow-y: auto;
 }
@@ -230,8 +230,8 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--oe-muted);
-  padding: 0 28px 8px;
+  color: #ffffff;
+  padding: 0 0 12px;
 }
 
 .oe-sidebar-divider {
@@ -248,11 +248,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 2px 16px;
+  margin: 2px 0;
   padding: 9px 12px;
   font-size: 13px;
   font-weight: 500;
-  color: var(--oe-muted);
+  color: #ffffff;
   cursor: pointer;
   border-radius: 8px;
   transition: all 0.15s ease;
@@ -277,7 +277,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  padding: 0 28px 12px;
+  padding: 0 0 12px;
   align-items: center;
 }
 
@@ -305,7 +305,7 @@
 .oe-save-status {
   font-size: 11px;
   color: var(--oe-muted);
-  padding: 0 28px;
+  padding: 0;
   margin-top: auto;
 }
 
