@@ -230,7 +230,7 @@
     ?>
     <?php wp_head(); ?>
 </head>
-<body <?php body_class('min-h-screen ' . (is_front_page() ? 'bg-omni-secondary' : 'bg-white') . ' flex flex-col font-sans text-slate-900 overflow-x-hidden'); ?>>
+<body <?php body_class('min-h-screen ' . (is_front_page() ? 'bg-omni-secondary' : 'bg-white') . ' flex flex-col font-sans text-slate-900'); ?>>
 <?php wp_body_open(); ?>
 
 <!-- ===== OMNI LOADING SCREEN ===== -->
@@ -630,4 +630,4 @@ body.omni-loading { overflow: hidden; }
 })();
 </script>
 <!-- ===== END OMNI NAV ACTIVE STATE ===== -->
-<main id="swup" class="flex-1 md:pt-32 pt-20 flex flex-col <?php echo esc_attr($transition_class); ?>" data-parallax="<?php echo esc_attr($parallax_data); ?>">
+<main id="swup" class="flex-1 md:pt-32 pt-20 flex flex-col <?php echo esc_attr($transition_class); ?> overflow-x-hidden" data-parallax="<?php echo esc_attr($parallax_data); ?>">

@@ -554,17 +554,20 @@
         var container = document.getElementById('swup');
         if (!container || container.getAttribute('data-parallax') !== 'yes') return;
 
-        Array.from(container.querySelectorAll('img')).forEach(function (img) {
-            if (img.closest('.hero-illustration-container')) return;
-            function apply() {
-                if (img.clientHeight > 80) {
-                    gsap.to(img, {
-                        y: -40, ease: 'none',
-                        scrollTrigger: { trigger: img, start: 'top bottom', end: 'bottom top', scrub: 0.8 }
-                    });
+        var mmParallax = gsap.matchMedia();
+        mmParallax.add("(min-width: 1024px)", function() {
+            Array.from(container.querySelectorAll('img')).forEach(function (img) {
+                if (img.closest('.hero-illustration-container')) return;
+                function apply() {
+                    if (img.clientHeight > 80) {
+                        gsap.to(img, {
+                            y: -40, ease: 'none',
+                            scrollTrigger: { trigger: img, start: 'top bottom', end: 'bottom top', scrub: 0.8 }
+                        });
+                    }
                 }
-            }
-            img.complete && img.naturalHeight > 0 ? apply() : img.addEventListener('load', apply, { once: true });
+                img.complete && img.naturalHeight > 0 ? apply() : img.addEventListener('load', apply, { once: true });
+            });
         });
     }
 
