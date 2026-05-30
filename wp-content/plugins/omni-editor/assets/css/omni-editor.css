@@ -21,29 +21,35 @@
 }
 
 #omni-editor-root {
-  --oe-bg:        #0F172A;
-  --oe-bg2:       #1E293B;
-  --oe-bg3:       #263347;
+  --oe-bg:        #0B1120;
+  --oe-bg2:       #151E32;
+  --oe-bg3:       #1E293B;
   --oe-border:    rgba(255,255,255,0.08);
-  --oe-text:      #E2E8F0;
+  --oe-text:      #F8FAFC;
   --oe-muted:     #94A3B8;
   --oe-accent:    #D4AF37;
   --oe-accent-2:  #B8962E;
-  --oe-green:     #22C55E;
+  --oe-green:     #10B981;
   --oe-red:       #EF4444;
-  --oe-topbar-h:  56px;
-  --oe-sidebar-w: 200px;
-  --oe-preview-w: 42%;
-  --oe-radius:    12px;
-  --oe-shadow:    0 4px 24px rgba(0,0,0,0.4);
+  --oe-topbar-h:  60px;
+  --oe-sidebar-w: 220px;
+  --oe-preview-w: 45%;
+  --oe-radius:    14px;
+  --oe-shadow:    0 8px 32px rgba(0,0,0,0.4);
+  /* Typography Variables for Easy Customization */
+  --oe-font-size-base: 14px;
+  --oe-font-size-sm: 12px;
+  --oe-font-size-lg: 16px;
+  
   font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--oe-text);
   background: var(--oe-bg);
-  border-left: 10px solid var(--oe-bg2);
+  border-left: 1px solid var(--oe-bg2);
   height: calc(100vh - 32px);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  font-size: var(--oe-font-size-base);
 }
 
 /* Hide WP admin notices inside our editor */
@@ -352,28 +358,35 @@
   background: var(--oe-bg2);
   border: 1px solid var(--oe-border);
   border-radius: var(--oe-radius);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   overflow: hidden;
-  transition: border-color 0.2s;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .oe-section-card:hover {
-  border-color: rgba(212,175,55,0.2);
+  border-color: rgba(212,175,55,0.3);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
 }
 
 .oe-section-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 18px;
+  gap: 12px;
+  padding: 16px 20px;
   cursor: pointer;
   user-select: none;
   border-bottom: 1px solid transparent;
-  transition: border-color 0.2s;
+  transition: background 0.2s ease, border-color 0.2s;
+}
+
+.oe-section-header:hover {
+  background: rgba(255,255,255,0.02);
 }
 
 .oe-section-header.open {
   border-bottom-color: var(--oe-border);
+  background: rgba(0,0,0,0.1);
 }
 
 .oe-section-icon {
@@ -436,29 +449,30 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: var(--oe-font-size-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--oe-muted);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .oe-field-hint {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--oe-muted);
-  opacity: 0.7;
-  margin-top: 4px;
+  opacity: 0.8;
+  margin-top: 6px;
+  line-height: 1.4;
 }
 
 .oe-field-badge {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
-  padding: 1px 6px;
+  padding: 2px 8px;
   border-radius: 999px;
-  background: rgba(212,175,55,0.1);
+  background: rgba(212,175,55,0.15);
   color: var(--oe-accent);
-  border: 1px solid rgba(212,175,55,0.2);
+  border: 1px solid rgba(212,175,55,0.3);
 }
 
 /* Text input */
@@ -466,27 +480,29 @@
 #omni-editor-root select.oe-input,
 #omni-editor-root textarea.oe-input {
   width: 100%;
-  background: var(--oe-bg3);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--oe-bg);
+  border: 1px solid var(--oe-border);
   border-radius: 8px;
-  padding: 9px 12px;
+  padding: 20px;
   color: var(--oe-text);
   font-family: inherit;
-  font-size: 13px;
-  transition: border-color 0.15s;
+  font-size: var(--oe-font-size-base) !important;
+  line-height: 1.5;
+  transition: all 0.2s ease;
   outline: none;
-  box-shadow: none; /* override wp */
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
 }
 
 #omni-editor-root input.oe-input:focus,
 #omni-editor-root select.oe-input:focus,
 #omni-editor-root textarea.oe-input:focus {
-  border-color: rgba(212,175,55,0.4);
-  box-shadow: 0 0 0 3px rgba(212,175,55,0.08);
+  border-color: var(--oe-accent);
+  box-shadow: 0 0 0 4px rgba(212,175,55,0.15), inset 0 2px 4px rgba(0,0,0,0.1);
+  background: var(--oe-bg2);
 }
 
 #omni-editor-root input.oe-input::placeholder,
-#omni-editor-root textarea.oe-input::placeholder { color: rgba(148,163,184,0.5); }
+#omni-editor-root textarea.oe-input::placeholder { color: rgba(148,163,184,0.4); }
 
 /* Rich text (contenteditable) */
 .oe-rt-toolbar {
@@ -523,22 +539,24 @@
 #omni-editor-root .oe-richtext {
   width: 100%;
   min-height: 42px;
-  background: var(--oe-bg3);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--oe-bg);
+  border: 1px solid var(--oe-border);
   border-radius: 0 0 8px 8px;
-  padding: 12px 16px;
+  padding: 20px;
   color: var(--oe-text);
   font-family: inherit;
-  font-size: 14px;
+  font-size: var(--oe-font-size-base) !important;
   line-height: 1.6;
   outline: none;
-  transition: border-color 0.15s;
+  transition: all 0.2s ease;
   word-break: break-word;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
 }
 
 #omni-editor-root .oe-richtext:focus {
-  border-color: rgba(212,175,55,0.4);
-  box-shadow: 0 0 0 3px rgba(212,175,55,0.08);
+  border-color: var(--oe-accent);
+  box-shadow: 0 0 0 4px rgba(212,175,55,0.15), inset 0 2px 4px rgba(0,0,0,0.1);
+  background: var(--oe-bg2);
 }
 
 .oe-richtext:empty::before {

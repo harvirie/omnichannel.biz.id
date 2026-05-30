@@ -418,12 +418,14 @@ jQuery(document).ready(function ($) {
                 <option value="Georgia, serif">Georgia</option>
             `;
             const sizeOptions = `
-                <option value="">Size</option>
-                <option value="1">Small</option>
-                <option value="3">Normal</option>
-                <option value="4">Large</option>
-                <option value="5">X-Large</option>
-                <option value="6">Huge</option>
+                <option value="">Ukuran Font</option>
+                <option value="1">10px</option>
+                <option value="2">13px</option>
+                <option value="3">16px (Bawaan)</option>
+                <option value="4">18px</option>
+                <option value="5">24px</option>
+                <option value="6">32px</option>
+                <option value="7">48px</option>
             `;
             inputHtml = `
             <div class="oe-rt-toolbar">

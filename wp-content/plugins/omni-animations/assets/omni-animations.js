@@ -183,113 +183,167 @@
         delay = delay || 0;
         var wordSpans = splitIntoWords(el);
 
-        if (wordSpans) {
-            // Word-by-word slide up dari bawah wrapper (clip effect)
-            gsap.fromTo(wordSpans,
-                { y: '105%', opacity: 0 },
-                {
-                    y: '0%', opacity: 1,
-                    duration: 0.65,
-                    ease: 'power3.out',
-                    stagger: 0.06,
-                    delay: delay,
-                    scrollTrigger: {
-                        trigger: triggerEl || el,
-                        start: 'top 88%',
-                        toggleActions: 'play none none none'
+        var mm = gsap.matchMedia();
+        mm.add({
+            isDesktop: "(min-width: 768px)",
+            isMobile: "(max-width: 767px)"
+        }, function(context) {
+            var isDesktop = context.conditions.isDesktop;
+
+            if (wordSpans) {
+                // Word-by-word slide up dari bawah wrapper (clip effect)
+                gsap.fromTo(wordSpans,
+                    { y: isDesktop ? '105%' : '60%', opacity: 0 },
+                    {
+                        y: '0%', opacity: 1,
+                        duration: isDesktop ? 0.65 : 0.5,
+                        ease: 'power3.out',
+                        stagger: isDesktop ? 0.06 : 0.03,
+                        delay: isDesktop ? delay : (delay * 0.5),
+                        scrollTrigger: {
+                            trigger: triggerEl || el,
+                            start: isDesktop ? 'top 88%' : 'top 92%',
+                            toggleActions: 'play none none none'
+                        }
                     }
+                );
+            } else {
+                if (isDesktop) {
+                    // Elemen punya HTML → clip-path curtain kiri ke kanan + slide up
+                    gsap.fromTo(el,
+                        { clipPath: 'inset(0 100% 0 0 round 2px)', y: 22, opacity: 0.6 },
+                        {
+                            clipPath: 'inset(0 0% 0 0 round 2px)',
+                            y: 0, opacity: 1,
+                            duration: 0.90,
+                            ease: 'power4.out',
+                            delay: delay,
+                            scrollTrigger: {
+                                trigger: triggerEl || el,
+                                start: 'top 88%',
+                                toggleActions: 'play none none none'
+                            }
+                        }
+                    );
+                } else {
+                    // Mobile: No clip-path, simple fade up for better performance
+                    gsap.fromTo(el,
+                        { y: 15, opacity: 0 },
+                        {
+                            y: 0, opacity: 1,
+                            duration: 0.6,
+                            ease: 'power3.out',
+                            delay: delay * 0.5,
+                            scrollTrigger: {
+                                trigger: triggerEl || el,
+                                start: 'top 92%',
+                                toggleActions: 'play none none none'
+                            }
+                        }
+                    );
                 }
-            );
-        } else {
-            // Elemen punya HTML → clip-path curtain kiri ke kanan + slide up
-            gsap.fromTo(el,
-                { clipPath: 'inset(0 100% 0 0 round 2px)', y: 22, opacity: 0.6 },
-                {
-                    clipPath: 'inset(0 0% 0 0 round 2px)',
-                    y: 0, opacity: 1,
-                    duration: 0.90,
-                    ease: 'power4.out',
-                    delay: delay,
-                    scrollTrigger: {
-                        trigger: triggerEl || el,
-                        start: 'top 88%',
-                        toggleActions: 'play none none none'
-                    }
-                }
-            );
-        }
+            }
+        });
     }
 
     function animateBadge(el, triggerEl, delay) {
         delay = delay || 0;
-        gsap.fromTo(el,
-            { x: -28, opacity: 0, scale: 0.85 },
-            {
-                x: 0, opacity: 1, scale: 1,
-                duration: 0.55,
-                ease: 'back.out(2)',
-                delay: delay,
-                scrollTrigger: {
-                    trigger: triggerEl || el,
-                    start: 'top 90%',
-                    toggleActions: 'play none none none'
+        var mm = gsap.matchMedia();
+        mm.add({
+            isDesktop: "(min-width: 768px)",
+            isMobile: "(max-width: 767px)"
+        }, function(context) {
+            var isDesktop = context.conditions.isDesktop;
+            gsap.fromTo(el,
+                { x: isDesktop ? -28 : -15, opacity: 0, scale: isDesktop ? 0.85 : 0.95 },
+                {
+                    x: 0, opacity: 1, scale: 1,
+                    duration: isDesktop ? 0.55 : 0.45,
+                    ease: isDesktop ? 'back.out(2)' : 'power2.out',
+                    delay: isDesktop ? delay : (delay * 0.5),
+                    scrollTrigger: {
+                        trigger: triggerEl || el,
+                        start: isDesktop ? 'top 90%' : 'top 95%',
+                        toggleActions: 'play none none none'
+                    }
                 }
-            }
-        );
+            );
+        });
     }
 
     function animateSubtitle(el, triggerEl, delay) {
         delay = delay || 0;
-        gsap.fromTo(el,
-            { y: 28, opacity: 0, filter: 'blur(4px)' },
-            {
-                y: 0, opacity: 1, filter: 'blur(0px)',
-                duration: 0.75,
-                ease: 'power3.out',
-                delay: delay,
-                scrollTrigger: {
-                    trigger: triggerEl || el,
-                    start: 'top 90%',
-                    toggleActions: 'play none none none'
+        var mm = gsap.matchMedia();
+        mm.add({
+            isDesktop: "(min-width: 768px)",
+            isMobile: "(max-width: 767px)"
+        }, function(context) {
+            var isDesktop = context.conditions.isDesktop;
+            gsap.fromTo(el,
+                { y: isDesktop ? 28 : 15, opacity: 0, filter: isDesktop ? 'blur(4px)' : 'blur(0px)' },
+                {
+                    y: 0, opacity: 1, filter: 'blur(0px)',
+                    duration: isDesktop ? 0.75 : 0.5,
+                    ease: 'power3.out',
+                    delay: isDesktop ? delay : (delay * 0.5),
+                    scrollTrigger: {
+                        trigger: triggerEl || el,
+                        start: isDesktop ? 'top 90%' : 'top 95%',
+                        toggleActions: 'play none none none'
+                    }
                 }
-            }
-        );
+            );
+        });
     }
 
     function animateListItems(items, triggerEl) {
         if (!items || !items.length) return;
-        gsap.fromTo(items,
-            { x: -40, opacity: 0 },
-            {
-                x: 0, opacity: 1,
-                duration: 0.55,
-                ease: 'power3.out',
-                stagger: 0.09,
-                scrollTrigger: {
-                    trigger: triggerEl || items[0],
-                    start: 'top 88%',
-                    toggleActions: 'play none none none'
+        var mm = gsap.matchMedia();
+        mm.add({
+            isDesktop: "(min-width: 768px)",
+            isMobile: "(max-width: 767px)"
+        }, function(context) {
+            var isDesktop = context.conditions.isDesktop;
+            gsap.fromTo(items,
+                { x: isDesktop ? -40 : -20, opacity: 0 },
+                {
+                    x: 0, opacity: 1,
+                    duration: isDesktop ? 0.55 : 0.45,
+                    ease: 'power3.out',
+                    stagger: isDesktop ? 0.09 : 0.05,
+                    scrollTrigger: {
+                        trigger: triggerEl || items[0],
+                        start: isDesktop ? 'top 88%' : 'top 95%',
+                        toggleActions: 'play none none none'
+                    }
                 }
-            }
-        );
+            );
+        });
     }
 
     function animateCards(cards, triggerEl) {
         if (!cards || !cards.length) return;
-        gsap.fromTo(cards,
-            { y: 55, opacity: 0, scale: 0.95 },
-            {
-                y: 0, opacity: 1, scale: 1,
-                duration: 0.72,
-                ease: 'back.out(1.5)',
-                stagger: 0.11,
-                scrollTrigger: {
-                    trigger: triggerEl || cards[0],
-                    start: 'top 87%',
-                    toggleActions: 'play none none none'
+        var mm = gsap.matchMedia();
+        mm.add({
+            isDesktop: "(min-width: 768px)",
+            isMobile: "(max-width: 767px)"
+        }, function(context) {
+            var isDesktop = context.conditions.isDesktop;
+            gsap.fromTo(cards,
+                { y: isDesktop ? 55 : 30, opacity: 0, scale: isDesktop ? 0.95 : 0.98 },
+                {
+                    y: 0, opacity: 1, scale: 1,
+                    duration: isDesktop ? 0.72 : 0.55,
+                    ease: isDesktop ? 'back.out(1.5)' : 'power3.out',
+                    stagger: isDesktop ? 0.11 : 0.08,
+                    scrollTrigger: {
+                        trigger: triggerEl || cards[0],
+                        start: isDesktop ? 'top 87%' : 'top 95%',
+                        toggleActions: 'play none none none'
+                    }
                 }
-            }
-        );
+            );
+        });
     }
 
     /**
@@ -392,32 +446,51 @@
 
         if (heroBadge && !heroBadge.dataset.animDone) {
             heroBadge.dataset.animDone = '1';
-            gsap.fromTo(heroBadge,
-                { y: -20, opacity: 0, scale: 0.9 },
-                { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(2)', delay: 0.1 }
-            );
+            var mmHeroBadge = gsap.matchMedia();
+            mmHeroBadge.add({ isDesktop: "(min-width: 768px)", isMobile: "(max-width: 767px)" }, function(c) {
+                var isDesktop = c.conditions.isDesktop;
+                gsap.fromTo(heroBadge,
+                    { y: isDesktop ? -20 : -10, opacity: 0, scale: isDesktop ? 0.9 : 0.95 },
+                    { y: 0, opacity: 1, scale: 1, duration: isDesktop ? 0.6 : 0.5, ease: isDesktop ? 'back.out(2)' : 'power2.out', delay: 0.1 }
+                );
+            });
         }
         if (heroH1 && !heroH1.dataset.animDone) {
             heroH1.dataset.animDone = '1';
             var heroWords = splitIntoWords(heroH1);
-            if (heroWords) {
-                gsap.fromTo(heroWords,
-                    { y: '110%', opacity: 0 },
-                    { y: '0%', opacity: 1, duration: 0.7, ease: 'power4.out', stagger: 0.05, delay: 0.22 }
-                );
-            } else {
-                gsap.fromTo(heroH1,
-                    { clipPath: 'inset(0 100% 0 0 round 2px)', y: 20 },
-                    { clipPath: 'inset(0 0% 0 0 round 2px)', y: 0, duration: 1.0, ease: 'power4.out', delay: 0.22 }
-                );
-            }
+            var mmHeroH1 = gsap.matchMedia();
+            mmHeroH1.add({ isDesktop: "(min-width: 768px)", isMobile: "(max-width: 767px)" }, function(c) {
+                var isDesktop = c.conditions.isDesktop;
+                if (heroWords) {
+                    gsap.fromTo(heroWords,
+                        { y: isDesktop ? '110%' : '60%', opacity: 0 },
+                        { y: '0%', opacity: 1, duration: isDesktop ? 0.7 : 0.5, ease: isDesktop ? 'power4.out' : 'power3.out', stagger: isDesktop ? 0.05 : 0.03, delay: isDesktop ? 0.22 : 0.1 }
+                    );
+                } else {
+                    if (isDesktop) {
+                        gsap.fromTo(heroH1,
+                            { clipPath: 'inset(0 100% 0 0 round 2px)', y: 20 },
+                            { clipPath: 'inset(0 0% 0 0 round 2px)', y: 0, duration: 1.0, ease: 'power4.out', delay: 0.22 }
+                        );
+                    } else {
+                        gsap.fromTo(heroH1,
+                            { y: 15, opacity: 0 },
+                            { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', delay: 0.1 }
+                        );
+                    }
+                }
+            });
         }
         if (heroP && !heroP.dataset.animDone) {
             heroP.dataset.animDone = '1';
-            gsap.fromTo(heroP,
-                { y: 30, opacity: 0, filter: 'blur(5px)' },
-                { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.8, ease: 'power3.out', delay: 0.45 }
-            );
+            var mmHeroP = gsap.matchMedia();
+            mmHeroP.add({ isDesktop: "(min-width: 768px)", isMobile: "(max-width: 767px)" }, function(c) {
+                var isDesktop = c.conditions.isDesktop;
+                gsap.fromTo(heroP,
+                    { y: isDesktop ? 30 : 15, opacity: 0, filter: isDesktop ? 'blur(5px)' : 'blur(0px)' },
+                    { y: 0, opacity: 1, filter: 'blur(0px)', duration: isDesktop ? 0.8 : 0.5, ease: 'power3.out', delay: isDesktop ? 0.45 : 0.2 }
+                );
+            });
         }
 
         // ── CTA dark section (Siap Memilih Paket...) ─────────────
@@ -436,15 +509,19 @@
             }
             if (ctaBtns.length) {
                 ctaBtns.forEach(function (b) { b.dataset.animDone = '1'; });
-                gsap.fromTo(ctaBtns,
-                    { y: 30, opacity: 0, scale: 0.95 },
-                    {
-                        y: 0, opacity: 1, scale: 1,
-                        duration: 0.65, ease: 'back.out(1.6)',
-                        stagger: 0.1, delay: 0.3,
-                        scrollTrigger: { trigger: ctaDark, start: 'top 88%', toggleActions: 'play none none none' }
-                    }
-                );
+                var mmCtaBtn = gsap.matchMedia();
+                mmCtaBtn.add({ isDesktop: "(min-width: 768px)", isMobile: "(max-width: 767px)" }, function(c) {
+                    var isDesktop = c.conditions.isDesktop;
+                    gsap.fromTo(ctaBtns,
+                        { y: isDesktop ? 30 : 15, opacity: 0, scale: isDesktop ? 0.95 : 0.98 },
+                        {
+                            y: 0, opacity: 1, scale: 1,
+                            duration: isDesktop ? 0.65 : 0.5, ease: isDesktop ? 'back.out(1.6)' : 'power3.out',
+                            stagger: isDesktop ? 0.1 : 0.05, delay: isDesktop ? 0.3 : 0.1,
+                            scrollTrigger: { trigger: ctaDark, start: isDesktop ? 'top 88%' : 'top 95%', toggleActions: 'play none none none' }
+                        }
+                    );
+                });
             }
         }
 
@@ -512,17 +589,21 @@
         var hdForm  = heroDesktop.querySelector('form');
         var hdBadge = heroDesktop.querySelector('[class*="flex items-center gap"]');
 
-        if (hdLogo)  gsap.fromTo(hdLogo,  { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', delay: 0.1 });
-        if (hdH1 && !hdH1.dataset.animDone) {
-            hdH1.dataset.animDone = '1';
-            gsap.fromTo(hdH1, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1.0, ease: 'back.out(1.4)', delay: 0.2 });
-        }
-        if (hdSub)   gsap.fromTo(hdSub,   { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.38 });
-        if (hdForm)  gsap.fromTo(hdForm,  { y: 30, opacity: 0, scale: 0.97 }, { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.5)', delay: 0.52 });
-        if (hdBadge) gsap.fromTo(hdBadge, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out', delay: 0.68 });
+        var mmFront = gsap.matchMedia();
+        mmFront.add({ isDesktop: "(min-width: 768px)", isMobile: "(max-width: 767px)" }, function(c) {
+            var d = c.conditions.isDesktop;
+            if (hdLogo)  gsap.fromTo(hdLogo,  { y: d ? -30 : -15, opacity: 0 }, { y: 0, opacity: 1, duration: d ? 0.7 : 0.5, ease: 'power3.out', delay: 0.1 });
+            if (hdH1 && !hdH1.dataset.animDone) {
+                hdH1.dataset.animDone = '1';
+                gsap.fromTo(hdH1, { y: d ? 40 : 20, opacity: 0 }, { y: 0, opacity: 1, duration: d ? 1.0 : 0.6, ease: d ? 'back.out(1.4)' : 'power3.out', delay: 0.2 });
+            }
+            if (hdSub)   gsap.fromTo(hdSub,   { y: d ? 30 : 15, opacity: 0 }, { y: 0, opacity: 1, duration: d ? 0.8 : 0.5, ease: 'power3.out', delay: 0.38 });
+            if (hdForm)  gsap.fromTo(hdForm,  { y: d ? 30 : 15, opacity: 0, scale: d ? 0.97 : 1 }, { y: 0, opacity: 1, scale: 1, duration: d ? 0.8 : 0.5, ease: d ? 'back.out(1.5)' : 'power3.out', delay: 0.52 });
+            if (hdBadge) gsap.fromTo(hdBadge, { y: d ? 20 : 10, opacity: 0 }, { y: 0, opacity: 1, duration: d ? 0.7 : 0.5, ease: 'power2.out', delay: 0.68 });
 
-        var heroVideoCard = heroSection.querySelector('.hidden.md\\:block.absolute');
-        if (heroVideoCard) gsap.fromTo(heroVideoCard, { x: 60, opacity: 0, scale: 0.95 }, { x: 0, opacity: 1, scale: 1, duration: 1.1, ease: 'power3.out', delay: 0.3 });
+            var heroVideoCard = heroSection.querySelector('.hidden.md\\:block.absolute');
+            if (heroVideoCard) gsap.fromTo(heroVideoCard, { x: d ? 60 : 30, opacity: 0, scale: d ? 0.95 : 1 }, { x: 0, opacity: 1, scale: 1, duration: d ? 1.1 : 0.6, ease: 'power3.out', delay: 0.3 });
+        });
     }
 
     // ─────────────────────────────────────────────────────────────
