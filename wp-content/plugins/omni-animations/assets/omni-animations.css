@@ -131,29 +131,57 @@ html.is-animating:not(.is-leaving) #swup.transition-scale {
     pointer-events: none;
     z-index: -1;
     overflow: hidden;
-    mask-image: linear-gradient(135deg, transparent 0%, black 30%, black 70%, transparent 100%);
-    -webkit-mask-image: linear-gradient(135deg, transparent 0%, black 30%, black 70%, transparent 100%);
-    mask-size: 300% 300%;
-    -webkit-mask-size: 300% 300%;
+    /* Soft overall fade at the edges so it blends into the background */
+    mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 90%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 90%);
 }
 
 .omni-luma-dot-1,
-.omni-luma-dot-2 {
+.omni-luma-dot-2,
+.omni-luma-dot-3 {
     position: absolute;
-    inset: -100px;
+    inset: -200px;
     background-repeat: repeat;
+    background-size: 16px 16px;
+    background-position: 0 0;
 }
 
-/* Layer 1: Abu muda dots (smaller) */
+/* Layer 1: Palung (Trough) - Abu Tua, Titik Kecil */
 .omni-luma-dot-1 {
-    background-image: radial-gradient(#cbd5e1 1.25px, transparent 1.25px);
-    background-size: 32px 32px;
-    opacity: 1;
+    background-image: radial-gradient(#94a3b8 1.5px, transparent 1.5px);
+    opacity: 0.7;
 }
 
-/* Layer 2: Abu tua dots (larger spacing, half size of previous) */
+/* Layer 2: Transisi - Abu Muda, Titik Sedang */
 .omni-luma-dot-2 {
-    background-image: radial-gradient(#94a3b8 2px, transparent 2px);
-    background-size: 48px 48px;
-    opacity: 0.8;
+    background-image: radial-gradient(#cbd5e1 3px, transparent 3px);
+    mask-image: 
+        radial-gradient(circle at 25% 25%, black 10%, transparent 45%),
+        radial-gradient(circle at 75% 75%, black 10%, transparent 45%),
+        radial-gradient(circle at 75% 25%, black 10%, transparent 45%),
+        radial-gradient(circle at 25% 75%, black 10%, transparent 45%);
+    mask-size: 800px 800px;
+    -webkit-mask-image: 
+        radial-gradient(circle at 25% 25%, black 10%, transparent 45%),
+        radial-gradient(circle at 75% 75%, black 10%, transparent 45%),
+        radial-gradient(circle at 75% 25%, black 10%, transparent 45%),
+        radial-gradient(circle at 25% 75%, black 10%, transparent 45%);
+    -webkit-mask-size: 800px 800px;
+}
+
+/* Layer 3: Puncak (Crest) - Abu Lebih Muda, Titik Besar */
+.omni-luma-dot-3 {
+    background-image: radial-gradient(#e2e8f0 4.5px, transparent 4.5px);
+    mask-image: 
+        radial-gradient(circle at 25% 25%, black 0%, transparent 25%),
+        radial-gradient(circle at 75% 75%, black 0%, transparent 25%),
+        radial-gradient(circle at 75% 25%, black 0%, transparent 25%),
+        radial-gradient(circle at 25% 75%, black 0%, transparent 25%);
+    mask-size: 800px 800px;
+    -webkit-mask-image: 
+        radial-gradient(circle at 25% 25%, black 0%, transparent 25%),
+        radial-gradient(circle at 75% 75%, black 0%, transparent 25%),
+        radial-gradient(circle at 75% 25%, black 0%, transparent 25%),
+        radial-gradient(circle at 25% 75%, black 0%, transparent 25%);
+    -webkit-mask-size: 800px 800px;
 }
