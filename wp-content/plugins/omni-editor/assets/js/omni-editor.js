@@ -276,14 +276,17 @@ jQuery(document).ready(function ($) {
             if ($activeEl && $activeEl.length) {
                 $activeEl.focus();
             }
-            restoreSelection();
             
-            document.execCommand(cmd, false, val);
+            setTimeout(() => {
+                restoreSelection();
+                document.execCommand(cmd, false, val);
+                
+                if ($activeEl && $activeEl.length) {
+                    $activeEl.trigger('input');
+                }
+            }, 10);
+            
             this.selectedIndex = 0;
-            
-            if ($activeEl && $activeEl.length) {
-                $activeEl.trigger('input');
-            }
         });
     }
     
