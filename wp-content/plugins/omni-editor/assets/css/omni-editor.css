@@ -1058,3 +1058,13 @@
 .wp-admin #wpbody-content {
   padding-bottom: 0 !important;
 }
+
+/* Fix for execCommand font sizes */
+font[size="1"] { font-size: 10px !important; }
+font[size="2"] { font-size: 13px !important; }
+font[size="3"] { font-size: 16px !important; }
+font[size="4"] { font-size: 18px !important; }
+font[size="5"] { font-size: 24px !important; }
+font[size="6"] { font-size: 32px !important; }
+font[size="7"] { font-size: 48px !important; }
+
