@@ -150,3 +150,14 @@ function omni_optimizer_admin_post_purge() {
         exit;
     }
 }
+
+add_action('init', function() {
+    if (isset($_GET['omni_debug_cache'])) {
+        echo "Optimizer Loaded: " . (defined('OMNI_OPTIMIZER_CACHE_DIR') ? 'Yes' : 'No') . "<br>";
+        echo "Cache Dir: " . (defined('OMNI_OPTIMIZER_CACHE_DIR') ? OMNI_OPTIMIZER_CACHE_DIR : 'N/A') . "<br>";
+        $dir = defined('OMNI_OPTIMIZER_CACHE_DIR') ? OMNI_OPTIMIZER_CACHE_DIR : '';
+        echo "Dir Exists: " . (file_exists($dir) ? 'Yes' : 'No') . "<br>";
+        echo "Is Writable: " . (is_writable($dir) ? 'Yes' : 'No') . "<br>";
+        exit;
+    }
+});
