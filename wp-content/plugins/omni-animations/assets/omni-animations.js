@@ -607,11 +607,29 @@
     }
 
     // ─────────────────────────────────────────────────────────────
-    // LUMA DOTS BACKGROUND ANIMATION (ORGANIC WAVE)
+    // LUMA DOTS BACKGROUND ANIMATION (ORGANIC WAVE - PURE CSS)
     // ─────────────────────────────────────────────────────────────
     function initLumaDots() {
-        if (!ensureGsap()) return;
         var containers = document.querySelectorAll('.omni-luma-dots:not([data-luma-init])');
+        if (!containers.length) return;
+        
+        // Smart Observer to pause/play pure CSS animations
+        var observer = null;
+        if ('IntersectionObserver' in window) {
+            observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    } else {
+                        entry.target.classList.remove('is-visible');
+                    }
+                });
+            }, {
+                rootMargin: '100px', // start animating slightly before it enters screen
+                threshold: 0
+            });
+        }
+
         containers.forEach(function(container) {
             container.dataset.lumaInit = '1';
             
@@ -632,28 +650,12 @@
             layer.appendChild(dot3);
             container.insertBefore(layer, container.firstChild);
 
-            // Subtle matrix drift (background pattern)
-            gsap.to(dot1, { backgroundPosition: "16px 16px", duration: 6, ease: "none", repeat: -1 });
-            gsap.to(dot2, { backgroundPosition: "16px -16px", duration: 8, ease: "none", repeat: -1 });
-            gsap.to(dot3, { backgroundPosition: "-16px 16px", duration: 10, ease: "none", repeat: -1 });
-
-            // Organic Mask drift (this creates the dynamic crest/trough wave effect)
-            // mask-size is 800px, so moving 800px creates a seamless perfect loop!
-            gsap.to(dot2, {
-                maskPosition: "800px 800px",
-                webkitMaskPosition: "800px 800px",
-                duration: 20,
-                ease: "none",
-                repeat: -1
-            });
-
-            gsap.to(dot3, {
-                maskPosition: "-800px 800px",
-                webkitMaskPosition: "-800px 800px",
-                duration: 15,
-                ease: "none",
-                repeat: -1
-            });
+            // Bind to observer
+            if (observer) {
+                observer.observe(container);
+            } else {
+                container.classList.add('is-visible'); // Fallback for very old browsers
+            }
         });
     }
 
