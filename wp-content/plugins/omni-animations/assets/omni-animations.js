@@ -631,33 +631,33 @@
             // GSAP Animations
             gsap.to(dot1, {
                 backgroundPosition: "32px 32px",
-                duration: 4,
+                duration: 2.5,
                 ease: "none",
                 repeat: -1
             });
             
             gsap.to(dot2, {
                 backgroundPosition: "-48px -48px",
-                duration: 7,
+                duration: 4.5,
                 ease: "none",
                 repeat: -1
             });
 
             gsap.to(dot1, {
-                opacity: 0.3,
-                duration: 2.5,
+                opacity: 0.5,
+                duration: 1.5,
                 ease: "sine.inOut",
                 yoyo: true,
                 repeat: -1
             });
             
             gsap.to(dot2, {
-                opacity: 0.15,
-                duration: 3.5,
+                opacity: 0.35,
+                duration: 2.2,
                 ease: "sine.inOut",
                 yoyo: true,
                 repeat: -1,
-                delay: 1
+                delay: 0.5
             });
         });
     }

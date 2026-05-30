@@ -131,8 +131,8 @@ html.is-animating:not(.is-leaving) #swup.transition-scale {
     pointer-events: none;
     z-index: -1;
     overflow: hidden;
-    mask-image: radial-gradient(ellipse at 30% 30%, black 10%, transparent 80%);
-    -webkit-mask-image: radial-gradient(ellipse at 30% 30%, black 10%, transparent 80%);
+    mask-image: radial-gradient(ellipse at 30% 30%, black 25%, transparent 95%);
+    -webkit-mask-image: radial-gradient(ellipse at 30% 30%, black 25%, transparent 95%);
 }
 
 .omni-luma-dot-1,
@@ -144,14 +144,14 @@ html.is-animating:not(.is-leaving) #swup.transition-scale {
 
 /* Layer 1: Abu muda dots */
 .omni-luma-dot-1 {
-    background-image: radial-gradient(#cbd5e1 2px, transparent 2px);
+    background-image: radial-gradient(#cbd5e1 2.5px, transparent 2.5px);
     background-size: 32px 32px;
-    opacity: 0.7;
+    opacity: 1;
 }
 
 /* Layer 2: Abu tua dots (larger spacing) */
 .omni-luma-dot-2 {
-    background-image: radial-gradient(#94a3b8 1.5px, transparent 1.5px);
+    background-image: radial-gradient(#94a3b8 2px, transparent 2px);
     background-size: 48px 48px;
-    opacity: 0.5;
+    opacity: 0.8;
 }
