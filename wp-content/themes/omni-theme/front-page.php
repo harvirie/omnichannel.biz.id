@@ -66,6 +66,12 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
     /* Force desktop content to hide */
     .tablet-force-hide { display: none !important; }
   }
+  
+  /* Tablet Landscape / Small Laptop (1024px - 1366px) */
+  @media (min-width: 1024px) and (max-width: 1366px) {
+    /* Stretch the SVG height slightly to prevent content bleeding */
+    .tablet-landscape-aspect { aspect-ratio: 2000 / 1400 !important; }
+  }
 </style>
 <section class="p-4 pb-0 md:p-6 bg-omni-secondary flex flex-col justify-center relative flex-1 overflow-x-hidden hero-desktop-min-h">
   <div class="relative w-full max-w-[1400px] mx-auto flex flex-col items-center justify-center pt-8 lg:pt-0">
@@ -73,7 +79,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
     <!-- Responsive Hero (Desktop & Mobile) -->
     <div class="w-full relative pb-0 md:pb-0">
       <!-- Top Card -->
-      <div class="relative z-10 w-[300vw] -left-[55vw] mobile-scale-w md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 1163.2;">
+      <div class="relative z-10 w-[300vw] -left-[55vw] mobile-scale-w tablet-landscape-aspect md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 1163.2;">
         <svg viewBox="0 0 2000.62 1163.2" class="absolute inset-0 w-full h-full drop-shadow-xl" preserveAspectRatio="none" style="overflow:visible;">
           <defs>
             <filter id="omni-glow-filter" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
