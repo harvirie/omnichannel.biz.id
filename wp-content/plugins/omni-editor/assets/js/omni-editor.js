@@ -258,12 +258,19 @@ jQuery(document).ready(function ($) {
             const color = $(this).val();
             $(this).siblings('.oe-color-preview').css('background', color);
             
-            restoreSelection();
-            document.execCommand('foreColor', false, color);
-            
-            if (lastActiveRichtext) {
-                $(lastActiveRichtext).trigger('input');
+            let $activeEl = lastActiveRichtext ? $(lastActiveRichtext) : null;
+            if ($activeEl && $activeEl.length) {
+                $activeEl.focus();
             }
+            
+            setTimeout(() => {
+                restoreSelection();
+                document.execCommand('foreColor', false, color);
+                
+                if ($activeEl && $activeEl.length) {
+                    $activeEl.trigger('input');
+                }
+            }, 10);
         });
 
         // Handle font name and font size selects
