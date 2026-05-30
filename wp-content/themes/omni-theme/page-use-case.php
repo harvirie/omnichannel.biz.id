@@ -109,80 +109,59 @@ $sections   = !empty($omni_usecase['sections']) ? $omni_usecase['sections'] : []
 
   <!-- Use Cases Section -->
   <section class="py-20">
-    <div class="max-w-7xl mx-auto px-6 space-y-10">
+    <div class="max-w-7xl mx-auto px-6">
 
       <!-- Dynamic Use Cases -->
       <?php 
-      if (empty($sections)) {
-          // Fallback if no sections in options
+      $cases = !empty($omni_usecase['cases']) ? $omni_usecase['cases'] : [];
+      if (empty($cases)) {
           if (class_exists('OmniEditorData')) {
-              $sections = OmniEditorData::defaults('usecase')['sections'];
+              $cases = OmniEditorData::defaults('usecase')['cases'] ?? [];
           }
       }
       ?>
 
-      <?php foreach ($sections as $sec): 
-          $is_dark = ($sec['style'] ?? 'light') === 'dark';
-          
-          $bg_class = $is_dark ? 'bg-omni-dark border-2 border-omni-accent hover:shadow-[0_20px_60px_rgba(253,184,84,0.25)]' : 'bg-omni-light border border-omni-border hover:shadow-xl';
-          $icon_bg = $is_dark ? 'bg-white/10' : 'bg-white shadow-sm';
-          $icon_color = $is_dark ? 'text-omni-accent' : 'text-omni-accent'; // Default fallback if not custom styled, let's just use accent
-          
-          $badge_bg = $is_dark ? 'bg-omni-accent/20 text-omni-accent' : 'bg-omni-secondary/20 text-omni-button-hover';
-          
-          $title_color = $is_dark ? 'text-white' : 'text-omni-dark';
-          $desc_color = $is_dark ? 'text-white/70' : 'text-omni-text-muted';
-          
-          $item_bg = $is_dark ? 'bg-white/10 border-white/20' : 'bg-white border-omni-border';
-          $item_title = $is_dark ? 'text-white' : 'text-omni-dark';
-          $item_desc = $is_dark ? 'text-white/60' : 'text-omni-text-muted';
-      ?>
-      <div class="rounded-3xl p-8 md:p-10 transition-shadow duration-300 <?php echo $bg_class; ?>">
-        <div class="flex flex-col md:flex-row gap-8">
-          <div class="shrink-0 p-4 rounded-2xl h-fit <?php echo $icon_bg; ?>">
-            <?php 
-            $sec_icon = $sec['icon'] ?? 'briefcase';
-            if (strpos($sec_icon, 'fa-') !== false) {
-                echo '<i class="text-4xl ' . esc_attr($sec_icon) . ' ' . $icon_color . '"></i>';
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <?php foreach ($cases as $case): 
+            $icon = $case['icon'] ?: 'briefcase';
+            
+            // Determine package badge styling
+            $pkg_type = $case['package'] ?? 'standard';
+            if ($pkg_type === 'pro') {
+                $dot_bg = 'bg-omni-accent';
+                $badge_bg = 'bg-omni-accent/10 text-omni-accent';
+                $pkg_name = 'Professional Plus';
+            } elseif ($pkg_type === 'all') {
+                $dot_bg = 'bg-omni-dark';
+                $badge_bg = 'bg-omni-dark/10 text-omni-dark';
+                $pkg_name = 'Semua Paket';
             } else {
-                echo '<i data-lucide="' . esc_attr($sec_icon) . '" class="w-10 h-10 ' . $icon_color . '"></i>';
+                $dot_bg = 'bg-omni-secondary';
+                $badge_bg = 'bg-omni-secondary/20 text-omni-button-hover';
+                $pkg_name = 'Standard';
             }
-            ?>
-          </div>
-          <div class="flex-1">
-            <div class="flex flex-wrap items-center gap-3 mb-3">
-              <h2 class="text-2xl font-bold <?php echo $title_color; ?>"><?php echo $sec['title']; ?></h2>
-              <?php if (!empty($sec['badge'])): ?>
-              <span class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full <?php echo $badge_bg; ?>">
-                <div class="w-2 h-2 rounded-full <?php echo $is_dark ? 'bg-omni-accent' : 'bg-omni-secondary'; ?>"></div>
-                <?php echo $sec['badge']; ?>
-              </span>
-              <?php endif; ?>
+        ?>
+        <div class="bg-white rounded-3xl p-8 border border-omni-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full group">
+            <div class="w-14 h-14 rounded-2xl bg-omni-light flex items-center justify-center mb-6 shrink-0 group-hover:scale-110 transition-transform">
+                <?php if (strpos($icon, 'fa-') !== false): ?>
+                    <i class="text-2xl <?php echo esc_attr($icon); ?> text-omni-accent"></i>
+                <?php else: ?>
+                    <i data-lucide="<?php echo esc_attr($icon); ?>" class="w-7 h-7 text-omni-accent"></i>
+                <?php endif; ?>
             </div>
-            <div class="mb-6 leading-relaxed omni-rich-text <?php echo $desc_color; ?>">
-              <?php echo wpautop($sec['description']); ?>
+            
+            <h3 class="text-2xl font-bold text-omni-dark mb-4 leading-tight"><?php echo esc_html($case['industry']); ?></h3>
+            <p class="text-omni-text-muted leading-relaxed flex-1 mb-8"><?php echo esc_html($case['desc']); ?></p>
+            
+            <div class="mt-auto pt-6 border-t border-omni-border flex items-center">
+                <span class="inline-flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-full <?php echo $badge_bg; ?>">
+                    <div class="w-2 h-2 rounded-full <?php echo $dot_bg; ?>"></div>
+                    <?php echo esc_html($pkg_name); ?>
+                </span>
             </div>
-            <div class="grid sm:grid-cols-3 gap-4">
-              <?php foreach (($sec['items'] ?? []) as $item): ?>
-              <div class="rounded-xl p-4 border <?php echo $item_bg; ?>">
-                <?php 
-                $item_icon = $item['icon'] ?? 'check-circle';
-                $item_icon_color = $is_dark ? 'text-omni-accent' : 'text-omni-secondary';
-                if (strpos($item_icon, 'fa-') !== false) {
-                    echo '<i class="text-xl mb-2 ' . esc_attr($item_icon) . ' ' . $item_icon_color . '"></i>';
-                } else {
-                    echo '<i data-lucide="' . esc_attr($item_icon) . '" class="h-5 w-5 mb-2 ' . $item_icon_color . '"></i>';
-                }
-                ?>
-                <p class="text-xs font-bold mt-1 <?php echo $item_title; ?>"><?php echo $item['title']; ?></p>
-                <p class="text-xs mt-1 <?php echo $item_desc; ?>"><?php echo $item['desc']; ?></p>
-              </div>
-              <?php endforeach; ?>
-            </div>
-          </div>
         </div>
+        <?php endforeach; ?>
       </div>
-      <?php endforeach; ?>
 
     </div>
   </section>
