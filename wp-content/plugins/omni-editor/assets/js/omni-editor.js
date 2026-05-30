@@ -266,6 +266,24 @@ jQuery(document).ready(function ($) {
                 $activeEl.trigger('input');
             }
         });
+
+        // Handle font name and font size selects
+        $panel.on('change', '.oe-rt-fontname, .oe-rt-fontsize', function() {
+            const cmd = $(this).hasClass('oe-rt-fontname') ? 'fontName' : 'fontSize';
+            const val = $(this).val();
+            if (!val) return;
+            
+            restoreSelection();
+            document.execCommand(cmd, false, val);
+            this.selectedIndex = 0;
+            
+            if (currentSelectionRange) {
+                const $activeEl = $(currentSelectionRange.startContainer).closest('.oe-richtext');
+                if ($activeEl.length) {
+                    $activeEl.trigger('input');
+                }
+            }
+        });
     }
     
     function restoreSelection() {
@@ -429,10 +447,10 @@ jQuery(document).ready(function ($) {
             `;
             inputHtml = `
             <div class="oe-rt-toolbar">
-                <select class="oe-rt-fontname" onchange="document.execCommand('fontName', false, this.value); this.selectedIndex = 0;">
+                <select class="oe-rt-fontname">
                     ${fontOptions}
                 </select>
-                <select class="oe-rt-fontsize" onchange="document.execCommand('fontSize', false, this.value); this.selectedIndex = 0;">
+                <select class="oe-rt-fontsize">
                     ${sizeOptions}
                 </select>
                 <button type="button" onmousedown="event.preventDefault()" onclick="document.execCommand('bold', false, null)" title="Bold"><b>B</b></button>

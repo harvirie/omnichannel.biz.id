@@ -545,7 +545,7 @@
   padding: 20px;
   color: var(--oe-text);
   font-family: inherit;
-  font-size: var(--oe-font-size-base) !important;
+  font-size: 16px !important;
   line-height: 1.6;
   outline: none;
   transition: all 0.2s ease;
