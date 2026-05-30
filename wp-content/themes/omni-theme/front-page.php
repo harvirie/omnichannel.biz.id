@@ -49,7 +49,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
   @media (min-width: 768px) {
     .hero-desktop-min-h { min-height: clamp(600px, calc(100vh - 6rem), 100vh); }
   }
-  @media (max-width: 767px) {
+  @media (max-width: 1023px) {
     .mobile-scale-w { width: 400vw !important; left: -75vw !important; }
   }
 </style>
@@ -59,7 +59,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
     <!-- Responsive Hero (Desktop & Mobile) -->
     <div class="w-full relative pb-0 md:pb-0">
       <!-- Top Card -->
-      <div class="relative z-10 w-[300vw] -left-[55vw] mobile-scale-w md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 1163.2;">
+      <div class="relative z-10 w-[300vw] -left-[55vw] mobile-scale-w lg:w-full lg:left-0 transition-all" style="aspect-ratio: 2000.62 / 1163.2;">
         <svg viewBox="0 0 2000.62 1163.2" class="absolute inset-0 w-full h-full drop-shadow-xl" preserveAspectRatio="none" style="overflow:visible;">
           <defs>
             <filter id="omni-glow-filter" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
@@ -88,7 +88,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
         </svg>
 
         <!-- Inner Image Container (Desktop) -->
-        <div class="hidden md:block absolute z-10 rounded-[2.5vw] overflow-hidden shadow-2xl" style="top: 17.55%; right: 4.5%; bottom: 11.45%; width: 43%;">
+        <div class="hidden lg:block absolute z-10 rounded-[2.5vw] overflow-hidden shadow-2xl" style="top: 17.55%; right: 4.5%; bottom: 11.45%; width: 43%;">
           <video src="https://res.cloudinary.com/dtxwwevxl/video/upload/q_auto:low,f_auto/v1778211855/video_hero_wkvc4s.mp4" poster="https://res.cloudinary.com/dtxwwevxl/video/upload/q_auto:low,f_auto/v1778211855/video_hero_wkvc4s.jpg" class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline preload="auto" style="will-change: transform;"></video>
           <div class="absolute inset-0 bg-gradient-to-t from-omni-dark/90 via-omni-dark/20 to-transparent"></div>
           
@@ -129,7 +129,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
         </div>
 
         <!-- Left Content (Desktop) -->
-        <div class="hidden md:flex absolute top-[7%] left-[5%] w-[38%] z-20 flex-col">
+        <div class="hidden lg:flex absolute top-[7%] left-[5%] w-[38%] z-20 flex-col">
           <div class="flex items-center mb-[2.2vw] xl:mb-8">
             <a href="<?php echo home_url('/'); ?>" aria-label="Beranda OmniServe">
               <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_dark_ymby0d.svg"
@@ -170,7 +170,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
         </div>
 
         <!-- Mobile Content -->
-        <div class="flex md:hidden relative z-20 flex-col px-6 pt-8 pb-12" style="width: 100vw; margin-left: 75vw;">
+        <div class="flex lg:hidden relative z-20 flex-col px-6 pt-8 pb-12" style="width: 100vw; margin-left: 75vw;">
 
           <a href="<?php echo home_url('/'); ?>" class="block" aria-label="Beranda OmniServe" style="margin-top: -10px; margin-left: -10px; margin-bottom: 20px;">
             <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221348/logo_dark_sr1ywk.svg"
@@ -239,7 +239,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
       </div>
 
       <!-- Bottom Card -->
-      <div class="relative z-20 w-[300vw] -left-[55vw] mobile-scale-w md:w-full md:left-0 transition-all" style="aspect-ratio: 2000.62 / 448.88; margin-top: -2.99%; margin-bottom: 0;">
+      <div class="relative z-20 w-[300vw] -left-[55vw] mobile-scale-w lg:w-full lg:left-0 transition-all" style="aspect-ratio: 2000.62 / 448.88; margin-top: -2.99%; margin-bottom: 0;">
         <svg viewBox="0 0 2000.62 448.88" class="absolute inset-0 w-full h-full text-omni-dark" preserveAspectRatio="xMidYMid meet" style="overflow: visible;">
           <path fill="#D4AF37" transform="translate(-8, 8)" opacity="0.8" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 600 L 0 600 L 0 64 A 64 64 0 0 1 64 0 Z"/>
           <path fill="currentColor" d="M 64 0 L 674.58 0 A 76 76 0 0 1 750.58 76 A 76 76 0 0 0 826.58 152 L 1936.62 152 A 64 64 0 0 1 2000.62 216 L 2000.62 600 L 0 600 L 0 64 A 64 64 0 0 1 64 0 Z"/>
@@ -248,7 +248,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
         </svg>
 
         <!-- Desktop Bottom Card Content -->
-        <div class="hidden md:flex absolute inset-0 z-10 items-center justify-between px-[6%]">
+        <div class="hidden lg:flex absolute inset-0 z-10 items-center justify-between px-[6%]">
           <div class="text-white">
             <h2 class="text-[2.5vw] xl:text-5xl mb-[1.38vw] xl:mb-5 text-omni-light leading-tight">
               <?php echo $integration_title; ?>
@@ -282,7 +282,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
         </div>
 
         <!-- Mobile Bottom Card Content -->
-        <div class="flex md:hidden absolute top-[15%] z-10 flex-col justify-center px-6 -translate-y-[10px] -translate-x-[20px]" style="width: 100vw; left: 75vw; height: 85%;">
+        <div class="flex lg:hidden absolute top-[15%] z-10 flex-col justify-center px-6 -translate-y-[10px] -translate-x-[20px]" style="width: 100vw; left: 75vw; height: 85%;">
           <div class="text-white mb-5">
             <h2 class="text-3xl mb-3 text-omni-light leading-tight">
               <?php echo $integration_title; ?>
