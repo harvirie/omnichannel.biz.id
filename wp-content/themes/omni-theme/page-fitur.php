@@ -45,7 +45,7 @@ $sections   = !empty($omni_fitur['sections']) ? $omni_fitur['sections'] : [];
   }
 </style>
 
-<div class="flex-1 bg-white w-full">
+<div class="flex-1 bg-white w-full no-gsap">
 
   <!-- Hero Section -->
   <div class="-mt-20 md:-mt-32 pt-40 md:pt-52 relative overflow-hidden" style="background-color: #f1f5f9; z-index: 30;">
@@ -123,7 +123,7 @@ $sections   = !empty($omni_fitur['sections']) ? $omni_fitur['sections'] : [];
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex flex-col <?php echo $is_even ? 'md:flex-row-reverse' : 'md:flex-row'; ?> gap-12 items-center">
         <div class="md:w-1/2">
-          <div class="inline-flex items-center gap-2 <?php echo $is_even ? 'bg-white' : 'bg-omni-light'; ?> text-omni-button-hover px-3 py-1.5 rounded-full text-xs font-bold mb-4">
+          <div class="inline-flex items-center gap-2 <?php echo $is_even ? 'bg-white' : 'bg-omni-light'; ?> text-omni-button-hover px-3 py-1.5 rounded-full text-sm font-bold mb-4">
             <i data-lucide="layers" class="h-3.5 w-3.5"></i>
             <?php echo esc_html($sec['badge'] ?? 'Fitur'); ?>
           </div>
@@ -147,8 +147,8 @@ $sections   = !empty($omni_fitur['sections']) ? $omni_fitur['sections'] : [];
                         }
                         ?>
                     </div>
-                    <h4 class="font-bold text-omni-dark text-sm mb-2"><?php echo $item['title']; ?></h4>
-                    <p class="text-xs text-omni-text-muted leading-relaxed"><?php echo $item['desc']; ?></p>
+                    <h4 class="font-bold text-omni-dark text-lg mb-2"><?php echo $item['title']; ?></h4>
+                    <p class="text-base text-omni-text-muted leading-relaxed"><?php echo $item['desc']; ?></p>
                 </div>
               <?php endforeach; ?>
             </div>

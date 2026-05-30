@@ -279,7 +279,7 @@
     function initSectionTextAnimations() {
         if (!ensureGsap()) return;
         var container = document.getElementById('swup');
-        if (!container) return;
+        if (!container || container.querySelector('.no-gsap')) return;
 
         var sections = Array.from(container.querySelectorAll('section, [class*="py-20"], [class*="py-24"], [class*="py-16"]'));
         var seen = new WeakSet();

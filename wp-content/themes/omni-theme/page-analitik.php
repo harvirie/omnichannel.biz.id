@@ -57,7 +57,7 @@ $cta_url = $omni_analitik['cta']['btn_url'] ?? '/harga';
   }
 </style>
 
-<div class="flex-1 bg-white w-full">
+<div class="flex-1 bg-white w-full no-gsap">
   <!-- Hero Header -->
   <div class="-mt-20 md:-mt-32 pt-40 md:pt-52 relative overflow-hidden" style="background-color: #f1f5f9; z-index: 30;">
     <div class="max-w-7xl mx-auto px-6 text-center relative" style="padding-bottom: 100px; z-index: 10;">
@@ -142,7 +142,7 @@ $cta_url = $omni_analitik['cta']['btn_url'] ?? '/harga';
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-16">
         <h2 class="text-3xl font-bold text-omni-dark mb-4"><?php echo $metrics_title; ?></h2>
-        <p class="text-omni-text-muted"><?php echo $metrics_sub; ?></p>
+        <p class="text-base text-omni-text-muted"><?php echo $metrics_sub; ?></p>
       </div>
       
       <div class="grid md:grid-cols-3 gap-8">
@@ -160,7 +160,7 @@ $cta_url = $omni_analitik['cta']['btn_url'] ?? '/harga';
             </div>
             <h3 class="text-omni-text-muted font-medium mb-2"><?php echo $metric['title']; ?></h3>
             <div class="text-4xl font-bold text-omni-dark mb-3"><?php echo $metric['val']; ?></div>
-            <p class="text-sm text-omni-text-muted/80"><?php echo $metric['desc']; ?></p>
+            <p class="text-base text-omni-text-muted/80"><?php echo $metric['desc']; ?></p>
           </div>
         <?php endforeach; ?>
       </div>
