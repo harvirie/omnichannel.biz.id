@@ -274,14 +274,19 @@ jQuery(document).ready(function ($) {
             if (!val) return;
             
             restoreSelection();
+            let $activeEl = null;
+            if (currentSelectionRange) {
+                $activeEl = $(currentSelectionRange.startContainer).closest('.oe-richtext');
+                if ($activeEl.length) {
+                    $activeEl.focus();
+                }
+            }
+            
             document.execCommand(cmd, false, val);
             this.selectedIndex = 0;
             
-            if (currentSelectionRange) {
-                const $activeEl = $(currentSelectionRange.startContainer).closest('.oe-richtext');
-                if ($activeEl.length) {
-                    $activeEl.trigger('input');
-                }
+            if ($activeEl && $activeEl.length) {
+                $activeEl.trigger('input');
             }
         });
     }
