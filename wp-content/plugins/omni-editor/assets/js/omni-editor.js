@@ -22,6 +22,7 @@ jQuery(document).ready(function ($) {
     let hasUnsavedChanges = false;
     let autoSaveTimer = null;
     let currentSelectionRange = null;
+    let lastActiveRichtext = null;
 
     // ─── INIT ────────────────────────────────────────────────────────
     
@@ -199,7 +200,8 @@ jQuery(document).ready(function ($) {
     
     function bindToolbar() {
         // Show toolbar on selection inside richtext
-        $panel.on('mouseup keyup', '.oe-richtext', function(e) {
+        $panel.on('mouseup keyup click focus', '.oe-richtext', function(e) {
+            lastActiveRichtext = this;
             const selection = window.getSelection();
             if (!selection.isCollapsed && selection.rangeCount > 0) {
                 currentSelectionRange = selection.getRangeAt(0);
@@ -245,10 +247,8 @@ jQuery(document).ready(function ($) {
             restoreSelection();
             document.execCommand(cmd, false, val);
             
-            // Trigger input event to save data
-            const $activeEl = $(currentSelectionRange.startContainer).closest('.oe-richtext');
-            if ($activeEl.length) {
-                $activeEl.trigger('input');
+            if (lastActiveRichtext) {
+                $(lastActiveRichtext).trigger('input');
             }
             
             updateToolbarState();
@@ -261,9 +261,8 @@ jQuery(document).ready(function ($) {
             restoreSelection();
             document.execCommand('foreColor', false, color);
             
-            const $activeEl = $(currentSelectionRange.startContainer).closest('.oe-richtext');
-            if ($activeEl.length) {
-                $activeEl.trigger('input');
+            if (lastActiveRichtext) {
+                $(lastActiveRichtext).trigger('input');
             }
         });
 
@@ -273,12 +272,9 @@ jQuery(document).ready(function ($) {
             const val = $(this).val();
             if (!val) return;
             
-            let $activeEl = null;
-            if (currentSelectionRange) {
-                $activeEl = $(currentSelectionRange.startContainer).closest('.oe-richtext');
-                if ($activeEl.length) {
-                    $activeEl.focus();
-                }
+            let $activeEl = lastActiveRichtext ? $(lastActiveRichtext) : null;
+            if ($activeEl && $activeEl.length) {
+                $activeEl.focus();
             }
             restoreSelection();
             
