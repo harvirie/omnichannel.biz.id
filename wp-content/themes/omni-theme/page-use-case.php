@@ -28,7 +28,7 @@ $omni_usecase = get_option('omni_editor_usecase', []);
 $hero_badge = $omni_usecase['hero']['badge'] ?? 'Solusi Nyata untuk Bisnis Nyata';
 $hero_title = $omni_usecase['hero']['title'] ?? 'Bagaimana OmniServe <span class="text-omni-button-hover">Mengubah Operasional</span><br>di Berbagai Industri';
 $hero_sub   = $omni_usecase['hero']['subtitle'] ?? 'Dari WhatsApp Unlimited hingga Telepon PSTN dengan Recording — pelajari bagaimana fitur-fitur nyata kami menyelesaikan tantangan nyata di lapangan.';
-$hero_img   = !empty($omni_usecase['hero']['image_url']) ? $omni_usecase['hero']['image_url'] : get_template_directory_uri() . '/assets/img/usecase-hero-updated.png';
+$hero_img   = !empty($omni_usecase['hero']['image_url']) ? $omni_usecase['hero']['image_url'] : get_template_directory_uri() . '/assets/img/usecase-hero-updated.webp';
 
 $sections   = !empty($omni_usecase['sections']) ? $omni_usecase['sections'] : [];
 ?>

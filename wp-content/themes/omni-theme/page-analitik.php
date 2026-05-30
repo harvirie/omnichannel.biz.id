@@ -23,7 +23,7 @@ $omni_analitik = get_option('omni_editor_analitik', []);
 $hero_badge = $omni_analitik['hero']['badge'] ?? 'Analitik Komprehensif';
 $hero_title = $omni_analitik['hero']['title'] ?? 'Berhenti Sekadar Merespon.<br /><span class="text-omni-button-hover">Ubah Interaksi Menjadi Data.</span>';
 $hero_sub = $omni_analitik['hero']['subtitle'] ?? 'Pelayanan pelanggan bukan lagi sekadar cost center. Melalui OmniServe, setiap keluhan, pertanyaan, dan saran direkam, dianalisis, dan divisualisasikan.';
-$hero_img = !empty($omni_analitik['hero']['image_url']) ? $omni_analitik['hero']['image_url'] : get_template_directory_uri() . '/assets/img/analitik-hero-updated.png';
+$hero_img = !empty($omni_analitik['hero']['image_url']) ? $omni_analitik['hero']['image_url'] : get_template_directory_uri() . '/assets/img/analitik-hero-updated.webp';
 
 $content_title = $omni_analitik['content']['title'] ?? 'Wawasan Real-Time untuk Keputusan Bisnis Cerdas';
 $content_sub = $omni_analitik['content']['subtitle'] ?? 'Platform analitik kami dirancang khusus untuk memantau sentimen pelanggan dan mengukur produktivitas agen secara komprehensif.';
@@ -109,6 +109,8 @@ $cta_url = $omni_analitik['cta']['btn_url'] ?? '/harga';
             src="<?php echo esc_url($content_img); ?>"
             alt="Data Analytics"
             class="relative rounded-2xl shadow-2xl border border-white/50 object-cover h-[450px] w-full"
+            loading="lazy"
+            decoding="async"
           />
         </div>
         

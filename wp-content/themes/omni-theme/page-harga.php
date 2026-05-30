@@ -23,7 +23,7 @@ $omni_harga = get_option('omni_editor_harga', []);
 $hero_badge = $omni_harga['hero']['badge'] ?? 'Harga OmniServe';
 $hero_title = $omni_harga['hero']['title'] ?? 'Investasi Tepat untuk <span class="text-omni-button-hover">Layanan Hebat</span>';
 $hero_sub   = $omni_harga['hero']['subtitle'] ?? 'Solusi call center omnichannel profesional dengan harga transparan.<br>Tanpa biaya tersembunyi. Dukungan penuh dari tim kami.';
-$hero_img   = !empty($omni_harga['hero']['image_url']) ? $omni_harga['hero']['image_url'] : get_template_directory_uri() . '/assets/img/harga-hero-updated.png';
+$hero_img   = !empty($omni_harga['hero']['image_url']) ? $omni_harga['hero']['image_url'] : get_template_directory_uri() . '/assets/img/harga-hero-updated.webp';
 
 $packages = !empty($omni_harga['packages']) ? $omni_harga['packages'] : [];
 $disclaimer = $omni_harga['disclaimer'] ?? '* Harga belum termasuk PPN. Syarat & ketentuan berlaku. Hubungi tim kami untuk penawaran custom sesuai kebutuhan instansi Anda.';

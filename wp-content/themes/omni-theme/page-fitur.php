@@ -28,7 +28,7 @@ $omni_fitur = get_option('omni_editor_fitur', []);
 $hero_badge = $omni_fitur['hero']['badge'] ?? 'Platform Omnichannel Terpadu';
 $hero_title = $omni_fitur['hero']['title'] ?? 'Semua Fitur yang Anda Butuhkan,<br><span class="text-omni-button-hover">dalam Satu Platform</span>';
 $hero_sub   = $omni_fitur['hero']['subtitle'] ?? 'Dari WhatsApp Verified Blue Tick hingga integrasi telepon PSTN — OmniServe hadir dengan fitur lengkap yang siap meningkatkan performa tim customer service Anda.';
-$hero_img   = !empty($omni_fitur['hero']['image_url']) ? $omni_fitur['hero']['image_url'] : get_template_directory_uri() . '/assets/img/fitur-hero-updated.png';
+$hero_img   = !empty($omni_fitur['hero']['image_url']) ? $omni_fitur['hero']['image_url'] : get_template_directory_uri() . '/assets/img/fitur-hero-updated.webp';
 
 $sections   = !empty($omni_fitur['sections']) ? $omni_fitur['sections'] : [];
 ?>
