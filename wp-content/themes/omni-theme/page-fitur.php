@@ -52,7 +52,7 @@ $sections   = !empty($omni_fitur['sections']) ? $omni_fitur['sections'] : [];
     <div class="max-w-7xl mx-auto px-6 text-center relative" style="padding-bottom: 100px; z-index: 10;">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="zap" class="h-4 w-4"></i>
-        <?php echo esc_html($hero_badge); ?>
+        <?php echo $hero_badge; ?>
       </div>
       <h1 class="text-4xl md:text-5xl font-bold text-omni-dark mb-6 leading-tight">
         <?php echo $hero_title; ?>
@@ -147,8 +147,8 @@ $sections   = !empty($omni_fitur['sections']) ? $omni_fitur['sections'] : [];
                         }
                         ?>
                     </div>
-                    <h4 class="font-bold text-omni-dark text-sm mb-2"><?php echo esc_html($item['title']); ?></h4>
-                    <p class="text-xs text-omni-text-muted leading-relaxed"><?php echo esc_html($item['desc']); ?></p>
+                    <h4 class="font-bold text-omni-dark text-sm mb-2"><?php echo $item['title']; ?></h4>
+                    <p class="text-xs text-omni-text-muted leading-relaxed"><?php echo $item['desc']; ?></p>
                 </div>
               <?php endforeach; ?>
             </div>

@@ -110,7 +110,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
                 <div class="swiper-slide">
                   <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-[1vw] xl:p-5 text-white shadow-xl cursor-grab active:cursor-grabbing">
                     <div class="flex items-center gap-2 mb-1">
-                      <h4 class="font-medium text-[1.1vw] xl:text-lg text-white"><?php echo esc_html($title); ?></h4>
+                      <h4 class="font-medium text-[1.1vw] xl:text-lg text-white"><?php echo $title; ?></h4>
                       <div class="bg-omni-accent p-1 rounded-full">
                         <i data-lucide="star" class="h-3 w-3 text-white fill-white"></i>
                       </div>
@@ -149,7 +149,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
 
           <!-- Search Bar -->
           <form method="get" action="<?php echo esc_url(home_url('/')); ?>" class="flex items-center bg-white p-[0.4vw] xl:p-1.5 rounded-full w-full shadow-sm mb-[2.2vw] xl:mb-8 border border-omni-border">
-            <a href="<?php echo esc_url($hero_cta_url); ?>" class="bg-omni-button hover:bg-omni-button-hover transition-colors text-white px-[1.2vw] py-[0.6vw] rounded-full text-[0.85vw] xl:text-sm font-semibold whitespace-nowrap"><?php echo esc_html($hero_cta_text); ?></a>
+            <a href="<?php echo esc_url($hero_cta_url); ?>" class="bg-omni-button hover:bg-omni-button-hover transition-colors text-white px-[1.2vw] py-[0.6vw] rounded-full text-[0.85vw] xl:text-sm font-semibold whitespace-nowrap"><?php echo $hero_cta_text; ?></a>
             <button type="button" onclick="document.getElementById('demo-modal').classList.remove('hidden')" class="px-[1vw] py-[0.6vw] text-[0.85vw] xl:text-sm font-semibold text-omni-text-muted hover:bg-slate-50 rounded-full transition-colors shrink-0">Demo</button>
             <input type="text" name="s" placeholder="Pencarian" class="flex-1 px-3 text-[0.8vw] xl:text-sm text-slate-600 font-medium bg-transparent outline-none min-w-0" />
             <button type="submit" aria-label="Cari" class="bg-omni-accent hover:bg-omni-accent-hover transition-colors p-[0.6vw] xl:p-2.5 rounded-full text-white shadow-md flex-shrink-0">
@@ -163,8 +163,8 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
               <i data-lucide="star" class="h-[1.1vw] w-[1.1vw] xl:h-5 xl:w-5 text-omni-accent fill-omni-accent"></i>
             </div>
             <div>
-              <div class="italic text-[1vw] xl:text-base text-omni-dark font-medium"><?php echo esc_html($hero_badge1); ?></div>
-              <div class="text-[0.8vw] xl:text-sm font-semibold text-omni-text-muted"><?php echo esc_html($hero_badge2); ?></div>
+              <div class="italic text-[1vw] xl:text-base text-omni-dark font-medium"><?php echo $hero_badge1; ?></div>
+              <div class="text-[0.8vw] xl:text-sm font-semibold text-omni-text-muted"><?php echo $hero_badge2; ?></div>
             </div>
           </div>
         </div>
@@ -191,7 +191,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
 
           <!-- Search Bar -->
           <form method="get" action="<?php echo esc_url(home_url('/')); ?>" class="flex items-center bg-white p-1.5 rounded-full shadow-sm mb-5 border border-omni-border w-full max-w-[340px]">
-            <a href="<?php echo esc_url($hero_cta_url); ?>" class="bg-omni-button hover:bg-omni-button-hover text-white px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap"><?php echo esc_html($hero_cta_text); ?></a>
+            <a href="<?php echo esc_url($hero_cta_url); ?>" class="bg-omni-button hover:bg-omni-button-hover text-white px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap"><?php echo $hero_cta_text; ?></a>
             <button type="button" onclick="document.getElementById('demo-modal').classList.remove('hidden')" class="px-2 py-2 text-xs font-semibold text-omni-text-muted hover:bg-slate-50 rounded-full transition-colors shrink-0">Demo</button>
             <input type="text" name="s" placeholder="Pencarian" class="flex-1 px-2 text-xs text-slate-600 font-medium bg-transparent outline-none min-w-0" />
             <button type="submit" aria-label="Cari" class="bg-omni-accent p-2 rounded-full text-white shadow-md shrink-0">
@@ -220,7 +220,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
                   <div class="swiper-slide">
                     <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-3 text-white shadow-lg cursor-grab active:cursor-grabbing">
                       <div class="flex items-center gap-2 mb-1">
-                        <h4 class="font-medium text-sm text-white"><?php echo esc_html($title); ?></h4>
+                        <h4 class="font-medium text-sm text-white"><?php echo $title; ?></h4>
                         <div class="bg-omni-accent p-1 rounded-full">
                           <i data-lucide="star" class="h-3 w-3 text-white fill-white"></i>
                         </div>
@@ -363,13 +363,13 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
   <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-omni-accent/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2"></div>
 
   <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6"><?php echo esc_html($cta_title); ?></h2>
+    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6"><?php echo $cta_title; ?></h2>
     <div class="text-omni-light text-xl mb-10 max-w-2xl mx-auto opacity-90 omni-rich-text">
       <?php echo wpautop($cta_sub); ?>
     </div>
     <div class="flex flex-col sm:flex-row justify-center gap-4">
       <a href="<?php echo esc_url($cta_btn_url); ?>" class="bg-omni-accent text-white hover:bg-omni-accent-hover px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
-        <?php echo esc_html($cta_btn_text); ?>
+        <?php echo $cta_btn_text; ?>
       </a>
       <a href="https://wa.me/6281283835553" target="_blank" rel="noopener noreferrer" class="bg-transparent text-white hover:bg-white/10 border border-white/30 px-8 py-4 rounded-full font-bold text-lg transition-all flex items-center justify-center">
         Hubungi Sales Kami
@@ -382,7 +382,7 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
 <section class="py-24 bg-omni-light relative">
   <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-5xl font-bold text-omni-dark mb-4"><?php echo esc_html($trusted_title); ?></h2>
+      <h2 class="text-3xl md:text-5xl font-bold text-omni-dark mb-4"><?php echo $trusted_title; ?></h2>
       <div class="text-omni-text-muted text-lg max-w-2xl mx-auto omni-rich-text">
         <?php echo wpautop($trusted_sub); ?>
       </div>
@@ -423,13 +423,13 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
                   <img src="<?php echo esc_url($cust_img); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="<?php echo esc_attr($cust_name); ?>" loading="lazy" decoding="async" />
                   <div class="absolute inset-0 bg-gradient-to-t from-omni-dark/90 via-omni-dark/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div class="absolute bottom-4 left-6 right-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                    <h3 class="text-white font-bold text-2xl leading-tight drop-shadow-md mb-1"><?php echo esc_html($cust_name); ?></h3>
+                    <h3 class="text-white font-bold text-2xl leading-tight drop-shadow-md mb-1"><?php echo $cust_name; ?></h3>
                     <div class="w-12 h-1 bg-omni-accent rounded-full transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 delay-100"></div>
                   </div>
                 </div>
                 <div class="p-6 flex-1 flex flex-col">
                   <p class="text-omni-text-muted text-[15px] leading-relaxed flex-1">
-                    <?php echo esc_html($cust_desc); ?>
+                    <?php echo $cust_desc; ?>
                   </p>
                 </div>
               </div>

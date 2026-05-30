@@ -53,10 +53,10 @@ $copyright = $omni_footer['copyright'] ?? 'Theme Design by Harizal.';
     
     <?php foreach ($columns as $idx => $col): ?>
     <div>
-      <h4 class="text-white font-semibold mb-4"><?php echo esc_html($col['title']); ?></h4>
+      <h4 class="text-white font-semibold mb-4"><?php echo $col['title']; ?></h4>
       <ul class="space-y-2 text-sm">
         <?php foreach (($col['links'] ?? []) as $link): ?>
-        <li><a href="<?php echo esc_url(str_starts_with($link['url'], '/') ? home_url($link['url']) : $link['url']); ?>" class="hover:text-omni-accent transition-colors" <?php echo str_starts_with($link['url'], 'http') ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html($link['label']); ?></a></li>
+        <li><a href="<?php echo esc_url(str_starts_with($link['url'], '/') ? home_url($link['url']) : $link['url']); ?>" class="hover:text-omni-accent transition-colors" <?php echo str_starts_with($link['url'], 'http') ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo $link['label']; ?></a></li>
         <?php endforeach; ?>
       </ul>
       
@@ -72,7 +72,7 @@ $copyright = $omni_footer['copyright'] ?? 'Theme Design by Harizal.';
     <?php endforeach; ?>
   </div>
   <div class="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-white/10 text-sm flex flex-col md:flex-row justify-between items-center text-center gap-3">
-    <p>&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>. Hak Cipta Dilindungi. <?php echo esc_html($copyright); ?></p>
+    <p>&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>. Hak Cipta Dilindungi. <?php echo $copyright; ?></p>
     <button onclick="omniConsentShowBanner()" style="
         background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.3);
         color:#D4AF37; padding:6px 14px; border-radius:8px;

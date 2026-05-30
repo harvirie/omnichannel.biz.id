@@ -53,7 +53,7 @@ $cta_url = $omni_harga['cta']['btn_url'] ?? 'https://wa.me/6281283835553';
     <div class="max-w-7xl mx-auto px-6 text-center relative" style="padding-bottom: 100px; z-index: 10;">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="tag" class="h-4 w-4"></i>
-        <?php echo esc_html($hero_badge); ?>
+        <?php echo $hero_badge; ?>
       </div>
       <h1 class="text-4xl md:text-5xl font-bold text-omni-dark mb-6 leading-tight">
         <?php echo $hero_title; ?>
@@ -131,9 +131,9 @@ $cta_url = $omni_harga['cta']['btn_url'] ?? 'https://wa.me/6281283835553';
         <div class="mb-6">
           <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold mb-4 <?php echo $badge_bg; ?>">
             <i data-lucide="<?php echo $is_dark ? 'zap' : 'layers'; ?>" class="h-3.5 w-3.5"></i>
-            <?php echo esc_html($pkg['badge']); ?>
+            <?php echo $pkg['badge']; ?>
           </div>
-          <h2 class="text-3xl font-extrabold mb-2 <?php echo $title_color; ?>"><?php echo esc_html($pkg['title']); ?></h2>
+          <h2 class="text-3xl font-extrabold mb-2 <?php echo $title_color; ?>"><?php echo $pkg['title']; ?></h2>
           <div class="text-sm leading-relaxed omni-rich-text <?php echo $desc_color; ?>">
             <?php echo wpautop($pkg['description']); ?>
           </div>
@@ -142,11 +142,11 @@ $cta_url = $omni_harga['cta']['btn_url'] ?? 'https://wa.me/6281283835553';
         <!-- Price -->
         <div class="rounded-2xl p-5 mb-6 <?php echo $price_box; ?>">
           <div class="flex items-end gap-2 mb-1">
-            <span class="text-3xl md:text-4xl font-extrabold <?php echo $price_monthly_color; ?>"><?php echo esc_html($pkg['price_monthly']); ?></span>
+            <span class="text-3xl md:text-4xl font-extrabold <?php echo $price_monthly_color; ?>"><?php echo $pkg['price_monthly']; ?></span>
             <span class="font-medium mb-1 <?php echo $is_dark ? 'text-white/70' : 'text-omni-text-muted'; ?>">/Bulan*</span>
           </div>
-          <p class="text-sm font-semibold <?php echo $price_total_color; ?>"><?php echo esc_html($pkg['price_total']); ?></p>
-          <p class="text-xs mt-1 <?php echo $is_dark ? 'text-white/60' : 'text-omni-text-muted'; ?>"><?php echo esc_html($pkg['price_note']); ?></p>
+          <p class="text-sm font-semibold <?php echo $price_total_color; ?>"><?php echo $pkg['price_total']; ?></p>
+          <p class="text-xs mt-1 <?php echo $is_dark ? 'text-white/60' : 'text-omni-text-muted'; ?>"><?php echo $pkg['price_note']; ?></p>
         </div>
 
         <!-- Features Table -->
@@ -179,8 +179,8 @@ $cta_url = $omni_harga['cta']['btn_url'] ?? 'https://wa.me/6281283835553';
               ?>
             </div>
             <div class="flex-1 min-w-0">
-              <span class="block text-xs font-semibold uppercase tracking-wide <?php echo $lbl_col; ?>"><?php echo esc_html($f['label']); ?></span>
-              <span class="block text-sm font-medium <?php echo $val_col; ?>"><?php echo esc_html($f['value']); ?></span>
+              <span class="block text-xs font-semibold uppercase tracking-wide <?php echo $lbl_col; ?>"><?php echo $f['label']; ?></span>
+              <span class="block text-sm font-medium <?php echo $val_col; ?>"><?php echo $f['value']; ?></span>
             </div>
           </li>
           <?php endforeach; ?>
@@ -189,7 +189,7 @@ $cta_url = $omni_harga['cta']['btn_url'] ?? 'https://wa.me/6281283835553';
         <a href="<?php echo esc_url($pkg['btn_url']); ?>" <?php if(strpos($pkg['btn_url'], 'demo=1')!==false) echo 'onclick="document.getElementById(\'demo-modal\')?.classList.remove(\'hidden\'); return false;"'; ?>
            class="w-full py-4 rounded-xl font-bold text-center transition-all flex items-center justify-center gap-2 <?php echo $btn_class; ?>">
           <i data-lucide="arrow-right" class="h-5 w-5"></i>
-          <?php echo esc_html($pkg['btn_text']); ?>
+          <?php echo $pkg['btn_text']; ?>
         </a>
       </div>
       <?php endforeach; ?>
@@ -209,7 +209,7 @@ $cta_url = $omni_harga['cta']['btn_url'] ?? 'https://wa.me/6281283835553';
     <a href="<?php echo esc_url($cta_url); ?>" target="_blank" rel="noopener noreferrer"
        class="inline-flex items-center gap-2 bg-omni-accent hover:bg-omni-accent-hover text-white font-bold py-4 px-8 rounded-full transition-all shadow-lg hover:-translate-y-1">
       <i data-lucide="phone" class="h-5 w-5"></i>
-      <?php echo esc_html($cta_btn); ?>
+      <?php echo $cta_btn; ?>
     </a>
   </div>
 

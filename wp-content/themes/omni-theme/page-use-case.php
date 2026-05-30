@@ -52,7 +52,7 @@ $sections   = !empty($omni_usecase['sections']) ? $omni_usecase['sections'] : []
     <div class="max-w-7xl mx-auto px-6 text-center relative" style="padding-bottom: 100px; z-index: 10;">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="briefcase" class="h-4 w-4"></i>
-        <?php echo esc_html($hero_badge); ?>
+        <?php echo $hero_badge; ?>
       </div>
       <h1 class="text-4xl md:text-5xl font-bold text-omni-dark mb-6 leading-tight">
         <?php echo $hero_title; ?>
@@ -151,11 +151,11 @@ $sections   = !empty($omni_usecase['sections']) ? $omni_usecase['sections'] : []
           </div>
           <div class="flex-1">
             <div class="flex flex-wrap items-center gap-3 mb-3">
-              <h2 class="text-2xl font-bold <?php echo $title_color; ?>"><?php echo esc_html($sec['title']); ?></h2>
+              <h2 class="text-2xl font-bold <?php echo $title_color; ?>"><?php echo $sec['title']; ?></h2>
               <?php if (!empty($sec['badge'])): ?>
               <span class="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full <?php echo $badge_bg; ?>">
                 <div class="w-2 h-2 rounded-full <?php echo $is_dark ? 'bg-omni-accent' : 'bg-omni-secondary'; ?>"></div>
-                <?php echo esc_html($sec['badge']); ?>
+                <?php echo $sec['badge']; ?>
               </span>
               <?php endif; ?>
             </div>
@@ -174,8 +174,8 @@ $sections   = !empty($omni_usecase['sections']) ? $omni_usecase['sections'] : []
                     echo '<i data-lucide="' . esc_attr($item_icon) . '" class="h-5 w-5 mb-2 ' . $item_icon_color . '"></i>';
                 }
                 ?>
-                <p class="text-xs font-bold mt-1 <?php echo $item_title; ?>"><?php echo esc_html($item['title']); ?></p>
-                <p class="text-xs mt-1 <?php echo $item_desc; ?>"><?php echo esc_html($item['desc']); ?></p>
+                <p class="text-xs font-bold mt-1 <?php echo $item_title; ?>"><?php echo $item['title']; ?></p>
+                <p class="text-xs mt-1 <?php echo $item_desc; ?>"><?php echo $item['desc']; ?></p>
               </div>
               <?php endforeach; ?>
             </div>

@@ -66,7 +66,7 @@ $cta_url = $omni_analitik['cta']['btn_url'] ?? '/harga';
     <div class="max-w-7xl mx-auto px-6 text-center relative" style="padding-bottom: 100px; z-index: 10;">
       <div class="inline-flex items-center gap-2 bg-omni-dark/10 text-omni-button-hover px-4 py-2 rounded-full text-sm font-semibold mb-6">
         <i data-lucide="bar-chart-2" class="h-4 w-4"></i>
-        <?php echo esc_html($hero_badge); ?>
+        <?php echo $hero_badge; ?>
       </div>
       <h1 class="text-4xl md:text-5xl font-bold text-omni-dark mb-6 leading-tight">
         <?php echo $hero_title; ?>
@@ -117,7 +117,7 @@ $cta_url = $omni_analitik['cta']['btn_url'] ?? '/harga';
         
         <div class="order-1 lg:order-2 space-y-8">
           <h2 class="text-3xl font-bold leading-tight text-omni-dark">
-            <?php echo esc_html($content_title); ?>
+            <?php echo $content_title; ?>
           </h2>
           <div class="text-omni-text-muted text-lg leading-relaxed omni-rich-text">
             <?php echo wpautop($content_sub); ?>
@@ -142,8 +142,8 @@ $cta_url = $omni_analitik['cta']['btn_url'] ?? '/harga';
   <section class="bg-white py-24 border-t border-omni-border">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold text-omni-dark mb-4"><?php echo esc_html($metrics_title); ?></h2>
-        <p class="text-omni-text-muted"><?php echo esc_html($metrics_sub); ?></p>
+        <h2 class="text-3xl font-bold text-omni-dark mb-4"><?php echo $metrics_title; ?></h2>
+        <p class="text-omni-text-muted"><?php echo $metrics_sub; ?></p>
       </div>
       
       <div class="grid md:grid-cols-3 gap-8">
@@ -159,9 +159,9 @@ $cta_url = $omni_analitik['cta']['btn_url'] ?? '/harga';
               }
               ?>
             </div>
-            <h3 class="text-omni-text-muted font-medium mb-2"><?php echo esc_html($metric['title']); ?></h3>
-            <div class="text-4xl font-bold text-omni-dark mb-3"><?php echo esc_html($metric['val']); ?></div>
-            <p class="text-sm text-omni-text-muted/80"><?php echo esc_html($metric['desc']); ?></p>
+            <h3 class="text-omni-text-muted font-medium mb-2"><?php echo $metric['title']; ?></h3>
+            <div class="text-4xl font-bold text-omni-dark mb-3"><?php echo $metric['val']; ?></div>
+            <p class="text-sm text-omni-text-muted/80"><?php echo $metric['desc']; ?></p>
           </div>
         <?php endforeach; ?>
       </div>
@@ -170,9 +170,9 @@ $cta_url = $omni_analitik['cta']['btn_url'] ?? '/harga';
   
   <!-- Mini CTA -->
   <section class="bg-omni-secondary py-16 text-center">
-    <h2 class="text-2xl font-bold text-white mb-6"><?php echo esc_html($cta_title); ?></h2>
+    <h2 class="text-2xl font-bold text-white mb-6"><?php echo $cta_title; ?></h2>
     <a href="<?php echo esc_url($cta_url); ?>" class="inline-block bg-omni-accent text-white px-8 py-3 rounded-full font-bold hover:bg-omni-accent-hover transition-colors shadow-lg">
-      <?php echo esc_html($cta_btn); ?>
+      <?php echo $cta_btn; ?>
     </a>
   </section>
 </div>
