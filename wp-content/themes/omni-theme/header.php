@@ -308,6 +308,7 @@
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
+    display: none !important;
 }
 body.omni-loading { overflow: hidden; }
 </style>
@@ -357,7 +358,7 @@ body.omni-loading { overflow: hidden; }
              alt="<?php echo esc_attr(get_bloginfo('name') ?: 'OmniServe Logo'); ?>"
              class="w-auto object-contain"
              style="height: 32px;"
-             loading="eager">
+             fetchpriority="high" decoding="async">
       </a>
       <div class="flex items-center">
         <button id="mobile-menu-btn" aria-label="Buka Menu" class="text-omni-text-muted hover:text-omni-accent transition-colors">
@@ -380,7 +381,7 @@ body.omni-loading { overflow: hidden; }
         <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_dark_ymby0d.svg"
              alt="<?php echo esc_attr(get_bloginfo('name') ?: 'OmniServe Logo'); ?>"
              class="h-8 w-auto object-contain"
-             loading="eager">
+             fetchpriority="high" decoding="async">
       </a>
     </div>
     <button id="mobile-menu-close" aria-label="Tutup Menu" class="text-omni-text-muted hover:text-omni-accent transition-colors bg-white p-2 rounded-full shadow-sm border border-omni-border/50">
@@ -446,7 +447,7 @@ body.omni-loading { overflow: hidden; }
           <img src="https://res.cloudinary.com/dtxwwevxl/image/upload/v1778221347/logo_long_wh_ysccoa.svg"
                alt="<?php echo esc_attr(get_bloginfo('name') ?: 'OmniServe Logo'); ?>"
                class="h-10 w-auto object-contain"
-               loading="eager">
+               fetchpriority="high" decoding="async">
         </a>
       </div>
 

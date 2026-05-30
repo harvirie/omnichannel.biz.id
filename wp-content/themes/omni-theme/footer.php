@@ -43,7 +43,7 @@ $copyright = $omni_footer['copyright'] ?? 'Theme Design by Harizal.';
           <img src="<?php echo esc_url($logo_url); ?>"
                alt="<?php echo esc_attr(get_bloginfo('name') ?: 'OmniServe Logo'); ?>"
                class="h-16 w-auto object-contain"
-               loading="lazy">
+               loading="lazy" decoding="async">
         </a>
       </div>
       <div class="max-w-xs text-sm leading-relaxed mb-6 omni-rich-text">

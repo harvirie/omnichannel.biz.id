@@ -146,7 +146,7 @@ html.is-animating:not(.is-leaving) #swup.transition-scale {
     background-position: 0 0;
     
     /* Hardware acceleration & Performance */
-    will-change: mask-position, -webkit-mask-position, background-position;
+    will-change: background-position;
     transform: translateZ(0);
     backface-visibility: hidden;
     
