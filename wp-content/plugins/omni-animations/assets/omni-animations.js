@@ -607,6 +607,62 @@
     }
 
     // ─────────────────────────────────────────────────────────────
+    // LUMA DOTS BACKGROUND ANIMATION
+    // ─────────────────────────────────────────────────────────────
+    function initLumaDots() {
+        if (!ensureGsap()) return;
+        var containers = document.querySelectorAll('.omni-luma-dots:not([data-luma-init])');
+        containers.forEach(function(container) {
+            container.dataset.lumaInit = '1';
+            
+            var layer = document.createElement('div');
+            layer.className = 'omni-luma-dots-layer';
+            
+            var dot1 = document.createElement('div');
+            dot1.className = 'omni-luma-dot-1';
+            
+            var dot2 = document.createElement('div');
+            dot2.className = 'omni-luma-dot-2';
+            
+            layer.appendChild(dot1);
+            layer.appendChild(dot2);
+            container.insertBefore(layer, container.firstChild);
+
+            // GSAP Animations
+            gsap.to(dot1, {
+                backgroundPosition: "32px 32px",
+                duration: 4,
+                ease: "none",
+                repeat: -1
+            });
+            
+            gsap.to(dot2, {
+                backgroundPosition: "-48px -48px",
+                duration: 7,
+                ease: "none",
+                repeat: -1
+            });
+
+            gsap.to(dot1, {
+                opacity: 0.3,
+                duration: 2.5,
+                ease: "sine.inOut",
+                yoyo: true,
+                repeat: -1
+            });
+            
+            gsap.to(dot2, {
+                opacity: 0.15,
+                duration: 3.5,
+                ease: "sine.inOut",
+                yoyo: true,
+                repeat: -1,
+                delay: 1
+            });
+        });
+    }
+
+    // ─────────────────────────────────────────────────────────────
     // RE-INIT THEME UI after Swup navigation
     // ─────────────────────────────────────────────────────────────
     function reinitThemeUI() {
@@ -686,6 +742,7 @@
             initFrontPageHero();
             initSectionTextAnimations();
             initSvgSignal();
+            initLumaDots();
             progressDone();
         });
 
@@ -709,6 +766,7 @@
         initFrontPageHero();
         initSectionTextAnimations();
         initSvgSignal();
+        initLumaDots();
     }
 
 })();

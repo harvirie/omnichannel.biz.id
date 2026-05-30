@@ -115,3 +115,43 @@ html.is-animating:not(.is-leaving) #swup.transition-scale {
     opacity: 0;
     transition: width 0.1s ease, opacity 0.3s ease 0.1s;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   LUMA DOTS BACKGROUND
+   ───────────────────────────────────────────────────────────── */
+.omni-luma-dots {
+    position: relative;
+    background-color: #f1f5f9; /* abu sangat muda */
+    z-index: 1;
+}
+
+.omni-luma-dots-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+    mask-image: radial-gradient(ellipse at 30% 30%, black 10%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at 30% 30%, black 10%, transparent 80%);
+}
+
+.omni-luma-dot-1,
+.omni-luma-dot-2 {
+    position: absolute;
+    inset: -100px;
+    background-repeat: repeat;
+}
+
+/* Layer 1: Abu muda dots */
+.omni-luma-dot-1 {
+    background-image: radial-gradient(#cbd5e1 2px, transparent 2px);
+    background-size: 32px 32px;
+    opacity: 0.7;
+}
+
+/* Layer 2: Abu tua dots (larger spacing) */
+.omni-luma-dot-2 {
+    background-image: radial-gradient(#94a3b8 1.5px, transparent 1.5px);
+    background-size: 48px 48px;
+    opacity: 0.5;
+}
