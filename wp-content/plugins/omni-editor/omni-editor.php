@@ -63,7 +63,7 @@ add_action('admin_enqueue_scripts', function ($hook) {
     // Our editor CSS
     $plugin_dir = plugin_dir_path(__FILE__);
     $plugin_url = plugin_dir_url(__FILE__);
-    wp_enqueue_style('omni-editor-css', $plugin_url . 'assets/css/omni-editor.css', array(), filemtime($plugin_dir . 'assets/css/omni-editor.css'));
+    wp_enqueue_style('omni-editor-css', $plugin_url . 'assets/css/omni-editor.css', array(), time());
     wp_enqueue_script('omni-editor-js', $plugin_url . 'assets/js/omni-editor.js', array('jquery', 'sortablejs'), filemtime($plugin_dir . 'assets/js/omni-editor.js'), true);
 
     // Pass data to JS
