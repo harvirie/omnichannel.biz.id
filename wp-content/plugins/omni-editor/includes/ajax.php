@@ -89,6 +89,7 @@ function omni_editor_sanitize_array(array $data): array {
                 'em'     => [],
                 'i'      => [],
                 'u'      => [],
+                'font'   => ['size' => [], 'color' => [], 'face' => []],
                 'span'   => ['class' => [], 'style' => []],
                 'a'      => ['href' => [], 'target' => [], 'rel' => []],
             ]);
