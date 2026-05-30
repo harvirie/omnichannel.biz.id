@@ -273,7 +273,6 @@ jQuery(document).ready(function ($) {
             const val = $(this).val();
             if (!val) return;
             
-            restoreSelection();
             let $activeEl = null;
             if (currentSelectionRange) {
                 $activeEl = $(currentSelectionRange.startContainer).closest('.oe-richtext');
@@ -281,6 +280,7 @@ jQuery(document).ready(function ($) {
                     $activeEl.focus();
                 }
             }
+            restoreSelection();
             
             document.execCommand(cmd, false, val);
             this.selectedIndex = 0;
