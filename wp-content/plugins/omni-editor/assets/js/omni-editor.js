@@ -618,6 +618,15 @@ jQuery(document).ready(function ($) {
             </div>
         `);
         
+        // SEO
+        if (!data.seo) {
+            data.seo = { title: '', content: '' };
+        }
+        html += createCard('SEO Content', 'file-text', 'Section', false, `
+            ${createField('Judul', 'seo.title', data.seo.title)}
+            ${createField('Konten SEO', 'seo.content', data.seo.content, 'textarea')}
+        `);
+        
         $panel.append(html);
         if (window.lucide) window.lucide.createIcons();
     }

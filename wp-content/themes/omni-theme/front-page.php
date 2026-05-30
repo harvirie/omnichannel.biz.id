@@ -455,14 +455,16 @@ $trusted_sub = $get_home_val('trusted.subtitle', 'Bergabunglah dengan perusahaan
   </div>
 </section>
 
+<?php
+$seo_title = $get_home_val('seo.title', 'Solusi Omnichannel Terbaik di Indonesia');
+$seo_content = $get_home_val('seo.content', '<p>OmniServe adalah platform <strong>omnichannel call center</strong> inovatif yang dirancang khusus untuk memenuhi kebutuhan instansi pemerintahan, perusahaan swasta, dan bisnis skala besar di Indonesia. Kami menyediakan solusi komunikasi terpusat yang mengintegrasikan berbagai saluran seperti WhatsApp, Instagram, Email, dan Telepon ke dalam satu dashboard cerdas yang mudah digunakan.</p><p>Dengan mengadopsi teknologi omnichannel, tim layanan pelanggan Anda dapat merespons lebih cepat, melacak riwayat percakapan secara akurat, dan meningkatkan tingkat kepuasan pelanggan secara keseluruhan. Tidak perlu lagi berpindah-pindah aplikasi; semuanya tersedia dalam satu layar. Tingkatkan produktivitas tim, pangkas waktu penyelesaian masalah (SLA), dan bangun kepercayaan masyarakat dengan layanan yang transparan dan profesional.</p><p>Bergabunglah dengan ratusan klien yang telah mempercayakan operasional layanan pelanggannya kepada OmniServe. Dapatkan kemudahan manajemen interaksi, analitik data waktu nyata (real-time analytics), dan fitur otomasi untuk memaksimalkan performa bisnis Anda. Coba sekarang dan rasakan perbedaan layanan call center masa depan bersama kami.</p>');
+?>
 <!-- SEO Content Section to improve Text-to-HTML Ratio -->
 <section class="py-16 bg-white relative">
   <div class="max-w-5xl mx-auto px-6 md:px-12 text-center text-omni-dark">
-    <h2 class="text-3xl md:text-4xl font-bold mb-6">Solusi Omnichannel Terbaik di Indonesia</h2>
+    <h2 class="text-3xl md:text-4xl font-bold mb-6"><?php echo $seo_title; ?></h2>
     <div class="text-omni-text-muted text-base leading-relaxed space-y-4 text-justify md:text-center omni-rich-text">
-      <p>OmniServe adalah platform <strong>omnichannel call center</strong> inovatif yang dirancang khusus untuk memenuhi kebutuhan instansi pemerintahan, perusahaan swasta, dan bisnis skala besar di Indonesia. Kami menyediakan solusi komunikasi terpusat yang mengintegrasikan berbagai saluran seperti WhatsApp, Instagram, Email, dan Telepon ke dalam satu dashboard cerdas yang mudah digunakan.</p>
-      <p>Dengan mengadopsi teknologi omnichannel, tim layanan pelanggan Anda dapat merespons lebih cepat, melacak riwayat percakapan secara akurat, dan meningkatkan tingkat kepuasan pelanggan secara keseluruhan. Tidak perlu lagi berpindah-pindah aplikasi; semuanya tersedia dalam satu layar. Tingkatkan produktivitas tim, pangkas waktu penyelesaian masalah (SLA), dan bangun kepercayaan masyarakat dengan layanan yang transparan dan profesional.</p>
-      <p>Bergabunglah dengan ratusan klien yang telah mempercayakan operasional layanan pelanggannya kepada OmniServe. Dapatkan kemudahan manajemen interaksi, analitik data waktu nyata (real-time analytics), dan fitur otomasi untuk memaksimalkan performa bisnis Anda. Coba sekarang dan rasakan perbedaan layanan call center masa depan bersama kami.</p>
+      <?php echo wpautop($seo_content); ?>
     </div>
   </div>
 </section>
