@@ -80,16 +80,11 @@ function omni_optimizer_serve_cache() {
     $cache_file = omni_optimizer_get_cache_path();
 
     if (file_exists($cache_file)) {
-        // Browser caching headers — 1 jam cache di browser pengunjung
         $cache_time = 3600;
         $mtime = filemtime($cache_file);
-        header('Content-Type: text/html; charset=utf-8');
-        header('X-Omni-Cache: HIT');
-        header('Cache-Control: public, max-age=' . $cache_time . ', stale-while-revalidate=60');
-        header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $cache_time) . ' GMT');
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $mtime) . ' GMT');
+        $content = file_get_contents($cache_file);
         
-        // Conditional GET support (304 Not Modified)
+        // 304 Not Modified support
         if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
             $if_modified = strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
             if ($mtime <= $if_modified) {
@@ -97,8 +92,28 @@ function omni_optimizer_serve_cache() {
                 exit;
             }
         }
-        
-        readfile($cache_file);
+
+        header('Content-Type: text/html; charset=utf-8');
+        header('X-Omni-Cache: HIT');
+        header('Cache-Control: public, max-age=' . $cache_time . ', stale-while-revalidate=60');
+        header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $cache_time) . ' GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $mtime) . ' GMT');
+        header('Vary: Accept-Encoding');
+
+        // Gzip compression jika browser support
+        $accept_encoding = isset($_SERVER['HTTP_ACCEPT_ENCODING']) ? $_SERVER['HTTP_ACCEPT_ENCODING'] : '';
+        if (extension_loaded('zlib') && strpos($accept_encoding, 'gzip') !== false) {
+            $compressed = gzencode($content, 6);
+            if ($compressed !== false) {
+                header('Content-Encoding: gzip');
+                header('Content-Length: ' . strlen($compressed));
+                echo $compressed;
+                exit;
+            }
+        }
+
+        header('Content-Length: ' . strlen($content));
+        echo $content;
         exit;
     }
 }
@@ -121,17 +136,21 @@ function omni_optimizer_minify_and_cache($html) {
         return $html;
     }
 
-    // ── HTML Minification (aman, tidak merusak JS/CSS) ──
+    // ── HTML Minification ──
     $minified = $html;
     
-    // 1. Hapus komentar HTML (kecuali conditional comments IE dan komentar Optimizer)
+    // 1. Hapus komentar HTML (kecuali conditional comments IE)
     $minified = preg_replace('/<!--(?!\s*(?:\[if\s|<!\[endif|Omni Optimizer)).*?-->/s', '', $minified);
     
-    // 2. Hapus whitespace berlebih ANTAR tag (tidak di dalam tag/atribut)
+    // 2. Hapus whitespace berlebih ANTAR tag
     $minified = preg_replace('/>\s{2,}</u', '> <', $minified);
     
     // 3. Hapus baris kosong ganda
     $minified = preg_replace('/^\s*[\r\n]/m', '', $minified);
+
+    // 4. Kompres whitespace di dalam atribut class (opsional, aman)
+    $minified = preg_replace('/class="\s+/', 'class="', $minified);
+    $minified = preg_replace('/\s+"/', '"', $minified);
 
     // Tambahkan signature
     $minified .= "\n<!-- Omni Optimizer v" . OMNI_OPTIMIZER_VERSION . ": Cached -->";

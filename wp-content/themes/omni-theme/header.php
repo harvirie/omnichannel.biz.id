@@ -40,8 +40,9 @@
     setTimeout(loadGTM, 5000); // Fallback
     </script>
     <?php endif; ?>
-    <!-- Google Fonts: hanya weight yang benar-benar dipakai -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts: non-render-blocking via media swap -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
 
     <!-- Swiper CSS: hanya dimuat jika dipakai, via jsDelivr cepat -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" media="print" onload="this.media='all'">
